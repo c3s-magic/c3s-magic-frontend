@@ -17,7 +17,7 @@ export default class MeanState extends Component {
             nrOfFailedProcesses={nrOfFailedProcesses}
             nrOfCompletedProcesses={nrOfCompletedProcesses}
             runningProcesses={runningProcesses}
-            />
+          />
         </Row>
       </div>);
   }

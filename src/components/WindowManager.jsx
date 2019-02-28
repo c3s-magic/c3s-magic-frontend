@@ -20,8 +20,8 @@ export default class WindowManager extends Component {
           title={v.title}
           closeCallback={() => { console.log(v); dispatch(actions.closeWindow(v.id)); }}
           updateCallback={(updates) => { dispatch(actions.updateWindow({ id: v.id, updates: updates })); }}
-          >
-          <div style={{width:'100%'}}>{ v.element }</div>
+        >
+          <div style={{ width:'100%' }}>{ v.element }</div>
         </Draggable>);
       })}
     </div>);

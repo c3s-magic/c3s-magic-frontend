@@ -15,7 +15,6 @@ class WPSDemoCopernicus extends Component {
     this.resultClickCallback = this.resultClickCallback.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
 
-
     this.state = {
       describeProcessDocument: null,
 
@@ -45,7 +44,7 @@ class WPSDemoCopernicus extends Component {
     that.setState({ isBusyMessage: 'getWPSProcessList' });
 
     await this.getWPSProcessList()
-      .then( function (response) {
+      .then(function (response) {
         // console.log('response: ', response);
         if (response === 'success') {
           that.setState({ wpsInfoFetched: true });
@@ -54,25 +53,21 @@ class WPSDemoCopernicus extends Component {
           that.handleLocationChange(that.props.location);
         }
       }
-    ).catch( function (error) {
-      console.log('error: ', error);
-    });
-
+      ).catch(function (error) {
+        console.log('error: ', error);
+      });
   }
-
 
   // wps service related methods
   async getWPSProcessList () {
     var that = this;
     return new Promise(function (resolve, reject) {
-
       that.setState({ isBusy: true });
       that.setState({ isBusyMessage: ' Getting process list from the server.' });
 
       let wpsUrl = 'https://portal.c3s-magic.eu/copernicus-wps/?';
       doWPSCall(wpsUrl + 'service=wps&request=getcapabilities&version=1.0.0',
         (result) => {
-
           // console.log(result);
           that.setState({ describeProcessDocument: result });
 
@@ -88,21 +83,17 @@ class WPSDemoCopernicus extends Component {
                 wpsProcessName.push({ name: pName });
                 return { wpsProcessName };
               });
-
             }
-
           } catch (e) {
             console.log('Process list error!');
             console.log(e);
           }
 
-            that.setState({ isBusy: false });
-            that.setState({ isBusyMessage: '' });
-            // console.log('Promise.resolve from WPSCalculate::getWPSProcessList()');
-            resolve('success');
-
-          }, (error) => {
-
+          that.setState({ isBusy: false });
+          that.setState({ isBusyMessage: '' });
+          // console.log('Promise.resolve from WPSCalculate::getWPSProcessList()');
+          resolve('success');
+        }, (error) => {
           console.error(error);
           that.setState({ describeProcessDocument: error });
 
@@ -116,7 +107,6 @@ class WPSDemoCopernicus extends Component {
     });
   }
 
-
   onWpsButtonClick (wpsName) {
     // console.log('Clicked on button --> ', wpsName);
     this.props.router.push('/calculate/' + wpsName);
@@ -129,14 +119,13 @@ class WPSDemoCopernicus extends Component {
         this.setState({ selectedProcess: wpsName });
 
         return response;
-      }).catch(function(e) {
-          console.error('Couldnot get the process list!');
+      }).catch(function (e) {
+        console.error('Couldnot get the process list!');
       });
 
     // this.setState({ isBusy: false });
     // return response;
   }
-
 
   async getWPSProcessInfo (processName) {
     var that = this;
@@ -146,167 +135,157 @@ class WPSDemoCopernicus extends Component {
     // console.log('Checking processes info for', processName);
 
     return new Promise(function (resolve, reject) {
-
       let wpsUrl = 'https://portal.c3s-magic.eu/copernicus-wps/?';
       doWPSCall(wpsUrl + 'service=wps&version=1.0.0&request=describeprocess&identifier=' + processName,
         (result) => {
-
         // console.log(result);
-        // console.log('Searching for input and output types in ', processName, 'process');
+          // console.log('Searching for input and output types in ', processName, 'process');
 
-        var formItemInputs = [];
-        var formItemDefaults = [];
-        var formItemOutputs = [];
+          var formItemInputs = [];
+          var formItemDefaults = [];
+          var formItemOutputs = [];
 
-        var wpsOutputList = null;
-        var wpsInputList = null;
+          var wpsOutputList = null;
+          var wpsInputList = null;
 
-        try {
-          wpsInputList = result['ProcessDescriptions'].ProcessDescription.DataInputs.Input;
+          try {
+            wpsInputList = result['ProcessDescriptions'].ProcessDescription.DataInputs.Input;
 
-          // console.log('input list: ', wpsInputList);
+            // console.log('input list: ', wpsInputList);
 
-          for (var key in wpsInputList) {
-            var item = wpsInputList[key];
+            for (var key in wpsInputList) {
+              var item = wpsInputList[key];
 
-            // console.log('intput item\n', item);
+              // console.log('intput item\n', item);
 
-            var newInput = {};
-            var itemTitle = item['Title'].value;
-            var itemIdentifier = item['Identifier'].value;
-            var itemDataType = item.LiteralData['DataType'].value;
+              var newInput = {};
+              var itemTitle = item['Title'].value;
+              var itemIdentifier = item['Identifier'].value;
+              var itemDataType = item.LiteralData['DataType'].value;
 
-            var itemDefaultValue = '';
+              var itemDefaultValue = '';
 
-            try {
-              itemDefaultValue = item.LiteralData.DefaultValue.value;
-            } catch (e) {
-            }
-
-            var itemAllowedValues = item.LiteralData['AllowedValues'];
-
-            // fix for non-existing allowedvalues field
-            if (typeof itemAllowedValues !== 'undefined') {
-              // console.log('Found allowed values!');
-              itemAllowedValues = itemAllowedValues['Value'];
-              // console.log(itemAllowedValues);
-            }
-
-            newInput.title = itemTitle;
-            newInput.identifier = itemIdentifier;
-            newInput.type = itemDataType;
-            newInput.default = itemDefaultValue;
-            newInput.selected = itemDefaultValue;
-
-            newInput.allowedValues = [];
-            for (var keyAV in itemAllowedValues) {
-              var av = itemAllowedValues[keyAV];
-
-              if ( av.value === undefined ){
-              newInput.allowedValues.push(av);
-              } else {
-                newInput.allowedValues.push(av.value);
+              try {
+                itemDefaultValue = item.LiteralData.DefaultValue.value;
+              } catch (e) {
               }
+
+              var itemAllowedValues = item.LiteralData['AllowedValues'];
+
+              // fix for non-existing allowedvalues field
+              if (typeof itemAllowedValues !== 'undefined') {
+              // console.log('Found allowed values!');
+                itemAllowedValues = itemAllowedValues['Value'];
+              // console.log(itemAllowedValues);
+              }
+
+              newInput.title = itemTitle;
+              newInput.identifier = itemIdentifier;
+              newInput.type = itemDataType;
+              newInput.default = itemDefaultValue;
+              newInput.selected = itemDefaultValue;
+
+              newInput.allowedValues = [];
+              for (var keyAV in itemAllowedValues) {
+                var av = itemAllowedValues[keyAV];
+
+                if (av.value === undefined) {
+                  newInput.allowedValues.push(av);
+                } else {
+                  newInput.allowedValues.push(av.value);
+                }
 
               // console.log('av:', av);
               // console.log('value:', av.value);
+              }
+
+              // formItemInputs[index] = newInput;
+              formItemInputs.push(newInput);
+              // formItemDefaults.push({ [itemTitle]:itemDefaultValue });
+
+              // that.setState((prevState) => {
+              //   const { wpsFormCurrent } = prevState;
+              //   var name = processName + itemTitle;
+              //   wpsFormCurrent.push({ [name]: itemDefaultValue });
+              //   return { wpsFormCurrent };
+              // });
             }
-
-            // formItemInputs[index] = newInput;
-            formItemInputs.push(newInput);
-            // formItemDefaults.push({ [itemTitle]:itemDefaultValue });
-
-            // that.setState((prevState) => {
-            //   const { wpsFormCurrent } = prevState;
-            //   var name = processName + itemTitle;
-            //   wpsFormCurrent.push({ [name]: itemDefaultValue });
-            //   return { wpsFormCurrent };
-            // });
-
+          } catch (err) {
+            console.log('No input settings found!');
+            console.log('error:', err);
+            that.setState({ formNoInputFound: true });
           }
-      } catch (err) {
-          console.log('No input settings found!');
-          console.log('error:', err);
-          that.setState({ formNoInputFound: true });
-      }
-
-      try {
-        wpsOutputList = result['ProcessDescriptions'].ProcessDescription.ProcessOutputs.Output;
-
-        // wpsOutputList.forEach(function (item, index) {
-        for (var key in wpsOutputList) {
-          var outItem = wpsOutputList[key];
-
-          // console.log('output outItem\n', outItem);
-
-          var newOutput = {};
-          var itemTitle = '';
-          var itemAbstract = '';
-          var itemIdentifier = '';
 
           try {
-            itemTitle = outItem['Title'].value;
-          } catch (e) {
+            wpsOutputList = result['ProcessDescriptions'].ProcessDescription.ProcessOutputs.Output;
+
+            // wpsOutputList.forEach(function (item, index) {
+            for (var key in wpsOutputList) {
+              var outItem = wpsOutputList[key];
+
+              // console.log('output outItem\n', outItem);
+
+              var newOutput = {};
+              var itemTitle = '';
+              var itemAbstract = '';
+              var itemIdentifier = '';
+
+              try {
+                itemTitle = outItem['Title'].value;
+              } catch (e) {
+              }
+              try {
+                itemAbstract = outItem['Abstract'].value;
+              } catch (e) {
+              }
+              try {
+                itemIdentifier = outItem['Identifier'].value;
+              } catch (e) {
+              }
+
+              newOutput.title = itemTitle;
+              newOutput.abstract = itemAbstract;
+              newOutput.identifier = itemIdentifier;
+
+              formItemOutputs.push(newOutput);
+            }
+          } catch (err) {
+            console.log('No output settings found!');
+            console.log('error:', err);
+            that.setState({ formNoOutputFound: true });
           }
-          try {
-            itemAbstract = outItem['Abstract'].value;
-          } catch (e) {
-          }
-          try {
-            itemIdentifier = outItem['Identifier'].value;
-          } catch (e) {
-          }
 
+          that.setState((prevState) => {
+            return { 'processInputs': formItemInputs };
+          });
 
-          newOutput.title = itemTitle;
-          newOutput.abstract = itemAbstract;
-          newOutput.identifier = itemIdentifier;
+          that.setState((prevState) => {
+            return { 'processOutputs': formItemOutputs };
+          });
 
-          formItemOutputs.push(newOutput);
+          // console.log(that.state);
 
+          that.setState({ isBusy: false });
+          that.setState({ isBusyMessage: '' });
+
+          // generate form elements of the selected process
+          var formElements = that.createForm();
+          that.setState({ showForm: true });
+
+          that.setState({
+            wpsFormElements: formElements
+          });
+
+          // console.log('Promise.resolve from WPSCalculate::getWPSProcessInfo()');
+          resolve('success');
+        }, (error) => {
+          // console.log('Promise.reject from WPSCalculate::getWPSProcessInfo()');
+          console.log('error: ', error);
+          reject('failed');
         }
-
-      } catch(err) {
-        console.log('No output settings found!');
-        console.log('error:', err);
-        that.setState({ formNoOutputFound: true });
-      }
-
-      that.setState((prevState) => {
-        return { ['processInputs']: formItemInputs };
-      });
-
-      that.setState((prevState) => {
-        return { ['processOutputs']: formItemOutputs };
-      });
-
-      // console.log(that.state);
-
-      that.setState({ isBusy: false });
-      that.setState({ isBusyMessage: '' });
-
-      // generate form elements of the selected process
-      var formElements = that.createForm();
-      that.setState({ showForm: true });
-
-      that.setState({
-        wpsFormElements: formElements
-      });
-
-      // console.log('Promise.resolve from WPSCalculate::getWPSProcessInfo()');
-      resolve('success');
-
-    }, (error) => {
-
-      // console.log('Promise.reject from WPSCalculate::getWPSProcessInfo()');
-      console.log('error: ', error);
-      reject('failed');
-
-      }
-    ); //doWPSCall
-  }); //promise
-}
-
+      ); // doWPSCall
+    }); // promise
+  }
 
   createForm () {
     var that = this;
@@ -323,7 +302,7 @@ class WPSDemoCopernicus extends Component {
         // console.log('selectbox: ', el);
         // console.log(el.allowedValues);
         return (
-          <label key={el.title+index}>
+          <label key={el.title + index}>
             {el.title}:
             <select
               value={that.state.processInputs[index].selected}
@@ -349,7 +328,7 @@ class WPSDemoCopernicus extends Component {
           <label key={el.default}>
             {el.title}:
             <input
-              key={el.title+index}
+              key={el.title + index}
               type='text'
               name={el.title}
               value={that.state.processInputs[index].selected}
@@ -361,7 +340,7 @@ class WPSDemoCopernicus extends Component {
       if (el.type === 'integer') {
         // console.log('integer: ', el);
         return (
-          <label key={el.title+index}>
+          <label key={el.title + index}>
             {el.title}:
             <input
               key={index}
@@ -381,7 +360,6 @@ class WPSDemoCopernicus extends Component {
     return formElements;
   }
 
-
   wpsExecute () {
     const { dispatch, actions, nrOfStartedProcesses, compute } = this.props;
     let wpsUrl = 'https://portal.c3s-magic.eu/copernicus-wps/?';
@@ -390,15 +368,12 @@ class WPSDemoCopernicus extends Component {
       '[delay=' + this.state.delay + ';]', nrOfStartedProcesses));
   };
 
-
-
   formSubmit (event) {
     var that = this;
     this.setState({ isBusy: true });
     this.setState({ isBusyMessage: 'formSubmit' });
     // console.log('WPSCalculate::formSubmit(formData)');
     // console.log('event submitted: ', event);
-
 
     // console.log(that.state.processInputs);
 
@@ -414,7 +389,6 @@ class WPSDemoCopernicus extends Component {
     });
     // dataInputs += ']';
 
-
     // console.log(dataInputs);
 
     const { dispatch, actions, nrOfStartedProcesses, compute } = this.props;
@@ -425,16 +399,12 @@ class WPSDemoCopernicus extends Component {
       nrOfStartedProcesses)
     );
 
-
     this.setState({ isBusy: false });
     this.setState({ isBusyMessage: '' });
   }
 
-
-
-
   onChange (event) {
-    var that =this;
+    var that = this;
     // console.log(this.state);
 
     this.setState({ isBusy: true });
@@ -457,7 +427,7 @@ class WPSDemoCopernicus extends Component {
 
     // update state
     this.setState({
-        items,
+      items
     });
 
     // update the form
@@ -476,20 +446,20 @@ class WPSDemoCopernicus extends Component {
   }
 
   handleLocationChange (newLocation) {
-    const {hash, pathname} = newLocation;
+    const { hash, pathname } = newLocation;
     let location = hash && hash.length > 0 ? hash : pathname;
     // console.log('newlocation', location);
     const hashParts = location.split('/');
     // console.log(hashParts);
-    if(hashParts.length === 3){
-      const lastPart = hashParts[hashParts.length -1];
-      if (lastPart && lastPart.length > 0){
+    if (hashParts.length === 3) {
+      const lastPart = hashParts[hashParts.length - 1];
+      if (lastPart && lastPart.length > 0) {
         this.onWpsButtonClick(lastPart);
       }
     }
   }
 
-  componentWillUpdate(nextProps) {
+  componentWillUpdate (nextProps) {
     if (nextProps && this.props && nextProps.location && nextProps.location.hash && this.props.location && this.props.location.hash && this.props.location.hash != nextProps.location.hash) {
       console.log('location willl change to', nextProps.location.hash);
       this.handleLocationChange(nextProps.location);
@@ -512,7 +482,6 @@ class WPSDemoCopernicus extends Component {
     }
   }
 
-
   render () {
     var that = this;
     const { compute, runningProcesses, nrOfStartedProcesses, actions, dispatch } = this.props;
@@ -523,11 +492,11 @@ class WPSDemoCopernicus extends Component {
     if (isBusy) {
       return (
         <div>
-          {compute ?
-          <Alert color='info'>
+          {compute
+            ? <Alert color='info'>
             Busy: { isBusyMessage }
-          </Alert>
-          : ''}
+            </Alert>
+            : ''}
         </div>
       );
     }
@@ -535,11 +504,11 @@ class WPSDemoCopernicus extends Component {
     if (!wpsInfoFetched) {
       return (
         <div>
-          {compute ?
-          <Alert color='warning'>
+          {compute
+            ? <Alert color='warning'>
             Couldn't fetch WPS Process info.
-          </Alert>
-          :''}
+            </Alert>
+            : ''}
         </div>
       );
     } else {
@@ -552,28 +521,28 @@ class WPSDemoCopernicus extends Component {
 
           <Row>
             <Col sm='12'>
-              {compute ?
-              <div>
-                <Alert color='info'>
+              {compute
+                ? <div>
+                  <Alert color='info'>
                   Compute node = { 'https://portal.c3s-magic.eu/copernicus-wps' }
-                </Alert>
-                <Row>
-                  <ul>
-                    {wpsButtonList}
-                  </ul>
-                </Row>
-                {errorExists
-                  ? <UncontrolledAlert color='danger' style={{ textAlign: 'initial' }}>
-                    {errorContent}
-                  </UncontrolledAlert>
-                  : showForm
+                  </Alert>
+                  <Row>
+                    <ul>
+                      {wpsButtonList}
+                    </ul>
+                  </Row>
+                  {errorExists
+                    ? <UncontrolledAlert color='danger' style={{ textAlign: 'initial' }}>
+                      {errorContent}
+                    </UncontrolledAlert>
+                    : showForm
                       ? <Card>
 
                         {formNoInputFound
-                        ? <Alert color='info'>
+                          ? <Alert color='info'>
                           No settings were found for the selected process.
-                        </Alert>
-                        : '' }
+                          </Alert>
+                          : '' }
 
                         <CardBody>
                           <form onSubmit={this.formSubmit}>
@@ -582,31 +551,29 @@ class WPSDemoCopernicus extends Component {
                           </form>
                         </CardBody>
                       </Card> : ''
-                }
-              </div>
-              : <div>You need to sign in to use this functionality</div>}
+                  }
+                </div>
+                : <div>You need to sign in to use this functionality</div>}
             </Col>
           </Row>
           <Row>
             <Col sm='12'>
               {showForm
-              ? <Alert color='info'>
+                ? <Alert color='info'>
                 The submitted jobs will be shown below.
-              </Alert>
-              : '' }
-              {compute ?
-              <div>
-                { Object.keys(runningProcesses).length > 0 && <h2>Your processing results:</h2> }
-                <RenderProcesses runningProcesses={runningProcesses} resultClickCallback={this.resultClickCallback} dispatch={dispatch} actions={actions} />
-              </div>
-              : ''}
+                </Alert>
+                : '' }
+              {compute
+                ? <div>
+                  { Object.keys(runningProcesses).length > 0 && <h2>Your processing results:</h2> }
+                  <RenderProcesses runningProcesses={runningProcesses} resultClickCallback={this.resultClickCallback} dispatch={dispatch} actions={actions} />
+                </div>
+                : ''}
             </Col>
           </Row>
         </div>);
     }
   }
-
-
 }
 
 WPSDemoCopernicus.propTypes = {
@@ -620,4 +587,4 @@ WPSDemoCopernicus.propTypes = {
   location: PropTypes.object
 };
 
-export default  withRouter(WPSDemoCopernicus);
+export default withRouter(WPSDemoCopernicus);

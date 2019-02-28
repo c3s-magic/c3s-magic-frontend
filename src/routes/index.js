@@ -399,7 +399,6 @@ export const createRoutes = (store) => {
         <Route path='adagucviewer'>
           <IndexRoute component={DoubleNavBarLayout} header={mainmenu} secondNavbar={systemmenu} viewComponent={adagucviewer} />
         </Route>
-      
 
       </Route>
 

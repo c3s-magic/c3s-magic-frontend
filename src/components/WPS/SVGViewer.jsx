@@ -15,16 +15,16 @@ export default class SVGViewer extends Component {
     axios({
       method: 'get',
       url: this.state.url,
-      withCredentials: true 
+      withCredentials: true
     }).then(src => {
-      this.setState({data: src.data});
+      this.setState({ data: src.data });
     }).catch((e) => {
       console.error(e);
       axios({
         method: 'get',
         url: this.state.url
       }).then(src => {
-        this.setState({data: src.data});
+        this.setState({ data: src.data });
       }).catch((e) => {
         console.error(e);
       })
@@ -36,12 +36,10 @@ export default class SVGViewer extends Component {
     if (this.state.data === null) {
       return (<div className='wpsOutputComponentContainer'>loading</div>);
     }
-    
-      
-    
-      return (<div style={{width:'100%', height:'350px', display:'block', overflow:'scroll'}}>
-        <InlineSVG src={this.state.data} />
-      </div>);
+
+    return (<div style={{ width:'100%', height:'350px', display:'block', overflow:'scroll' }}>
+      <InlineSVG src={this.state.data} />
+    </div>);
   }
 }
 

@@ -18,7 +18,7 @@ export default class Correlations extends Component {
             nrOfFailedProcesses={nrOfFailedProcesses}
             nrOfCompletedProcesses={nrOfCompletedProcesses}
             runningProcesses={runningProcesses}
-            />
+          />
         </Row>
       </div>);
   }

@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import { getConfig } from '../getConfig';
-let config = getConfig();
 
 import { Col, Row, Navbar, NavItem, Nav, NavLink, Button } from 'reactstrap';
 import WindowManager from '../components/WindowManager';
 import PropTypes from 'prop-types';
 // import MSPLogo from '../components/assets/dsp_logo.svg';
 import Icon from 'react-fa';
+let config = getConfig();
 
 export default class TitleComponent extends Component {
-  constructor() {
+  constructor () {
     super();
     this.canRender = this.canRender.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.canRender();
   }
 
-  componentWillUpdate() {
+  componentWillUpdate () {
     // this.canRender();
   }
 
-  render() {
+  render () {
     const { clientId, location } = this.props;
     var { pathname } = location;
 
@@ -48,22 +48,22 @@ export default class TitleComponent extends Component {
               <Button color='success' href='https://goo.gl/forms/AaQf8yoRjWAMh8T22' target='_blank'>Feedback</Button>
             </Col>
             {
-                clientId !== null ?
-            <Col xs='auto' className='signInOffButton'>
-              <Button href='#/account'>Account</Button>
-            </Col> : null
+              clientId !== null
+                ? <Col xs='auto' className='signInOffButton'>
+                  <Button href='#/account'>Account</Button>
+                </Col> : null
             }
-              {
-                clientId !== null ? (
+            {
+              clientId !== null ? (
 
-                  <Col xs='auto' className='signInOffButton'>
-                    <Button color='primary' onClick={this.logout}><Icon name='sign-out' />&nbsp;Sign out</Button>
-                  </Col>
-                )
-                  : <Col xs='auto' className='signInOffButton'>
-                      <Button onClick={this.login}><Icon name='sign-in' />&nbsp;Sign in</Button>
-                    </Col>
-              }
+                <Col xs='auto' className='signInOffButton'>
+                  <Button color='primary' onClick={this.logout}><Icon name='sign-out' />&nbsp;Sign out</Button>
+                </Col>
+              )
+                : <Col xs='auto' className='signInOffButton'>
+                  <Button onClick={this.login}><Icon name='sign-in' />&nbsp;Sign in</Button>
+                </Col>
+            }
 
           </Row>
         </Navbar>
@@ -76,7 +76,7 @@ export default class TitleComponent extends Component {
               <NavLink href='#/tailoredproducts' active={pathname === '/tphome' || pathname.indexOf('/tailored') !== -1} >Tailored Products</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href='#/diagnostics' active={pathname === '/diagnostics'  || pathname.indexOf('/diagnostics') !== -1} >Metrics &amp; Diagnostics</NavLink>
+              <NavLink href='#/diagnostics' active={pathname === '/diagnostics' || pathname.indexOf('/diagnostics') !== -1} >Metrics &amp; Diagnostics</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href='#/calculate/' active={pathname === '/calculate/'} >Calculate</NavLink>

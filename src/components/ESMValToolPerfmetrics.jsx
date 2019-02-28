@@ -4,19 +4,15 @@ import { Button, Input, Row, Col, Progress, Card, ControlLabel } from 'reactstra
 import MarkdownFromFile from '../containers/MarkdownFromFile';
 import DapPreview from './DapPreview';
 import ImagePreview from './ImagePreview';
-import {stripNS} from "../utils/WPSRunner";
+import { stripNS } from '../utils/WPSRunner';
 
+// var { SchemaForm } = require('react-schema-form');
 
-//var { SchemaForm } = require('react-schema-form');
+// import { SchemaForm } from 'react-schema-form';
 
-//import { SchemaForm } from 'react-schema-form';
-
-import Form from "react-jsonschema-form";
+import Form from 'react-jsonschema-form';
 
 var $RefParser = require('json-schema-ref-parser');
-
-
-
 
 class RenderProcesses extends Component {
   renderProcess (process) {
@@ -76,69 +72,68 @@ export default class ESMValToolPerfmetrics extends Component {
       inputa: 10,
       inputb: 20,
       inputs: {
-  "model1": {
-    "default": "bcc-csm1-1",
-    "identifier": "model1",
-    "values": null,
-    "title": "First Model"
-  },
-  "model2": {
-    "default": "GFDL-ESM2G",
-    "identifier": "model2",
-    "values": null,
-    "title": "Second Model"
-  },
-  "model3": {
-    "default": "MPI-ESM-LR",
-    "identifier": "model3",
-    "values": null,
-    "title": "Third Model"
-  },
-  "model4": {
-    "default": "MPI-ESM-MR",
-    "identifier": "model4",
-    "values": null,
-    "title": "Fourth Model"
-  },
-  "variable": {
-    "default": "ta",
-    "identifier": "variable",
-    "values": null,
-    "title": "Variable"
-  },
-  "mip": {
-    "default": "Amon",
-    "identifier": "mip",
-    "values": null,
-    "title": "MIP"
-  },
-  "experiment": {
-    "default": "historical",
-    "identifier": "experiment",
-    "values": null,
-    "title": "Experiment"
-  },
-  "ensemble_member": {
-    "default": "r1i1p1",
-    "identifier": "ensemble_member",
-    "values": null,
-    "title": "Ensemble Member"
-  },
-  "start_year": {
-    "default": "2001",
-    "identifier": "start_year",
-    "values": null,
-    "title": "Start Year"
-  },
-  "end_year": {
-    "default": "2002",
-    "identifier": "end_year",
-    "values": null,
-    "title": "End Year"
-  }
-}
+        'model1': {
+          'default': 'bcc-csm1-1',
+          'identifier': 'model1',
+          'values': null,
+          'title': 'First Model'
+        },
+        'model2': {
+          'default': 'GFDL-ESM2G',
+          'identifier': 'model2',
+          'values': null,
+          'title': 'Second Model'
+        },
+        'model3': {
+          'default': 'MPI-ESM-LR',
+          'identifier': 'model3',
+          'values': null,
+          'title': 'Third Model'
+        },
+        'model4': {
+          'default': 'MPI-ESM-MR',
+          'identifier': 'model4',
+          'values': null,
+          'title': 'Fourth Model'
+        },
+        'variable': {
+          'default': 'ta',
+          'identifier': 'variable',
+          'values': null,
+          'title': 'Variable'
+        },
+        'mip': {
+          'default': 'Amon',
+          'identifier': 'mip',
+          'values': null,
+          'title': 'MIP'
+        },
+        'experiment': {
+          'default': 'historical',
+          'identifier': 'experiment',
+          'values': null,
+          'title': 'Experiment'
+        },
+        'ensemble_member': {
+          'default': 'r1i1p1',
+          'identifier': 'ensemble_member',
+          'values': null,
+          'title': 'Ensemble Member'
+        },
+        'start_year': {
+          'default': '2001',
+          'identifier': 'start_year',
+          'values': null,
+          'title': 'Start Year'
+        },
+        'end_year': {
+          'default': '2002',
+          'identifier': 'end_year',
+          'values': null,
+          'title': 'End Year'
+        }
+      }
     };
-
   }
 
   toggle (e) {
@@ -171,8 +166,6 @@ export default class ESMValToolPerfmetrics extends Component {
       nrOfStartedProcesses));
   };
 
-
-
   handleChange (name, value) {
     console.log(name, value);
     this.setState({
@@ -192,39 +185,39 @@ export default class ESMValToolPerfmetrics extends Component {
   resultClickCallback (value) {
     console.log(value);
     if (value) {
-        this.props.dispatch(this.props.actions.showWindow(
-          {
-            component:(<ImagePreview imagedata={value} />),
-            title:'Preview',
-            dispatch: this.props.dispatch,
-            width:530,
-            height: 460
-          })
-        );
+      this.props.dispatch(this.props.actions.showWindow(
+        {
+          component:(<ImagePreview imagedata={value} />),
+          title:'Preview',
+          dispatch: this.props.dispatch,
+          width:530,
+          height: 460
+        })
+      );
     }
   }
 
   formSubmit (formData) {
-    console.log("Data submitted: ", formData);
+    console.log('Data submitted: ', formData);
   }
 
   formChanged (info) {
-    console.log("Form changed: ", info);
+    console.log('Form changed: ', info);
   }
 
   formError (info) {
-    console.error("Form error: ", info);
+    console.error('Form error: ', info);
   }
 
-  componentWillMount() {
-    $RefParser.dereference("form_data.json")
-      .then(schema => this.setState({form_schema: schema, namelist_ok: true}));
+  componentWillMount () {
+    $RefParser.dereference('form_data.json')
+      .then(schema => this.setState({ form_schema: schema, namelist_ok: true }));
   }
 
-  componentDidMount() {
-    $RefParser.dereference("namelist_anomaly_agreement.yml")
+  componentDidMount () {
+    $RefParser.dereference('namelist_anomaly_agreement.yml')
       .then(function (namelist) {
-        namelist.models.forEach(function(model) {
+        namelist.models.forEach(function (model) {
           console.log(model.model);
           console.log(model.exp);
           console.log(model.mip);
@@ -234,11 +227,10 @@ export default class ESMValToolPerfmetrics extends Component {
           console.log(model.ensemble);
         })
       });
-
   }
 
-  fetchInfo(){
-    console.log("Fetching the form info");
+  fetchInfo () {
+    console.log('Fetching the form info');
   }
 
   render () {
@@ -274,13 +266,13 @@ export default class ESMValToolPerfmetrics extends Component {
               })
             }
           </div>
-            <Form schema={form_schema} onSubmit={this.formSubmit} onChange={this.formChanged} onError={this.formError}/>
+          <Form schema={form_schema} onSubmit={this.formSubmit} onChange={this.formChanged} onError={this.formError} />
           <Row>
             <Col xs='2' style={{ margin:'10px' }} ><Button color='primary' id='wrangleButton' onClick={() => { this.wrangleClicked(); }}>Compute</Button></Col>
           </Row>
           <RenderProcesses runningProcesses={runningProcesses} resultClickCallback={this.resultClickCallback} />
         </div>
-        : <div>You need to sign in to use this functionality</div> }
+          : <div>You need to sign in to use this functionality</div> }
       </div>);
   }
 }

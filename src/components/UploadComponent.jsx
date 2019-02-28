@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getConfig } from './getConfig';
-let config = getConfig();
 
 import FileColumnDescriptionComponent from './FileColumnDescriptionComponent';
 import FileStructureDescriptionComponent from './FileStructureDescriptionComponent';
 import PreviewComponent from './PreviewComponent';
 import FileUploadComponent from './FileUploadComponent';
+let config = getConfig();
 
 export default class UploadComponent extends Component {
   componentWillUnmount () {
@@ -40,7 +40,7 @@ export default class UploadComponent extends Component {
     return (
       <div className='MainViewport'>
         <FileUploadComponent accessToken={this.props.accessToken}
-                             dispatch={this.props.dispatch} actions={this.props.actions} />
+          dispatch={this.props.dispatch} actions={this.props.actions} />
         <div className='divider-2' />
         { this.props.fileName &&
         <FileStructureDescriptionComponent accessToken={this.props.accessToken}
@@ -51,19 +51,19 @@ export default class UploadComponent extends Component {
           replacer={this.replacer} />
         }
 
-        <div className='divider-2'/>
+        <div className='divider-2' />
         {this.props.fileName && this.props.uploadedFileStructureDescription &&
         <div>
           <h3>CSV Preview (5 rows)</h3>
           <PreviewComponent
-            file={config.adagucServicesHost + '/opendap/' + this.props.accessToken + '/' + this.props.clientId.replace('/','.') +'/' + this.props.fileName}
+            file={config.adagucServicesHost + '/opendap/' + this.props.accessToken + '/' + this.props.clientId.replace('/', '.') + '/' + this.props.fileName}
             tableClassName='previewTable'
             componentClassName='previewComponentUpload'
-            numberOfLinesDisplayed={5}/>
+            numberOfLinesDisplayed={5} />
         </div>
         }
 
-        <div className='divider-2'/>
+        <div className='divider-2' />
         { this.props.fileName && this.props.uploadedFileStructureDescription &&
         <FileColumnDescriptionComponent accessToken={this.props.accessToken}
           dispatch={this.props.dispatch}
@@ -76,7 +76,7 @@ export default class UploadComponent extends Component {
           backend={this.props.backend}
           nrOfStartedProcesses={this.props.nrOfStartedProcesses}
           runningProcesses={this.props.runningProcesses}
-          uploadScanProcess={this.props.uploadScanProcess}/>
+          uploadScanProcess={this.props.uploadScanProcess} />
         }
       </div>
     );

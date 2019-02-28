@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getConfig } from '../getConfig';
-let config = getConfig();
 
 import { Control, Form } from 'react-redux-form';
 import { Button } from 'reactstrap';
+let config = getConfig();
 
 export default class FileStructureDescriptionComponent extends Component {
   handleSubmit () {

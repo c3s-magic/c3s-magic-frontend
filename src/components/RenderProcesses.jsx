@@ -4,7 +4,7 @@ import { Row, Col, Progress, Card, CardBody, CardText, CardLink, CardTitle, Card
 import RenderWPSProcessOutput from './WPS/RenderWPSProcessOutput';
 
 export default class RenderProcesses extends Component {
-  constructor() {
+  constructor () {
     super()
     this.renderProcess = this.renderProcess.bind(this);
     this.iterProcesses = this.iterProcesses.bind(this);
@@ -19,12 +19,11 @@ export default class RenderProcesses extends Component {
       return newArray;
     }
   };
-  
-    // console.log(output);
 
-   
-  renderProcess (process,processid) {
-    const {actions, dispatch} = this.props;
+  // console.log(output);
+
+  renderProcess (process, processid) {
+    const { actions, dispatch } = this.props;
     let processOutputs = {};
     try {
       const _processOutputs = process.result.ExecuteResponse.ProcessOutputs.Output;
@@ -33,7 +32,7 @@ export default class RenderProcesses extends Component {
       } else {
         processOutputs = _processOutputs;
       }
-    }catch (e){
+    } catch (e) {
     }
     return (
       <Card>
@@ -42,7 +41,7 @@ export default class RenderProcesses extends Component {
             <Col xs='11'><CardTitle>{process.id}) {process.message}</CardTitle></Col>
             <Col className='float-right'>
               {
-                process.isComplete ? (<Button color='danger' onClick={()=>{
+                process.isComplete ? (<Button color='danger' onClick={() => {
                   dispatch(actions.removeWPSResult(process.id));
                 }}>X</Button>) : null
               }
@@ -51,16 +50,16 @@ export default class RenderProcesses extends Component {
           <Col> <div className='text-center'>{process.percentageComplete} </div><Progress value={process.percentageComplete} /></Col>
 
           { /* <Col style={{ backgroundColor: '#d9edf7', cursor: 'pointer', color: '#31708f' }} onClick={() => { this.props.resultClickCallback(value); }}>{shown}</Col> */ }
-        <Row>
-          <Col>
-            {
-              Object.keys(processOutputs).map((k, i) => {
-                const processOutput = processOutputs[k];
-                return (<RenderWPSProcessOutput key={i} processOutput={processOutput} />);
-              })
-            }
-          </Col>
-        </Row>
+          <Row>
+            <Col>
+              {
+                Object.keys(processOutputs).map((k, i) => {
+                  const processOutput = processOutputs[k];
+                  return (<RenderWPSProcessOutput key={i} processOutput={processOutput} />);
+                })
+              }
+            </Col>
+          </Row>
         </CardBody>
       </Card>
     );

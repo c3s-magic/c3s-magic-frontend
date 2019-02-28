@@ -7,11 +7,10 @@ class DiagnosticsChart extends Component {
   componentWillMount () {
   }
 
-  componentDidMount(){
+  componentDidMount () {
   }
 
   render () {
-
     return (
       <RechartsComponent dapurl={this.props.data} type={'scatter_1'} />
     );

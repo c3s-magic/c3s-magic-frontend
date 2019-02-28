@@ -11,7 +11,7 @@ export default class NavBarLayout extends Component {
             {React.cloneElement(header, this.props) || 'HeaderLayout Oops'}
           </Row>
           : null }
-          { viewComponent
+        { viewComponent
           ? <Row className='ViewComponent' tag='main'>
             { viewComponent }
           </Row>

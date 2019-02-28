@@ -36,7 +36,7 @@ export default class BasketComponent extends Component {
         if (_layerNames[j].indexOf('baselayer') === -1 &&
             _layerNames[j].indexOf('overlay') === -1 &&
             _layerNames[j].indexOf('grid') === -1
-            ) {
+        ) {
           // eslint-disable-next-line
           new WMJSLayer({
             service:WMSGetCapabiltiesURL,

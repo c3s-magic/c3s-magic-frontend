@@ -17,7 +17,7 @@ export default class TXTViewer extends Component {
       url: this.state.url,
       withCredentials: true
     }).then(src => {
-      this.setState({data: src.data});
+      this.setState({ data: src.data });
     }).catch((e) => {
       console.error(e);
     })
@@ -25,9 +25,9 @@ export default class TXTViewer extends Component {
 
   render () {
     const { closeCallback } = this.props;
-      return (<div className='wpsOutputComponentContainer'>
-        <textarea style={{ fontSize:'10px', lineHeight:'12px', width: '100%', height:'400px', border:'none',resize:'none',overflowY:'scroll',outline:'none' }} value={this.state.data} />
-      </div>);
+    return (<div className='wpsOutputComponentContainer'>
+      <textarea style={{ fontSize:'10px', lineHeight:'12px', width: '100%', height:'400px', border:'none', resize:'none', overflowY:'scroll', outline:'none' }} value={this.state.data} />
+    </div>);
   }
 }
 

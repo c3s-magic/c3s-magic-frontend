@@ -19,7 +19,7 @@ export default class YMLViewer extends Component {
       url: this.state.url,
       withCredentials: true
     }).then(src => {
-      this.setState({data: (YAML.parse(src.data))});
+      this.setState({ data: (YAML.parse(src.data)) });
     }).catch((e) => {
       console.error(e);
     })
@@ -27,9 +27,9 @@ export default class YMLViewer extends Component {
 
   render () {
     const { closeCallback } = this.props;
-      return (<div className='wpsOutputComponentContainer'>
-        <ReactJson style={{fontSize:'10px', lineHeight:'12px'}} src={this.state.data} />
-              </div>);
+    return (<div className='wpsOutputComponentContainer'>
+      <ReactJson style={{ fontSize:'10px', lineHeight:'12px' }} src={this.state.data} />
+    </div>);
   }
 }
 

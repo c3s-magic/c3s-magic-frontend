@@ -28,7 +28,7 @@ export default class MultiModelProductsMenu extends Component {
                 Sub ensemble selections
               </NavLink>
             </NavItem>
-              <NavItem>
+            <NavItem>
               <NavLink href='#/multimodelproducts/estimateofagreement' active={pathname === '/multimodelproducts/estimateofagreement'} >
                 <Icon name='' />
                 Estimate of Agreement

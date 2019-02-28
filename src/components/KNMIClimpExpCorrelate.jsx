@@ -54,57 +54,57 @@ export default class KNMIClimpExpCorrelate extends Component {
       inputa: 10,
       inputb: 20,
       inputs: {
-  "netcdf_source1": {
-    "default": "/data/climexp/cru_ts3.22.1901.2013.pre.dat.nc",
-    "abstract": "application/netcdf",
-    "identifier": "netcdf_source1",
-    "values": null,
-    "title": "NetCDF field data"
-  },
-  "netcdf_source2": {
-    "default": "/data/climexp/nino3.nc",
-    "abstract": "application/netcdf",
-    "identifier": "netcdf_source2",
-    "values": null,
-    "title": "NetCDF timeseries data"
-  },
-  "ratio": {
-    "default": "1:12",
-    "identifier": "ratio",
-    "values": null,
-    "title": "Ratio"
-  },
-  "netcdf_target": {
-    "default": "out.nc",
-    "identifier": "netcdf_target",
-    "values": null,
-    "title": "Output netCDF filename"
-  },
-  "average": {
-    "default": "ave",
-    "identifier": "average",
-    "values": null,
-    "title": "Average"
-  },
-  "tags": {
-    "default": "c3s-422-Lot2",
-    "identifier": "tags",
-    "values": null,
-    "title": "User defined tags"
-  },
-  "frequency": {
-    "default": "mon",
-    "identifier": "frequency",
-    "values": null,
-    "title": "Frequency"
-  },
-  "var": {
-    "default": "3",
-    "identifier": "var",
-    "values": null,
-    "title": "Lag"
-  }
-}
+        'netcdf_source1': {
+          'default': '/data/climexp/cru_ts3.22.1901.2013.pre.dat.nc',
+          'abstract': 'application/netcdf',
+          'identifier': 'netcdf_source1',
+          'values': null,
+          'title': 'NetCDF field data'
+        },
+        'netcdf_source2': {
+          'default': '/data/climexp/nino3.nc',
+          'abstract': 'application/netcdf',
+          'identifier': 'netcdf_source2',
+          'values': null,
+          'title': 'NetCDF timeseries data'
+        },
+        'ratio': {
+          'default': '1:12',
+          'identifier': 'ratio',
+          'values': null,
+          'title': 'Ratio'
+        },
+        'netcdf_target': {
+          'default': 'out.nc',
+          'identifier': 'netcdf_target',
+          'values': null,
+          'title': 'Output netCDF filename'
+        },
+        'average': {
+          'default': 'ave',
+          'identifier': 'average',
+          'values': null,
+          'title': 'Average'
+        },
+        'tags': {
+          'default': 'c3s-422-Lot2',
+          'identifier': 'tags',
+          'values': null,
+          'title': 'User defined tags'
+        },
+        'frequency': {
+          'default': 'mon',
+          'identifier': 'frequency',
+          'values': null,
+          'title': 'Frequency'
+        },
+        'var': {
+          'default': '3',
+          'identifier': 'var',
+          'values': null,
+          'title': 'Lag'
+        }
+      }
     };
   }
 
@@ -208,7 +208,7 @@ export default class KNMIClimpExpCorrelate extends Component {
           </Row>
           <RenderProcesses runningProcesses={runningProcesses} resultClickCallback={this.resultClickCallback} />
         </div>
-        : <div>You need to sign in to use this functionality</div> }
+          : <div>You need to sign in to use this functionality</div> }
       </div>);
   }
 }
