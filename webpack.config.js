@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 require('babel-register');
 
 module.exports = {
@@ -12,6 +12,12 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'c3s-magic-frontend.js'
+  },
+  devServer:{
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*'
+    }
   },
   devtool: 'source-map',
   module: {
@@ -87,4 +93,4 @@ module.exports = {
 };
 module.loaders = [
   { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader' }
-]
+];

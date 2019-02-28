@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, CardBody, Button, Input, Row, Col, Alert } from 'reactstrap';
-import { xml2jsonparser } from '../utils/xml2jsonparser';
+import { Card, CardBody, Button, Row, Col, Alert, UncontrolledAlert } from 'reactstrap';
 import RenderProcesses from './RenderProcesses';
 import { doWPSCall } from '../utils/WPSRunner';
 import ImagePreview from './ImagePreview';
 import { withRouter } from 'react-router';
-
+import _ from 'lodash';
 class WPSDemoCopernicus extends Component {
   constructor (props) {
     super(props);
@@ -38,7 +37,7 @@ class WPSDemoCopernicus extends Component {
 
   async componentDidMount () {
     // console.log('WPSCalculate::componentDidMount()');
-    var that = this;
+    let that = this;
 
     that.setState({ isBusy: true });
     that.setState({ isBusyMessage: 'getWPSProcessList' });
@@ -60,7 +59,7 @@ class WPSDemoCopernicus extends Component {
 
   // wps service related methods
   async getWPSProcessList () {
-    var that = this;
+    let that = this;
     return new Promise(function (resolve, reject) {
       that.setState({ isBusy: true });
       that.setState({ isBusyMessage: ' Getting process list from the server.' });
@@ -72,11 +71,11 @@ class WPSDemoCopernicus extends Component {
           that.setState({ describeProcessDocument: result });
 
           try {
-            var wpsProcessList = result['Capabilities']['ProcessOfferings']['Process'];
+            let wpsProcessList = result['Capabilities']['ProcessOfferings']['Process'];
             // console.log('91::wpsProcessList', wpsProcessList);
 
-            for (var key in wpsProcessList) {
-              var pName = wpsProcessList[key]['Identifier'].value;
+            for (let key in wpsProcessList) {
+              let pName = wpsProcessList[key]['Identifier'].value;
 
               that.setState((prevState) => {
                 const { wpsProcessName } = prevState;
@@ -101,7 +100,7 @@ class WPSDemoCopernicus extends Component {
           that.setState({ isBusyMessage: '' });
 
           // console.log('Promise.reject from WPSCalculate::getWPSProcessList()');
-          reject('failed');
+          reject(new Error('failed'));
         }
       );
     });
@@ -128,7 +127,7 @@ class WPSDemoCopernicus extends Component {
   }
 
   async getWPSProcessInfo (processName) {
-    var that = this;
+    let that = this;
     that.setState({ isBusy: true });
     that.setState({ isBusyMessage: 'getting settings for ' + processName });
     // console.log('WPSCalculate::getWPSProcessInfo(processName)');
@@ -141,36 +140,35 @@ class WPSDemoCopernicus extends Component {
         // console.log(result);
           // console.log('Searching for input and output types in ', processName, 'process');
 
-          var formItemInputs = [];
-          var formItemDefaults = [];
-          var formItemOutputs = [];
+          let formItemInputs = [];
+          let formItemOutputs = [];
 
-          var wpsOutputList = null;
-          var wpsInputList = null;
+          let wpsOutputList = null;
+          let wpsInputList = null;
 
           try {
             wpsInputList = result['ProcessDescriptions'].ProcessDescription.DataInputs.Input;
 
             // console.log('input list: ', wpsInputList);
 
-            for (var key in wpsInputList) {
-              var item = wpsInputList[key];
+            for (let key in wpsInputList) {
+              let item = wpsInputList[key];
 
               // console.log('intput item\n', item);
 
-              var newInput = {};
-              var itemTitle = item['Title'].value;
-              var itemIdentifier = item['Identifier'].value;
-              var itemDataType = item.LiteralData['DataType'].value;
+              let newInput = {};
+              let itemTitle = item['Title'].value;
+              let itemIdentifier = item['Identifier'].value;
+              let itemDataType = item.LiteralData['DataType'].value;
 
-              var itemDefaultValue = '';
+              let itemDefaultValue = '';
 
               try {
                 itemDefaultValue = item.LiteralData.DefaultValue.value;
               } catch (e) {
               }
 
-              var itemAllowedValues = item.LiteralData['AllowedValues'];
+              let itemAllowedValues = item.LiteralData['AllowedValues'];
 
               // fix for non-existing allowedvalues field
               if (typeof itemAllowedValues !== 'undefined') {
@@ -186,8 +184,8 @@ class WPSDemoCopernicus extends Component {
               newInput.selected = itemDefaultValue;
 
               newInput.allowedValues = [];
-              for (var keyAV in itemAllowedValues) {
-                var av = itemAllowedValues[keyAV];
+              for (let keyAV in itemAllowedValues) {
+                let av = itemAllowedValues[keyAV];
 
                 if (av.value === undefined) {
                   newInput.allowedValues.push(av);
@@ -205,7 +203,7 @@ class WPSDemoCopernicus extends Component {
 
               // that.setState((prevState) => {
               //   const { wpsFormCurrent } = prevState;
-              //   var name = processName + itemTitle;
+              //   let name = processName + itemTitle;
               //   wpsFormCurrent.push({ [name]: itemDefaultValue });
               //   return { wpsFormCurrent };
               // });
@@ -220,15 +218,15 @@ class WPSDemoCopernicus extends Component {
             wpsOutputList = result['ProcessDescriptions'].ProcessDescription.ProcessOutputs.Output;
 
             // wpsOutputList.forEach(function (item, index) {
-            for (var key in wpsOutputList) {
-              var outItem = wpsOutputList[key];
+            for (let key in wpsOutputList) {
+              let outItem = wpsOutputList[key];
 
               // console.log('output outItem\n', outItem);
 
-              var newOutput = {};
-              var itemTitle = '';
-              var itemAbstract = '';
-              var itemIdentifier = '';
+              let newOutput = {};
+              let itemTitle = '';
+              let itemAbstract = '';
+              let itemIdentifier = '';
 
               try {
                 itemTitle = outItem['Title'].value;
@@ -269,7 +267,7 @@ class WPSDemoCopernicus extends Component {
           that.setState({ isBusyMessage: '' });
 
           // generate form elements of the selected process
-          var formElements = that.createForm();
+          let formElements = that.createForm();
           that.setState({ showForm: true });
 
           that.setState({
@@ -281,23 +279,23 @@ class WPSDemoCopernicus extends Component {
         }, (error) => {
           // console.log('Promise.reject from WPSCalculate::getWPSProcessInfo()');
           console.log('error: ', error);
-          reject('failed');
+          reject(new Error('failed' + error));
         }
       ); // doWPSCall
     }); // promise
   }
 
   createForm () {
-    var that = this;
+    let that = this;
 
     this.setState({ isBusy: true });
     this.setState({ isBusyMessage: ' generating the form' });
 
-    var inputList = this.state.processInputs;
+    let inputList = this.state.processInputs;
     // console.log(inputList);
     // console.log(that.state);
 
-    var formElements = inputList.map(function (el, index) {
+    let formElements = inputList.map(function (el, index) {
       if (el.type === 'string' && el.allowedValues.length > 0) {
         // console.log('selectbox: ', el);
         // console.log(el.allowedValues);
@@ -361,7 +359,7 @@ class WPSDemoCopernicus extends Component {
   }
 
   wpsExecute () {
-    const { dispatch, actions, nrOfStartedProcesses, compute } = this.props;
+    const { dispatch, actions, nrOfStartedProcesses } = this.props;
     let wpsUrl = 'https://portal.c3s-magic.eu/copernicus-wps/?';
     dispatch(actions.startWPSExecute(wpsUrl,
       'sleep',
@@ -369,7 +367,7 @@ class WPSDemoCopernicus extends Component {
   };
 
   formSubmit (event) {
-    var that = this;
+    let that = this;
     this.setState({ isBusy: true });
     this.setState({ isBusyMessage: 'formSubmit' });
     // console.log('WPSCalculate::formSubmit(formData)');
@@ -391,7 +389,7 @@ class WPSDemoCopernicus extends Component {
 
     // console.log(dataInputs);
 
-    const { dispatch, actions, nrOfStartedProcesses, compute } = this.props;
+    const { dispatch, actions, nrOfStartedProcesses } = this.props;
     let wpsUrl = 'https://portal.c3s-magic.eu/copernicus-wps/?';
     dispatch(actions.startWPSExecute(wpsUrl,
       this.state.selectedProcess,
@@ -404,7 +402,7 @@ class WPSDemoCopernicus extends Component {
   }
 
   onChange (event) {
-    var that = this;
+    let that = this;
     // console.log(this.state);
 
     this.setState({ isBusy: true });
@@ -419,7 +417,7 @@ class WPSDemoCopernicus extends Component {
     // console.log('name:', name);
     // console.log(that.state.processInputs);
 
-    var stateItemIndex = that.state.processInputs.map(function (e) { return e.title; }).indexOf(name);
+    let stateItemIndex = that.state.processInputs.map(function (e) { return e.title; }).indexOf(name);
     // console.log('stateItemIndex:', stateItemIndex);
 
     const items = this.state.processInputs;
@@ -431,7 +429,7 @@ class WPSDemoCopernicus extends Component {
     });
 
     // update the form
-    var formElements = that.createForm();
+    let formElements = that.createForm();
     that.setState({ showForm: true });
 
     that.setState({
@@ -460,7 +458,7 @@ class WPSDemoCopernicus extends Component {
   }
 
   componentWillUpdate (nextProps) {
-    if (nextProps && this.props && nextProps.location && nextProps.location.hash && this.props.location && this.props.location.hash && this.props.location.hash != nextProps.location.hash) {
+    if (nextProps && this.props && nextProps.location && nextProps.location.hash && this.props.location && this.props.location.hash && this.props.location.hash !== nextProps.location.hash) {
       console.log('location willl change to', nextProps.location.hash);
       this.handleLocationChange(nextProps.location);
     }
@@ -483,9 +481,9 @@ class WPSDemoCopernicus extends Component {
   }
 
   render () {
-    var that = this;
-    const { compute, runningProcesses, nrOfStartedProcesses, actions, dispatch } = this.props;
-    const { showForm, isBusy, isBusyMessage, wpsProcessName, wpsInfoFetched, runningJobs } = this.state;
+    let that = this;
+    const { compute, runningProcesses, actions, dispatch } = this.props;
+    const { showForm, isBusy, isBusyMessage, wpsInfoFetched } = this.state;
     const { errorExists, errorContent, formNoInputFound } = this.state;
     const { wpsFormElements } = this.state;
 
@@ -512,12 +510,12 @@ class WPSDemoCopernicus extends Component {
         </div>
       );
     } else {
-      var wpsButtonList = this.state.wpsProcessName.map(function (wp, index) {
+      let wpsButtonList = this.state.wpsProcessName.map(function (wp, index) {
         return <Button key={index} color='primary' onClick={() => { that.onWpsButtonClick(wp.name); }}>{wp.name}</Button>;
       });
 
       return (
-        <div style={{ backgroundColor: '#FFF', width: '100%' }}>
+        <div style={{ backgroundColor: '#FFF', width: '100%', fontFamily: 'Roboto' }}>
 
           <Row>
             <Col sm='12'>
@@ -565,7 +563,7 @@ class WPSDemoCopernicus extends Component {
                 : '' }
               {compute
                 ? <div>
-                  { Object.keys(runningProcesses).length > 0 && <h2>Your processing results:</h2> }
+                  { Object.keys(runningProcesses).length > 0 && <h2>Your processing results</h2> }
                   <RenderProcesses runningProcesses={runningProcesses} resultClickCallback={this.resultClickCallback} dispatch={dispatch} actions={actions} />
                 </div>
                 : ''}
@@ -581,10 +579,9 @@ WPSDemoCopernicus.propTypes = {
   dispatch: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
   nrOfStartedProcesses: PropTypes.number,
-  nrOfFailedProcesses: PropTypes.number,
-  nrOfCompletedProcesses: PropTypes.number,
   runningProcesses: PropTypes.object.isRequired,
-  location: PropTypes.object
+  location: PropTypes.object,
+  router: PropTypes.object
 };
 
 export default withRouter(WPSDemoCopernicus);

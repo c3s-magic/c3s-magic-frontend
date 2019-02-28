@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Progress, Card, CardBody, CardText, CardLink, CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Row, Col, Progress, Card, CardBody, CardTitle, Button } from 'reactstrap';
 import RenderWPSProcessOutput from './WPS/RenderWPSProcessOutput';
 
 export default class RenderProcesses extends Component {
   constructor () {
-    super()
+    super();
     this.renderProcess = this.renderProcess.bind(this);
     this.iterProcesses = this.iterProcesses.bind(this);
   }
@@ -36,16 +36,22 @@ export default class RenderProcesses extends Component {
     }
     return (
       <Card>
-        <CardBody>
+        <CardBody className='RenderProcesses_CardBody'>
           <Row>
-            <Col xs='11'><CardTitle>{process.id}) {process.message}</CardTitle></Col>
+            <Col xs='11'>
+              <h1 className='RenderProcesses_ProcessTitle'>Results for process {process.identifier}:</h1>
+            </Col>
             <Col className='float-right'>
               {
-                process.isComplete ? (<Button color='danger' onClick={() => {
+                process.isComplete ? (<Button color='primary' onClick={() => {
                   dispatch(actions.removeWPSResult(process.id));
                 }}>X</Button>) : null
               }
             </Col>
+
+          </Row>
+          <Row>
+            <Col xs='11'><CardTitle>{process.id}) {process.message}</CardTitle></Col>
           </Row>
           <Col> <div className='text-center'>{process.percentageComplete} </div><Progress value={process.percentageComplete} /></Col>
 
@@ -80,7 +86,7 @@ export default class RenderProcesses extends Component {
 
 RenderProcesses.propTypes = {
   runningProcesses: PropTypes.object.isRequired,
-  resultClickCallback: PropTypes.func.isRequired,
+  // resultClickCallback: PropTypes.func.isRequired,
   actions: PropTypes.object,
   dispatch: PropTypes.func.isRequired
 };

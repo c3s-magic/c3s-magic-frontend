@@ -30,14 +30,6 @@ html {
   margin-bottom: 1rem;
 }
 
-.container .row > [class^="col-"] {
-  /*padding-top: .75rem;
-  padding-bottom: .75rem;
-  background-color: #E5EDF5;
-  border: 1px solid #C9C1D5;
-  color: #5F5F5F;*/
-}
-
 
 .diagnosticsCol {
   padding-top: .75rem;
@@ -420,9 +412,7 @@ iframe {
   padding-bottom:0.5em;
 }
 
-.text {
 
-}
 .text p{
   max-width:700px;
 }
@@ -444,6 +434,7 @@ iframe {
 }
 
 .catalogMetadataModal{
+  color:black;
 }
 
 .catalogMetadata{
@@ -683,7 +674,6 @@ div.hpace2em {
   height: 100%;
   border: none;
   box-shadow: none;
-  webkit-box-shadow: none;
   /* -ms-zoom: 0.75;
   -moz-transform: scale(1.25);
   -moz-transform-origin: 0 0;
@@ -733,4 +723,17 @@ div.hpace2em {
 .container .row {
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
+}
+
+.RenderProcesses_ProcessTitle {
+  color:black;
+  font-size: 25px;
+  margin-bottom:25px;
+  color: rgb(148, 19, 51);
+}
+
+.RenderProcesses_CardBody{
+  background-color: #d1ecf1;
+  padding:20px;
+
 }
