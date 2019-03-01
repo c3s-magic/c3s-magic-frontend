@@ -30,7 +30,7 @@ export default class ReactWebMapJS extends Component {
     // console.log('componentDidUpdate');
     if (this.props.layers.length) {
       this.webMapJS.removeAllLayers();
-      for (let j = 0;j < this.props.layers.length; j++) {
+      for (let j = 0; j < this.props.layers.length; j++) {
         this.webMapJS.addLayer(this.props.layers[j]);
         // console.log('add layer ok', this.props.layers[j].name);
         if (this.props.layerReadyCallback) {
@@ -57,7 +57,7 @@ export default class ReactWebMapJS extends Component {
     this.webMapJS.setWMJSTileRendererTileSettings(WMJSTileRendererTileSettings);
     this.webMapJS.setBaseURL('./adagucwebmapjs/');
     this.webMapJS.setProjection({ srs:this.props.srs || 'EPSG:3857', bbox:this.props.bbox || [-19000000, -19000000, 19000000, 19000000] });
-    
+
     let baselayers = [
       // new WMJSLayer({ 'name': 'OSM', type: 'twms' }),
       new WMJSLayer({
@@ -81,7 +81,6 @@ export default class ReactWebMapJS extends Component {
     if (this.props.baselayers) {
       baselayers = this.props.baselayers;
     }
-
 
     this.webMapJS.setBaseLayers(baselayers);
 

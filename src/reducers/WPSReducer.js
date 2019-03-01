@@ -1,4 +1,4 @@
-import { START_WPS_EXECUTE_START, START_WPS_EXECUTE_END, START_WPS_EXECUTE_FAILED, WPS_STATUS_UPDATE, WPS_COMPLETED, WPS_REMOVERESULT } from '../constants/WPSLabels';
+import { START_WPS_EXECUTE_START, START_WPS_EXECUTE_END, START_WPS_EXECUTE_FAILED, WPS_STATUS_UPDATE, WPS_COMPLETED, WPS_REMOVERESULT, WPS_TOGGLERESULT } from '../constants/WPSLabels';
 
 const handleWPSExecute = (state, payload) => {
   // console.log('reducer handleWPSExecute', payload);
@@ -48,6 +48,15 @@ const removeWPSResult = (state, payload) => {
   });
 };
 
+const toggleWPSResult = (state, payload) => {
+  let newRunningProcesses = Object.assign({}, state.runningProcesses);
+  newRunningProcesses[payload.id].collapsed = !newRunningProcesses[payload.id].collapsed;
+  console.log(newRunningProcesses[payload.id].collapsed);
+  return Object.assign({}, state, {
+    runningProcesses: newRunningProcesses
+  });
+};
+
 /**
  * Deleting an item from the basket.
  **/
@@ -61,7 +70,8 @@ const ACTION_HANDLERS = {
   [START_WPS_EXECUTE_END] : (state, action) => handleWPSEnd(state, action.payload),
   [WPS_STATUS_UPDATE] : (state, action) => handleWPSStatusUpdate(state, action.payload),
   [WPS_COMPLETED] : (state, action) => handleWPSComplete(state, action.payload),
-  [WPS_REMOVERESULT] : (state, action) => removeWPSResult(state, action.payload)
+  [WPS_REMOVERESULT] : (state, action) => removeWPSResult(state, action.payload),
+  [WPS_TOGGLERESULT] : (state, action) => toggleWPSResult(state, action.payload)  
 };
 
 // ------------------------------------

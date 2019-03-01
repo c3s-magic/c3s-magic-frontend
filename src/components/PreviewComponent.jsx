@@ -25,19 +25,19 @@ export default class PreviewComponent extends Component {
     const fullUrl = this.props.file + '?FORMAT=application/json&maxlines=' + number;
 
     fetch(fullUrl)
-    .then((result) => {
-      if (result.ok) {
-        return result.json();
-      } else {
-        return null;
-      }
-    })
-    .then((json) => {
+      .then((result) => {
+        if (result.ok) {
+          return result.json();
+        } else {
+          return null;
+        }
+      })
+      .then((json) => {
       /* If null, leave it. */
-      if (!json) return;
-      /* Directly set the state. */
-      _this.setState({ rows: json.rows, columns: json.columns });
-    });
+        if (!json) return;
+        /* Directly set the state. */
+        _this.setState({ rows: json.rows, columns: json.columns });
+      });
   }
 
   componentWillMount () {
@@ -51,8 +51,8 @@ export default class PreviewComponent extends Component {
      * in the JsonTable settings.
      */
     numberOfLinesDisplayed
-    ? numberOfLinesToDisplay = numberOfLinesDisplayed
-    : numberOfLinesToDisplay = 1; // Default is 1.
+      ? numberOfLinesToDisplay = numberOfLinesDisplayed
+      : numberOfLinesToDisplay = 1; // Default is 1.
 
     this.getFirstNDataFromCSV(numberOfLinesToDisplay);
   }

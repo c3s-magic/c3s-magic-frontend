@@ -106,7 +106,7 @@ export default class Draggable extends Component {
     e.preventDefault();
   }
   onMouseUp (e) {
-    if (this.state.resizing){
+    if (this.state.resizing) {
       window.dispatchEvent(new Event('resize'));
     }
     this.setState({ dragging: false, resizing: false, cursor: 'default' });

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getConfig } from '../getConfig';
-let config = getConfig();
 
 import JsonTable from 'ts-react-json-table';
 import ScrollArea from 'react-scrollbar';
 import { Button } from 'reactstrap';
 import Moment from 'react-moment';
+let config = getConfig();
 
 export default class JobListComponent extends Component {
   constructor (props) {
@@ -17,7 +17,6 @@ export default class JobListComponent extends Component {
     this.pollingActive = false;
     this.onClickRow = this.onClickRow.bind(this);
     this.pollJobList = this.pollJobList.bind(this);
-    
   }
   /* Sleep function. */
   sleep (ms) {
@@ -30,17 +29,17 @@ export default class JobListComponent extends Component {
       return;
     }
 
-    fetch(this.props.backend + '/joblist/list?', {credentials: 'include' })
-    .then((result) => {
-      if (result.ok) {
-        return result.json();
-      } else {
-        return null;
-      }
-    })
-    .then((json) => {
-      dispatch(actions.updateJobListItems(json));
-    });
+    fetch(this.props.backend + '/joblist/list?', { credentials: 'include' })
+      .then((result) => {
+        if (result.ok) {
+          return result.json();
+        } else {
+          return null;
+        }
+      })
+      .then((json) => {
+        dispatch(actions.updateJobListItems(json));
+      });
   }
 
   /**
@@ -53,22 +52,21 @@ export default class JobListComponent extends Component {
   deleteJobListItem () {
     if (!this.state.cursor) return;
     const { accessToken } = this.props;
-    fetch(this.props.backend + '/joblist/remove?&job=' + this.state.cursor.id, {credentials: 'include' })
-    .then((result) => {
-      if (result.ok) {
-        return result.json();
-      } else {
-        return null;
-      }
-    })
-    .then((json) => {
-      console.log(json.message);
-      this.fetchJobListItems();
-    });
+    fetch(this.props.backend + '/joblist/remove?&job=' + this.state.cursor.id, { credentials: 'include' })
+      .then((result) => {
+        if (result.ok) {
+          return result.json();
+        } else {
+          return null;
+        }
+      })
+      .then((json) => {
+        console.log(json.message);
+        this.fetchJobListItems();
+      });
   }
 
   pollJobList () {
-    
     if (!this.pollingActive) return;
     this.fetchJobListItems();
     this.sleep(2000).then(this.pollJobList);
@@ -82,7 +80,6 @@ export default class JobListComponent extends Component {
   componentWillUnmount () {
     this.pollingActive = false;
   }
-
 
   render () {
     if (!this.props.jobs) return null;

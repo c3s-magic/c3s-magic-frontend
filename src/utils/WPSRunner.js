@@ -90,7 +90,6 @@ export const doWPSExecuteCall = function (wps, statusCallBack, executeCompleteCa
   };
 
   let wpsExecuteCallback = (executeResponse) => {
-    console.log(wpsExecuteCallback);
     if (handleExceptions(executeResponse) === true) {
       console.log('Exception in WPS Process');
       return;
@@ -103,7 +102,7 @@ export const doWPSExecuteCall = function (wps, statusCallBack, executeCompleteCa
         return;
       }
       let pollCallBack = (json) => {
-        setTimeout(pol, 300);
+        setTimeout(pol, 600);
         let percentageComplete = 0;
         let message = '';
 

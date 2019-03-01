@@ -14,7 +14,7 @@ export default class AccountComponent extends Component {
   }
 
   render () {
-    const { accessToken, emailAddress, clientId, backend, compute } = this.props;
+    const { accessToken, emailAddress, clientId, compute } = this.props;
     const { backendHost } = config;
     // console.log(this.props);
     return (
@@ -39,7 +39,12 @@ export default class AccountComponent extends Component {
                 <p>Accesstoken: {accessToken}</p>
               }
               {
-                (compute && compute.length > 0) ? (<p>Compute Nodes:<br /><ol> {compute.map((d, i) => <li key={i}>{d.name + ' with url ' + d.url}</li>)}</ol></p>) : <p>No compute nodes found.</p>
+                (compute && compute.length > 0) ? (<div>
+                  <p>Compute Nodes:</p>
+                  <br />
+                  <ol>
+                    {compute.map((d, i) => <li key={i}>{d.name + ' with url ' + d.url}</li>)}
+                  </ol></div>) : <p>No compute nodes found.</p>
               }
               {
                 <p>Backend: {backendHost}</p>
@@ -55,6 +60,5 @@ AccountComponent.propTypes = {
   accessToken: PropTypes.string,
   emailAddress: PropTypes.string,
   clientId: PropTypes.string,
-  backend: PropTypes.string,
   compute: PropTypes.array
 };

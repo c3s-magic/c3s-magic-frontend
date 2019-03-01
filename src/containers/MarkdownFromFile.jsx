@@ -12,8 +12,8 @@ export default class MarkdownFromFile extends Component {
   }
   componentWillMount () {
     fetch(this.props.url)
-     .then((response) => { return response.text(); })
-     .then((result) => { this.setState({ text: result }); return result; });
+      .then((response) => { return response.text(); })
+      .then((result) => { this.setState({ text: result }); return result; });
   }
 
   render () {

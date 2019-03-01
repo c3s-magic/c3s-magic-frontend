@@ -42,7 +42,7 @@ export default class RechartsComponent extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getScatterChart = this.getScatterChart.bind(this);
     this.getLineChart = this.getLineChart.bind(this);
-    
+
     this.state = {
       scatterdata: { tas:[], tas_0:[] },
       // dataurl:'https://portal.c3s-magic.eu/backend/adagucopendap/recipe_flato13ipcc_20180825_091035%2Fwork%2Ffig09-42a%2Ffig09-42a%2Fch09_fig09-42a.nc',
@@ -82,27 +82,27 @@ export default class RechartsComponent extends Component {
       }
       throw new TypeError('Oops, we haven\'t got JSON!');
     })
-    .catch(error => {
-      throw error;
-    }).then(data => {
+      .catch(error => {
+        throw error;
+      }).then(data => {
       // console.log(data);
-      let tas = [];
-      data.data.tas.map((d, i) => {
-        tas.push({ y: data.data.tas[i], x: data.data.ecs[i], model: data.data.models[i].trim() });
+        let tas = [];
+        data.data.tas.map((d, i) => {
+          tas.push({ y: data.data.tas[i], x: data.data.ecs[i], model: data.data.models[i].trim() });
+        });
+        let tas0 = [];
+        data.data.tas.map((d, i) => {
+          tas0.push({ y: data.data.tas_0[i], x: data.data.ecs[i], model: data.data.models[i].trim() });
+        });
+        this.setState({ scatterdata: { tas: tas, tas_0: tas0 } });
+      }).catch(error => {
+        console.log(error);
+        if (error.toString) {
+          this.setState({ error: error.toString() });
+        } else {
+          this.setState({ error: JSON.stringify(error, null, 2) });
+        }
       });
-      let tas0 = [];
-      data.data.tas.map((d, i) => {
-        tas0.push({ y: data.data.tas_0[i], x: data.data.ecs[i], model: data.data.models[i].trim() });
-      });
-      this.setState({ scatterdata: { tas: tas, tas_0: tas0 } });
-    }).catch(error => {
-      console.log(error);
-      if (error.toString) {
-        this.setState({ error: error.toString() });
-      } else {
-        this.setState({ error: JSON.stringify(error, null, 2) });
-      }
-    });
   }
 
   handleChange (event) {
@@ -114,14 +114,14 @@ export default class RechartsComponent extends Component {
     this.loaddap();
   }
 
-  handleToolTip(event) {
+  handleToolTip (event) {
 
   }
 
   resize () {
     const element = this.refs.rechartscontainer;
     if (element) {
-      this.setState({rechartsWidth: parseInt(element.clientWidth), rechartsHeight: parseInt(element.clientHeight)});
+      this.setState({ rechartsWidth: parseInt(element.clientWidth), rechartsHeight: parseInt(element.clientHeight) });
     }
   }
   getScatterChart () {
@@ -152,14 +152,14 @@ export default class RechartsComponent extends Component {
       </Scatter>
     </ScatterChart>);
   }
-  getLineChart() {
+  getLineChart () {
     return (<LineChart width={this.state.rechartsWidth} height={this.state.rechartsHeight} data={this.props.data}>
-        <XAxis dataKey="name"/>
-        <YAxis/>
-        <CartesianGrid stroke="#eee" strokeDasharray="5 5"/>
-        <Line type="monotone" dataKey="temperature" stroke="#8884d8" />
-        <Line type="monotone" dataKey="precipitation" stroke="#82ca9d" />
-      </LineChart>);
+      <XAxis dataKey='name' />
+      <YAxis />
+      <CartesianGrid stroke='#eee' strokeDasharray='5 5' />
+      <Line type='monotone' dataKey='temperature' stroke='#8884d8' />
+      <Line type='monotone' dataKey='precipitation' stroke='#82ca9d' />
+    </LineChart>);
   }
   render () {
     // console.log(this.state);
@@ -171,7 +171,7 @@ export default class RechartsComponent extends Component {
     }
 
     return (
-      <div className='RechartsComponent' style={{ height:'100%', width:'100%', border:'none', display:'block', overflow:'hidden'}}>
+      <div className='RechartsComponent' style={{ height:'100%', width:'100%', border:'none', display:'block', overflow:'hidden' }}>
         {/* <Row>
           { <Col xs='10'>
             <input style={{ width:'100%' }} type='text' name='name' value={this.state.dataurl} onChange={this.handleChange} />
@@ -180,8 +180,8 @@ export default class RechartsComponent extends Component {
             <Button color='primary' onClick={this.handleSubmit}>Refresh</Button>
           </Col>
         </Row> */}
-        { this.state.error && this.state.error.length > 0 ? (<Alert style={{ margin: '10px' }} color='danger'>{this.state.error.replace('\n', '<br />')}</Alert>) : 
-          (<div className='RechartsArea' ref={(container) => { this.container = container; }}
+        { this.state.error && this.state.error.length > 0 ? (<Alert style={{ margin: '10px' }} color='danger'>{this.state.error.replace('\n', '<br />')}</Alert>)
+          : (<div className='RechartsArea' ref={(container) => { this.container = container; }}
             style={{ height:'100%', width:'100%', border:'none', display:'block', overflow:'hidden' }} >
             <div ref='rechartscontainer' style={{
               minWidth:'inherit',

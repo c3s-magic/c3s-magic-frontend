@@ -1,9 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-require("babel-register");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+require('babel-register');
 
 module.exports = {
   entry: './src/main.js',
@@ -12,6 +12,12 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'c3s-magic-frontend.js'
+  },
+  devServer:{
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*'
+    }
   },
   devtool: 'source-map',
   module: {
@@ -22,41 +28,41 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         }
-      },{
+      }, {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader",
+            loader: 'html-loader',
             options: { minimize: true }
           }
         ]
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"]
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
-        loader: 'file-loader?name=[name].[ext]'  // <-- retain original file name
-      },{
+        loader: 'file-loader?name=[name].[ext]' // <-- retain original file name
+      }, {
         test: /\.(ttf|eot|woff|woff2)$/,
         use: {
-          loader: "file-loader",
+          loader: 'file-loader',
           options: {
-            name: "fonts/[name].[ext]",
-          },
-        },
-      },{
+            name: 'fonts/[name].[ext]'
+          }
+        }
+      }, {
         test: /\.scss$/,
         use: [
           {
-            loader: "style-loader" // creates style nodes from JS strings
+            loader: 'style-loader' // creates style nodes from JS strings
           },
           {
-            loader: "css-loader" // translates CSS into CommonJS
+            loader: 'css-loader' // translates CSS into CommonJS
           },
           {
-            loader: "sass-loader" // compiles Sass to CSS
+            loader: 'sass-loader' // compiles Sass to CSS
           }
         ]
       }
@@ -70,21 +76,21 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html"
+      template: './src/index.html',
+      filename: './index.html'
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
+      filename: '[name].css',
+      chunkFilename: '[id].css'
     }),
     new CopyWebpackPlugin([
       { from: 'src/static' }
     ])
   ],
   node: {
-    fs: "empty"
+    fs: 'empty'
   }
 };
 module.loaders = [
-  { test: /\.js$/, exclude: /node_modules/, use: "babel-loader" }
-]
+  { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader' }
+];

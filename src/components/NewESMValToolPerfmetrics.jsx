@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Input, Row, Col, Progress, Card, ControlLabel, Alert, UncontrolledAlert } from 'reactstrap';
-import { TabContent, TabPane, Nav, NavItem, NavLink, CardTitle, CardText} from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, CardTitle, CardText } from 'reactstrap';
 
 import MarkdownFromFile from '../containers/MarkdownFromFile';
 import DapPreview from './DapPreview';
 import ImagePreview from './ImagePreview';
-import {stripNS} from "../utils/WPSRunner";
+import { stripNS } from '../utils/WPSRunner';
 
-import Form from "react-jsonschema-form";
+import Form from 'react-jsonschema-form';
+import classnames from 'classnames';
 var _ = require('lodash');
 var $RefParser = require('json-schema-ref-parser');
-import classnames from 'classnames';
-
 
 class RenderProcesses extends Component {
   renderProcess (process) {
@@ -54,7 +53,7 @@ RenderProcesses.propTypes = {
 };
 
 export default class ESMValToolPerfmetrics extends Component {
-  constructor() {
+  constructor () {
     super();
     this.wrangleClicked = this.wrangleClicked.bind(this);
     this.resultClickCallback = this.resultClickCallback.bind(this);
@@ -70,18 +69,17 @@ export default class ESMValToolPerfmetrics extends Component {
       running_jobs: [],
       activeTab: '1',
       dropdownOpen: false,
-      dropDownValue: 'add',
+      dropDownValue: 'add'
     };
 
-    $RefParser.dereference("form_data.json")
-      .then(schema => this.setState({form_schema: schema, namelist_ok: true}));
+    $RefParser.dereference('form_data.json')
+      .then(schema => this.setState({ form_schema: schema, namelist_ok: true }));
 
-    $RefParser.dereference("namelist_anomaly_agreement.yml")
-      .then(fdata => this.setState({form_data: fdata}));
-
+    $RefParser.dereference('namelist_anomaly_agreement.yml')
+      .then(fdata => this.setState({ form_data: fdata }));
   }
 
-  toggleTab(tab) {
+  toggleTab (tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
@@ -89,8 +87,8 @@ export default class ESMValToolPerfmetrics extends Component {
     }
   }
 
-  wrangleClicked(id) {
-    const {dispatch, actions, nrOfStartedProcesses, wpsDomain} = this.props;
+  wrangleClicked (id) {
+    const { dispatch, actions, nrOfStartedProcesses, wpsDomain } = this.props;
 
     let dataInputs = '';
     Object.keys(this.state.inputs).map(
@@ -107,15 +105,14 @@ export default class ESMValToolPerfmetrics extends Component {
       nrOfStartedProcesses));
   };
 
-
-  handleChange(name, value) {
+  handleChange (name, value) {
     console.log(name, value);
     this.setState({
       [name]: value
     });
   };
 
-  handleWPSInputChange(name, value) {
+  handleWPSInputChange (name, value) {
     console.log(name, value);
     let inputs = Object.assign({}, this.state.inputs);
     inputs[name]['default'] = value;
@@ -124,12 +121,12 @@ export default class ESMValToolPerfmetrics extends Component {
     });
   };
 
-  resultClickCallback(value) {
+  resultClickCallback (value) {
     console.log(value);
     if (value) {
       this.props.dispatch(this.props.actions.showWindow(
         {
-          component: (<ImagePreview imagedata={value}/>),
+          component: (<ImagePreview imagedata={value} />),
           title: 'Preview',
           dispatch: this.props.dispatch,
           width: 530,
@@ -139,112 +136,107 @@ export default class ESMValToolPerfmetrics extends Component {
     }
   }
 
-  formSubmit(formData) {
-    console.log("Data submitted: ", formData);
+  formSubmit (formData) {
+    console.log('Data submitted: ', formData);
 
-    const {dispatch, actions, nrOfStartedProcesses, wpsDomain} = this.props;
+    const { dispatch, actions, nrOfStartedProcesses, wpsDomain } = this.props;
     let dataInputs = '';
 
-    _.forIn(formData.formData.ModelEntry, function(value, key) {
+    _.forIn(formData.formData.ModelEntry, function (value, key) {
       if (dataInputs.length > 0) {
         dataInputs += ';';
       }
       key = parseInt(key) + 1;
-      dataInputs += "model"+key + '=' + value;
+      dataInputs += 'model' + key + '=' + value;
       console.log(key, value);
       console.log(dataInputs);
     });
 
-    dataInputs = dataInputs + ";variable=ta;mip=Amon;experiment=historical;ensemble_member=r1i1p1;start_year=2001;end_year=2002";
+    dataInputs = dataInputs + ';variable=ta;mip=Amon;experiment=historical;ensemble_member=r1i1p1;start_year=2001;end_year=2002';
     console.log(wpsDomain, dataInputs);
     dispatch(actions.startWPSExecute(wpsDomain, 'esmvaltool-perfmetrics',
       dataInputs,
       nrOfStartedProcesses));
-
   }
 
-  formChanged(info) {
-    console.log("Form changed: ", info);
+  formChanged (info) {
+    console.log('Form changed: ', info);
   }
 
-  formError(info) {
-    console.error("Form error: ", info);
+  formError (info) {
+    console.error('Form error: ', info);
   }
 
-  componentDidMount() {
-    console.log("componentDidMount::Filling the form data");
+  componentDidMount () {
+    console.log('componentDidMount::Filling the form data');
   }
 
- loadModels(){
-   console.log("updateForm::Updating the form data");
-   // const { form_schema, form_data } = this.state;
+  loadModels () {
+    console.log('updateForm::Updating the form data');
+    // const { form_schema, form_data } = this.state;
 
-   var temp = [];
-   this.state.form_data.models.forEach(function(model) {
+    var temp = [];
+    this.state.form_data.models.forEach(function (model) {
+      // console.log(model.model);
+      // console.log(model.exp);
+      // console.log(model.mip);
+      // console.log(model.project);
+      // console.log(model.end_year);
+      // console.log(model.start_year);
+      // console.log(model.ensemble);
 
-     // console.log(model.model);
-     // console.log(model.exp);
-     // console.log(model.mip);
-     // console.log(model.project);
-     // console.log(model.end_year);
-     // console.log(model.start_year);
-     // console.log(model.ensemble);
+      temp.push({ 'type':'string', 'enum':[model.model], 'title':model.model });
+    });
 
-     temp.push({"type":"string","enum":[model.model],"title":model.model});
+    var new_state = _.cloneDeep(this.state);
+    new_state.form_schema.definitions.Model.anyOf = temp;
 
-   });
+    this.setState(_.merge(this.state.form_schema, new_state))
 
-   var new_state = _.cloneDeep(this.state);
-   new_state.form_schema.definitions.Model.anyOf = temp;
+    // console.log(new_state);
+    // console.log(this.state.form_schema);
 
-   this.setState(_.merge(this.state.form_schema, new_state))
+    this.setState({ data_loaded:true });
+  }
 
-   // console.log(new_state);
-   // console.log(this.state.form_schema);
-
-   this.setState({data_loaded:true});
- }
-
-  componentWillMount() {
-    console.log("  componentWillMount() ");
+  componentWillMount () {
+    console.log('  componentWillMount() ');
     // this.forceUpdate();
-   }
+  }
 
-  componentDidMount() {
-    console.log("  componentDidMount() ");
+  componentDidMount () {
+    console.log('  componentDidMount() ');
     // this.forceUpdate();
   }
 
   render () {
-    console.log("  render() ");
+    console.log('  render() ');
 
-    const { wpsDomain, runningProcesses, nrOfStartedProcesses, actions} = this.props;
+    const { wpsDomain, runningProcesses, nrOfStartedProcesses, actions } = this.props;
     const { form_schema, form_data, data_loaded, running_jobs } = this.state;
 
-    if (!data_loaded){
+    if (!data_loaded) {
       return (
-              <div>
-                  <div className='text'>
-                    <MarkdownFromFile url={'/contents/MeanState.md'} />
-                  </div>
-
-                  <Alert color="warning">
-                    Press the button to load the models.
-                  </Alert>
-                  <Row>
-                    <Button color='primary' id='updateButton' onClick={() => {this.loadModels();}}>Load Models</Button>
-                  </Row>
-              </div>
-      );
-    }
-    else {
-      return (
-
-        <div style={{backgroundColor: '#FFF', width: '100%'}}>
+        <div>
           <div className='text'>
             <MarkdownFromFile url={'/contents/MeanState.md'} />
           </div>
 
+          <Alert color='warning'>
+                    Press the button to load the models.
+          </Alert>
+          <Row>
+            <Button color='primary' id='updateButton' onClick={() => { this.loadModels(); }}>Load Models</Button>
+          </Row>
+        </div>
+      );
+    } else {
+      return (
+
+        <div style={{ backgroundColor: '#FFF', width: '100%' }}>
+          <div className='text'>
+            <MarkdownFromFile url={'/contents/MeanState.md'} />
+          </div>
 
           <Nav tabs>
             <NavItem>
@@ -259,42 +251,42 @@ export default class ESMValToolPerfmetrics extends Component {
               <NavLink
                 className={classnames({ active: this.state.activeTab === '2' })}
                 onClick={() => { this.toggleTab('2'); }}
-                >
+              >
                 Output
               </NavLink>
             </NavItem>
           </Nav>
           <TabContent activeTab={this.state.activeTab}>
-            <TabPane tabId="1">
+            <TabPane tabId='1'>
               <Row>
-                <Col sm="12">
-                  {wpsDomain ?
-                    <div>
-                      <Alert color="info">
+                <Col sm='12'>
+                  {wpsDomain
+                    ? <div>
+                      <Alert color='info'>
                         Your compute node = {wpsDomain}
                       </Alert>
-                      <UncontrolledAlert color="danger" style={{textAlign: 'initial'}}>
+                      <UncontrolledAlert color='danger' style={{ textAlign: 'initial' }}>
                         <strong>Warning:</strong> The parameters given below cannot be changed at the moment.
                         variable=ta;mip=Amon;experiment=historical;ensemble_member=r1i1p1;start_year=2001;end_year=200
                       </UncontrolledAlert>
                       <Row>
                         <Form schema={form_schema} formData={form_data} onSubmit={this.formSubmit} onChange={this.formChanged}
-                              onError={this.formError}/>
+                          onError={this.formError} />
                       </Row>
                     </div>
                     : <div>You need to sign in to use this functionality</div>}
                 </Col>
               </Row>
             </TabPane>
-            <TabPane tabId="2">
+            <TabPane tabId='2'>
               <Row>
-                <Col sm="12">
-                  <Alert color="info">
+                <Col sm='12'>
+                  <Alert color='info'>
                     This tab will show the processes.
                   </Alert>
-                  {wpsDomain ?
-                    <div>
-                      <RenderProcesses runningProcesses={runningProcesses} resultClickCallback={this.resultClickCallback}/>
+                  {wpsDomain
+                    ? <div>
+                      <RenderProcesses runningProcesses={runningProcesses} resultClickCallback={this.resultClickCallback} />
                     </div>
                     : <div>You need to sign in to use this functionality</div>}
                 </Col>

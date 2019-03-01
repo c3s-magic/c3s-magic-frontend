@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getConfig } from '../getConfig';
-let config = getConfig();
 
 import { Control, Form } from 'react-redux-form';
 import { withRouter } from 'react-router';
 import { Button, Input, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Col, Progress, Card } from 'reactstrap';
+let config = getConfig();
 
 class RenderProcesses extends Component {
   renderProcess (process) {
@@ -72,7 +72,6 @@ class FileColumnDescriptionComponent extends Component {
   }
 
   goToWrangler () {
-
     const { dispatch, actions } = this.props;
 
     dispatch(actions.setCSVFileToWrangle({ fileName: this.props.fileName }));
@@ -80,7 +79,6 @@ class FileColumnDescriptionComponent extends Component {
   }
 
   render () {
-
     return (
       <div>
         <div className='alert alert-info col-6'>
@@ -230,7 +228,7 @@ class FileColumnDescriptionComponent extends Component {
 
           <div className='divider-2' />
 
-          <RenderProcesses runningProcesses={ this.props.runningProcesses } />
+          <RenderProcesses runningProcesses={this.props.runningProcesses} />
 
           <div className='divider-2' />
 

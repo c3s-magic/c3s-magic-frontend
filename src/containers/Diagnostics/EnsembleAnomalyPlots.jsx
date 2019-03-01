@@ -58,37 +58,37 @@ class WPSWranglerDemo extends PureComponent {
     // console.log("slider:", this.state.showSlider);
     // var data_path = config.backendHost + '/wms?DATASET=' + this.props.map_data + '&';
 
-    return (<div className='MainViewportNoOverflow' style={{display:'flex', flexDirection:'column', padding:0}}>
+    return (<div className='MainViewportNoOverflow' style={{ display:'flex', flexDirection:'column', padding:0 }}>
       <Row>
         <h3>Ensemble anomaly plots</h3>
       </Row>
       <Row>
-      
-        {this.state.showSlider ?
-        <Col>
-          <Row>
+
+        {this.state.showSlider
+          ? <Col>
+            <Row>
             Maps with percentage of models agreeing on the sign of (sub-)ensemble-mean anomalies
-          </Row>
-          <Row>
-            <Col xs='auto'>
-              <Label>Stippling (% of members agreeing):</Label>
-            </Col>
-            <Col>
-              <ReactSlider
-                className={'horizontal-slider'}
-                defaultValue={this.state.currentValue}
-                onChange={(v) => { this.debouncedHandleSliderChange(v); }}
-              />
-            </Col>
-            <Col xs='2'>{this.state.currentValue} %</Col>
-          </Row>
-        </Col>
-         : ''}
+            </Row>
+            <Row>
+              <Col xs='auto'>
+                <Label>Stippling (% of members agreeing):</Label>
+              </Col>
+              <Col>
+                <ReactSlider
+                  className={'horizontal-slider'}
+                  defaultValue={this.state.currentValue}
+                  onChange={(v) => { this.debouncedHandleSliderChange(v); }}
+                />
+              </Col>
+              <Col xs='2'>{this.state.currentValue} %</Col>
+            </Row>
+          </Col>
+          : ''}
       </Row>
-      <Row style={{flex:2}}>
-      
+      <Row style={{ flex:2 }}>
+
         <ADAGUCViewerComponent
-          controls={{showdownloadbutton: false}}
+          controls={{ showdownloadbutton: false }}
           stacklayers
           height={'50vh'}
           wmsurl={this.props.map_data}

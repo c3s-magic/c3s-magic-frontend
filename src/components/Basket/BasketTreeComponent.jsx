@@ -79,7 +79,6 @@ class BasketTreeComponent extends Component {
     this.setState({ cursor: node, previewActive: false });
     console.log(node);
     if (node.type === 'LEAF') {
-      
       if (node.httpurl.endsWith('.png')) {
 
       }
@@ -92,14 +91,13 @@ class BasketTreeComponent extends Component {
 
         let basename = baseName(node.dapurl);
         let url = node.dapurl;
-        if (node.httpurl.endsWith('.png') || node.httpurl.endsWith('.yml') || node.httpurl.endsWith('.txt') || node.httpurl.endsWith('.svg')){
+        if (node.httpurl.endsWith('.png') || node.httpurl.endsWith('.yml') || node.httpurl.endsWith('.txt') || node.httpurl.endsWith('.svg')) {
           url = node.httpurl;
         }
-        
 
         this.props.dispatch(this.props.actions.showWindow(
           {
-            component:(<RenderWPSProcessOutput width={'100%'} height={'300px'} url={url} title={basename} identifier={basename} abstract={""}/>),
+            component:(<RenderWPSProcessOutput width={'100%'} height={'300px'} url={url} title={basename} identifier={basename} abstract={''} />),
             title: basename
           })
         );
@@ -231,12 +229,12 @@ class BasketTreeComponent extends Component {
           <hr />
           {
             this.state.previewActive
-            ? <PreviewComponent
-              file={this.state.cursor ? this.state.cursor.httpurl : ''}
-              tableClassName='previewTable'
-              componentClassName='previewComponent'
-              numberOfLinesDisplayed={30} />
-            : null
+              ? <PreviewComponent
+                file={this.state.cursor ? this.state.cursor.httpurl : ''}
+                tableClassName='previewTable'
+                componentClassName='previewComponent'
+                numberOfLinesDisplayed={30} />
+              : null
           }
         </Row> }
       </div>

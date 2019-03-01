@@ -32,7 +32,7 @@ const initialState = {
 
 const store = createStore(initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-//const store = createStore(initialState, __DEV__);
+// const store = createStore(initialState, __DEV__);
 // ========================================================
 // Render Setup
 // ========================================================
