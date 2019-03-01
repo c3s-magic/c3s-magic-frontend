@@ -727,13 +727,23 @@ div.hpace2em {
 
 .RenderProcesses_ProcessTitle {
   color:black;
-  font-size: 25px;
-  margin-bottom:25px;
-  color: rgb(148, 19, 51);
 }
 
+.ProcessSettings_CardBody{
+  background-color: #d1ecf1;
+  padding:20px;
+}
+
+.ProcessSettings_CardBody label {
+  margin:10px;
+}
+.ProcessSettings_CardBody select {
+  margin:0 10px 0 10px;
+}
+.ProcessSettings_CardBody input {
+  margin:0 10px 0 10px;
+}
 .RenderProcesses_CardBody{
   background-color: #d1ecf1;
   padding:20px;
-
 }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Progress, Card, CardBody, CardTitle, Button } from 'reactstrap';
+import { Row, Col, Progress, Card, CardBody, CardTitle, Button, CardSubtitle } from 'reactstrap';
 import RenderWPSProcessOutput from './WPS/RenderWPSProcessOutput';
+import Icon from 'react-fa';
 
 export default class RenderProcesses extends Component {
   constructor () {
@@ -39,33 +40,36 @@ export default class RenderProcesses extends Component {
         <CardBody className='RenderProcesses_CardBody'>
           <Row>
             <Col xs='11'>
-              <h1 className='RenderProcesses_ProcessTitle'>Results for process {process.identifier}:</h1>
+              <CardTitle className='RenderProcesses_ProcessTitle'>Results for process {process.identifier}:</CardTitle>
             </Col>
             <Col className='float-right'>
               {
-                process.isComplete ? (<Button color='primary' onClick={() => {
-                  dispatch(actions.removeWPSResult(process.id));
-                }}>X</Button>) : null
+                process.isComplete || true ? (<Button color='secondary' onClick={() => {
+                  dispatch(actions.toggleWPSResult(process.id));
+                }}><Icon name={process.collapsed ? 'chevron-down' : 'chevron-up'} />{process.collapsed}</Button>) : null
               }
             </Col>
 
           </Row>
-          <Row>
-            <Col xs='11'><CardTitle>{process.id}) {process.message}</CardTitle></Col>
-          </Row>
-          <Col> <div className='text-center'>{process.percentageComplete} </div><Progress value={process.percentageComplete} /></Col>
-
-          { /* <Col style={{ backgroundColor: '#d9edf7', cursor: 'pointer', color: '#31708f' }} onClick={() => { this.props.resultClickCallback(value); }}>{shown}</Col> */ }
-          <Row>
-            <Col>
-              {
-                Object.keys(processOutputs).map((k, i) => {
-                  const processOutput = processOutputs[k];
-                  return (<RenderWPSProcessOutput key={i} processOutput={processOutput} />);
-                })
-              }
-            </Col>
-          </Row>
+          { !process.collapsed &&
+            (<div>
+              <Row>
+                <Col xs='11'><CardSubtitle>{process.id}) {process.message}</CardSubtitle></Col>
+              </Row>
+              <Col> <div className='text-center'>{process.percentageComplete + ' %'} </div><Progress value={process.percentageComplete} /></Col>
+              { /* <Col style={{ backgroundColor: '#d9edf7', cursor: 'pointer', color: '#31708f' }} onClick={() => { this.props.resultClickCallback(value); }}>{shown}</Col> */ }
+              <Row>
+                <Col>
+                  {
+                    Object.keys(processOutputs).map((k, i) => {
+                      const processOutput = processOutputs[k];
+                      return (<RenderWPSProcessOutput key={i} processOutput={processOutput} />);
+                    })
+                  }
+                </Col>
+              </Row>
+            </div>)
+          }
         </CardBody>
       </Card>
     );

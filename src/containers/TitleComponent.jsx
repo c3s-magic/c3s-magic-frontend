@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { getConfig } from '../getConfig';
 
 import { Col, Row, Navbar, NavItem, Nav, NavLink, Button } from 'reactstrap';
-import WindowManager from '../components/WindowManager';
 import PropTypes from 'prop-types';
 // import MSPLogo from '../components/assets/dsp_logo.svg';
 import Icon from 'react-fa';
@@ -175,6 +174,7 @@ export default class TitleComponent extends Component {
           dispatch(actions.setClientId(obj.id));
           dispatch(actions.setEmailAddress(obj.email_address));
           dispatch(actions.setBackend(obj.backend));
+          console.log('setting compute nodes');
           dispatch(actions.setCompute(obj.compute));
           // console.log('Signed in', obj.domain);
         }
@@ -204,7 +204,9 @@ export default class TitleComponent extends Component {
 TitleComponent.propTypes = {
   // accessToken: PropTypes.string,
   // emailAddress: PropTypes.string,
+  dispatch: PropTypes.func.isRequired,
   clientId: PropTypes.string,
   // domain: PropTypes.string,
-  location: PropTypes.object
+  location: PropTypes.object,
+  actions: PropTypes.object
 };

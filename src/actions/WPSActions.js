@@ -1,6 +1,6 @@
 // This is where action creators are put
 import { doWPSExecuteCall } from '../utils/WPSRunner.js';
-import { START_WPS_EXECUTE_START, START_WPS_EXECUTE_FAILED, START_WPS_EXECUTE_END, WPS_STATUS_UPDATE, WPS_COMPLETED, WPS_REMOVERESULT } from '../constants/WPSLabels';
+import { START_WPS_EXECUTE_START, START_WPS_EXECUTE_FAILED, START_WPS_EXECUTE_END, WPS_STATUS_UPDATE, WPS_COMPLETED, WPS_REMOVERESULT, WPS_TOGGLERESULT } from '../constants/WPSLabels';
 
 const startWPSExecute = (wpsdomain, identifier, dataInputs, nrOfStartedProcesses) => {
   return (dispatch) => {
@@ -38,9 +38,19 @@ const removeWPSResult = (payload) => {
   };
 };
 
+const toggleWPSResult = (payload) => {
+  return {
+    type: WPS_TOGGLERESULT,
+    payload: {
+      id: payload
+    }
+  };
+};
+
 const actions = {
   startWPSExecute,
-  removeWPSResult
+  removeWPSResult,
+  toggleWPSResult
 };
 
 export default actions;

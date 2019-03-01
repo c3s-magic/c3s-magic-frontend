@@ -44,7 +44,7 @@ export default class AccountComponent extends Component {
                   <br />
                   <ol>
                     {compute.map((d, i) => <li key={i}>{d.name + ' with url ' + d.url}</li>)}
-                  </ol></div>) : <p>No compute nodes found.</p>         
+                  </ol></div>) : <p>No compute nodes found.</p>
               }
               {
                 <p>Backend: {backendHost}</p>
@@ -60,6 +60,5 @@ AccountComponent.propTypes = {
   accessToken: PropTypes.string,
   emailAddress: PropTypes.string,
   clientId: PropTypes.string,
-  backend: PropTypes.string,
   compute: PropTypes.array
 };
