@@ -22,6 +22,7 @@ class WPSDemoCopernicus extends Component {
     this.formSubmit = this.formSubmit.bind(this);
     this.toggleWPSSelectorDropDown = this.toggleWPSSelectorDropDown.bind(this);
     this.fetchProcesses = this.fetchProcesses.bind(this);
+    this.getProcessInfo = this.getProcessInfo.bind(this);
     console.log('Constructing WPSDemoCopernicus');
     this.state = {
       describeProcessDocument: null,
@@ -107,7 +108,9 @@ class WPSDemoCopernicus extends Component {
             for (let key in wpsProcessList) {
               try {
                 let identifier = wpsProcessList[key]['Identifier'].value;
-                processNames.push({ name: identifier });
+                let abstract = '<no abstract provided>'; try { abstract = wpsProcessList[key]['Abstract'].value; } catch (e) {}
+                let title = '<no title provided>'; try { title = wpsProcessList[key]['Title'].value; } catch (e) {}
+                processNames.push({ name: identifier, abstract: abstract, title: title });
               } catch (e) {
                 console.log(e);
               }
@@ -517,12 +520,23 @@ class WPSDemoCopernicus extends Component {
     }));
   }
 
+  getProcessInfo () {
+    let processInfo = null;
+    if (this.state.selectedProcess && this.state.wpsProcessName && this.state.wpsProcessName.length) {
+      let i = this.state.wpsProcessName.findIndex(p => p.name === this.state.selectedProcess);
+      if (i !== -1) {
+        processInfo = this.state.wpsProcessName[i];
+      }
+    }
+    return processInfo;
+  }
+
   render () {
     const { compute, runningProcesses, actions, dispatch } = this.props;
     const { showForm, isBusy, isBusyMessage, wpsInfoFetched } = this.state;
     const { errorExists, errorContent, formNoInputFound } = this.state;
     const { wpsFormElements } = this.state;
-
+    // console.log(this.state);
     if (isBusy) {
       return (
         <div>
@@ -546,6 +560,7 @@ class WPSDemoCopernicus extends Component {
         </div>
       );
     } else {
+      let processInfo = this.getProcessInfo();
       return (
         <div style={{ backgroundColor: '#FFF', width: '100%', fontFamily: 'Roboto', padding:'20px' }}>
           <Row>
@@ -581,7 +596,7 @@ class WPSDemoCopernicus extends Component {
                     ? <UncontrolledAlert color='danger' style={{ textAlign: 'initial' }}>
                       {errorContent}
                     </UncontrolledAlert>
-                    : showForm
+                    : (showForm && processInfo)
                       ? <Card>
 
                         {formNoInputFound
@@ -589,9 +604,9 @@ class WPSDemoCopernicus extends Component {
                           No settings were found for the selected process.
                           </Alert>
                           : '' }
-
                         <CardBody className='ProcessSettings_CardBody'>
-                          <CardTitle>Settings for process {this.state.selectedProcess}</CardTitle>
+                          <CardTitle>Settings for process {this.state.selectedProcess} - {processInfo.title}:</CardTitle>
+                          <span className={'WPSDemoCopernicus_ProcessAbstract'}>{processInfo.abstract}</span>
                           {wpsFormElements}
                           <br />
                           <hr />
