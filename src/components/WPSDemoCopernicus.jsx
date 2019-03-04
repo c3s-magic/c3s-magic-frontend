@@ -59,6 +59,13 @@ class WPSDemoCopernicus extends Component {
   }
 
   fetchProcesses () {
+    if (!this.props.compute || !this.props.compute.length || this.props.compute.length === 0) {
+      this.setState({
+        isBusy: false,
+        isBusyMessage: 'No compute nodes set'
+      });
+      return;
+    }
     this.getWPSProcessList().then((response) => {
       if (response === 'success') {
         this.setState({ wpsInfoFetched: true });
@@ -539,6 +546,9 @@ class WPSDemoCopernicus extends Component {
     const { errorExists, errorContent, formNoInputFound } = this.state;
     const { wpsFormElements } = this.state;
     // console.log(this.state);
+    if (!compute) {
+      return (<div style={{margin:'20px'}}><Alert color='info'>You need to sign in to use this functionality</Alert></div>);
+    }
     if (isBusy) {
       return (
         <div>
@@ -620,7 +630,7 @@ class WPSDemoCopernicus extends Component {
                       </Card> : ''
                   }
                 </div>
-                : <div>You need to sign in to use this functionality</div>}
+                : <div>No compute nodes found, maybe you need to sign in?</div>}
             </Col>
           </Row>
           <Row>
@@ -638,7 +648,7 @@ class WPSDemoCopernicus extends Component {
 }
 
 WPSDemoCopernicus.propTypes = {
-  compute: PropTypes.array.isRequired,
+  compute: PropTypes.array,
   dispatch: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
   nrOfStartedProcesses: PropTypes.number,
