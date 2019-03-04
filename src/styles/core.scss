@@ -735,7 +735,7 @@ div.hpace2em {
 }
 
 .ProcessSettings_CardBody label {
-  margin:10px;
+  margin:4px;
 }
 .ProcessSettings_CardBody select {
   margin:0 10px 0 10px;
@@ -746,4 +746,48 @@ div.hpace2em {
 .RenderProcesses_CardBody{
   background-color: #d1ecf1;
   padding:20px;
+}
+
+.WPSDemoCopernicus_InputLabels{
+  color:black;
+}
+
+.WPSDemoCopernicus_InputLabels select, .WPSDemoCopernicus_InputLabels input{
+  color:black;
+  width:250px;
+  display:inline-block;
+}
+.WPSDemoCopernicus_InputLabelsLabel{
+  color:black;
+  width:200px;
+  display:inline-block;
+}
+.WPSDemoCopernicus_InputAbstract{
+  width:auto;
+}
+
+
+/* Tooltip container */
+.C3SMagicTooltip {
+  display:inline-block;
+}
+
+/* Tooltip text */
+.C3SMagicTooltip .C3SMagicTooltipText {
+  visibility: hidden;
+  width: 320px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.C3SMagicTooltip:hover .C3SMagicTooltipText {
+  visibility: visible;
 }

@@ -120,7 +120,7 @@ class DiagnosticPage extends Component {
         if (this.state.yamlData[elementName]) {
           this.state.yamlData[elementName].forEach(function (element) {
             if (typeof element === 'object') {
-              _element += '<li key={element}>' + element.text + '&nbsp;<a href="' + element.url + '" target="_blank">' + '[link to paper]' + '</a></li>';
+              _element += '<li key={element}>' + element.text + '&nbsp;<a href="' + element.url + '" target="_blank">' + '[link]' + '</a></li>';
             } else {
               _element += '<li key={element}>' + element + '</li>';
             }
@@ -240,12 +240,32 @@ class DiagnosticPage extends Component {
                   </div>
 
                   <div className='vspace2em'>
-                    { this.renderPageElement('provenance') && (<Button color='primary' onClick={this.viewProvenance}>&nbsp;View provenance</Button>) }
+                    { this.renderPageElement('provenance') && (
+                      <Button className='C3SMagicTooltip' onClick={this.viewProvenance}>
+                        <Icon name='tag' />
+                        &nbsp;Provenance
+                        <span className='C3SMagicTooltipText'>
+                          {
+                            'This describes entities and processes involved in producing the resource. ' +
+                            'Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility.'
+                          }
+                        </span>
+                      </Button>
+                    )
+
+                    }
                     &nbsp;
                     { /*  data consisting of single entry */ }
                     { (this.renderPageElement('data') && !Array.isArray(this.renderPageElement('data'))) && (
-                      <Button color='primary' onClick={() => { this.downloadData(this.renderPageElement('data')); }}>
-                        <Icon name='download' />&nbsp;Download data</Button>) }
+                      <Button className='C3SMagicTooltip' onClick={() => { this.downloadData(this.renderPageElement('data')); }}>
+                        <Icon name='download' />
+                        &nbsp;Download
+                        <span className='C3SMagicTooltipText'>
+                          {
+                            'Download a zipped bundle of all output files'
+                          }
+                        </span>
+                      </Button>) }
 
                     { /*  data consisting of multiple entries */ }
                     { (this.renderPageElement('data') && Array.isArray(this.renderPageElement('data'))) && (
@@ -281,10 +301,14 @@ class DiagnosticPage extends Component {
                   <div className='text vspace2em'>
                     <h2 style={{ color: '#921A36' }}>Settings</h2>
                     {this.renderPageElement('settings')}
-                    { this.renderPageElement('process') && <Button color='primary' onClick={this.calculate}><Icon name='' />&nbsp;Calculate metric</Button> }
+                    { this.renderPageElement('process') ? <div>
+                      <p>You can change the settings above in order to calculate your own result:</p>
+                      <Button onClick={this.calculate}><Icon name='gear' />&nbsp;Adjust settings</Button>
+                    </div>
+                      : null }
                   </div>
                 </Col>
-              </Row>
+              </Row>l
               <Row>
                 <Col xs='12' className='diagnosticsCol'>
                   <div className='text'>

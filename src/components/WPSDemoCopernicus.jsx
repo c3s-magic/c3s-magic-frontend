@@ -62,9 +62,10 @@ class WPSDemoCopernicus extends Component {
         this.setState({ wpsInfoFetched: true });
         this.setState({ isBusy: false });
         this.setState({ isBusyMessage: '' });
-        this.handleLocationChange(this.props.location);
-        if (!this.state.selectedProcess && this.state.wpsProcessName.length > 0) {
-          this.setState({ selectedProcess: this.state.wpsProcessName[0].name });
+        if (this.handleLocationChange(this.props.location) !== true) {
+          if (!this.state.selectedProcess && this.state.wpsProcessName.length > 0) {
+            this.onWpsButtonClick(this.state.wpsProcessName[0].name, false);
+          }
         }
       }
     }
@@ -137,35 +138,40 @@ class WPSDemoCopernicus extends Component {
     });
   }
 
-  onWpsButtonClick (wpsName) {
-    // console.log('Clicked on button --> ', wpsName);
-    this.props.router.push('/calculate/' + wpsName);
-    this.getWPSProcessInfo(wpsName)
-      .then(response => {
-        // console.log(response);
-        // console.log(this.state);
-        this.setState({ isBusy: false });
-        this.setState({ isBusyMessage: '' });
-        this.setState({ selectedProcess: wpsName });
-
-        return response;
-      }).catch((e) => {
-        console.error('Could not get the process list!');
-      });
-
-    // this.setState({ isBusy: false });
-    // return response;
+  onWpsButtonClick (wpsName, changeLocation) {
+    if (changeLocation) {
+      this.props.router.push('/calculate/' + wpsName);
+    }
+    if (this.state.selectedProcess === wpsName) {
+      console.log('Process alreay selected');
+      return;
+    }
+    return new Promise((resolve, reject) => {
+      this.getWPSProcessInfo(wpsName)
+        .then(response => {
+          this.setState(
+            {
+              isBusy: false,
+              isBusyMessage: '',
+              selectedProcess: wpsName
+            },
+            resolve(response)
+          );
+        }).catch((e) => {
+          reject(new Error('Could not get the process list!'));
+        });
+    });
   }
 
   getWPSProcessInfo (processName) {
     this.setState({ isBusy: true, isBusyMessage: 'getting settings for ' + processName });
-
+    console.log('getting getWPSProcessInfo');
     return new Promise((resolve, reject) => {
       let wpsUrl = this.getWPSUrlByName(this.state.currentWPSNodeName);
       doWPSCall(wpsUrl + 'service=wps&version=1.0.0&request=describeprocess&identifier=' + processName,
         (result) => {
-        // console.log(result);
-          // console.log('Searching for input and output types in ', processName, 'process');
+          this.setState({ formNoInputFound: false });
+          console.log('Searching for input and output types in ', processName, 'process', result);
 
           let formItemInputs = [];
           let formItemOutputs = [];
@@ -173,6 +179,7 @@ class WPSDemoCopernicus extends Component {
           let wpsOutputList = null;
           let wpsInputList = null;
 
+          /* Searching inputs */
           try {
             wpsInputList = result['ProcessDescriptions'].ProcessDescription.DataInputs.Input;
 
@@ -187,6 +194,10 @@ class WPSDemoCopernicus extends Component {
 
                 let newInput = {};
                 let itemTitle = item['Title'].value;
+                let itemAbstract = itemTitle;
+                try {
+                  itemAbstract = item['Abstract'].value;
+                } catch (e) {}
                 let itemIdentifier = item['Identifier'].value;
                 let itemDataType = item.LiteralData['DataType'].value;
 
@@ -211,7 +222,7 @@ class WPSDemoCopernicus extends Component {
                 newInput.type = itemDataType;
                 newInput.default = itemDefaultValue;
                 newInput.selected = itemDefaultValue;
-
+                newInput.abstract = itemAbstract;
                 newInput.allowedValues = [];
                 for (let keyAV in itemAllowedValues) {
                   let av = itemAllowedValues[keyAV];
@@ -228,11 +239,11 @@ class WPSDemoCopernicus extends Component {
               }
             }
           } catch (err) {
-            console.log('No input settings found!');
-            console.log('error:', err);
+            console.log('No input settings found:', err);
             this.setState({ formNoInputFound: true });
           }
 
+          /* Searching outputs */
           try {
             wpsOutputList = result['ProcessDescriptions'].ProcessDescription.ProcessOutputs.Output;
 
@@ -315,55 +326,76 @@ class WPSDemoCopernicus extends Component {
         // console.log('selectbox: ', el);
         // console.log(el.allowedValues);
         return (
-          <label key={el.title + index}>
-            {el.title}:
-            <select
-              value={this.state.processInputs[index].selected}
-              onChange={this.onChange}
-              name={el.title}
-            >
-              {el.allowedValues.map(av =>
-                <option
-                  key={av}
-                  value={av}
-                >
-                  {av}
-                </option>
-              )}
-            </select>
-          </label>
+          <div key={'container' + el.title + index} className={'WPSDemoCopernicus_InputLabels'} >
+            <label key={el.title + index}>
+              <span className={'WPSDemoCopernicus_InputLabelsLabel'}>
+                {el.title}:
+              </span>
+              <select
+                value={this.state.processInputs[index].selected}
+                onChange={this.onChange}
+                name={el.title}
+              >
+                {el.allowedValues.map(av =>
+                  <option
+                    key={av}
+                    value={av}
+                  >
+                    {av}
+                  </option>
+                )}
+              </select>
+            </label>
+            <span className={'WPSDemoCopernicus_InputAbstract'}>
+              {el.abstract}
+            </span>
+          </div>
         );
       }
 
       if (el.type === 'string') {
         // console.log('string: ', el);
         return (
-          <label key={el.default}>
-            {el.title}:
-            <input
-              key={el.title + index}
-              type='text'
-              name={el.title}
-              value={this.state.processInputs[index].selected}
-              onChange={this.onChange} />
-          </label>
+          <div key={'container' + el.title + index} className={'WPSDemoCopernicus_InputLabels'} >
+            <label key={el.default}>
+              <span className={'WPSDemoCopernicus_InputLabelsLabel'}>
+                {el.title}:
+              </span>
+              <input
+                key={el.title + index}
+                type='text'
+                name={el.title}
+                value={this.state.processInputs[index].selected}
+                onChange={this.onChange} />
+            </label>
+            <span className={'WPSDemoCopernicus_InputAbstract'}>
+              {el.abstract}
+            </span>
+          </div>
         );
       }
 
       if (el.type === 'integer') {
         // console.log('integer: ', el);
         return (
-          <label key={el.title + index}>
-            {el.title}:
-            <input
-              key={index}
-              name={el.title}
-              type='number'
-              size='6'
-              width='6'
-              value={this.state.processInputs[index].selected}
-              onChange={this.onChange} />
-          </label>
+          <div key={'container' + el.title + index} className={'WPSDemoCopernicus_InputLabels'} >
+            <label key={el.title + index}>
+              <span className={'WPSDemoCopernicus_InputLabelsLabel'}>>
+                {el.title}:
+              </span>
+              <input
+                key={index}
+                name={el.title}
+                type='number'
+                size='6'
+                width='6'
+                value={this.state.processInputs[index].selected}
+                onChange={this.onChange} />
+            </label>
+            <span className={'WPSDemoCopernicus_InputAbstract'}>
+              {el.abstract}
+            </span>
+          </div>
         );
       }
     });
@@ -449,9 +481,11 @@ class WPSDemoCopernicus extends Component {
     if (hashParts.length === 3) {
       const lastPart = hashParts[hashParts.length - 1];
       if (lastPart && lastPart.length > 0) {
-        this.onWpsButtonClick(lastPart);
+        this.onWpsButtonClick(lastPart, false);
+        return true;
       }
     }
+    return false;
   }
 
   componentWillUpdate (nextProps) {
@@ -534,7 +568,7 @@ class WPSDemoCopernicus extends Component {
                               <DropdownItem header>Please select one of the processes</DropdownItem>
                               {
                                 this.state.wpsProcessName.map((wp, index) => {
-                                  return <DropdownItem key={index} color='primary' onClick={() => { this.onWpsButtonClick(wp.name); }}>{wp.name}</DropdownItem>;
+                                  return <DropdownItem key={index} color='primary' onClick={() => { this.onWpsButtonClick(wp.name, true); }}>{wp.name}</DropdownItem>;
                                 })
                               }
                             </DropdownMenu>
