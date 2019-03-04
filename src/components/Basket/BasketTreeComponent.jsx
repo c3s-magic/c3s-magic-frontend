@@ -10,9 +10,6 @@ import { withRouter } from 'react-router';
 import Moment from 'react-moment';
 import Icon from 'react-fa';
 import FileUploadComponent from '../FileUploadComponent';
-import { ENOBUFS } from 'constants';
-
-var fileDownload = require('js-file-download');
 
 class BasketTreeComponent extends Component {
   constructor (props) {
@@ -26,6 +23,7 @@ class BasketTreeComponent extends Component {
     this.previewFile = this.previewFile.bind(this);
     this.reloadBasket = this.reloadBasket.bind(this);
     this.uploadBasketItem = this.uploadBasketItem.bind(this);
+    this.onDoubleClick = this.onDoubleClick.bind(this);    
 
     decorators.Header = (properties) => {
       if (!properties.node.type === 'NODE') return;
@@ -35,8 +33,9 @@ class BasketTreeComponent extends Component {
       const iconStyle = { marginRight: '5px' };
 
       if (properties.node.type === 'LEAF') {
+        console.log(properties.node);
         return (
-          <div style={{ verticalAlign: 'top', color: '#000000' }}>
+          <div style={{ verticalAlign: 'top', color: '#000000', cursor: 'default', backgroundColor: properties.node.active === true ? '#00A0FF' : null }}>
             <div style={style.title}>
               <div>
                 <i className={iconClass} style={iconStyle} />
@@ -74,10 +73,20 @@ class BasketTreeComponent extends Component {
     if (node.children) {
       node.toggled = toggled;
     }
-
     /* When toggled, preview is always not active. */
     this.setState({ cursor: node, previewActive: false });
-    console.log(node);
+    
+    if (this.clickedNode === node) {
+      this.onDoubleClick(node);
+      this.clickedNode = null;
+    }
+    this.clickedNode = node;
+    setTimeout(() => {
+      this.clickedNode = null;
+    }, 300);
+
+  }
+  onDoubleClick (node) {
     if (node.type === 'LEAF') {
       if (node.httpurl.endsWith('.png')) {
 
@@ -247,7 +256,6 @@ BasketTreeComponent.propTypes = {
   data: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
-  router: PropTypes.object,
   accessToken: PropTypes.string,
   backend: PropTypes.string
 };
