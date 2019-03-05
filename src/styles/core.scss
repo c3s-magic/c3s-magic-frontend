@@ -417,7 +417,7 @@ iframe {
   max-width:700px;
 }
 .card{
-  padding:10px;
+  margin: 12px 0;
 }
 
 .required:after {
@@ -730,7 +730,7 @@ div.hpace2em {
 }
 
 .ProcessSettings_CardBody{
-  background-color: #d1ecf1;
+  background-color: #def6fb;
   padding:20px;
 }
 
@@ -743,10 +743,44 @@ div.hpace2em {
 .ProcessSettings_CardBody input {
   margin:0 10px 0 10px;
 }
-.RenderProcesses_CardBody{
-  background-color: #d1ecf1;
+.RenderProcesses_CardBody, .RenderProcesses_CardBody_NoSuccess, .RenderProcesses_CardBody_Success{
+  background-color: #def6fb;
   padding:20px;
 }
+
+.RenderWPSProcessOutput_CardBody, .RenderWPSProcessOutput_CardBody_NoSuccess, .RenderWPSProcessOutput_CardBody_Success {
+  border:'none';
+  background-color:#DDE;
+  margin:8px 0px 8px 0;
+  padding:10px;
+  color: '#333';
+  border-radius: 5px;
+  border: 1px solid #AAA;
+}
+
+.RenderProcesses_CardBody_NoSuccess, .RenderWPSProcessOutput_CardBody_NoSuccess{
+  background-color: red;
+}
+.RenderProcesses_CardBody_Success, .RenderWPSProcessOutput_CardBody_Success{
+  background-color: #CCFFCC;
+}
+.RenderProcessesTickMark_Success{
+  color:#A5DC86;
+  font-size: 40px;
+  display: inline-block;
+  height: 40px;
+  line-height: 0px;
+  overflow: hidden;
+}
+.RenderProcessesTickMark_Error{
+  color: black;
+  font-size: 40px;
+  display: inline-block;
+  height: 40px;
+  line-height: 0px;
+  overflow: hidden;
+}
+
 
 .WPSDemoCopernicus_InputLabels{
   color:black;
@@ -767,10 +801,10 @@ div.hpace2em {
 }
 
 .WPSDemoCopernicus_ProcessAbstract {
-  color: #0c5460;
-  background-color: #fefefe;
-  border: 1px solid #bee5eb;
-  font-size: 13px;
+  color: #444;
+  background-color: #DDE;
+  border-width: 0.125rem;  
+  font-size: 14px;
   font-family: Roboto;
   display: block;
   font-style: italic;

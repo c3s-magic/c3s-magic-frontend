@@ -102,7 +102,7 @@ export const doWPSExecuteCall = function (wps, statusCallBack, executeCompleteCa
         return;
       }
       let pollCallBack = (json) => {
-        setTimeout(pol, 600);
+        setTimeout(pol, 1000);
         let percentageComplete = 0;
         let message = '';
 
