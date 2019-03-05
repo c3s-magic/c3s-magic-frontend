@@ -13,6 +13,7 @@ export default class TitleComponent extends Component {
     this.canRender = this.canRender.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
+    this.parseGetId = this.parseGetId.bind(this);
   }
 
   componentDidMount () {
@@ -150,35 +151,42 @@ export default class TitleComponent extends Component {
       </div>);
   }
 
+  parseGetId (getIdJSON, actions, dispatch) {
+    if (getIdJSON.error) {
+      console.log('Not signed in');
+      dispatch(actions.setAccessToken(null));
+      dispatch(actions.setClientId(null));
+      dispatch(actions.setEmailAddress(null));
+      dispatch(actions.setBackend(null));
+      dispatch(actions.setCompute(null));
+    } else {
+      console.log(getIdJSON);
+      dispatch(actions.setAccessToken(getIdJSON.services_access_token));
+      dispatch(actions.setClientId(getIdJSON.id));
+      dispatch(actions.setEmailAddress(getIdJSON.email_address));
+      dispatch(actions.setBackend(getIdJSON.backend));
+      dispatch(actions.setCompute(getIdJSON.compute));
+    }
+  }
+
   canRender () {
     const { dispatch, actions } = this.props;
     const { backendHost } = config;
     fetch(backendHost + '/getid', {
       credentials: 'include'
-    })
-      .then(function (response) {
+    }).then(function (response) {
+      return response.json();
+    }).then(json => {
+      this.parseGetId(json, actions, dispatch);
+    }).catch(e => {
+      /* Try without credentials, this will allow cors which enables talking with the backend */
+      fetch(backendHost + '/getid', {
+      }).then(function (response) {
         return response.json();
-      })
-      .then(json => {
-        let obj = json;
-        if (obj.error) {
-          // console.log('Not signed in');
-          dispatch(actions.setAccessToken(null));
-          dispatch(actions.setClientId(null));
-          dispatch(actions.setEmailAddress(null));
-          dispatch(actions.setBackend(null));
-          dispatch(actions.setCompute(null));
-        } else {
-          // console.log(json);
-          dispatch(actions.setAccessToken(obj.services_access_token));
-          dispatch(actions.setClientId(obj.id));
-          dispatch(actions.setEmailAddress(obj.email_address));
-          dispatch(actions.setBackend(obj.backend));
-          console.log('setting compute nodes');
-          dispatch(actions.setCompute(obj.compute));
-          // console.log('Signed in', obj.domain);
-        }
+      }).then(json => {
+        this.parseGetId(json, actions, dispatch);
       });
+    });
   }
 
   login () {

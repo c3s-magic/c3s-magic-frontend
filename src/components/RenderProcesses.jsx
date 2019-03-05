@@ -44,9 +44,9 @@ export default class RenderProcesses extends Component {
             </Col>
             <Col className='float-right'>
               {
-                process.isComplete || true ? (<Button color='secondary' onClick={() => {
+                process.isComplete ? (<Button color='secondary' onClick={() => {
                   dispatch(actions.toggleWPSResult(process.id));
-                }}><Icon name={process.collapsed ? 'chevron-down' : 'chevron-up'} />{process.collapsed}</Button>) : null
+                }}><Icon name={process.collapsed ? 'chevron-down' : 'chevron-up'} /></Button>) : null
               }
             </Col>
 
