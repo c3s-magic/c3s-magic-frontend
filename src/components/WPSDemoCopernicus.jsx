@@ -572,9 +572,6 @@ class WPSDemoCopernicus extends Component {
             <Col sm='12'>
               {compute
                 ? <div>
-                  <Alert color='info'>
-                    Current compute node location is { this.getWPSUrlByName(this.state.currentWPSNodeName) }
-                  </Alert>
                   <Row>
                     <FormGroup>
                       <Row>
@@ -593,6 +590,9 @@ class WPSDemoCopernicus extends Component {
                               }
                             </DropdownMenu>
                           </Dropdown>
+                        </Col>
+                        <Col xs='auto'>
+                          <Label style={{ lineHeight: '40px' }}>Your current compute node location is { this.getWPSUrlByName(this.state.currentWPSNodeName) }</Label>
                         </Col>
                       </Row>
                     </FormGroup>

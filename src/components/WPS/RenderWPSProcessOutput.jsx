@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Card, CardBody, CardText, CardLink, CardTitle } from 'reactstrap';
 
-import ImagePreview from '../ImagePreview';
+import ClickableImage from '../ClickableImage';
 import YMLViewer from './YMLViewer';
 import TXTViewer from './TXTViewer';
 import SVGViewer from './SVGViewer';
@@ -96,7 +96,7 @@ export default class RenderWPSProcessOutput extends Component {
         <CardBody>
           { output.data && (<CardText>{output.data}</CardText>) }
           { output.imageLink && (<Row>
-            <Col xs='10'><ImagePreview imagedata={output.imageLink} /></Col>
+            <Col xs='10'><div style={{ maxHeight:'250px', overflow: 'hidden', width: '50%' }}><ClickableImage src={output.imageLink} /></div></Col>
             {/* <Col><Button color='secondary' onClick={() =>{ this.props.resultClickCallback(output.imageLink);}}>Open image</Button></Col> */}
           </Row>)
           }
