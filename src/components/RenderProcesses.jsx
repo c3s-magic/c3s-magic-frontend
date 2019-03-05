@@ -35,19 +35,42 @@ export default class RenderProcesses extends Component {
       }
     } catch (e) {
     }
+
+    let isSuccess;
+    Object.keys(processOutputs).map((k, i) => {
+      const myProcessOutput = processOutputs[k];
+      if (myProcessOutput && myProcessOutput.Identifier && myProcessOutput.Identifier.value &&
+          myProcessOutput.Data && myProcessOutput.Data.LiteralData && myProcessOutput.Data.LiteralData.value !== undefined && myProcessOutput.Data.LiteralData.value !== null) {
+        let identifier = myProcessOutput.Identifier.value;
+        let data = myProcessOutput.Data.LiteralData.value;
+        isSuccess = identifier === 'success' ? data === 'True' ? true : (data === 'False' ? false : undefined) : undefined;
+      }
+    });
+    let className = 'RenderProcesses_CardBody';
+    if (isSuccess === false) className = 'RenderProcesses_CardBody_NoSuccess';
+    if (isSuccess === true) className = 'RenderProcesses_CardBody_Success';
     return (
       <Card>
-        <CardBody className='RenderProcesses_CardBody'>
+        <CardBody className={className}>
           <Row>
-            <Col xs='11'>
+            <Col xs='10'>
               <CardTitle className='RenderProcesses_ProcessTitle'>Results for process {process.identifier}:</CardTitle>
             </Col>
-            <Col className='float-right'>
-              {
-                process.isComplete ? (<Button color='secondary' onClick={() => {
-                  dispatch(actions.toggleWPSResult(process.id));
-                }}><Icon name={process.collapsed ? 'chevron-down' : 'chevron-up'} /></Button>) : null
-              }
+            <Col xs='2'>
+              <div style={{ width:'150px', float:'right', display:'flex' }}>
+                { isSuccess === true ? <div title='Process succeeded' className='RenderProcessesTickMark_Success'><Icon name='check' />&nbsp;</div> : null }
+                { isSuccess === false ? <div title='Process failed, check logs.' className='RenderProcessesTickMark_Error'><Icon name='exclamation' />&nbsp;</div> : null }
+                {
+                  (<Button color='secondary' onClick={() => {
+                    dispatch(actions.toggleWPSResult(process.id));
+                  }}><Icon name={process.collapsed ? 'chevron-down' : 'chevron-up'} /></Button>)
+                }
+                {
+                  (<Button disabled={!process.isComplete} onClick={() => {
+                    dispatch(actions.removeWPSResult(process.id));
+                  }}><Icon name='close' /></Button>)
+                }
+              </div>
             </Col>
 
           </Row>

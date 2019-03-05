@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Card, CardBody, CardText, CardLink, CardTitle, Button } from 'reactstrap';
+import { Row, Col, Card, CardBody, CardText, CardLink, CardTitle } from 'reactstrap';
 
-import ImagePreview from '../ImagePreview';
+import ClickableImage from '../ClickableImage';
 import YMLViewer from './YMLViewer';
 import TXTViewer from './TXTViewer';
 import SVGViewer from './SVGViewer';
@@ -10,9 +10,6 @@ import ADAGUCViewerComponent from '../ADAGUCViewerComponent';
 import Icon from 'react-fa';
 
 export default class RenderWPSProcessOutput extends Component {
-  constructor () {
-    super()
-  }
   render () {
     const { processOutput, url, identifier, title, abstract } = this.props;
     let myProcessOutput = processOutput;
@@ -54,7 +51,7 @@ export default class RenderWPSProcessOutput extends Component {
     if (myProcessOutput && myProcessOutput.Title && myProcessOutput.Title.value) { output.title = myProcessOutput.Title.value; }
     if (myProcessOutput && myProcessOutput.Abstract && myProcessOutput.Abstract.value) { output.abstract = myProcessOutput.Abstract.value; }
     /* Parse literaldata */
-    if (myProcessOutput && myProcessOutput.Data) {
+    if (myProcessOutput && myProcessOutput.Data !== undefined && myProcessOutput.Data !== null) {
       if (myProcessOutput.Data.LiteralData && myProcessOutput.Data.LiteralData.value) {
         output.data = myProcessOutput.Data.LiteralData.value;
       }
@@ -86,9 +83,12 @@ export default class RenderWPSProcessOutput extends Component {
         }
       }
     }
-    console.log(output);
+    const isSuccess = output.identifier === 'success' ? output.data === 'True' ? true : (output.data === 'False' ? false : undefined) : undefined;
+    let className = 'RenderWPSProcessOutput_CardBody';
+    if (isSuccess === true) className = 'RenderWPSProcessOutput_CardBody_Success';
+    if (isSuccess === false) className = 'RenderWPSProcessOutput_CardBody_NoSuccess';
     return (<div key={output.identifier}>
-      <Card style={{ border:'none', backgroundColor:'#EEE', margin:'8px 0px 8px 0' }}>
+      <Card className={className}>
         <CardBody>
           <CardTitle>{output.title}&nbsp;<span style={{ color:'darkgrey', fontStyle:'italic' }}>-&nbsp;({output.identifier})</span></CardTitle>
           <CardText>{output.abstract}</CardText>
@@ -96,7 +96,7 @@ export default class RenderWPSProcessOutput extends Component {
         <CardBody>
           { output.data && (<CardText>{output.data}</CardText>) }
           { output.imageLink && (<Row>
-            <Col xs='10'><ImagePreview imagedata={output.imageLink} /></Col>
+            <Col xs='10'><div style={{ maxHeight:'250px', overflow: 'hidden', width: '50%' }}><ClickableImage src={output.imageLink} /></div></Col>
             {/* <Col><Button color='secondary' onClick={() =>{ this.props.resultClickCallback(output.imageLink);}}>Open image</Button></Col> */}
           </Row>)
           }
@@ -127,4 +127,11 @@ export default class RenderWPSProcessOutput extends Component {
       </Card>
     </div>);
   }
+};
+RenderWPSProcessOutput.propTypes = {
+  processOutput:PropTypes.object,
+  url:PropTypes.string,
+  identifier:PropTypes.string,
+  title:PropTypes.string,
+  abstract:PropTypes.string
 };

@@ -6,6 +6,7 @@ import { doWPSCall } from '../utils/WPSRunner';
 import ImagePreview from './ImagePreview';
 import { withRouter } from 'react-router';
 import { toArray } from 'adaguc-webmapjs';
+import Icon from 'react-fa';
 import _ from 'lodash';
 class WPSDemoCopernicus extends Component {
   constructor (props) {
@@ -116,7 +117,8 @@ class WPSDemoCopernicus extends Component {
               }
             }
           } catch (e) {
-            console.log(e);
+            console.error(e, result);
+            reject(new Error('failed' + e));
           }
           this.setState(
             {
@@ -553,9 +555,12 @@ class WPSDemoCopernicus extends Component {
       return (
         <div>
           {compute
-            ? <Alert color='warning'>
-            Couldn't fetch WPS Process info. {this.state.isBusyMessage}
-            </Alert>
+            ? (<div style={{ margin:'20px' }}>
+              <Alert color='warning'>
+                Sorry, I could not fetch WPS Process info. Maybe the server is too busy? [{this.state.isBusyMessage}]
+              </Alert>
+              <Button color='primary' onClick={() => { this.fetchProcesses(); }} ><Icon name='refresh' />&nbsp;Try again</Button>
+            </div>)
             : ''}
         </div>
       );
@@ -567,9 +572,6 @@ class WPSDemoCopernicus extends Component {
             <Col sm='12'>
               {compute
                 ? <div>
-                  <Alert color='info'>
-                    Current compute node location is { this.getWPSUrlByName(this.state.currentWPSNodeName) }
-                  </Alert>
                   <Row>
                     <FormGroup>
                       <Row>
@@ -588,6 +590,9 @@ class WPSDemoCopernicus extends Component {
                               }
                             </DropdownMenu>
                           </Dropdown>
+                        </Col>
+                        <Col xs='auto'>
+                          <Label style={{ lineHeight: '40px' }}>Your current compute node location is { this.getWPSUrlByName(this.state.currentWPSNodeName) }</Label>
                         </Col>
                       </Row>
                     </FormGroup>
