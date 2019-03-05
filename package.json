@@ -46,6 +46,7 @@
     "json-schema-ref-parser": "^6.0.2",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
+    "react-burger-menu": "^2.6.5",
     "react-dom-factories": "^1.0.2",
     "react-fa": "^5.0.0",
     "react-json-view": "^1.19.1",
