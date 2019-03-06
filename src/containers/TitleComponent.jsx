@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getConfig } from '../getConfig';
-
+import SideBar from './SideBar';
 import { Col, Row, Navbar, NavItem, Nav, NavLink, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 // import MSPLogo from '../components/assets/dsp_logo.svg';
@@ -32,7 +32,9 @@ export default class TitleComponent extends Component {
 
     return (
       <div className='TitleComponent'>
-        <Navbar dark >
+
+      <div className="d-none d-md-block">
+        <Navbar dark>
           <Row className='navbar-header-c3s'>
             <Col className='welcomeSign'>
               <p style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: '10px' }}>
@@ -44,9 +46,11 @@ export default class TitleComponent extends Component {
                 </a>
               </p>
             </Col>
+
             <Col xs='auto' className='signInOffButton'>
               <Button color='success' href='https://goo.gl/forms/AaQf8yoRjWAMh8T22' target='_blank'>Feedback</Button>
             </Col>
+
             {
               clientId !== null
                 ? <Col xs='auto' className='signInOffButton'>
@@ -64,10 +68,9 @@ export default class TitleComponent extends Component {
                   <Button onClick={this.login}><Icon name='sign-in' />&nbsp;Sign in</Button>
                 </Col>
             }
-
           </Row>
         </Navbar>
-        <Navbar style={{ backgroundColor: '#941333', color: 'white', height: '38px', textAlign: 'center' }} className='navbar-static-top'>
+        <Navbar style={{ backgroundColor: '#941333', color: 'white', height: '38px', textAlign: 'center' }} className='navbar-static-top   d-none d-sm-block'>
           <Nav>
             <NavItem>
               <NavLink href='#/' active={pathname === '/'} >Home</NavLink>
@@ -105,6 +108,34 @@ export default class TitleComponent extends Component {
 
           </Nav>
         </Navbar>
+        </div>
+
+        <div className="d-md-none">
+          <SideBar/>
+          <Navbar style={{ backgroundColor: '#941333', color: 'white', height: '42px'}} className='navbar-static-top'>
+            <Row style={{ height:'42px', position: 'absolute', right: '2px'}} >
+                <Button color='success' href='https://goo.gl/forms/AaQf8yoRjWAMh8T22' target='_blank'>Feedback</Button>
+              {
+                clientId !== null
+                  ? 
+                    <Button href='#/account'>Account</Button>
+                  : null
+              }
+              {
+                clientId !== null ? (
+                  
+                    <Button color='primary' onClick={this.logout}><Icon name='sign-out' />&nbsp;Sign out</Button>
+                  
+                )
+                  : 
+                    <Button onClick={this.login}><Icon name='sign-in' />&nbsp;Sign in</Button>
+                  
+              }
+
+            </Row>
+          </Navbar>
+        </div>
+
         { /* <Navbar style={{ backgroundColor:'#941333', color:'white', height:'38px', textAlign: 'center' }} className='navbar-static-top'>
           <Nav>
             <NavItem>
