@@ -247,6 +247,8 @@ class DiagnosticPage extends Component {
                         {
                           'Provenance describes entities and processes involved in producing the resource. '
                         }
+                        <br />
+                        <br />
                         <Button className='C3SMagicTooltip' onClick={this.viewProvenance}>
                           <Icon name='tag' />
                           &nbsp;View Provenance
@@ -264,7 +266,7 @@ class DiagnosticPage extends Component {
                     this.renderPageElement('data') && (
                       <div className='text vspace1em'>
                         <h2 style={{ color: '#921A36' }}>Download</h2>
-                        Download precalculated results for this metric as a zipped bundle.<br />
+                        Download precalculated results for this metric as a zipped bundle.<br /><br />
                         { /*  data consisting of single entry */ }
                         { !Array.isArray(this.renderPageElement('data')) && (
                           <Button className='C3SMagicTooltip' onClick={() => { this.downloadData(this.renderPageElement('data')); }}>
