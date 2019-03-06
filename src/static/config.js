@@ -5,4 +5,5 @@ config.staticWMS='https://portal.c3s-magic.eu/backend/wms';
 config.backendHost = 'https://portal-dev.c3s-magic.eu/backend/';
 // config.backendHost = 'https://localportal.c3s-magic.eu/backend/';
 // config.backendHost = 'https://portal.c3s-magic.eu/backend/';
-config.backendHost = 'https://magicvm/backend/';
+// config.backendHost = 'https://magicvm/backend/';
+config.backendHost = 'https://portal-dev.c3s-magic.eu/backend/';
