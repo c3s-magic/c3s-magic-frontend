@@ -5,7 +5,6 @@ import RenderProcesses from './RenderProcesses';
 import { doWPSCall } from '../utils/WPSRunner';
 import ImagePreview from './ImagePreview';
 import { withRouter } from 'react-router';
-import { toArray } from 'adaguc-webmapjs';
 import Icon from 'react-fa';
 import _ from 'lodash';
 class WPSDemoCopernicus extends Component {
@@ -25,10 +24,11 @@ class WPSDemoCopernicus extends Component {
     this.toggleComputeNodeSelectorDropDown = this.toggleComputeNodeSelectorDropDown.bind(this);
     this.fetchProcesses = this.fetchProcesses.bind(this);
     this.getProcessInfo = this.getProcessInfo.bind(this);
-    console.log('Constructing WPSDemoCopernicus');
+    this.setComputeNode = this.setComputeNode.bind(this);
+    console.log('Constructing WPSDemoCopernicus', this.props.location);
     this.state = {
       describeProcessDocument: null,
-      currentWPSNodeName: 'copernicus-wps',
+      currentWPSNodeName: this.getInfoFromLocation(this.props.location).computeNode,
       wpsProcessName: [],
       wpsInfoFetched: false,
       wpsProcessData: [],
@@ -36,7 +36,6 @@ class WPSDemoCopernicus extends Component {
       wpsFormCurrent: [],
       showForm: false,
       formNoInputFound: false,
-      formNoOutputFound: false,
       selectedProcess: null,
       isBusy: false,
       isBusyMessage: '',
@@ -60,36 +59,46 @@ class WPSDemoCopernicus extends Component {
   }
 
   fetchProcesses () {
-    if (!this.props.compute || !this.props.compute.length || this.props.compute.length === 0) {
-      this.setState({
-        isBusy: false,
-        isBusyMessage: 'No compute nodes set'
-      });
-      return;
-    }
-    this.getWPSProcessList().then((response) => {
-      if (response === 'success') {
-        this.setState({ wpsInfoFetched: true });
-        this.setState({ isBusy: false });
-        this.setState({ isBusyMessage: '' });
-        if (this.handleLocationChange(this.props.location) !== true) {
-          if (!this.state.selectedProcess && this.state.wpsProcessName.length > 0) {
-            this.onWpsButtonClick(this.state.wpsProcessName[0].name, false);
-          }
-        }
+    return new Promise((resolve, reject) => {
+      if (!this.props.compute || !this.props.compute.length || this.props.compute.length === 0) {
+        this.setState({
+          isBusy: false,
+          isBusyMessage: 'No compute nodes set'
+        });
+        reject(new Error('Unable to fetchProcesses: No compute nodes set'));
+        return;
       }
-    }
-    ).catch((error) => {
-      console.log('error: ', error);
-      this.setState({
-        isBusy: false,
-        isBusyMessage: 'Error while getting process list from the server: ' + error });
+      console.log('start getWPSProcessList');
+      this.getWPSProcessList().then((response) => {
+        if (response === 'success') {
+          this.setState({
+            wpsInfoFetched: true,
+            isBusy: false,
+            isBusyMessage: ''
+          }, () => {
+            return this.onWpsButtonClick(null);
+          });
+        } else {
+          reject(new Error('getWPSProcessList failed'));
+        }
+      }).catch((error) => {
+        console.log('error: ', error);
+        this.setState({
+          isBusy: false,
+          isBusyMessage: 'Error while getting process list from the server: ' + error },
+        () => {
+          reject(error);
+        });
+      });
     });
   }
 
   componentDidMount () {
-    this.fetchProcesses();
+    if (this.props.compute && this.props.compute.length > 0) {
+      this.handleLocationChange(this.props.location);
+    }
   }
+
   componentDidUpdate (prevProps) {
     if (prevProps.compute !== this.props.compute) {
       console.log('updating compute props');
@@ -97,6 +106,7 @@ class WPSDemoCopernicus extends Component {
         console.log('success already updated');
         return;
       }
+      console.log('start fetching processes');
       this.fetchProcesses();
     }
   }
@@ -151,15 +161,35 @@ class WPSDemoCopernicus extends Component {
     });
   }
 
-  onWpsButtonClick (wpsName, changeLocation) {
-    if (changeLocation) {
-      this.props.router.push('/calculate/' + wpsName);
-    }
-    if (this.state.selectedProcess === wpsName) {
-      console.log('Process alreay selected');
-      return;
-    }
+  onWpsButtonClick (_wpsName) {
     return new Promise((resolve, reject) => {
+      /* Determine current WPS process name */
+      let wpsName = _wpsName || this.state.selectedProcess;
+      if (wpsName === null) {
+        wpsName = this.getInfoFromLocation(this.props.location).wpsName;
+        if (wpsName === null) {
+          console.log('WPSName === null, setting to first');
+          if (this.state.wpsProcessName && this.state.wpsProcessName.length > 0) {
+            wpsName = this.state.wpsProcessName[0].name;
+            console.log('Auto set WPS name to ' + wpsName);
+          } else {
+            reject(new Error('No processes available'));
+          }
+        }
+      }
+      /* Check if this process is in our list */
+      if (this.state.wpsProcessName && this.state.wpsProcessName.length > 0) {
+        const found = this.state.wpsProcessName.findIndex(e => e.name === wpsName);
+        if (found === -1) {
+          console.log('Process not found in compute node, setting default');
+          wpsName = this.state.wpsProcessName[0].name;
+        }
+      }
+      this.props.router.push('/calculate/' + this.state.currentWPSNodeName + '/' + wpsName);
+      if (this.state.selectedProcess === _wpsName) {
+        console.log('Process [' + _wpsName + '] already selected');
+        resolve('Process already selected');
+      }
       this.getWPSProcessInfo(wpsName)
         .then(response => {
           this.setState(
@@ -171,14 +201,21 @@ class WPSDemoCopernicus extends Component {
             resolve(response)
           );
         }).catch((e) => {
-          reject(new Error('Could not get the process list!'));
+          this.setState(
+            {
+              isBusy: false,
+              isBusyMessage: 'Error' + e,
+              selectedProcess: null
+            },
+            reject(new Error('Could not get the process list!' + e))
+          );
         });
     });
   }
 
   getWPSProcessInfo (processName) {
     this.setState({ isBusy: true, isBusyMessage: 'getting settings for ' + processName });
-    console.log('getting getWPSProcessInfo');
+    console.log('getting getWPSProcessInfo for ' + processName);
     return new Promise((resolve, reject) => {
       let wpsUrl = this.getWPSUrlByName(this.state.currentWPSNodeName);
       doWPSCall(wpsUrl + 'service=wps&version=1.0.0&request=describeprocess&identifier=' + processName,
@@ -190,11 +227,12 @@ class WPSDemoCopernicus extends Component {
           let formItemOutputs = [];
 
           let wpsOutputList = null;
-          let wpsInputList = null;
-
           /* Searching inputs */
           try {
-            wpsInputList = toArray(result['ProcessDescriptions'].ProcessDescription.DataInputs.Input);
+            /* With a single input the keys are not mapped on {'0': ..., '1': ...} but directly to the object */
+            const wpsInputListTMP = result['ProcessDescriptions'].ProcessDescription.DataInputs.Input;
+            const wpsInputListKeys = Object.keys(wpsInputListTMP);
+            const wpsInputList = (wpsInputListKeys.length > 0 && wpsInputListKeys[0] !== '0') ? { '0': wpsInputListTMP } : wpsInputListTMP;
 
             // console.log('input list: ', wpsInputList);
             for (let key in wpsInputList) {
@@ -280,7 +318,6 @@ class WPSDemoCopernicus extends Component {
           } catch (err) {
             console.log('No output settings found!');
             console.log('error:', err);
-            this.setState({ formNoOutputFound: true });
           }
 
           this.setState((prevState) => {
@@ -307,7 +344,6 @@ class WPSDemoCopernicus extends Component {
           resolve('success');
         }, (error) => {
           // console.log('Promise.reject from WPSCalculate::getWPSProcessInfo()');
-          console.log('error: ', error);
           reject(new Error('failed' + error));
         }
       ); // doWPSCall
@@ -376,12 +412,12 @@ class WPSDemoCopernicus extends Component {
         );
       }
 
-      if (el.type === 'integer') {
+      if (el.type === 'integer' || el.type === 'float') {
         // console.log('integer: ', el);
         return (
           <div key={'container' + el.title + index} className={'WPSDemoCopernicus_InputLabels'} >
             <label key={el.title + index}>
-              <span className={'WPSDemoCopernicus_InputLabelsLabel'}>>
+              <span className={'WPSDemoCopernicus_InputLabelsLabel'}>
                 {el.title}:
               </span>
               <input
@@ -473,20 +509,43 @@ class WPSDemoCopernicus extends Component {
     this.setState({ isBusyMessage: '' });
   }
 
-  handleLocationChange (newLocation) {
+  getInfoFromLocation (newLocation) {
     const { hash, pathname } = newLocation;
     let location = hash && hash.length > 0 ? hash : pathname;
-    // console.log('newlocation', location);
+    console.log('newlocation', location);
     const hashParts = location.split('/');
     // console.log(hashParts);
-    if (hashParts.length === 3) {
-      const lastPart = hashParts[hashParts.length - 1];
-      if (lastPart && lastPart.length > 0) {
-        this.onWpsButtonClick(lastPart, false);
-        return true;
-      }
+    if (hashParts.length === 3 || hashParts.length === 4) {
+      const wpsName = hashParts[hashParts.length - 1];
+      const computeNode = hashParts.length === 4 ? hashParts[2] : null;
+      console.log('getInfoFromLocation ' + wpsName);
+      return { wpsName: wpsName, computeNode: computeNode || 'copernicus-wps' };
     }
-    return false;
+    console.log('getInfoFromLocation ' + null);
+    return { wpsName: null, computeNode: 'copernicus-wps' };
+  }
+
+  handleLocationChange (newLocation) {
+    console.log('handleLocationChange');
+    return new Promise((resolve, reject) => {
+      const { wpsName, computeNode } = this.getInfoFromLocation(newLocation);
+      if (wpsName) {
+        console.log('setting compute node to ' + computeNode);
+        return this.setComputeNode(computeNode).then(() => {
+          console.log('compute node done, now setting wps name to ' + wpsName);
+          if (wpsName && wpsName.length > 0) {
+            console.log('this.state.selectedProcess' + this.state.selectedProcess);
+            if (this.state.selectedProcess !== wpsName) {
+              return this.onWpsButtonClick(wpsName).then((e) => { console.log(e); }).catch((e) => { console.warn(e); }).then().catch();
+            }
+          }
+        }).catch((e) => {
+          console.warn(e);
+          resolve();
+        });
+      }
+      resolve();
+    });
   }
 
   componentWillUpdate (nextProps) {
@@ -533,6 +592,26 @@ class WPSDemoCopernicus extends Component {
       }
     }
     return processInfo;
+  }
+
+  setComputeNode (name) {
+    return new Promise((resolve, reject) => {
+      if (name === null || this.state.currentWPSNodeName === name) { resolve(new Error('Unable to set compute node')); return; }
+      console.log('Setting compute node name to [' + name + ']');
+      this.setState({
+        selectedProcess: null,
+        currentWPSNodeName: name,
+        wpsInfoFetched: false,
+        wpsProcessName: []
+      }, () => {
+        this.fetchProcesses().then(() => {
+          // if (name !== null) {
+          //   this.props.router.push('/calculate/' + name + '/' + this.state.selectedProcess);
+          // }
+          resolve();
+        }).catch(reject);
+      });
+    });
   }
 
   render () {
@@ -591,13 +670,7 @@ class WPSDemoCopernicus extends Component {
                           {
                             compute.map((wp, index) => {
                               return <DropdownItem active={this.state.currentWPSNodeName === wp.name} key={index} color='primary' onClick={() => {
-                                this.setState({
-                                  selectedProcess: null,
-                                  currentWPSNodeName: wp.name,
-                                  wpsInfoFetched: false
-                                }, () => {
-                                  this.fetchProcesses();
-                                });
+                                this.setComputeNode(wp.name);
                               }}>{wp.name}</DropdownItem>;
                             })
                           }
@@ -620,7 +693,7 @@ class WPSDemoCopernicus extends Component {
                                 active={(processInfo && processInfo.name) === (wp && wp.name)}
                                 key={index}
                                 color='primary'
-                                onClick={() => { this.onWpsButtonClick(wp.name, true); }}>{wp.name} - {wp.title}
+                                onClick={() => { this.onWpsButtonClick(wp.name).then().catch(); }}>{wp.name} - {wp.title}
                               </DropdownItem>;
                             })
                           }

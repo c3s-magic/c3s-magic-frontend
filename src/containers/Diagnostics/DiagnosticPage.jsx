@@ -321,10 +321,11 @@ class DiagnosticPage extends Component {
 
                   <div className='text vspace2em'>
                     <h2 style={{ color: '#921A36' }}>Settings</h2>
+                    <p>Settings for the pre-calculated results.</p>
                     {this.renderPageElement('settings')}
                     { this.renderPageElement('process') ? <div>
-                      <p>You can change the settings above in order to calculate your own result.</p>
-                      <Button onClick={this.calculate}><Icon name='gear' />&nbsp;Adjust settings</Button>
+                      <p>You can calculate this metric yourself using custom settings.</p>
+                      <Button onClick={this.calculate}><Icon name='gear' />&nbsp;Calculate metric</Button>
                     </div>
                       : null }
                   </div>
