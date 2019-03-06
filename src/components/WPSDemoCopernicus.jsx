@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, CardBody, CardTitle, Button, Row, Col, Alert, UncontrolledAlert, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, FormGroup, Label } from 'reactstrap';
+import { Card, CardBody, CardTitle, Button, Row, Col, Alert, UncontrolledAlert, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Label } from 'reactstrap';
 import RenderProcesses from './RenderProcesses';
 import { doWPSCall } from '../utils/WPSRunner';
 import ImagePreview from './ImagePreview';
@@ -22,6 +22,7 @@ class WPSDemoCopernicus extends Component {
     this.createForm = this.createForm.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
     this.toggleWPSSelectorDropDown = this.toggleWPSSelectorDropDown.bind(this);
+    this.toggleComputeNodeSelectorDropDown = this.toggleComputeNodeSelectorDropDown.bind(this);
     this.fetchProcesses = this.fetchProcesses.bind(this);
     this.getProcessInfo = this.getProcessInfo.bind(this);
     console.log('Constructing WPSDemoCopernicus');
@@ -193,12 +194,10 @@ class WPSDemoCopernicus extends Component {
 
           /* Searching inputs */
           try {
-            wpsInputList = result['ProcessDescriptions'].ProcessDescription.DataInputs.Input;
+            wpsInputList = toArray(result['ProcessDescriptions'].ProcessDescription.DataInputs.Input);
 
             // console.log('input list: ', wpsInputList);
-
-            for (let myKey in wpsInputList) {
-              const key = toArray(myKey);
+            for (let key in wpsInputList) {
               try {
                 let item = wpsInputList[key];
 
@@ -206,21 +205,11 @@ class WPSDemoCopernicus extends Component {
 
                 let newInput = {};
                 let itemTitle = item['Title'].value;
-                let itemAbstract = itemTitle;
-                try {
-                  itemAbstract = item['Abstract'].value;
-                } catch (e) {}
                 let itemIdentifier = item['Identifier'].value;
-                let itemDataType = item.LiteralData['DataType'].value;
-
-                let itemDefaultValue = '';
-
-                try {
-                  itemDefaultValue = item.LiteralData.DefaultValue.value;
-                } catch (e) {
-                }
-
-                let itemAllowedValues = item.LiteralData['AllowedValues'];
+                let itemAbstract = itemTitle; try { itemAbstract = item['Abstract'].value; } catch (e) {}
+                let itemDataType = ''; try { itemDataType = item.LiteralData['DataType'].value; } catch (e) {}
+                let itemDefaultValue; try { itemDefaultValue = item.LiteralData.DefaultValue.value; } catch (e) {}
+                let itemAllowedValues; try { itemAllowedValues = item.LiteralData['AllowedValues']; } catch (e) {}
 
                 // fix for non-existing allowedvalues field
                 if (typeof itemAllowedValues !== 'undefined') {
@@ -529,6 +518,12 @@ class WPSDemoCopernicus extends Component {
     }));
   }
 
+  toggleComputeNodeSelectorDropDown () {
+    this.setState(prevState => ({
+      computeNodeSelectorDropDownOpen: !prevState.computeNodeSelectorDropDownOpen
+    }));
+  }
+
   getProcessInfo () {
     let processInfo = null;
     if (this.state.selectedProcess && this.state.wpsProcessName && this.state.wpsProcessName.length) {
@@ -547,7 +542,7 @@ class WPSDemoCopernicus extends Component {
     const { wpsFormElements } = this.state;
     // console.log(this.state);
     if (!compute) {
-      return (<div style={{margin:'20px'}}><Alert color='info'>You need to sign in to use this functionality</Alert></div>);
+      return (<div style={{ margin:'20px' }}><Alert color='info'>You need to sign in to use this functionality</Alert></div>);
     }
     if (isBusy) {
       return (
@@ -569,7 +564,9 @@ class WPSDemoCopernicus extends Component {
               <Alert color='warning'>
                 Sorry, I could not fetch WPS Process info. Maybe the server is too busy? [{this.state.isBusyMessage}]
               </Alert>
-              <Button color='primary' onClick={() => { this.fetchProcesses(); }} ><Icon name='refresh' />&nbsp;Try again</Button>
+              <Button color='primary' onClick={() => {
+                this.setState({ currentWPSNodeName: 'copernicus-wps' }, () => { this.fetchProcesses(); });
+              }} ><Icon name='refresh' />&nbsp;Try again</Button>
             </div>)
             : ''}
         </div>
@@ -583,29 +580,58 @@ class WPSDemoCopernicus extends Component {
               {compute
                 ? <div>
                   <Row>
-                    <FormGroup>
-                      <Row>
-                        <Col xs='auto' ><Label style={{ lineHeight: '40px' }}>Select a process: </Label></Col>
-                        <Col xs='auto' >
-                          <Dropdown isOpen={this.state.wpsSelectorDropDownOpen} toggle={this.toggleWPSSelectorDropDown}>
-                            <DropdownToggle caret>
-                              {this.state.selectedProcess}
-                            </DropdownToggle>
-                            <DropdownMenu>
-                              <DropdownItem header>Please select one of the processes</DropdownItem>
-                              {
-                                this.state.wpsProcessName.map((wp, index) => {
-                                  return <DropdownItem key={index} color='primary' onClick={() => { this.onWpsButtonClick(wp.name, true); }}>{wp.name}</DropdownItem>;
-                                })
-                              }
-                            </DropdownMenu>
-                          </Dropdown>
-                        </Col>
-                        <Col xs='auto'>
-                          <Label style={{ lineHeight: '40px' }}>Your current compute node location is { this.getWPSUrlByName(this.state.currentWPSNodeName) }</Label>
-                        </Col>
-                      </Row>
-                    </FormGroup>
+                    <Col xs='2' ><Label style={{ lineHeight: '40px' }}>Select a compute node: </Label></Col>
+                    <Col xs='8' >
+                      <Dropdown isOpen={this.state.computeNodeSelectorDropDownOpen} toggle={this.toggleComputeNodeSelectorDropDown}>
+                        <DropdownToggle caret>
+                          {this.state.currentWPSNodeName}
+                        </DropdownToggle>
+                        <DropdownMenu>
+                          <DropdownItem header>Please select one of the compute nodes</DropdownItem>
+                          {
+                            compute.map((wp, index) => {
+                              return <DropdownItem active={this.state.currentWPSNodeName === wp.name} key={index} color='primary' onClick={() => {
+                                this.setState({
+                                  selectedProcess: null,
+                                  currentWPSNodeName: wp.name,
+                                  wpsInfoFetched: false
+                                }, () => {
+                                  this.fetchProcesses();
+                                });
+                              }}>{wp.name}</DropdownItem>;
+                            })
+                          }
+                        </DropdownMenu>
+                      </Dropdown>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs='2' ><Label style={{ lineHeight: '40px' }}>Select a process: </Label></Col>
+                    <Col xs='8' >
+                      <Dropdown isOpen={this.state.wpsSelectorDropDownOpen} toggle={this.toggleWPSSelectorDropDown}>
+                        <DropdownToggle caret>
+                          {(processInfo && (processInfo.name + ' - ' + processInfo.title)) || this.state.selectedProcess}
+                        </DropdownToggle>
+                        <DropdownMenu>
+                          <DropdownItem header>Please select one of the processes</DropdownItem>
+                          {
+                            this.state.wpsProcessName.map((wp, index) => {
+                              return <DropdownItem
+                                active={(processInfo && processInfo.name) === (wp && wp.name)}
+                                key={index}
+                                color='primary'
+                                onClick={() => { this.onWpsButtonClick(wp.name, true); }}>{wp.name} - {wp.title}
+                              </DropdownItem>;
+                            })
+                          }
+                        </DropdownMenu>
+                      </Dropdown>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs='12'>
+                      <Label style={{ lineHeight: '40px' }}>Your current compute node location is { this.getWPSUrlByName(this.state.currentWPSNodeName) }</Label>
+                    </Col>
                   </Row>
                   {errorExists
                     ? <UncontrolledAlert color='danger' style={{ textAlign: 'initial' }}>

@@ -4,6 +4,7 @@ import { Row, Col, Card, CardBody, CardText, CardLink, CardTitle } from 'reactst
 
 import ClickableImage from '../ClickableImage';
 import YMLViewer from './YMLViewer';
+import JSONViewer from './JSONViewer';
 import TXTViewer from './TXTViewer';
 import SVGViewer from './SVGViewer';
 import ADAGUCViewerComponent from '../ADAGUCViewerComponent';
@@ -69,6 +70,10 @@ export default class RenderWPSProcessOutput extends Component {
         if (output.reference.endsWith('.yml')) {
           output.esmRecipe = output.reference;
         }
+        /* Check if is JSON */
+        if (output.reference.endsWith('.json') || output.reference.endsWith('.wpssettings')) {
+          output.jsonViewer = output.reference;
+        }
         /* Check if this is a textfile */
         if (output.reference.endsWith('.txt')) {
           output.txtViewer = output.reference;
@@ -101,6 +106,7 @@ export default class RenderWPSProcessOutput extends Component {
           </Row>)
           }
           { output.esmRecipe && (<Row><Col xs='10'><YMLViewer url={output.esmRecipe} /></Col></Row>) }
+          { output.jsonViewer && (<Row><Col xs='10'><JSONViewer url={output.jsonViewer} /></Col></Row>) }
           { output.txtViewer && (<Row><Col xs='10'><TXTViewer url={output.txtViewer} /></Col></Row>) }
           { output.svgViewer && (<Row><Col xs='12'><SVGViewer url={output.svgViewer} /></Col></Row>) }
           { output.netcdfOpenDAP && (<Row><Col xs='10'>

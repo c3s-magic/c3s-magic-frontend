@@ -247,20 +247,16 @@ class DiagnosticPage extends Component {
                         {
                           'Provenance describes entities and processes involved in producing the resource. '
                         }
-                        <ul>
-                          <li>
-                            <Button className='C3SMagicTooltip' onClick={this.viewProvenance}>
-                              <Icon name='tag' />
-                              &nbsp;View Provenance
-                              <span className='C3SMagicTooltipText'>
-                                {
-                                  'This describes entities and processes involved in producing the resource. ' +
-                                  'Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility.'
-                                }
-                              </span>
-                            </Button>
-                          </li>
-                        </ul>
+                        <Button className='C3SMagicTooltip' onClick={this.viewProvenance}>
+                          <Icon name='tag' />
+                          &nbsp;View Provenance
+                          <span className='C3SMagicTooltipText'>
+                            {
+                              'This describes entities and processes involved in producing the resource. ' +
+                              'Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility.'
+                            }
+                          </span>
+                        </Button>
                       </div>
                     )
                   }
@@ -269,35 +265,33 @@ class DiagnosticPage extends Component {
                       <div className='text vspace1em'>
                         <h2 style={{ color: '#921A36' }}>Download</h2>
                         Download precalculated results for this metric as a zipped bundle.<br />
-                        <ul>
-                          { /*  data consisting of single entry */ }
-                          { !Array.isArray(this.renderPageElement('data')) && (
-                            <li>
-                              
-                              <Button className='C3SMagicTooltip' onClick={() => { this.downloadData(this.renderPageElement('data')); }}>
-                                <Icon name='download' />
-                                &nbsp;Download bundle
-                                <span className='C3SMagicTooltipText'>
-                                  {
-                                    'Download a zipped bundle of all output files, ESMValTool logfiles and intermediate files.'
-                                  }
-                                </span>
-                              </Button>
-                            </li>
-                          )
-                          }
-                          { /*  data consisting of multiple entries */ }
-                          { Array.isArray(this.renderPageElement('data')) && (
-                            this.renderPageElement('data').map((dataUrl, key) => {
-                              return (<li key={key}>
-                                <Button color='primary' onClick={() => { this.downloadData(dataUrl); }}>
-                                  <Icon name='download' />&nbsp;{this.getBasename(dataUrl)}
-                                </Button>
-                              </li>);
-                            })
-                          )
-                          }
-                        </ul>
+                        { /*  data consisting of single entry */ }
+                        { !Array.isArray(this.renderPageElement('data')) && (
+                          <Button className='C3SMagicTooltip' onClick={() => { this.downloadData(this.renderPageElement('data')); }}>
+                            <Icon name='download' />
+                            &nbsp;Download bundle
+                            <span className='C3SMagicTooltipText'>
+                              {
+                                'Download a zipped bundle of all output files, ESMValTool logfiles and intermediate files.'
+                              }
+                            </span>
+                          </Button>
+                        )
+                        }
+                        { /*  data consisting of multiple entries */ }
+                        { Array.isArray(this.renderPageElement('data')) && (
+                          <ul>
+                            {
+                              this.renderPageElement('data').map((dataUrl, key) => {
+                                return (<li key={key}>
+                                  <Button color='primary' onClick={() => { this.downloadData(dataUrl); }}>
+                                    <Icon name='download' />&nbsp;{this.getBasename(dataUrl)}
+                                  </Button>
+                                </li>);
+                              })
+                            }
+                          </ul>)
+                        }
                       </div>
                     )
                   }

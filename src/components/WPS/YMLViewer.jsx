@@ -22,11 +22,10 @@ export default class YMLViewer extends Component {
       this.setState({ data: (YAML.parse(src.data)) });
     }).catch((e) => {
       console.error(e);
-    })
+    });
   }
 
   render () {
-    const { closeCallback } = this.props;
     return (<div className='wpsOutputComponentContainer'>
       <ReactJson style={{ fontSize:'10px', lineHeight:'12px' }} src={this.state.data} />
     </div>);
@@ -34,6 +33,5 @@ export default class YMLViewer extends Component {
 }
 
 YMLViewer.propTypes = {
-  url: PropTypes.string,
-  closeCallback: PropTypes.func
+  url: PropTypes.string
 };
