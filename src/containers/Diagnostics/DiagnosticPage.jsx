@@ -211,17 +211,18 @@ class DiagnosticPage extends Component {
 
               <Row>
                 <Col xs='6' className='diagnosticsCol'>
+
                   <div className='text'>
-                    <h2 style={{ color: '#921A36' }}>Partners</h2>
-                    {this.renderPageElement('partner')}
+                    <h2 style={{ color: '#921A36' }}>Description</h2>
+                    {this.renderPageElement('description_short')}
+                    <div className='text vspace1em'>
+                      <Button color='primary' onClick={this.readMore}><Icon name='' />&nbsp;Read more</Button>{' '}
+                    </div>
                   </div>
 
                   <div className='text vspace2em'>
-                    <h2 style={{ color: '#921A36' }}>Description</h2>
-                    {this.renderPageElement('description_short')}
-                    <div className='text vspace2em'>
-                      <Button color='primary' onClick={this.readMore}><Icon name='' />&nbsp;Read more</Button>{' '}
-                    </div>
+                    <h2 style={{ color: '#921A36' }}>Partners</h2>
+                    {this.renderPageElement('partner')}
                   </div>
 
                   <div className='text vspace2em'>
@@ -230,52 +231,76 @@ class DiagnosticPage extends Component {
                   </div>
 
                   <div className='text vspace2em'>
-                    <h2 style={{ color: '#921A36' }}>References</h2>
-                    {this.renderPageElement('references')}
-                  </div>
-
-                  <div className='text vspace2em'>
                     <h2 style={{ color: '#921A36' }}>Contact</h2>
                     {this.renderPageElement('contact')}
                   </div>
 
-                  <div className='vspace2em'>
-                    { this.renderPageElement('provenance') && (
-                      <Button className='C3SMagicTooltip' onClick={this.viewProvenance}>
-                        <Icon name='tag' />
-                        &nbsp;Provenance
-                        <span className='C3SMagicTooltipText'>
-                          {
-                            'This describes entities and processes involved in producing the resource. ' +
-                            'Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility.'
-                          }
-                        </span>
-                      </Button>
-                    )
-
-                    }
-                    &nbsp;
-                    { /*  data consisting of single entry */ }
-                    { (this.renderPageElement('data') && !Array.isArray(this.renderPageElement('data'))) && (
-                      <Button className='C3SMagicTooltip' onClick={() => { this.downloadData(this.renderPageElement('data')); }}>
-                        <Icon name='download' />
-                        &nbsp;Download
-                        <span className='C3SMagicTooltipText'>
-                          {
-                            'Download a zipped bundle of all output files'
-                          }
-                        </span>
-                      </Button>) }
-
-                    { /*  data consisting of multiple entries */ }
-                    { (this.renderPageElement('data') && Array.isArray(this.renderPageElement('data'))) && (
-                      <div><h2 style={{ color: '#921A36' }}>Datasets</h2><ul>{this.renderPageElement('data').map((dataUrl, key) => {
-                        return (<li key={key}><Button color='primary' onClick={() => { this.downloadData(dataUrl); }}>
-                          <Icon name='download' />&nbsp;{this.getBasename(dataUrl)}</Button></li>);
-                      })}</ul></div>)
-                    }
+                  <div className='text vspace2em'>
+                    <h2 style={{ color: '#921A36' }}>References</h2>
+                    {this.renderPageElement('references')}
                   </div>
 
+                  {
+                    this.renderPageElement('provenance') && (
+                      <div className='text vspace1em'>
+                        <h2 style={{ color: '#921A36' }}>Provenance</h2>
+                        {
+                          'Provenance describes entities and processes involved in producing the resource. '
+                        }
+                        <ul>
+                          <li>
+                            <Button className='C3SMagicTooltip' onClick={this.viewProvenance}>
+                              <Icon name='tag' />
+                              &nbsp;View Provenance
+                              <span className='C3SMagicTooltipText'>
+                                {
+                                  'This describes entities and processes involved in producing the resource. ' +
+                                  'Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility.'
+                                }
+                              </span>
+                            </Button>
+                          </li>
+                        </ul>
+                      </div>
+                    )
+                  }
+                  {
+                    this.renderPageElement('data') && (
+                      <div className='text vspace1em'>
+                        <h2 style={{ color: '#921A36' }}>Download</h2>
+                        Download precalculated results for this metric as a zipped bundle.<br />
+                        <ul>
+                          { /*  data consisting of single entry */ }
+                          { !Array.isArray(this.renderPageElement('data')) && (
+                            <li>
+                              
+                              <Button className='C3SMagicTooltip' onClick={() => { this.downloadData(this.renderPageElement('data')); }}>
+                                <Icon name='download' />
+                                &nbsp;Download bundle
+                                <span className='C3SMagicTooltipText'>
+                                  {
+                                    'Download a zipped bundle of all output files, ESMValTool logfiles and intermediate files.'
+                                  }
+                                </span>
+                              </Button>
+                            </li>
+                          )
+                          }
+                          { /*  data consisting of multiple entries */ }
+                          { Array.isArray(this.renderPageElement('data')) && (
+                            this.renderPageElement('data').map((dataUrl, key) => {
+                              return (<li key={key}>
+                                <Button color='primary' onClick={() => { this.downloadData(dataUrl); }}>
+                                  <Icon name='download' />&nbsp;{this.getBasename(dataUrl)}
+                                </Button>
+                              </li>);
+                            })
+                          )
+                          }
+                        </ul>
+                      </div>
+                    )
+                  }
                 </Col>
                 <Col xs='6' className='diagnosticsCol'>
 
@@ -302,26 +327,27 @@ class DiagnosticPage extends Component {
                     <h2 style={{ color: '#921A36' }}>Settings</h2>
                     {this.renderPageElement('settings')}
                     { this.renderPageElement('process') ? <div>
-                      <p>You can change the settings above in order to calculate your own result:</p>
+                      <p>You can change the settings above in order to calculate your own result.</p>
                       <Button onClick={this.calculate}><Icon name='gear' />&nbsp;Adjust settings</Button>
                     </div>
                       : null }
                   </div>
                 </Col>
-              </Row>l
-              <Row>
-                <Col xs='12' className='diagnosticsCol'>
-                  <div className='text'>
-                    {this.isEnabled('chart')
-                      ? <div key={'chart'} className='text'>
-                        <h2 style={{ color: '#921A36' }}>Interactive chart</h2>
-                        <DiagnosticsChart data={this.renderPageElement('chart')} />
-                      </div>
-                      : null
-                    }
-                  </div>
-                </Col>
               </Row>
+              {
+                this.isEnabled('chart') && (
+                  <Row>
+                    <Col xs='12' className='diagnosticsCol'>
+                      <div className='text'>
+                        <div key={'chart'} className='text'>
+                          <h2 style={{ color: '#921A36' }}>Interactive chart</h2>
+                          <DiagnosticsChart data={this.renderPageElement('chart')} />
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
+                )
+              }
               <Row>
                 <Col xs='12' className='diagnosticsCol'>
                   <div className='text vspace2em'>
