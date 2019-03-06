@@ -15,8 +15,12 @@ import ClickableImage from '../../components/ClickableImage';
 import { Row, Col, Button, Alert, Container } from 'reactstrap';
 import Icon from 'react-fa';
 import RenderWPSProcessOutput from '../../components/WPS/RenderWPSProcessOutput';
-var $RefParser = require('json-schema-ref-parser');
+import { getConfig } from '../../getConfig';
+const YAML = require('yamljs');
 var _ = require('lodash');
+
+// import { WMJSLayer, WMJSGetServiceFromStore } from 'adaguc-webmapjs';
+let config = getConfig();
 
 class DiagnosticPage extends Component {
   constructor (props) {
@@ -37,11 +41,13 @@ class DiagnosticPage extends Component {
   readYaml () {
     var yamlPath = 'diagnosticsdata/' + this.props.params.diag + '/' + this.props.params.diag + '.yml';
     this.setState({ yamlPath: yamlPath });
-    var that = this;
-    $RefParser.dereference(yamlPath)
-      .then(data => {
-        that.setState({ yamlData: data, readSuccess: true });
+    fetch(yamlPath).then((response) => {
+      return response.text().then((text) => {
+        text = text.replace('{DATAURL}', config.dataURL);
+        text = text.replace('{STATICWMS}', config.staticWMS);
+        this.setState({ yamlData: YAML.parse(text), readSuccess: true });
       });
+    });
   }
 
   componentDidMount () {
