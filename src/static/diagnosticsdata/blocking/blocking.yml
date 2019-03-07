@@ -1,6 +1,6 @@
 ---
 id: 1
-name: Blocking metrics and indices
+name: Blocking Metrics and Indices
 partner: ISAC-CNR
 authors:
   - Paolo Davini (ISAC-CNR, Italy)
@@ -10,7 +10,8 @@ contact:
   - Paolo Davini p.davini@isac.cnr.it
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
   - Enrico Arnone e.arnone@isac.cnr.it
-description_short: The Blocking metrics shows the mid-latitude 1D and 2D blocking indices.
+description_short: The Blocking metrics shows the mid-latitude 1D and 2D blocking indices. It is one of the recepies in the MId-Latitude Evaluation System (MiLES).
+#that was developed to support analysis of mid-latitude weather patterns in terms of atmospheric blocking, teleconnections and weather regimes. 
 description_file: 'blocking/description.md'
 media: 
   - diagnosticsdata/blocking/TM90_MPI-ESM-P_r1_1951_2005_DJF.png
@@ -29,15 +30,20 @@ references:
   url: "https://doi.org/10.1034/j.1600-0870.1990.t01-2-00003.x"
 - text: "Paolo Davini. (2018, April 30). MiLES - Mid Latitude Evaluation System (Version v0.51). Zenodo. http://doi.org/10.5281/zenodo.1237838"
   url: "http://doi.org/10.5281/zenodo.1237838"
+- text: "REX, D. F. (1950), Blocking Action in the Middle Troposphere and its Effect upon Regional Climate. Tellus, 2: 275-301. doi:10.1111/j.2153-3490.1950.tb00339.x"
+  url: "https://onlinelibrary.wiley.com/action/showCitFormats?doi=10.1111%2Fj.2153-3490.1950.tb00331.x"
 settings:
   - Models:
-      - MPI-ESM-P
-  - Start year: 1950
-  - End year: 2005
+      - EC-EARTH
+  - Variable: "Geopotential height"
+  - Start year: 1980
+  - End year: 1989
   - Experiment: Historical
+  - Ensamble: r2i1p1
   - Season: DJF
   - Reference dataset: ERA-INTERIM
-title: Blocking metrics and indices
+  - Latitude (pre-processor): "1.25 - 90"
+title: Blocking Metrics and Indices
 #provenance: <point to svg file>
 #process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
 data: https://portal.c3s-magic.eu/data/recipes/recipe_miles_block_20181211.zip

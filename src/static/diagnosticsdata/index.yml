@@ -4,7 +4,7 @@ diagnostics:
         name: python_example
         title: ESMValTool climate data pre-processor
         sub_title:
-        info_text: Showcases how ESMValTool climate data pre-processor can be used to regrid, select area, aggregate, provenance tracking and many more features.
+        info_text: Showcases how ESMValTool climate data pre-processor can be used to regrid, select area, aggregate, perform provenance tracking and many more features.
         info_file: python_example/python_example.yml
         image_file: ./diagnosticsdata/python_example/CMIP5_bcc-csm1-1_Amon_historical_r1i1p1_T3M_ta_2001-2002_mean_r_2i936e.png
         github_issue:
@@ -22,7 +22,7 @@ diagnostics:
         name: cvdp
         title: Climate Variability Diagnostics
         sub_title:
-        info_text: The Climate Variability Diagnostics Package (CVDP) developed by NCAR's Climate Analysis Section is an analysis tool that documents the major modes of climate variability in models and observations.
+        info_text: The NCAR Climate Variability Package (CVDP) is a stand alone ncl based application for the analysis of climate variability in models and observations.
         info_file: cvdp/cvdp.yml
         image_file: https://portal.c3s-magic.eu/data/recipes/recipe_cvdp_20181207_142708/work/diagnostic1/cvdp/tas.mean.ann.png
         github_issue:
@@ -34,9 +34,9 @@ diagnostics:
     perfmetrics:
         id: 18
         name: perfmetrics
-        title: Performance metrics
+        title: Performance Metrics for Essential Climate Parameters
         sub_title:
-        info_text: Performance metrics to quantify the ability of the models to reproduce the climatological mean annual cycle for selected "Essential Climate Variables"
+        info_text: A standard recipe for the calculation of performance metrics to quantify the ability of the models to reproduce the climatological mean annual cycle for selected Essential Climate Variables (ECV) plus some additional corresponding diagnostics.
         info_file: perfmetrics/perfmetrics.yml
         image_file: ./diagnosticsdata/perfmetrics/Portait.png
         github_issue:
@@ -61,9 +61,9 @@ diagnostics:
     blocking:
         id: 7
         name: blocking
-        title: Blocking metrics and indices
+        title: Blocking Metrics and Indices
         sub_title:
-        info_text: Metrics showing mid-latitude 1D and 2D blocking indices
+        info_text: The Blocking metrics shows the mid-latitude 1D and 2D blocking indices. It is one of the recepies in the MId-Latitude Evaluation System (MiLES).
         info_file: blocking/blocking.yml
         image_file: diagnosticsdata/blocking/blocking_thumbnail.png
         github_issue:
@@ -73,9 +73,9 @@ diagnostics:
     stratosphere-troposphere:
         id: 9
         name: stratosphere-troposphere
-        title: Stratosphere-troposphere coupling
+        title: Stratosphere-Troposphere coupling
         sub_title:
-        info_text: Diagnostics showing EOF/PC decomposition of the zonal mean geopotential height field to provide an evaluation of the stratosphere-troposphere coupling
+        info_text: Metric to evaluate the representation of the Northern Annular Mode (NAM) in climate simulations, using reanalysis datasets as reference.
         info_file: stratosphere-troposphere/stratosphere-troposphere.yml
         image_file: diagnosticsdata/stratosphere-troposphere/stratosphere-troposphere_thumbnail.png
         github_issue:
@@ -84,15 +84,14 @@ diagnostics:
           - zmnam
           - ISAC-CNR
           - Process
-    # a.k.a weather regimes https://github.com/nmanuben/ESMValTool/blob/bsc_wp5/esmvaltool/namelists/namelist_weather_regime.yml
     modes_of_variability:
-        id: 112
+        id: 5
         name: modes_of_variability
-        title: Modes of variability
+        title: Modes of Variability
         sub_title:
-        info_text: Diagnostic to compute the RMSE between the observed and modelled patterns of variability.
+        info_text: Diagnostic to compute the Root Mean Square Error (RMSE) between the observed and modelled patterns of variability.
         info_file: modes_of_variability/modes_of_variability.yml
-        image_file: ./diagnosticsdata/modes_of_variability/era_interim_1990-01-2010-01_clusters.png
+        image_file: diagnosticsdata/modes_of_variability/era_interim_1990-01-2010-01_clusters.png
         github_issue:
         tags:
           - WP4
@@ -114,21 +113,21 @@ diagnostics:
         name: quantilebias
         title: Precipitation quantile bias
         sub_title:
-        info_text: Diagnostic showing the quantile bias between models and a reference dataset
+        info_text: Diagnostic showing the quantile bias between models and a reference dataset.
         info_file: quantilebias/quantilebias.yml
         image_file: diagnosticsdata/quantilebias/quantilebias_thumbnail.png
         github_issue:
         tags:
           - WP4
           - ISAC-CNR
-    anomaly_agreement:
-        id: 1
-        name: anomaly_agreement
-        title: Generic multi-model products
+    multimodel_products:
+        id: 8
+        name: multimodel_products
+        title: Generic Multi-Model Products
         sub_title:
-        info_text: Diagnostic showing the ensemble mean anomaly and the ensemble variance and agreement and plot the results as maps and time series.
-        info_file: anomaly_agreement/anomaly_agreement.yml
-        image_file: diagnosticsdata/anomaly_agreement/bsc_anomaly_timeseries.png
+        info_text: Diagnostic to calculate the ensemble mean anomaly, variance and agreement. The results are shown as maps and time series.
+        info_file: multimodel_products/multimodel_products.yml
+        image_file: diagnosticsdata/multimodel_products/bsc_anomaly_timeseries.png
         github_issue: https://github.com/c3s-magic/c3s-magic-frontend/issues/51
         tags:
             - WP5
@@ -139,7 +138,7 @@ diagnostics:
         name: ensclus
         title: EnsClus - Ensemble Clustering
         sub_title:
-        info_text: Diagnostic based on the k-means algorithm, with the aim to group ensemble members according to similar characteristics and to select the most representative member for each cluster
+        info_text: Cluster analysis tool based on the k-means algorithm for ensembles of climate model simulations. EnsClus groups ensemble members according to similar characteristics and select the most representative member for each cluster.
         info_file: ensclus/ensclus.yml
         image_file: diagnosticsdata/ensclus/ensclus_thumbnail.png
         github_issue:
@@ -148,14 +147,14 @@ diagnostics:
           - WP5
           - ISAC-CNR
           - Process
-    combine_indices:
+    combined_indices:
         id: 12
-        name: combine_indices
-        title: Single and multi-model indices based on area averages
+        name: combined_indices
+        title: Single and multi-model indices based on area averages.
         sub_title:
-        info_text: Diagnostic showing single and multi model indices based on area averages.
-        info_file: combine_indices/combine_indices.yml
-        image_file: diagnosticsdata/combine_indices/single_and_multi_model_indices_thumbnail.png
+        info_text: Metric showning single and multi model indices based on area averages.
+        info_file: combined_indices/combined_indices.yml
+        image_file: diagnosticsdata/combined_indices/single_and_multi_model_indices_thumbnail.png
         github_issue:
         tags:
           - WP6
@@ -163,9 +162,9 @@ diagnostics:
     annularmodes:
         id: 2
         name: annularmodes
-        title: Indices of annular modes
+        title: Indices of Annular Modes
         sub_title:
-        info_text: Diagnostic showing EOF/PC decomposition of the zonal mean geopotential height field to provide an evaluation of the Northern Annular Mode pattern at the surface and in the stratosphere
+        info_text: Metric to show the zonal mean Northern Annular Mode (NAM) to provide an evaluation of the NAM pattern at the surface and in the stratosphere. Outputs are a plot of the monthly timeseries of the zonal mean NAM index and a frequency histogram of the daily values of the NAM index. 
         info_file: annularmodes/annularmodes.yml
         image_file: diagnosticsdata/annularmodes/annularmodes_thumbnail.png
         github_issue:
@@ -175,11 +174,23 @@ diagnostics:
     teleconnections:
         id: 5
         name: teleconnections
-        title: Teleconnection indices and weather regimes
+        title: Teleconnection indices
         sub_title:
-        info_text: This diagnostic implements the MId-Latitude Evaluation System (MiLES) providing teleconnection indices (Z500 empirical orthogonal functions) and North-Atlantic Weather Regimes
+        info_text: Diagnostic that implements the MId-Latitude Evaluation System (MiLES) to provide teleconnection indices (Z500 empirical orthogonal functions).
         info_file: teleconnections/teleconnections.yml
         image_file: diagnosticsdata/teleconnections/teleconnections_thumbnail.png
+        github_issue:
+        tags:
+          - WP6
+          - ISAC-CNR
+    weather_regimes:
+        id: 55
+        name: weather_regimes
+        title: Weather Regimes
+        sub_title:
+        info_text: Recipe for computing and plotting weather regimes using the MiLES (Mid-Latitude Evaluation System) package.
+        info_file: weather_regimes/weather_regimes.yml
+        image_file: diagnosticsdata/weather_regimes/weather_regimes_thumbnail.png
         github_issue:
         tags:
           - WP6
@@ -189,7 +200,7 @@ diagnostics:
         name: hyint_timeseries
         title: HyInt and ETCCDI trends and significance testing
         sub_title:
-        info_text: Metric showing timeseries and trends for the HyInt hydroclimatic indices and ETCCDI extremes indices
+        info_text: Metric showing timeseries and trends for the HyInt hydroclimatic indices and ETCCDI extremes indices.
         info_file: hyint_timeseries/hyint_timeseries.yml
         image_file: diagnosticsdata/hyint_timeseries/hyint_timeseries_thumbnail.png
         github_issue:
@@ -273,30 +284,43 @@ diagnostics:
         tags:
           - WP7
           - ISAC-CNR
-    extreme_spells:
+    heatwaves_coldwaves:
         id: 14
-        name: extreme_spells
-        title: Heatwave and coldwave duration
+        name: heatwaves_coldwaves
+        title: Heatwaves and Coldwaves duration
         sub_title:
         info_text: Metric showing the duration of heatwaves and coldwaves, to help understand potential changes in energy demand.
-        info_file: extreme_spells/extreme_spells.yml
-        image_file: diagnosticsdata/extreme_spells/extreme_spells_energy.png
+        info_file: heatwaves_coldwaves/heatwaves_coldwaves.yml
+        image_file: diagnosticsdata/heatwaves_coldwaves/extreme_spells_energy.png
         github_issue:
         tags:
           - WP7
           - BSC
-          - Extreme Spells
+#          - Heatwaves and coldwaves
     dtr:
         id: 13
         name: dtr
-        title: Diurnal Temperature Variation (DTR) Indicator and Wind Capacity Factor
+        title: Diurnal Temperature Variation (DTR) Indicator 
         sub_title:
-        info_text: Metric showing the diurnal temperature indicator to estimate energy demand, and the wind capacity factor to estimate energy supply.
+        info_text: Metric showing the diurnal temperature indicator to estimate energy demand
+#        , and the wind capacity factor to estimate energy supply.
         info_file: dtr/dtr.yml
         image_file: diagnosticsdata/dtr/diurnal_temperature_variation.png
         github_issue:
         tags:
           - WP7
+          - BSC
+    capacity_factor:
+        id: 133
+        name: capacity_factor
+        title: Capacity Factor of Wind Power 
+        sub_title: Ratio of average estimated power to theoretical maximum power
+        info_text: Metric showing the wind capacity factor to estimate energy supply.
+        info_file: capacity_factor/capacity_factor.yml
+        image_file: diagnosticsdata/capacity_factor/diurnal_temperature_variation.png
+        github_issue:
+        tags:
+          - WP7    
           - BSC
     risk_index:
         id: 101

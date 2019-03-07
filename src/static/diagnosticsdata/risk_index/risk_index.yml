@@ -1,5 +1,5 @@
 ---
-name: Insurance risk indices (Tailored product - Insurance)
+name: Combined Climate Extreme Index
 partner: BSC
 authors:
   - Louis-Philippe Caron
@@ -23,15 +23,35 @@ enableADAGUC:
 references:
   - text: "Manubens, Nicolau, Louis-Philippe Caron, Alasdair Hunter, Omar Bellprat, Eleftheria Exarchou, Neven S. Fučkar, Javier Garcia-Serrano et al. \"An R package for climate forecast verification.\" Environmental Modelling & Software 103 (2018): 29-42."
   - url: "https://doi.org/10.1016/j.envsoft.2018.01.018"
+  - text: "Alexander L.V. and Coauthors (2006). Global observed changes in daily climate extremes of temperature and precipitation. J. Geophys. Res., 111, D05109, doi:10.1029/2005JD006290."
+  - url: "https://doi.org/10.1029/2005JD006290"
+  - text: "American Academy of Actuaries, Canadian Institute of Actuaries, Casualty Actuarial Society and Society of Actuaries. Actuaries Climate Index."
+  - url: "http://actuariesclimateindex.org"
+  - text: "Donat, M., and Coauthors (2013). Updated analyses of temperature and precipitation extreme indices since the beginning of the twentieth century: The HadEX2 dataset. J. Geophys. Res., 118, 2098–2118, doi:10.1002/jgrd.50150."
+  - url: "https://doi.org/10.1002/jgrd.50150"
+  - text: "Fouillet, A., Rey, G., Laurent, F., Pavillon, G. Bellec, S., Guihenneuc-Jouyaux, C., Clavel J., Jougla, E. and Hémon, D. (2006) Excess mortality related to the August 2003 heat wave in France. Int. Arch. Occup. Environ. Health, 80, 16–24. doi: 10.1007/s00420-006-0089-4"
+  - url: "https://doi.org/10.1007/s00420-006-0089-4"
+  - text: "Gleason, K.L., J.H. Lawrimore, D.H. Levinson, T.R. Karl, and D.J. Karoly (2008). A Revised U.S. Climate Extremes Index. J. Climate, 21, 2124-2137. doi:/10.1175/2007JCLI1883.1"
+  - url: "https://doi.org/10.1175/2007JCLI1883.1"
+  - text: "Meehl, G. A., and Coauthors (2000). An introduction to trends inextreme weather and climate events: Observations, socio-economic impacts, terrestrial ecological impacts, and model projections. Bull. Amer. Meteor. Soc., 81, 413–416. doi: 10.1175/1520-0477(2000)081<0413:AITTIE>2.3.CO;2" 
+  - url: "https://doi.org/10.1175/1520-0477(2000)081<0413:AITTIE>2.3.CO;2"
+  - text: "Whitman, S., G. Good, E. R. Donoghue, N. Benbow, W. Y. Shou and S. X. Mou (1997). Mortality in Chicago attributed to the July 1995 heat wave. Amer. J. Public Health, 87, 1515–1518. doi: 10.2105/AJPH.87.9.1515"
+  - url: "https://doi.org/10.2105/AJPH.87.9.1515"
+  - text: "Zhang, Y., M. Nitschke, and P. Bi (2013). Risk factors for direct heat-related hospitalization during the 2009 Adelaide heat-wave: A case crossover study. Sci. Total Environ., 442, 1–5. doi: 10.1016/j.scitotenv.2012.10.042"
+  - url: "https://doi.org/10.1016/j.scitotenv.2012.10.042"
+  - text: "Zhang, X. , Alexander, L. , Hegerl, G. C., Jones, P. , Tank, A. K., Peterson, T. C., Trewin, B. and Zwiers, F. W. (2011). Indices for monitoring changes in extremes based on daily temperature and precipitation data. WIREs Clim Change, 2: 851-870. doi:10.1002/wcc.147"
+  - url: "https://doi.org/10.1002/wcc.147"
 settings:
   - Models:
-    - IPSL
-  - start_historical: '1960-01-01'
-  - end_historical: '1991-12-31'
-  - start_projection: '2020-01-01'
-  - end_projection: '2040-12-31'
+    - IPSL-CM5A-MR
+  - Variable: "Near surface wind speed"
+  - Ensemble: "r1i1p1"
+  - Longitude: "-60 - 40"
+  - Latitude: "30 - 70"
+  - Historical simulations: "1971-2000"
+  - Projection: "2020 - 2040"
   - Experiment: RCP8.5
-title: Insurance risk indices
+title: Combined Climate Extreme Index
 youtube:
 info_file: risk_index/risk_index.yml
 image_file: diagnosticsdata/risk_index/insurance_risk_indices.png

@@ -1,5 +1,5 @@
 ---
-name: Performance metrics
+name: Performance Metrics for Essential Climate Parameters
 partner: DLR
 authors:
   - Veronika Eyring
@@ -7,9 +7,8 @@ authors:
   - Mattia Righi
   - Birgit Hassler
 contact:
-  - Veronika Eyring @veyring
   - Mattia Righi @mattiarighi
-description_short: Diagnostic providing a standard recipe for he calculation of performance metrics to quantify the ability of the models to reproduce the climatological mean annual cycle for selected "Essential Climate Variables" (ECVs) plus some additional corresponding diagnostics.
+description_short: A standard recipe for the calculation of performance metrics to quantify the ability of the models to reproduce the climatological mean annual cycle for selected Essential Climate Variables (ECV) plus some additional corresponding diagnostics.
 description_file: 'perfmetrics/description.md'
 report_file:
 media: diagnosticsdata/perfmetrics/Portait.png
@@ -20,66 +19,98 @@ references:
     url: "https://doi.org/10.5194/gmd-8-733-2015"
 settings:
   - Models:
-      - MIROC4h
-      - NSIDC-NT
       - ACCESS1-0
       - ACCESS1-3
-      - CESM1-CAM5-1-FV2
-      - FGOALS-g2
-      - MIROC5
-      - GFDL-ESM2M
-      - multi-model-mean
-      - CMCC-CMS
-      - MPI-ESM-LR
-      - HadCM3
-      - IPSL-CM5B-LR
-      - MIROC-ESM
-      - ESACCI-SSMI
-      - HadGEM2-AO
-      - CanESM2
-      - FGOALS-s2
-      - multi-model-median
-      - HadGEM2-CC
-      - MPI-ESM-P
-      - MRI-ESM1
-      - MPI-ESM-MR
-      - CSIRO-Mk3-6-0
-      - CESM1-BGC
-      - inmcm4
-      - CESM1-FASTCHEM
-      - GISS-E2-R-CC
-      - BNU-ESM
-      - CNRM-CM5-2
-      - CCSM4
-      - GFDL-CM2p1
-      - GFDL-ESM2G
-      - EC-EARTH
-      - CanCM4
-      - NorESM1-M
-      - CESM1-WACCM
-      - IPSL-CM5A-MR
-      - IPSL-CM5A-LR
-      - GFDL-CM3
-      - CNRM-CM5
-      - GISS-E2-H
-      - MIROC-ESM-CHEM
-      - MRI-CGCM3
-      - NorESM1-ME
-      - CMCC-CM
-      - GISS-E2-R
-      - FIO-ESM
-      - GISS-E2-H-CC
-      - CMCC-CESM
-      - bcc-csm1-1-m
-      - HadGEM2-ES
       - bcc-csm1-1
+      - bcc-csm1-1-m
+      - BNU-ESM
+      - CanCM4
+      - CanESM2
+      - CCSM4
+      - CESM1-BGC
       - CESM1-CAM5
-  - start_reference: "1980-01-01"
-  - end_reference: "2012-12-01"
-  - start_projection: "1980-01-01"
-  - end_projection: "2012-12-01"
+      - CESM1-CAM5-1-FV2
+      - CESM1-FASTCHEM
+      - CESM1-WACCM
+      - CMCC-CESM
+      - CMCC-CM
+      - CMCC-CMS
+      - CNRM-CM5
+      - CNRM-CM5-2
+      - CSIRO-Mk3-6-0
+      - EC-EARTH
+      - FGOALS-g2
+      - FGOALS-s2
+      - FIO-ESM
+      - GFDL-CM2p1
+      - GFDL-CM3
+      - GFDL-ESM2G
+      - GFDL-ESM2M
+      - GISS-E2-H
+      - GISS-E2-H-CC
+      - GISS-E2-R
+      - HadCM3
+      - HadGEM2-AO
+      - HadGEM2-CC
+      - HadGEM2-ES
+      - inmcm4
+      - IPSL-CM5A-LR
+      - IPSL-CM5A-MR
+      - IPSL-CM5B-LR
+      - MIROC4h
+      - MIROC5
+      - MIROC-ESM
+      - MIROC-ESM-CHEM
+      - MPI-ESM-LR
+      - MPI-ESM-MR
+      - MPI-ESM-P
+      - MRI-CGCM3
+      - MRI-ESM1
+      - NorESM1-M
+      - NorESM1-ME
+  - Variables: 
+      -	"Air temperature at 850;200;30;5 hPa global" 
+      - " Air temperature zonal mean"
+      - " Eastward wind at 850 and 200 hPa global" 
+      - " Northward wind at 850 and 200 hPa global" 
+      - " Geopotential height 500 hPa global"
+      - " Specific humidity at 400 hPa global"
+      - " Near-surface air temperature"
+      - " Sea-surface (skin) temperature"
+      - " Precipitation"
+      - " Total cloud cover"
+      - " All-sky longwave radiation"
+      - " All-sky shortwave radiation"
+      - " Longwave cloud radiative effect"
+      - " Shortwave cloud radiative effect"
+      - " Aerosol optical depth at 550 and 870 nm"
+      - " Specific humidity at 400 hPa global"
+      - " Absorption optical depth at 550 nm"
+      - " Fine mode optical depth at 550 nm"
+      - " Total column ozone"
+  - Start reference: "2000"
+  - End reference: "2002"
   - Experiment: historical
-title: Performance metrics
+  - Ensemble: "r1i1p1"
+  - Reference dataset: ERA-Interim
+  - Alternative reference datasets: 
+      - NCEP 
+      - GPCP-SG
+      - ESACCI-CLOUD
+      - CERES-EBAF
+      - ESACCI-AEROSOL
+      - AIRS
+      - ESACCI-SST
+      - ESACCI-OZONE
+# - Reference dataset for Precipitation: GPCP-SG
+#  - Reference dataset for Total cloud cover: ESACCI-CLOUD
+#  - Reference dataset for All-sky longwave/shortwave radiation and cloud radiative effect: CERES-EBAF
+#  - Reference dataset for Aerosol, absorption and fine mode optical depths: ESACCI-AEROSOL
+#  - Reference dataset for Specific humidity: AIRS
+#  - Reference dataset for Sea-surface (skin) temperature: ESACCI-SST
+#  - Reference dataset for Total column ozone: ESACCI-OZONE
+  - Note: "Some varaibles were calculated using part of the models and different start/end dates and some models are using different ensembles (r6i1p1 for EC-EARTH and r1i1p2 for GISS-E2-H/GISS-E2-R)"
+title: Performance Metrics for essential climate parameters
 youtube:
 #chart: 'https://portal.c3s-magic.eu/backend/adagucopendap/recipe_flato13ipcc_20180825_091035%2Fwork%2Ffig09-42a%2Ffig09-42a%2Fch09_fig09-42a.nc'
 image_file: ./diagnosticsdata/perfmetrics/Portait.png

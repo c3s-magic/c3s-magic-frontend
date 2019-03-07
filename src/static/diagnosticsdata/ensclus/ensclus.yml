@@ -1,15 +1,17 @@
 ---
 id: 1
 name: EnsClus - Ensemble Clustering
-title: Ensemble Clustering - cluster analysis based on the k-means algorithm for ensembles of climate model simulations
+title: Ensemble Clustering - a cluster analysis tool for climate model simulations
 partner: ISAC-CNR
 authors:
   - Irene Mavilia (ISAC-CNR, Italy)
   - Susanna Corti (ISAC-CNR, Italy)
+  - Jost von Hardenberg (ISAC-CNR, Italy)
+  - Enrico Arnone (ISAC-CNR, Italy)
 contact:
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
   - Enrico Arnone e.arnone@isac.cnr.it
-description_short: EnsClus calculates a cluster analysis based on the k-means algorithm, with the aim to group ensemble members according to similar characteristics and to select the most representative member for each cluster
+description_short: Cluster analysis tool based on the k-means algorithm for ensembles of climate model simulations. EnsClus groups ensemble members according to similar characteristics and select the most representative member for each cluster.
 description_file: 'ensclus/description.md'
 #media: https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360
 enableADAGUC:
@@ -23,18 +25,50 @@ references:
   - text: "Straus, D. M., S. Corti, and F. Molteni, 2007: Circulation regimes: Chaotic variability vs. SST forced predictability. J. Climate, 20, 2251–2272"
     url: "https://doi.org/10.1175/JCLI4070.1"
 settings:
-  - Models: ECEARTH31
-  - Varname: pr
-  - Number of ensemble members: 60
+  - Models:
+      - ACCESS1-0
+      - ACCESS1-3
+      - bcc-csm1-1
+      - bcc-csm1-1-m
+      - CanESM2
+      - CESM1-BGC
+      - CESM1-CAM5
+      - CESM1-CAM5-1-FV2
+      - CESM1-FASTCHEM
+      - CESM1-WACCM
+      - CMCC-CESM
+      - CMCC-CMS
+      - CNRM-CM5
+      - CNRM-CM5-2
+      - FGOALS-g2
+      - FIO-ESM
+      - GFDL-CM2p1
+      - GFDL-CM3
+      - GFDL-ESM2G
+      - GFDL-ESM2M
+      - HadCM3
+      - HadGEM2-CC
+      - HadGEM2-ES
+      - inmcm4
+      - IPSL-CM5A-LR
+      - IPSL-CM5A-MR
+      - IPSL-CM5B-LR
+      - MPI-ESM-LR
+      - MPI-ESM-MR
+      - MPI-ESM-P
+      - NorESM1-M
+      - NorESM1-ME
+  - Varibale: Precipitation
   - Season: JJA
-  - Area: Eu
-  - Experiment: Historical
-  - Start year: 1979
-  - End year: 2008
+  - Area: EU
   - Extreme: 75th_percentile
-  - Number of clusters: 6
+  - Number of clusters: 3
   - Percentage of variance explained by PCs (perc): 80
   - Number of PCs (numpcs): 'no' 
+  - Experiment: Historical
+  - Ensemble: r1i1p1
+  - Start year: 1900
+  - End year: 2005
 #youtube: MktvzcvflL8
 image_file: diagnosticsdata/ensclus/ensclus_thumbnail.png
 data: https://portal.c3s-magic.eu/data/recipes/recipe_ensclus_20181211.zip

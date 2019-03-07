@@ -1,5 +1,6 @@
 ---
-name: Generic multi-model products
+id: 8
+name: Generic Multi-Model Products
 partner: BSC
 authors:
   - Nicolau Manubens
@@ -9,7 +10,7 @@ authors:
 contact:
   - Nicolau Manubens @nmanuben
 description_short: Diagnostic to calculate the ensemble's mean anomaly, variance and agreement. The results are shown as maps and time series.
-description_file: 'anomaly_agreement/description.md'
+description_file: 'multimodel_products/description.md'
 report_file: report.pdf
 media:
   - https://portal.c3s-magic.eu/data/recipes/recipe_multimodel_products_wp5_20181211_133442/plots/anomaly_agreement/main/Area-averaged%20tas_JUN_multimodel-anomaly_2006_2099_1961_1990.png
@@ -29,14 +30,18 @@ settings:
       - bcc-csm1-1
   - Variable: "June mean air temperature at 2M"
   - Ensemble: "r1i1p1"
-  - Historical simulations: "1961-1990"
-  - Projection: "2006 - 2099"
-  - Experiment: "RCP2.6"
+  - Climatology start year: "1961"
+  - Climatology end year: "1990" 
+  - Anomaly start year: "2006"
+  - Anomaly end year: "2099"
+  - Anomaly class: "RCP26"
+  - Moninf: 6
   - Agreement threshold: 80
   - Running mean period: "5 years"
-title: Generic multi-model products
+  - Time series plot: "single"
+title: Generic Multi-Model Products
 #youtube: CNWA4j2okcc
 data: https://portal.c3s-magic.eu/data/recipes/recipe_multimodel_products_wp5_20181211_133442.zip
 #provenance: <point to svg file>
 #process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
-image_file: diagnosticsdata/anomaly_agreement/bsc_anomaly_timeseries.png
+image_file: diagnosticsdata/multimodel_products/bsc_anomaly_timeseries.png

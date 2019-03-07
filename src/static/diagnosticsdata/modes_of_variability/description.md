@@ -1,3 +1,7 @@
-This diagnositic shows the RMSE between the observed and modelled patterns of variability obtained through classification and their relative relative bias in the percentage of occurrence and the persistence of each mode. 
+The goal of this recipe is to compute modes of variability from a reference/observational dataset and a set of climate projections and calculate the Root Mean Square Error (RMSE) between the mean anomalies obtained for the clusters from the reference and projection data sets. 
+This is done through K-means clustering applied either directly to the spatial data or after computing the EOFs. 
 
-Modes of variability are first obtained through EOFs and/or k-mean clustering applied to the anomalies for any season or month, where the user can specify the number of clusters to be computed (e.g. 3 for Arctic sea ice or 4 for North Atlantic sea level pressure).
+The user can specify the number of clusters to be computed. 
+
+The recipe's output consist of netcdf files containing the time series of the cluster occurrences, the mean anomaly corresponding to each cluster at each location, and the corresponding p-value for both the observed and projected weather regimes and the RMSE between them.
+

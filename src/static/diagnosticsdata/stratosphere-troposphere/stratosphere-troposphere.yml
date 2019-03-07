@@ -1,14 +1,16 @@
 ---
 id: 1
-name: Stratosphere-troposphere coupling
+name: Stratosphere-Troposphere coupling
 partner: ISAC-CNR
 authors:
   - Federico Serva (ISAC-CNR, Italy)
   - Chiara Cagnazzo (ISAC-CNR, Italy)
+  - Jost von Hardenberg (ISAC-CNR, Italy)
+  - Federico Serva (ISAC-CNR, Italy)
 contact:
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
   - Federico Serva federico.serva@artov.isac.cnr.it
-description_short: Metric based on EOF/PC decomposition of the zonal mean geopotential height field to provide an evaluation of the Northern Annular Mode. Spatial patterns of variability based on monthly data.
+description_short: Metric to evaluate the representation of the Northern Annular Mode (NAM) in climate simulations, using reanalysis datasets as reference.
 description_file: 'stratosphere-troposphere/description.md'
 #media: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360'
 #enableADAGUC:
@@ -21,13 +23,22 @@ description_file: 'stratosphere-troposphere/description.md'
 references:
 - text: "Baldwin, M. P. and Thompson, D. W. (2009), A critical comparison of stratosphere–troposphere coupling indices. Q.J.R. Meteorol. Soc., 135: 1661-1672. doi:10.1002/qj.479"
   url: "https://doi.org/10.1002/qj.479"
+- text: "Baldwin, M. P. and Dunkerton, T. J. (2001), Stratospheric Harbingers of Anomalous Weather Regimes Q.J.R. Meteorol. Science Oct 2001:
+Vol. 294, Issue 5542, pp. 581-584: https://doi.org/10.1126/science.1063315"
+  url: "https://doi.org/10.1126/science.1063315"
+- text: "Wallace, J. M. (2000), North atlantic oscillatiodannular mode: Two paradigms—one phenomenon. Q.J.R. Meteorol. Soc., 126: 791-805. doi:10.1002/qj.49712656402"
+  url: "https://doi.org/10.1002/qj.49712656402"
 settings:
   - Models:
       - MPI-ESM-MR
+  - Variable: Geopotential height
   - Experiment: Historical
+  - Ensamble: "r1i1p1"
   - Start year: 1979
   - End year: 2008
-title: Stratosphere-troposphere coupling
+  - Longitude (pre-processor): "0-360"
+  - Latitude (pre-processor): "20-90"
+title: Stratosphere-Troposphere coupling
 image_file: diagnosticsdata/stratosphere-troposphere/stratosphere-troposphere_thumbnail.png
 data: https://portal.c3s-magic.eu/data/recipes/recipe_miles_eof_20181211.zip
 #provenance: <point to svg file>
