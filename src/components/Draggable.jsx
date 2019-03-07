@@ -156,7 +156,7 @@ export default class Draggable extends Component {
       cursor: this.state.cursor,
       zIndex: this.state.zIndex
     });
-    console.log('render index ' + this.props.index);
+    // console.log('render index ' + this.props.index);
     return DOM.div(
       {
         ref: (element) => { this.divRef = element; },
@@ -181,7 +181,6 @@ export default class Draggable extends Component {
 Draggable.propTypes = {
   children: PropTypes.object,
   zIndex: PropTypes.number,
-  index: PropTypes.number,
   initialPos: PropTypes.object,
   initialSize: PropTypes.object,
   style: PropTypes.object,

@@ -78,7 +78,7 @@ const _closeWindow = (state, payload) => {
 };
 
 const _updateWindow = (state, payload) => {
-  console.log('_updateWindow', payload);
+  // console.log('_updateWindow', payload);
   let windows = state.windows.slice();
   for (let j = 0; j < windows.length; j++) {
     if (windows[j].id === payload.id) {
@@ -87,7 +87,7 @@ const _updateWindow = (state, payload) => {
       windows[j].w = payload.updates.w;
       windows[j].h = payload.updates.h;
       windows[j].zIndex = zIndex++;
-      console.log(windows[j]);
+      // console.log(windows[j]);
       break;
     }
   };

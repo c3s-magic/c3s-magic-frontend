@@ -33,103 +33,98 @@ export default class TitleComponent extends Component {
     return (
       <div className='TitleComponent'>
 
-      <div className="d-none d-md-block">
-        <Navbar dark>
-          <Row className='navbar-header-c3s'>
-            <Col className='welcomeSign'>
-              <p style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: '10px' }}>
-                <a href='http://www.copernicus.eu/'>
-                  <img alt='' src='./sites/default/files/copernicus-logo.png' style={{ marginRight: '40px', width: '187px', height: '69px' }} />
-                </a>
-                <a href='/'>
-                  <img alt='' src='./sites/default/files/repository/website-structure/c3s-logo.png' style={{ width: '236px', height: '69px' }} />
-                </a>
-              </p>
-            </Col>
+        <div className='d-none d-md-block'>
+          <Navbar dark>
+            <Row className='navbar-header-c3s'>
+              <Col className='welcomeSign'>
+                <p style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: '10px' }}>
+                  <a href='http://www.copernicus.eu/'>
+                    <img alt='' src='./sites/default/files/copernicus-logo.png' style={{ marginRight: '40px', width: '187px', height: '69px' }} />
+                  </a>
+                  <a href='/'>
+                    <img alt='' src='./sites/default/files/repository/website-structure/c3s-logo.png' style={{ width: '236px', height: '69px' }} />
+                  </a>
+                </p>
+              </Col>
 
-            <Col xs='auto' className='signInOffButton'>
-              <Button color='success' href='https://goo.gl/forms/AaQf8yoRjWAMh8T22' target='_blank'>Feedback</Button>
-            </Col>
-
-            {
-              clientId !== null
-                ? <Col xs='auto' className='signInOffButton'>
-                  <Button href='#/account'>Account</Button>
-                </Col> : null
-            }
-            {
-              clientId !== null ? (
-
-                <Col xs='auto' className='signInOffButton'>
-                  <Button color='primary' onClick={this.logout}><Icon name='sign-out' />&nbsp;Sign out</Button>
-                </Col>
-              )
-                : <Col xs='auto' className='signInOffButton'>
-                  <Button onClick={this.login}><Icon name='sign-in' />&nbsp;Sign in</Button>
-                </Col>
-            }
-          </Row>
-        </Navbar>
-        <Navbar style={{ backgroundColor: '#941333', color: 'white', height: '38px', textAlign: 'center' }} className='navbar-static-top   d-none d-sm-block'>
-          <Nav>
-            <NavItem>
-              <NavLink href='#/' active={pathname === '/'} >Home</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href='#/tailoredproducts' active={pathname === '/tphome' || pathname.indexOf('/tailored') !== -1} >Tailored Products</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href='#/diagnostics' active={pathname === '/diagnostics' || pathname.indexOf('/diagnostics') !== -1} >Metrics &amp; Diagnostics</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href='#/calculate/' active={pathname === '/calculate/'} >Calculate</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href='#/esgfsearch' active={pathname === '/esgfsearch'} >Explore Data</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href='#/about' active={pathname === '/about'} >About</NavLink>
-            </NavItem>
-            { /* <NavItem>
-              <NavLink href='#/interactivecharts' active={pathname === '/interactivecharts'} >Charts</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href='#/adagucviewer' active={pathname === '/adagucviewer'} >Data viewer</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href='#/basket' active={pathname === '/basket'}><Icon name='shopping-basket' /> Basket</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href='#/jobs' active={pathname === '/jobs'}><Icon name='list' /> Joblist</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href='#/account' active={pathname === '/account'}><Icon name='user-o' /> Account</NavLink>
-            </NavItem> */ }
-
-          </Nav>
-        </Navbar>
-        </div>
-
-        <div className="d-md-none">
-          <SideBar/>
-          <Navbar style={{ backgroundColor: '#941333', color: 'white', height: '42px'}} className='navbar-static-top'>
-            <Row style={{ height:'42px', position: 'absolute', right: '2px'}} >
+              <Col xs='auto' className='signInOffButton'>
                 <Button color='success' href='https://goo.gl/forms/AaQf8yoRjWAMh8T22' target='_blank'>Feedback</Button>
+              </Col>
+
               {
                 clientId !== null
-                  ? 
+                  ? <Col xs='auto' className='signInOffButton'>
                     <Button href='#/account'>Account</Button>
+                  </Col> : null
+              }
+              {
+                clientId !== null ? (
+
+                  <Col xs='auto' className='signInOffButton'>
+                    <Button color='primary' onClick={this.logout}><Icon name='sign-out' />&nbsp;Sign out</Button>
+                  </Col>
+                )
+                  : <Col xs='auto' className='signInOffButton'>
+                    <Button onClick={this.login}><Icon name='sign-in' />&nbsp;Sign in</Button>
+                  </Col>
+              }
+            </Row>
+          </Navbar>
+          <Navbar style={{ backgroundColor: '#941333', color: 'white', height: '38px', textAlign: 'center' }} className='navbar-static-top   d-none d-sm-block'>
+            <Nav>
+              <NavItem>
+                <NavLink href='#/' active={pathname === '/'} >Home</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href='#/tailoredproducts' active={pathname === '/tphome' || pathname.indexOf('/tailored') !== -1} >Tailored Products</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href='#/diagnostics' active={pathname === '/diagnostics' || pathname.indexOf('/diagnostics') !== -1} >Metrics &amp; Diagnostics</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href='#/calculate/' active={pathname === '/calculate/'} >Calculate</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href='#/esgfsearch' active={pathname === '/esgfsearch'} >Explore Data</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href='#/about' active={pathname === '/about'} >About</NavLink>
+              </NavItem>
+              { /* <NavItem>
+                <NavLink href='#/interactivecharts' active={pathname === '/interactivecharts'} >Charts</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href='#/adagucviewer' active={pathname === '/adagucviewer'} >Data viewer</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href='#/basket' active={pathname === '/basket'}><Icon name='shopping-basket' /> Basket</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href='#/jobs' active={pathname === '/jobs'}><Icon name='list' /> Joblist</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href='#/account' active={pathname === '/account'}><Icon name='user-o' /> Account</NavLink>
+              </NavItem> */ }
+
+            </Nav>
+          </Navbar>
+        </div>
+
+        <div className='d-md-none'>
+          <SideBar />
+          <Navbar style={{ backgroundColor: '#941333', color: 'white', height: '42px' }} className='navbar-static-top'>
+            <Row style={{ height:'42px', position: 'absolute', right: '2px' }} >
+              <Button color='success' href='https://goo.gl/forms/AaQf8yoRjWAMh8T22' target='_blank'>Feedback</Button>
+              {
+                clientId !== null
+                  ? <Button href='#/account'>Account</Button>
                   : null
               }
               {
                 clientId !== null ? (
-                  
-                    <Button color='primary' onClick={this.logout}><Icon name='sign-out' />&nbsp;Sign out</Button>
-                  
+                  <Button color='primary' onClick={this.logout}><Icon name='sign-out' />&nbsp;Sign out</Button>
                 )
-                  : 
-                    <Button onClick={this.login}><Icon name='sign-in' />&nbsp;Sign in</Button>
-                  
+                  : <Button onClick={this.login}><Icon name='sign-in' />&nbsp;Sign in</Button>
               }
 
             </Row>
@@ -191,7 +186,6 @@ export default class TitleComponent extends Component {
       dispatch(actions.setBackend(null));
       dispatch(actions.setCompute(null));
     } else {
-      console.log(getIdJSON);
       dispatch(actions.setAccessToken(getIdJSON.services_access_token));
       dispatch(actions.setClientId(getIdJSON.id));
       dispatch(actions.setEmailAddress(getIdJSON.email_address));

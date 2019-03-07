@@ -26,7 +26,7 @@ export default class JSONViewer extends Component {
 
   render () {
     return (<div className='wpsOutputComponentContainer'>
-      <ReactJson style={{ fontSize:'10px', lineHeight:'12px' }} src={this.state.data} />
+      { this.state.data && <ReactJson style={{ fontSize:'10px', lineHeight:'12px' }} src={this.state.data} /> }
     </div>);
   }
 }

@@ -25,6 +25,7 @@ class WPSDemoCopernicus extends Component {
     this.fetchProcesses = this.fetchProcesses.bind(this);
     this.getProcessInfo = this.getProcessInfo.bind(this);
     this.setComputeNode = this.setComputeNode.bind(this);
+    this.setStatePromise = this.setStatePromise.bind(this);
     console.log('Constructing WPSDemoCopernicus', this.props.location);
     this.state = {
       describeProcessDocument: null,
@@ -58,35 +59,40 @@ class WPSDemoCopernicus extends Component {
     throw new Error('Compute service with name ' + wpsName + ' not found');
   }
 
+  setStatePromise (obj) {
+    return new Promise((resolve) => {
+      this.setState(obj, () => { resolve(); });
+    });
+  }
+
   fetchProcesses () {
     return new Promise((resolve, reject) => {
       if (!this.props.compute || !this.props.compute.length || this.props.compute.length === 0) {
-        this.setState({
+        return this.setStatePromise({
           isBusy: false,
           isBusyMessage: 'No compute nodes set'
+        }).then(() => {
+          reject(new Error('Unable to fetchProcesses: No compute nodes set'));
         });
-        reject(new Error('Unable to fetchProcesses: No compute nodes set'));
-        return;
       }
       console.log('start getWPSProcessList');
-      this.getWPSProcessList().then((response) => {
+      return this.getWPSProcessList().then((response) => {
         if (response === 'success') {
-          this.setState({
+          return this.setStatePromise({
             wpsInfoFetched: true,
             isBusy: false,
             isBusyMessage: ''
-          }, () => {
+          }).then(() => {
             return this.onWpsButtonClick(null);
           });
         } else {
           reject(new Error('getWPSProcessList failed'));
         }
       }).catch((error) => {
-        console.log('error: ', error);
-        this.setState({
+        return this.setStatePromise({
           isBusy: false,
-          isBusyMessage: 'Error while getting process list from the server: ' + error },
-        () => {
+          isBusyMessage: 'Error while getting process list from the server: ' + JSON.stringify(error, null, 2)
+        }).then(() => {
           reject(error);
         });
       });
@@ -106,16 +112,19 @@ class WPSDemoCopernicus extends Component {
         console.log('success already updated');
         return;
       }
-      console.log('start fetching processes');
-      this.fetchProcesses();
+      console.log('start fetching processes via componentDidUpdate');
+      this.fetchProcesses().catch((e) => {
+        console.log(e);
+        this.setState({ isBusyMessage: JSON.stringify(e, null, 2) });
+      });
     }
   }
 
   // wps service related methods
   getWPSProcessList () {
+    console.log('getWPSProcessList for ' + this.state.currentWPSNodeName);
     return new Promise((resolve, reject) => {
-      this.setState({ isBusy: true });
-      this.setState({ isBusyMessage: ' Getting process list from the server.' });
+      this.setState({ isBusy: true, isBusyMessage: ' Getting process list from the server.' });
 
       let wpsUrl = this.getWPSUrlByName(this.state.currentWPSNodeName);
       doWPSCall(wpsUrl + 'service=wps&request=getcapabilities&version=1.0.0',
@@ -136,16 +145,16 @@ class WPSDemoCopernicus extends Component {
             }
           } catch (e) {
             console.error(e, result);
-            reject(new Error('failed' + e));
+            reject(new Error('Invalid response from WPS GetCapabilities: ' + JSON.stringify(result, null, 2)));
+            return;
           }
-          this.setState(
+          return this.setStatePromise(
             {
               wpsProcessName: processNames,
               describeProcessDocument: result,
               isBusy:false,
               isBusyMessage: ''
-            },
-            () => { resolve('success'); }
+            }).then(() => { resolve('success'); }
           );
         }, (error) => {
           console.error(error);
@@ -162,6 +171,7 @@ class WPSDemoCopernicus extends Component {
   }
 
   onWpsButtonClick (_wpsName) {
+    console.log('onWpsButtonClick');
     return new Promise((resolve, reject) => {
       /* Determine current WPS process name */
       let wpsName = _wpsName || this.state.selectedProcess;
@@ -181,34 +191,33 @@ class WPSDemoCopernicus extends Component {
       if (this.state.wpsProcessName && this.state.wpsProcessName.length > 0) {
         const found = this.state.wpsProcessName.findIndex(e => e.name === wpsName);
         if (found === -1) {
-          console.log('Process not found in compute node, setting default');
-          wpsName = this.state.wpsProcessName[0].name;
+          // console.log('Process not found in compute node, setting default');
+          reject(new Error('Process not found in compute node process list'));
+          // console.log('rejecte4d');
+          return;
+          // wpsName = this.state.wpsProcessName[0].name;
         }
       }
       this.props.router.push('/calculate/' + this.state.currentWPSNodeName + '/' + wpsName);
-      if (this.state.selectedProcess === _wpsName) {
+      if (this.state.selectedProcess === _wpsName && this.state.selectedProcess !== null) {
         console.log('Process [' + _wpsName + '] already selected');
         resolve('Process already selected');
       }
-      this.getWPSProcessInfo(wpsName)
+      return this.getWPSProcessInfo(wpsName)
         .then(response => {
-          this.setState(
+          return this.setStatePromise(
             {
               isBusy: false,
               isBusyMessage: '',
               selectedProcess: wpsName
-            },
-            resolve(response)
-          );
+            }).then(() => { resolve(response); });
         }).catch((e) => {
-          this.setState(
+          return this.setStatePromise(
             {
               isBusy: false,
-              isBusyMessage: 'Error' + e,
+              isBusyMessage: 'Error' + JSON.stringify(e, null, 2),
               selectedProcess: null
-            },
-            reject(new Error('Could not get the process list!' + e))
-          );
+            }).then(() => { reject(new Error('Could not get the process list!' + e)); });
         });
     });
   }
@@ -512,16 +521,12 @@ class WPSDemoCopernicus extends Component {
   getInfoFromLocation (newLocation) {
     const { hash, pathname } = newLocation;
     let location = hash && hash.length > 0 ? hash : pathname;
-    console.log('newlocation', location);
     const hashParts = location.split('/');
-    // console.log(hashParts);
     if (hashParts.length === 3 || hashParts.length === 4) {
       const wpsName = hashParts[hashParts.length - 1];
       const computeNode = hashParts.length === 4 ? hashParts[2] : null;
-      console.log('getInfoFromLocation ' + wpsName);
       return { wpsName: wpsName, computeNode: computeNode || 'copernicus-wps' };
     }
-    console.log('getInfoFromLocation ' + null);
     return { wpsName: null, computeNode: 'copernicus-wps' };
   }
 
@@ -529,22 +534,14 @@ class WPSDemoCopernicus extends Component {
     console.log('handleLocationChange');
     return new Promise((resolve, reject) => {
       const { wpsName, computeNode } = this.getInfoFromLocation(newLocation);
-      if (wpsName) {
-        console.log('setting compute node to ' + computeNode);
-        return this.setComputeNode(computeNode).then(() => {
-          console.log('compute node done, now setting wps name to ' + wpsName);
-          if (wpsName && wpsName.length > 0) {
-            console.log('this.state.selectedProcess' + this.state.selectedProcess);
-            if (this.state.selectedProcess !== wpsName) {
-              return this.onWpsButtonClick(wpsName).then((e) => { console.log(e); }).catch((e) => { console.warn(e); }).then().catch();
-            }
-          }
-        }).catch((e) => {
-          console.warn(e);
-          resolve();
-        });
-      }
-      resolve();
+      console.log('setting compute node to ' + computeNode);
+      return this.setComputeNode(computeNode).then(() => {
+        console.log('compute node done, now setting wps name to ' + wpsName);
+        return this.onWpsButtonClick(wpsName).then((e) => { console.log(e); }).catch((e) => { console.warn(e); }).then().catch();
+      }).catch((e) => {
+        console.warn(e);
+        resolve();
+      });
     });
   }
 
@@ -596,20 +593,16 @@ class WPSDemoCopernicus extends Component {
 
   setComputeNode (name) {
     return new Promise((resolve, reject) => {
-      if (name === null || this.state.currentWPSNodeName === name) { resolve(new Error('Unable to set compute node')); return; }
+      if (name === null) { reject(new Error('Unable to set compute node')); return; }
       console.log('Setting compute node name to [' + name + ']');
-      this.setState({
+      return this.setStatePromise({
         selectedProcess: null,
         currentWPSNodeName: name,
         wpsInfoFetched: false,
         wpsProcessName: []
-      }, () => {
-        this.fetchProcesses().then(() => {
-          // if (name !== null) {
-          //   this.props.router.push('/calculate/' + name + '/' + this.state.selectedProcess);
-          // }
-          resolve();
-        }).catch(reject);
+      }).then(() => {
+        console.log('start fetchProcesses via setCComputeNode');
+        return this.fetchProcesses();
       });
     });
   }
@@ -659,7 +652,7 @@ class WPSDemoCopernicus extends Component {
               {compute
                 ? <div>
                   <Row>
-                    <Col xs='2' ><Label style={{ lineHeight: '40px' }}>Select a compute node: </Label></Col>
+                    <Col xs='3' ><Label style={{ lineHeight: '40px' }}>Select a compute node: </Label></Col>
                     <Col xs='8' >
                       <Dropdown isOpen={this.state.computeNodeSelectorDropDownOpen} toggle={this.toggleComputeNodeSelectorDropDown}>
                         <DropdownToggle caret>
@@ -679,7 +672,7 @@ class WPSDemoCopernicus extends Component {
                     </Col>
                   </Row>
                   <Row>
-                    <Col xs='2' ><Label style={{ lineHeight: '40px' }}>Select a process: </Label></Col>
+                    <Col xs='3' ><Label style={{ lineHeight: '40px' }}>Select a process: </Label></Col>
                     <Col xs='8' >
                       <Dropdown isOpen={this.state.wpsSelectorDropDownOpen} toggle={this.toggleWPSSelectorDropDown}>
                         <DropdownToggle caret>

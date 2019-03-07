@@ -23,7 +23,7 @@ class BasketTreeComponent extends Component {
     this.previewFile = this.previewFile.bind(this);
     this.reloadBasket = this.reloadBasket.bind(this);
     this.uploadBasketItem = this.uploadBasketItem.bind(this);
-    this.onDoubleClick = this.onDoubleClick.bind(this);    
+    this.onDoubleClick = this.onDoubleClick.bind(this);
 
     decorators.Header = (properties) => {
       if (!properties.node.type === 'NODE') return;
@@ -75,7 +75,6 @@ class BasketTreeComponent extends Component {
     }
     /* When toggled, preview is always not active. */
     this.setState({ cursor: node, previewActive: false });
-    
     if (this.clickedNode === node) {
       this.onDoubleClick(node);
       this.clickedNode = null;
@@ -84,7 +83,6 @@ class BasketTreeComponent extends Component {
     setTimeout(() => {
       this.clickedNode = null;
     }, 300);
-
   }
   onDoubleClick (node) {
     if (node.type === 'LEAF') {

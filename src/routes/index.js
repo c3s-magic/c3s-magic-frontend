@@ -153,14 +153,13 @@ const mapDispatchToBasketProps = function (dispatch) {
 };
 
 const mapStateToJoblistProps = (state) => {
-  console.log(state);
   return { ...state.jobListState, ...state.userState };
 };
 
 const mapDispatchToJoblistProps = function (dispatch) {
   return ({
     dispatch: dispatch,
-    actions: { ...joblistactions }
+    actions: { ...joblistactions, ...windowManagerActions }
   });
 };
 

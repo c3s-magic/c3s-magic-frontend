@@ -1,34 +1,60 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getConfig } from '../getConfig';
-
-import JsonTable from 'ts-react-json-table';
-import ScrollArea from 'react-scrollbar';
 import { Button } from 'reactstrap';
-import Moment from 'react-moment';
-let config = getConfig();
+import Icon from 'react-fa';
+import RenderProcessOutputs from './RenderProcessOutputs';
+import { cloneDeep } from 'lodash';
+
+const getKeys = function (obj) {
+  if (!Object.keys) {
+    let keys = [];
+    let k;
+    for (k in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, k)) {
+        keys.push(k);
+      }
+    }
+    return keys;
+  } else {
+    return Object.keys(obj);
+  }
+};
+
+var _stripNS = function (newObj, obj) {
+  var keys = getKeys(obj);
+
+  for (var j = 0; j < keys.length; j++) {
+    var key = keys[j];
+    var i = key.indexOf(':');
+    var newkey = key.substring(i + 1);
+    var value = obj[key];
+    if (typeof value === 'object') {
+      newObj[newkey] = {};
+      _stripNS(newObj[newkey], value);
+    } else {
+      newObj[newkey] = value;
+    }
+  }
+};
+
+export const stripNS = function (currentObj) {
+  var newObj = {};
+  _stripNS(newObj, currentObj);
+  return newObj;
+};
 
 export default class JobListComponent extends Component {
   constructor (props) {
     super(props);
-    this.state = {
-      cursor: null
-    };
     this.pollingActive = false;
-    this.onClickRow = this.onClickRow.bind(this);
     this.pollJobList = this.pollJobList.bind(this);
-  }
-  /* Sleep function. */
-  sleep (ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    this.deleteJobListItem = this.deleteJobListItem.bind(this);
+    this.showJob = this.showJob.bind(this);
   }
 
   fetchJobListItems () {
-    const { accessToken, dispatch, actions } = this.props;
-    if (!accessToken) {
-      return;
-    }
-
+    const { dispatch, actions, backend } = this.props;
+    if (!backend) return;
     fetch(this.props.backend + '/joblist/list?', { credentials: 'include' })
       .then((result) => {
         if (result.ok) {
@@ -42,17 +68,27 @@ export default class JobListComponent extends Component {
       });
   }
 
-  /**
-   * Setting the state when clicking a row in the table.
-   */
-  onClickRow (e, item) {
-    this.setState({ cursor: item });
+  showJob (job) {
+    console.log('Showjob for ', job);
+    const { actions, dispatch } = this.props;
+    dispatch(actions.showWindow(
+      {
+        component:(<div width={'100%'} height={'300px'} >
+          <RenderProcessOutputs dispatch={dispatch} actions={actions} process={{
+            result: stripNS(job.output),
+            id: 0,
+            message: job.status,
+            percentageComplete: job.percentage,
+            collapsed: false
+          }} />
+        </div>),
+        title: job.id
+      })
+    );
   }
 
-  deleteJobListItem () {
-    if (!this.state.cursor) return;
-    const { accessToken } = this.props;
-    fetch(this.props.backend + '/joblist/remove?&job=' + this.state.cursor.id, { credentials: 'include' })
+  deleteJobListItem (job) {
+    fetch(this.props.backend + '/joblist/remove?&job=' + job.id, { credentials: 'include' })
       .then((result) => {
         if (result.ok) {
           return result.json();
@@ -61,15 +97,18 @@ export default class JobListComponent extends Component {
         }
       })
       .then((json) => {
-        console.log(json.message);
         this.fetchJobListItems();
       });
   }
 
   pollJobList () {
-    if (!this.pollingActive) return;
+    if (!this.pollingActive || this.isPolling === true) return;
     this.fetchJobListItems();
-    this.sleep(2000).then(this.pollJobList);
+    this.isPolling = true;
+    setTimeout(() => {
+      this.isPolling = false;
+      this.pollJobList();
+    }, 2000);
   }
 
   componentDidMount () {
@@ -83,70 +122,54 @@ export default class JobListComponent extends Component {
 
   render () {
     if (!this.props.jobs) return null;
-    const jobs = this.props.jobs;
-
-    /* We cannot display object inside a JSON,
-     * so delete it. */
-    jobs.forEach(function (object) {
-      if (!object) return;
-      delete object.wpspostdata;
+    const _jobs = this.props.jobs;
+    let jobs = cloneDeep(_jobs);
+    jobs.sort((a, b) => {
+      if (a.creationtime < b.creationtime) return 1;
+      if (a.creationtime > b.creationtime) return -1;
+      if (a.creationtime === b.creationtime) return 0;
     });
-
-    /* Columns for the JsonTable. */
-    const columns = [
-      { key: 'id', label: 'Job ID' },
-      { key: 'processid', label: 'Process' },
-      { key: 'creationtime',
-        label: 'Status date',
-        cell: function (item, columnKey) {
-          return <Moment format='MMMM Do YYYY, HH:mm:ss' >{item.creationtime}</Moment>;
-        } },
-      { key: 'percentage', label: '%' },
-      { key: 'statuslocation',
-        label: 'Location URL',
-        cell: function (item, columnKey) {
-          return <a target='_blank' href={item.statuslocation}>Result</a>;
-        } },
-      { key: 'wpsstatus', label: 'Status' }
-    ];
-
-    /* Settings for the JsonTable. */
-    let _this = this;
-    const settings = {
-      keyField: 'id',
-      noRowsMessage: 'There are no jobs.',
-      rowClass: function (current, item) {
-        const cursor = _this.state.cursor;
-        if (!cursor) return current;
-        if (cursor.id === item.id) {
-          return current + ' selectedRowJobList';
-        }
-        return current;
-      }
-    };
-
     return (
       <div className='MainViewport'>
-        <ScrollArea speed={1} horizontal className='jobListScrollComponent' >
-          { <JsonTable
-            rows={jobs}
-            className='joblistTable'
-            columns={columns}
-            onClickRow={this.onClickRow}
-            settings={settings}
-          /> }
-        </ScrollArea>
-        <hr />
-        <Button disabled={!this.state.cursor} onClick={() => this.deleteJobListItem()}>Delete</Button>
+        <table className='JobListComponent_Table'>
+          <thead>
+            <tr>
+              <th>Process identifier</th><th>Creation time</th><th>Percentage complete</th><th>Message</th><th>State</th><th>Show</th><th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              jobs.map((job, i) => {
+                let stateClassName = 'JobListComponent_Pending';
+                if (job.wpsstatus === 'PROCESSSUCCEEDED') stateClassName = 'JobListComponent_PROCESSSUCCEEDED';
+                if (job.wpsstatus === 'PROCESSACCEPTED') stateClassName = 'JobListComponent_PROCESSACCEPTED';
+                if (job.wpsstatus === 'PROCESSSTARTED') stateClassName = 'JobListComponent_PROCESSSTARTED';
+                if (job.wpsstatus === 'PROCESSFAILED') stateClassName = 'JobListComponent_PROCESSFAILED';
+
+                return (<tr key={i}><td>{job.processid}</td><td>{job.creationtime}</td><td>{job.percentage} %</td><td>{job.status}</td><td className={stateClassName} >{job.wpsstatus}</td>
+                  <td>
+                    <Button disabled={job.wpsstatus !== 'PROCESSSUCCEEDED'} onClick={() => { this.showJob(job); }}>
+                      <Icon name='info' />
+                    </Button>
+                  </td>
+                  <td>
+                    <Button onClick={() => { this.deleteJobListItem(job); }}>
+                      <Icon name='trash' />
+                    </Button>
+                  </td>
+                </tr>);
+              })
+            }
+          </tbody>
+        </table>
       </div>
     );
   }
 }
 
 JobListComponent.propTypes = {
-  accessToken: PropTypes.string,
   backend: PropTypes.string,
-  jobs: PropTypes.Array,
+  jobs: PropTypes.any,
   dispatch: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired
 };

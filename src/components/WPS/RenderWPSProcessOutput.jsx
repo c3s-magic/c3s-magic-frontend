@@ -32,7 +32,6 @@ export default class RenderWPSProcessOutput extends Component {
         }
       };
     }
-    console.log('myProcessOutput:', myProcessOutput);
     let output = {
       identifier: null,
       title: '<no title>',

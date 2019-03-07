@@ -128,7 +128,7 @@ body {
   border-collapse: collapse;
 }
 
-.joblistTable {
+.JobListComponent_Table {
   th {
     border: .5px solid black;
     background-color: #d9edf7;
@@ -145,6 +145,12 @@ body {
   width: 100%;
   border: .5px solid black;
   border-collapse: collapse;
+}
+.JobListComponent_Table Button {
+  margin:0;
+  border:none;
+  background:none;
+  color:black;
 }
 
 .jobListScrollComponent {
@@ -937,4 +943,30 @@ div.hpace2em {
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+}
+
+
+.JobListComponent_Pending{
+  color:black;
+  background-color: #A5DC86;
+}
+
+.JobListComponent_PROCESSSUCCEEDED{
+  color:black;
+  background-color: #CCFFCC;
+}
+
+.JobListComponent_PROCESSACCEPTED{
+  color:black;
+  background-color: rgb(8, 240, 8);
+}
+
+.JobListComponent_PROCESSSTARTED{
+  color:black;
+  background-color: #CCCCFF;
+}
+
+.JobListComponent_PROCESSFAILED{
+  color:black;
+  background-color: rgb(255, 67, 67);
 }
