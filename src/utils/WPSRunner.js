@@ -39,13 +39,25 @@ export const stripNS = function (currentObj) {
   return newObj;
 };
 
+var getCapDocumentMaps = [];
+
+export const clearWPSCache = () => {
+  console.log('Clearing WPS cache');
+  getCapDocumentMaps = [];
+};
+
 export const doWPSCall = function (wps, callback, failure) {
-  doXML2JSONCallWithToken(wps, callback, failure);
+  if ((wps.indexOf('getcapabilities') !== -1 || wps.indexOf('describeprocess') !== -1) && getCapDocumentMaps[wps]) {
+    console.log('Re-using from cache ' + wps);
+    callback(getCapDocumentMaps[wps]);
+    return;
+  }
+  doXML2JSONCallWithToken(wps, (data) => { getCapDocumentMaps[wps] = data; callback(data); }, failure);
 };
 
 export const doWPSExecuteCall = function (wps, statusCallBack, executeCompleteCallBack, failure) {
   console.log('start');
-  statusCallBack('Starting WPS', 0);
+  statusCallBack('Starting WPS', 0, null);
 
   /* Returns true if there was an error */
   let handleExceptions = (json) => {
@@ -56,7 +68,7 @@ export const doWPSExecuteCall = function (wps, statusCallBack, executeCompleteCa
       message = 'Failed, unable to get message';
       if (json.error) {
         message = json.error;
-        statusCallBack(message, percentageComplete);
+        statusCallBack(message, percentageComplete, null);
         executeCompleteCallBack(json, false);
         if (failure) {
           failure(message);
@@ -80,7 +92,7 @@ export const doWPSExecuteCall = function (wps, statusCallBack, executeCompleteCa
     } catch (e) {
     }
     if (message) {
-      statusCallBack(message, percentageComplete);
+      statusCallBack(message, percentageComplete, null);
       executeCompleteCallBack(json, false);
       console.log('message set', message);
       return true;
@@ -125,14 +137,14 @@ export const doWPSExecuteCall = function (wps, statusCallBack, executeCompleteCa
           if (message) {
             percentageComplete = 100;
             processIsRunning = false;
-            statusCallBack(message, percentageComplete);
-            executeCompleteCallBack(json, true);
+            statusCallBack(message, percentageComplete, statusLocation);
+            executeCompleteCallBack(json, true, statusLocation);
             return;
           }
         } catch (e) {
         }
         if (processCompleted === false) {
-          statusCallBack(message, percentageComplete);
+          statusCallBack(message, percentageComplete, statusLocation);
         }
       };
       if (wps.startsWith('https://')) {

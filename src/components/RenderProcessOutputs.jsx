@@ -54,12 +54,14 @@ export default class RenderProcessOutputs extends Component {
                 }
               </div>
             </Col>
-
           </Row>
           { !process.collapsed &&
             (<div>
               <Row>
                 <Col xs='11'><CardSubtitle>{process.id}) {process.message}</CardSubtitle></Col>
+              </Row>
+              <Row>
+                <Col xs='11'>Status link: <a href={process.statuslocation} target='_blank'>{process.statuslocation}</a></Col>
               </Row>
               <Col> <div className='text-center'>{process.percentageComplete + ' %'} </div><Progress value={process.percentageComplete} /></Col>
               { /* <Col style={{ backgroundColor: '#d9edf7', cursor: 'pointer', color: '#31708f' }} onClick={() => { this.props.resultClickCallback(value); }}>{shown}</Col> */ }

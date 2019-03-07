@@ -146,7 +146,12 @@ export default class JobListComponent extends Component {
                 if (job.wpsstatus === 'PROCESSSTARTED') stateClassName = 'JobListComponent_PROCESSSTARTED';
                 if (job.wpsstatus === 'PROCESSFAILED') stateClassName = 'JobListComponent_PROCESSFAILED';
 
-                return (<tr key={i}><td>{job.processid}</td><td>{job.creationtime}</td><td>{job.percentage} %</td><td>{job.status}</td><td className={stateClassName} >{job.wpsstatus}</td>
+                return (<tr key={i}>
+                  <td>{job.processid}</td>
+                  <td>{job.creationtime}</td>
+                  <td>{job.percentage} %</td>
+                  <td>{job.status}</td>
+                  <td className={stateClassName} ><a href={job.statuslocation} target='_blank'>{job.wpsstatus}</a></td>
                   <td>
                     <Button disabled={job.wpsstatus !== 'PROCESSSUCCEEDED'} onClick={() => { this.showJob(job); }}>
                       <Icon name='info' />

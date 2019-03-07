@@ -15,11 +15,11 @@ const startWPSExecute = (wpsdomain, identifier, dataInputs, nrOfStartedProcesses
     try {
       let wps = wpsdomain + 'service=wps&request=Execute&identifier=' + identifier + '&version=1.0.0&' +
       'DataInputs=' + dataInputs + '&storeExecuteResponse=true&status=true&';
-      let statusUpdateCallback = (message, percentageComplete) => {
-        dispatch({ type: WPS_STATUS_UPDATE, payload: { message: message, percentageComplete: percentageComplete, id: nrOfStartedProcesses } });
+      let statusUpdateCallback = (message, percentageComplete, statusLocation) => {
+        dispatch({ type: WPS_STATUS_UPDATE, payload: { message: message, percentageComplete: percentageComplete, id: nrOfStartedProcesses, statuslocation: statusLocation } });
       };
-      let executeCompletCallback = (json, processSucceeded) => {
-        dispatch({ type: WPS_COMPLETED, payload: { json: json, processSucceeded: processSucceeded, id: nrOfStartedProcesses } });
+      let executeCompletCallback = (json, processSucceeded, statusLocation) => {
+        dispatch({ type: WPS_COMPLETED, payload: { json: json, processSucceeded: processSucceeded, id: nrOfStartedProcesses, statuslocation: statusLocation } });
       };
       doWPSExecuteCall(wps, statusUpdateCallback, executeCompletCallback);
     } catch (e) {

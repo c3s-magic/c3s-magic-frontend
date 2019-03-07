@@ -57,13 +57,6 @@ const toggleWPSResult = (state, payload) => {
   });
 };
 
-/**
- * Deleting an item from the basket.
- **/
-const setCSVFileToWrangle = (state, payload) => {
-  return Object.assign({}, state, { selectedCSVFileForWrangling: payload.fileName });
-};
-
 const ACTION_HANDLERS = {
   [START_WPS_EXECUTE_START] : (state, action) => handleWPSExecute(state, action.payload),
   [START_WPS_EXECUTE_FAILED] : (state, action) => handleWPSFailed(state, action.payload),
@@ -71,7 +64,7 @@ const ACTION_HANDLERS = {
   [WPS_STATUS_UPDATE] : (state, action) => handleWPSStatusUpdate(state, action.payload),
   [WPS_COMPLETED] : (state, action) => handleWPSComplete(state, action.payload),
   [WPS_REMOVERESULT] : (state, action) => removeWPSResult(state, action.payload),
-  [WPS_TOGGLERESULT] : (state, action) => toggleWPSResult(state, action.payload)  
+  [WPS_TOGGLERESULT] : (state, action) => toggleWPSResult(state, action.payload)
 };
 
 // ------------------------------------

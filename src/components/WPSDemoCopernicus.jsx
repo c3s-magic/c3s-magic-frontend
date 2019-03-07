@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardBody, CardTitle, Button, Row, Col, Alert, UncontrolledAlert, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Label } from 'reactstrap';
 import RenderProcesses from './RenderProcesses';
-import { doWPSCall } from '../utils/WPSRunner';
+import { doWPSCall, clearWPSCache } from '../utils/WPSRunner';
 import ImagePreview from './ImagePreview';
 import { withRouter } from 'react-router';
 import Icon from 'react-fa';
 import _ from 'lodash';
+
 class WPSDemoCopernicus extends Component {
   constructor (props) {
     super(props);
@@ -133,6 +134,7 @@ class WPSDemoCopernicus extends Component {
         resolve('success');
         return;
       }
+
       this.setState({ isBusy: true, isBusyMessage: ' Getting process list from the server.', fetchedWPSNodeName: 'fetching' });
       const currentWPSNodeName = this.state.currentWPSNodeName;
       let wpsUrl = this.getWPSUrlByName(currentWPSNodeName);
@@ -198,11 +200,11 @@ class WPSDemoCopernicus extends Component {
       if (this.state.wpsProcessName && this.state.wpsProcessName.length > 0) {
         const found = this.state.wpsProcessName.findIndex(e => e.name === wpsName);
         if (found === -1) {
-          // console.log('Process not found in compute node, setting default');
+          console.warn('Process not found in compute node, setting default');
           reject(new Error('Process not found in compute node process list'));
           // console.log('rejecte4d');
-          return;
-          // wpsName = this.state.wpsProcessName[0].name;
+          // return;
+          wpsName = this.state.wpsProcessName[0].name;
         }
       }
       this.props.router.push('/calculate/' + this.state.currentWPSNodeName + '/' + wpsName);
@@ -644,6 +646,7 @@ class WPSDemoCopernicus extends Component {
                 Sorry, I could not fetch WPS Process info. Maybe the server is too busy? [{this.state.isBusyMessage}]
               </Alert>
               <Button color='primary' onClick={() => {
+                clearWPSCache();
                 this.setState({ currentWPSNodeName: 'copernicus-wps' }, () => { this.fetchProcesses(); });
               }} ><Icon name='refresh' />&nbsp;Try again</Button>
             </div>)
@@ -670,6 +673,7 @@ class WPSDemoCopernicus extends Component {
                           {
                             compute.map((wp, index) => {
                               return <DropdownItem active={this.state.currentWPSNodeName === wp.name} key={index} color='primary' onClick={() => {
+                                clearWPSCache();
                                 this.setComputeNode(wp.name);
                               }}>{wp.name}</DropdownItem>;
                             })
@@ -693,7 +697,10 @@ class WPSDemoCopernicus extends Component {
                                 active={(processInfo && processInfo.name) === (wp && wp.name)}
                                 key={index}
                                 color='primary'
-                                onClick={() => { this.onWpsButtonClick(wp.name).then().catch(); }}>{wp.name} - {wp.title}
+                                onClick={() => {
+                                  clearWPSCache();
+                                  this.onWpsButtonClick(wp.name).then().catch();
+                                }}>{wp.name} - {wp.title}
                               </DropdownItem>;
                             })
                           }
