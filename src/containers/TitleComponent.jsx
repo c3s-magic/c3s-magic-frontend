@@ -88,7 +88,7 @@ export default class TitleComponent extends Component {
                 <NavLink href='#/esgfsearch' active={pathname === '/esgfsearch'} >Explore Data</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href='#/about' active={pathname === '/about'} >About</NavLink>
+                <NavLink href='#/help' active={pathname === '/help'} >Help</NavLink>
               </NavItem>
               { /* <NavItem>
                 <NavLink href='#/interactivecharts' active={pathname === '/interactivecharts'} >Charts</NavLink>

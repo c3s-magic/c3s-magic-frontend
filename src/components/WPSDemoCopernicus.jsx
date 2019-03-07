@@ -124,9 +124,18 @@ class WPSDemoCopernicus extends Component {
   getWPSProcessList () {
     console.log('getWPSProcessList for ' + this.state.currentWPSNodeName);
     return new Promise((resolve, reject) => {
-      this.setState({ isBusy: true, isBusyMessage: ' Getting process list from the server.' });
-
-      let wpsUrl = this.getWPSUrlByName(this.state.currentWPSNodeName);
+      if (this.state.fetchedWPSNodeName === 'fetching') {
+        reject(new Error('Already fetching WPS GetCapabilities'));
+        return;
+      }
+      if (this.state.fetchedWPSNodeName === this.state.currentWPSNodeName) {
+        console.log('Already fetched');
+        resolve('success');
+        return;
+      }
+      this.setState({ isBusy: true, isBusyMessage: ' Getting process list from the server.', fetchedWPSNodeName: 'fetching' });
+      const currentWPSNodeName = this.state.currentWPSNodeName;
+      let wpsUrl = this.getWPSUrlByName(currentWPSNodeName);
       doWPSCall(wpsUrl + 'service=wps&request=getcapabilities&version=1.0.0',
         (result) => {
           let processNames = [];
@@ -145,12 +154,14 @@ class WPSDemoCopernicus extends Component {
             }
           } catch (e) {
             console.error(e, result);
+            this.setState({ describeProcessDocument: null, isBusy: false, isBusyMessage: '', fetchedWPSNodeName: null });
             reject(new Error('Invalid response from WPS GetCapabilities: ' + JSON.stringify(result, null, 2)));
             return;
           }
           return this.setStatePromise(
             {
               wpsProcessName: processNames,
+              fetchedWPSNodeName: currentWPSNodeName,
               describeProcessDocument: result,
               isBusy:false,
               isBusyMessage: ''
@@ -158,11 +169,7 @@ class WPSDemoCopernicus extends Component {
           );
         }, (error) => {
           console.error(error);
-          this.setState({ describeProcessDocument: error });
-
-          this.setState({ isBusy: false });
-          this.setState({ isBusyMessage: '' });
-
+          this.setState({ describeProcessDocument: error, isBusy: false, isBusyMessage: '', fetchedWPSNodeName: null });
           // console.log('Promise.reject from WPSCalculate::getWPSProcessList()');
           reject(new Error('failed'));
         }

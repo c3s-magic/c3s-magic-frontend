@@ -88,6 +88,8 @@ import SystemHome from '../containers/System/SystemHome';
 import Provenance from '../containers/System/Provenance';
 import Data from '../containers/System/Data';
 
+import Help from '../containers/Help';
+
 /* Calculate */
 import CalculateMenu from '../containers/Calculate/CalculateMenu';
 
@@ -379,6 +381,11 @@ export const createRoutes = (store) => {
         </Route>
       </Route>
 
+      <Route path='/help'>
+        <IndexRoute component={NavBarLayout} header={mainmenu} secondNavbar={tailoredproductsmenu}
+          viewComponent={React.createElement(connect(mapStateToTitleProps, mapDispatchToTitleProps)(Help))}
+        />
+      </Route>
       <Route path='about' title='About'>
         <Route path=''>
           <IndexRoute component={DoubleNavBarLayout} header={mainmenu} secondNavbar={systemmenu}
