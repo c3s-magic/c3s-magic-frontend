@@ -2,8 +2,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Badge, Container, Row, Col, Card, CardImg, CardText, CardSubtitle, CardBody } from 'reactstrap';
-
-var $RefParser = require('json-schema-ref-parser');
+import { getConfig } from '../../getConfig';
+let config = getConfig();
+const YAML = require('yamljs');
+// var $RefParser = require('json-schema-ref-parser');
 
 export default class DiagnosticsHome extends Component {
   constructor (props) {
@@ -83,11 +85,13 @@ export default class DiagnosticsHome extends Component {
   }
 
   componentDidMount () {
-    var that = this;
-    $RefParser.dereference('diagnosticsdata/index.yml')
-      .then(data => {
-        that.setState({ diagList: data.diagnostics });
+    fetch('diagnosticsdata/index.yml').then((response) => {
+      return response.text().then((text) => {
+        text = text.replace('{DATAURL}', config.dataURL);
+        text = text.replace('{STATICWMS}', config.staticWMS);
+        this.setState({ diagList: YAML.parse(text).diagnostics, readSuccess: true });
       });
+    });
   }
 
   componentWillMount () {

@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import ReactJson from 'react-json-view';
-const YAML = require('yamljs');
-export default class YMLViewer extends Component {
+export default class JSONViewer extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -19,7 +18,7 @@ export default class YMLViewer extends Component {
       url: this.state.url,
       withCredentials: true
     }).then(src => {
-      this.setState({ data: (YAML.parse(src.data)) });
+      this.setState({ data: src.data });
     }).catch((e) => {
       console.error(e);
     });
@@ -32,6 +31,6 @@ export default class YMLViewer extends Component {
   }
 }
 
-YMLViewer.propTypes = {
+JSONViewer.propTypes = {
   url: PropTypes.string
 };

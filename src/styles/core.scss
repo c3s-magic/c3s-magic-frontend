@@ -403,7 +403,7 @@ iframe {
 
 .MainViewport h2{
   font-size:24px;
-  padding-bottom:0.5em;
+  // padding-bottom:0.5em;
 }
 
 
@@ -614,6 +614,21 @@ aside, header, main {
 .diagCard {
   cursor:pointer;
 }
+
+div.vspace1em {
+  clear: both;
+  margin-top: 1em;
+
+  flex: 1;
+  flex-direction: column;
+  overflow-x: hidden;
+  display:block;
+  height:inherit;
+  width:inherit;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 
 div.vspace2em {
   clear: both;
