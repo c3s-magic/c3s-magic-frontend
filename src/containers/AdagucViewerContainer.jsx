@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MarkdownFromFile from './MarkdownFromFile';
+// import MarkdownFromFile from './MarkdownFromFile';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Col } from 'reactstrap';
 import Icon from 'react-fa';
 import ADAGUCViewerComponent from '../components/ADAGUCViewerComponent';
