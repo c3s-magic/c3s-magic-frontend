@@ -236,7 +236,9 @@ class WPSDemoCopernicus extends Component {
     console.log('getting getWPSProcessInfo for ' + processName);
     return new Promise((resolve, reject) => {
       let wpsUrl = this.getWPSUrlByName(this.state.currentWPSNodeName);
-      doWPSCall(wpsUrl + 'service=wps&version=1.0.0&request=describeprocess&identifier=' + processName,
+      let describeProcessLink = wpsUrl + 'service=wps&version=1.0.0&request=describeprocess&identifier=' + processName;
+      this.setState({ describeProcessLink: describeProcessLink });
+      doWPSCall(describeProcessLink,
         (result) => {
           this.setState({ formNoInputFound: false });
           console.log('Searching for input and output types in ', processName, 'process', result);
@@ -668,7 +670,24 @@ class WPSDemoCopernicus extends Component {
                         <DropdownToggle caret>
                           {this.state.currentWPSNodeName}
                         </DropdownToggle>
-                        <DropdownMenu>
+                        <DropdownMenu
+                          modifiers={{
+                            setMaxHeight: {
+                              enabled: true,
+                              order: 890,
+                              fn: (data) => {
+                                return {
+                                  ...data,
+                                  styles: {
+                                    ...data.styles,
+                                    overflow: 'auto',
+                                    maxHeight: '50vh'
+                                  }
+                                };
+                              }
+                            }
+                          }}
+                        >
                           <DropdownItem header>Please select one of the compute nodes</DropdownItem>
                           {
                             compute.map((wp, index) => {
@@ -687,9 +706,26 @@ class WPSDemoCopernicus extends Component {
                     <Col xs='8' >
                       <Dropdown isOpen={this.state.wpsSelectorDropDownOpen} toggle={this.toggleWPSSelectorDropDown}>
                         <DropdownToggle caret>
-                          {(processInfo && (processInfo.name + ' - ' + processInfo.title)) || this.state.selectedProcess}
+                          {(processInfo && (processInfo.title)) || this.state.selectedProcess}
                         </DropdownToggle>
-                        <DropdownMenu>
+                        <DropdownMenu
+                          modifiers={{
+                            setMaxHeight: {
+                              enabled: true,
+                              order: 890,
+                              fn: (data) => {
+                                return {
+                                  ...data,
+                                  styles: {
+                                    ...data.styles,
+                                    overflow: 'auto',
+                                    maxHeight: '50vh'
+                                  }
+                                };
+                              }
+                            }
+                          }}
+                        >
                           <DropdownItem header>Please select one of the processes</DropdownItem>
                           {
                             this.state.wpsProcessName.map((wp, index) => {
@@ -700,7 +736,7 @@ class WPSDemoCopernicus extends Component {
                                 onClick={() => {
                                   clearWPSCache();
                                   this.onWpsButtonClick(wp.name).then().catch();
-                                }}>{wp.name} - {wp.title}
+                                }}>{wp.title}
                               </DropdownItem>;
                             })
                           }
@@ -726,7 +762,9 @@ class WPSDemoCopernicus extends Component {
                           </Alert>
                           : '' }
                         <CardBody className='ProcessSettings_CardBody'>
-                          <CardTitle>Settings for process {this.state.selectedProcess} - {processInfo.title}:</CardTitle>
+                          <CardTitle>Settings for '{processInfo.title}'
+                            <a className={'WPSDemoCopernicus_Small'} href={this.state.describeProcessLink} target='_blank'>&nbsp; (describeProcess for {this.state.selectedProcess})</a>
+                          </CardTitle>
                           <span className={'WPSDemoCopernicus_ProcessAbstract'}>{processInfo.abstract}</span>
                           {wpsFormElements}
                           <br />
