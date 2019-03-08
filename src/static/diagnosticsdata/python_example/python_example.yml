@@ -41,7 +41,7 @@ settings:
   - Reference dataset: ERA-INTERIM
   - Additional dataset: NCEP
 title: ESMValTool climate data pre-processor
-process: /calculate/esmvaltool_preprocessor
+process: /calculate/copernicus-wps/preproc
 data: https://portal.c3s-magic.eu/data/recipes/recipe_python_20181213_151304.zip
 provenance: https://portal.c3s-magic.eu/data/recipes/recipe_python_20181213_151304/work/diagnostic1/script1/MultiModelMean_T3M_ta_2000-2002_mean_provenance.svg
 image_file: https://portal.c3s-magic.eu/data/recipes/recipe_python_20181213_151304/plots/diagnostic1/script1/MultiModelMean_T3M_ta_2000-2002_mean.png
