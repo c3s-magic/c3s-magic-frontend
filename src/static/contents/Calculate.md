@@ -1,8 +1,8 @@
 # Calculate
 
-This is the advanced calculate page, most users should start at [Metrics & Diagnostics](#/diagnostics).
+This is the advanced calculate page, it is adviced to start at the [Tailored Products](#/tailoredproducts) and [Metrics & Diagnostics](#/diagnostics) pages first.
 
-The Magic portal offers pre-calculated datasets for a wide variety of Metrics and Diagnostics. If for some reason a user would like to have the results of a metric with customized settings rather than the defaults normally use, most metrics available on the portal can be calculated here.
+The Magic portal offers pre-calculated datasets for a wide variety of Metrics and Diagnostics. If for some reason a user would like to have the results of a metric with customized settings rather than the defaults normally used, metrics available on the portal can be calculated here.
 
 The calculation can be performed on several wps servers. Normally the default suffices. The set of available metrics may vary across wps servers.
 
