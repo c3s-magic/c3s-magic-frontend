@@ -55,7 +55,7 @@ export default class WP1Home extends Component {
                     animationDates.push({ name: 'time', value: timeDim.getValueForIndex(j) });
                   }
                   webMapJSInstance.stopAnimating();
-                  webMapJSInstance.setAnimationDelay(500);
+                  webMapJSInstance.setAnimationDelay(250);
                   webMapJSInstance.draw(animationDates);
                 } catch (e) {
                   console.log(e);
