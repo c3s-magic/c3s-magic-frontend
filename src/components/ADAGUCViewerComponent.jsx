@@ -470,7 +470,10 @@ export default class ADAGUCViewerComponent extends PureComponent {
                       webMapJSInitializedCallback={(wmjs, appendOrRemove) => {
                         let id = wmjslayer.name;
                         // console.log('stack', id, index, wmjslayer.name);
-                        if (appendOrRemove) this.webMapJSInstances[id] = wmjs; else delete this.webMapJSInstances[id];
+                        if (appendOrRemove) this.webMapJSInstances[id] = wmjs; else {
+                          this.webMapJSInstances[id].destroy();
+                          delete this.webMapJSInstances[id];
+                        }
                         if (appendOrRemove && this.props.webMapJSInitializedCallback) this.props.webMapJSInitializedCallback(wmjs);
                       }}
                     />
@@ -492,7 +495,10 @@ export default class ADAGUCViewerComponent extends PureComponent {
                     if (this.props.parsedLayerCallback && webMapJS) this.props.parsedLayerCallback(wmjsLayer, webMapJS);
                   }}
                   webMapJSInitializedCallback={(wmjs, appendOrRemove) => {
-                    if (appendOrRemove) this.webMapJSInstances['first'] = wmjs; else delete this.webMapJSInstances['first'];
+                    if (appendOrRemove) this.webMapJSInstances['first'] = wmjs; else {
+                      this.webMapJSInstances['first'].destroy();
+                      delete this.webMapJSInstances['first'];
+                    }
                     if (appendOrRemove && this.props.webMapJSInitializedCallback) this.props.webMapJSInitializedCallback(wmjs);
                   }}
                 />

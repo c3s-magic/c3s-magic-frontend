@@ -100,7 +100,7 @@ export default class RenderWPSProcessOutput extends Component {
         <CardBody>
           { output.data && (<CardText>{output.data}</CardText>) }
           { output.imageLink && (<Row>
-            <Col xs='10'><div style={{ maxHeight:'250px', overflow: 'hidden', width: '50%' }}><ClickableImage src={output.imageLink} /></div></Col>
+            <Col xs='10'><div style={{ maxHeight:'250px', width: '50%' }}><ClickableImage src={output.imageLink} /></div></Col>
             {/* <Col><Button color='secondary' onClick={() =>{ this.props.resultClickCallback(output.imageLink);}}>Open image</Button></Col> */}
           </Row>)
           }

@@ -255,7 +255,6 @@ class WPSDemoCopernicus extends Component {
               try {
                 let metadataItem = metadataItems[key];
                 metadata.push({ title: metadataItem.attr.title, href:  metadataItem.attr.href });
-                console.log(metadataItem);
               } catch (e) {
                 console.log(e);
               }
