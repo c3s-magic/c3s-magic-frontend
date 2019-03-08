@@ -15,11 +15,11 @@ your job list. Your job list and basket can be found on the [Calculate](#/calcul
 
 #### Metric documentation
 
-The documentation for the metrics and diagnostics found in this portal has been collected in the ESMValTool Documentation page](https://esmvaltool.readthedocs.io)
+The documentation for the metrics and diagnostics found in this portal has been collected in the [ESMValTool Documentation page](https://esmvaltool.readthedocs.io).
 
 #### Software documentation
 
-The documentation for the software used to run his portal has been collected in the C3S Magic Documentation page](https://c3smagic.readthedocs.io)
+The documentation for the software used to run his portal has been collected in the [C3S Magic Documentation page](https://c3smagic.readthedocs.io).
 
 #### Advanced Viewers
 

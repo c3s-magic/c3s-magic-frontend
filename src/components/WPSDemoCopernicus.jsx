@@ -831,7 +831,7 @@ class WPSDemoCopernicus extends Component {
   }
 
   render () {
-    return (<div style={{ width:'100%' }} >
+    return (<div style={{ width:'100%' }} className='MainViewport' >
       <div style={{ width:'50vw', margin:'15px 0 0 15px' }}>
         <MarkdownFromFile url={'/contents/Calculate.md'} />
       </div>
