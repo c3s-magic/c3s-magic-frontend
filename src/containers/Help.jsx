@@ -2,17 +2,18 @@
 import React, { Component } from 'react';
 import MarkdownFromFile from './MarkdownFromFile';
 
-import { Row } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 
 export default class Help extends Component {
   render () {
     return (
       <div className='MainViewport'>
         <Row>
-
-          <div className='text'>
+          <Col xs='2' />
+          <Col xs='8'>
             <MarkdownFromFile url={'/contents/Help.md'} />
-          </div>
+          </Col>
+          <Col xs='2' />
         </Row>
       </div>);
   }

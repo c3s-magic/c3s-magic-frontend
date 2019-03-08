@@ -7,6 +7,7 @@ import ImagePreview from './ImagePreview';
 import { withRouter } from 'react-router';
 import Icon from 'react-fa';
 import _ from 'lodash';
+import MarkdownFromFile from '../containers/MarkdownFromFile';
 
 class WPSDemoCopernicus extends Component {
   constructor (props) {
@@ -27,6 +28,7 @@ class WPSDemoCopernicus extends Component {
     this.getProcessInfo = this.getProcessInfo.bind(this);
     this.setComputeNode = this.setComputeNode.bind(this);
     this.setStatePromise = this.setStatePromise.bind(this);
+    this.renderCompute = this.renderCompute.bind(this);
     console.log('Constructing WPSDemoCopernicus', this.props.location);
     this.state = {
       describeProcessDocument: null,
@@ -240,7 +242,29 @@ class WPSDemoCopernicus extends Component {
       this.setState({ describeProcessLink: describeProcessLink });
       doWPSCall(describeProcessLink,
         (result) => {
-          this.setState({ formNoInputFound: false });
+          this.setState({ formNoInputFound: false, documentationLink: null });
+
+          console.log('Looking for link');
+
+          try {
+            let metadataItems = {};
+            let _metadataItems = result['ProcessDescriptions'].ProcessDescription.Metadata;
+            if (!_metadataItems[0]) metadataItems[0] = _metadataItems; else metadataItems = _metadataItems;
+            let metadata = [];
+            for (let key in metadataItems) {
+              try {
+                let metadataItem = metadataItems[key];
+                metadata.push({ title: metadataItem.attr.title, href:  metadataItem.attr.href });
+                console.log(metadataItem);
+              } catch (e) {
+                console.log(e);
+              }
+            }
+            this.setState({ documentationLink: metadata });
+          } catch (e) {
+            console.log(e);
+          }
+
           console.log('Searching for input and output types in ', processName, 'process', result);
 
           let formItemInputs = [];
@@ -618,7 +642,7 @@ class WPSDemoCopernicus extends Component {
     });
   }
 
-  render () {
+  renderCompute () {
     const { compute, runningProcesses, actions, dispatch } = this.props;
     const { showForm, isBusy, isBusyMessage, wpsInfoFetched } = this.state;
     const { errorExists, errorContent, formNoInputFound } = this.state;
@@ -658,52 +682,14 @@ class WPSDemoCopernicus extends Component {
     } else {
       let processInfo = this.getProcessInfo();
       return (
-        <div style={{ backgroundColor: '#FFF', width: '100%', fontFamily: 'Roboto', padding:'20px' }}>
+        <div style={{ backgroundColor: '#FFF', width: '100%', fontFamily: 'Roboto', padding:'0 20px' }}>
           <Row>
             <Col sm='12'>
               {compute
                 ? <div>
                   <Row>
-                    <Col xs='3' ><Label style={{ lineHeight: '40px' }}>Select a compute node: </Label></Col>
-                    <Col xs='8' >
-                      <Dropdown isOpen={this.state.computeNodeSelectorDropDownOpen} toggle={this.toggleComputeNodeSelectorDropDown}>
-                        <DropdownToggle caret>
-                          {this.state.currentWPSNodeName}
-                        </DropdownToggle>
-                        <DropdownMenu
-                          modifiers={{
-                            setMaxHeight: {
-                              enabled: true,
-                              order: 890,
-                              fn: (data) => {
-                                return {
-                                  ...data,
-                                  styles: {
-                                    ...data.styles,
-                                    overflow: 'auto',
-                                    maxHeight: '50vh'
-                                  }
-                                };
-                              }
-                            }
-                          }}
-                        >
-                          <DropdownItem header>Please select one of the compute nodes</DropdownItem>
-                          {
-                            compute.map((wp, index) => {
-                              return <DropdownItem active={this.state.currentWPSNodeName === wp.name} key={index} color='primary' onClick={() => {
-                                clearWPSCache();
-                                this.setComputeNode(wp.name);
-                              }}>{wp.name}</DropdownItem>;
-                            })
-                          }
-                        </DropdownMenu>
-                      </Dropdown>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs='3' ><Label style={{ lineHeight: '40px' }}>Select a process: </Label></Col>
-                    <Col xs='8' >
+                    <Col xs='auto' ><Label style={{ lineHeight: '40px' }}>Diagnostic: </Label></Col>
+                    <Col xs='auto' >
                       <Dropdown isOpen={this.state.wpsSelectorDropDownOpen} toggle={this.toggleWPSSelectorDropDown}>
                         <DropdownToggle caret>
                           {(processInfo && (processInfo.title)) || this.state.selectedProcess}
@@ -743,10 +729,44 @@ class WPSDemoCopernicus extends Component {
                         </DropdownMenu>
                       </Dropdown>
                     </Col>
-                  </Row>
-                  <Row>
-                    <Col xs='12'>
-                      <Label style={{ lineHeight: '40px' }}>Your current compute node location is { this.getWPSUrlByName(this.state.currentWPSNodeName) }</Label>
+                    <Col xs='auto' ><Label style={{ lineHeight: '40px' }}> on WPS server</Label></Col>
+                    <Col xs='auto' >
+                      <Dropdown isOpen={this.state.computeNodeSelectorDropDownOpen} toggle={this.toggleComputeNodeSelectorDropDown}>
+                        <DropdownToggle caret>
+                          {this.state.currentWPSNodeName}
+                        </DropdownToggle>
+                        <DropdownMenu
+                          modifiers={{
+                            setMaxHeight: {
+                              enabled: true,
+                              order: 890,
+                              fn: (data) => {
+                                return {
+                                  ...data,
+                                  styles: {
+                                    ...data.styles,
+                                    overflow: 'auto',
+                                    maxHeight: '50vh'
+                                  }
+                                };
+                              }
+                            }
+                          }}
+                        >
+                          <DropdownItem header>Please select one of the compute nodes</DropdownItem>
+                          {
+                            compute.map((wp, index) => {
+                              return <DropdownItem active={this.state.currentWPSNodeName === wp.name} key={index} color='primary' onClick={() => {
+                                clearWPSCache();
+                                this.setComputeNode(wp.name);
+                              }}>{wp.name}</DropdownItem>;
+                            })
+                          }
+                        </DropdownMenu>
+                      </Dropdown>
+                    </Col>
+                    <Col xs='auto'>
+                      <Label className='WPSDemoCopernicus_Small' style={{ lineHeight: '40px' }}>WPS server URL { this.getWPSUrlByName(this.state.currentWPSNodeName) }</Label>
                     </Col>
                   </Row>
                   {errorExists
@@ -762,10 +782,30 @@ class WPSDemoCopernicus extends Component {
                           </Alert>
                           : '' }
                         <CardBody className='ProcessSettings_CardBody'>
-                          <CardTitle>Settings for '{processInfo.title}'
-                            <a className={'WPSDemoCopernicus_Small'} href={this.state.describeProcessLink} target='_blank'>&nbsp; (describeProcess for {this.state.selectedProcess})</a>
-                          </CardTitle>
+                          <CardTitle>{processInfo.title}</CardTitle>
                           <span className={'WPSDemoCopernicus_ProcessAbstract'}>{processInfo.abstract}</span>
+                          <hr />
+                          <div>
+                            <CardTitle>
+                              Documentation
+                            </CardTitle>
+                            <span className={'WPSDemoCopernicus_ProcessAbstract'} style={{ width: '100%' }}>
+                              <ul>
+                                { this.state.documentationLink && (
+                                  this.state.documentationLink.map((item, key) => {
+                                    return (
+                                      <li key={key}>{item.title} - <a href={item.href} target='_blank'>{item.href}</a></li>
+                                    );
+                                  })
+                                )}
+                                <li>Describe process - <a href={this.state.describeProcessLink} target='_blank'>{this.state.describeProcessLink}</a></li>
+                              </ul>
+                            </span>
+                            <hr />
+                          </div>
+                          <CardTitle>
+                            Settings
+                          </CardTitle>
                           {wpsFormElements}
                           <br />
                           <hr />
@@ -788,6 +828,15 @@ class WPSDemoCopernicus extends Component {
           </Row>
         </div>);
     }
+  }
+
+  render () {
+    return (<div style={{ width:'100%' }} >
+      <div style={{ width:'50vw', margin:'15px 0 0 15px' }}>
+        <MarkdownFromFile url={'/contents/Calculate.md'} />
+      </div>
+      { this.renderCompute() }
+    </div>);
   }
 }
 

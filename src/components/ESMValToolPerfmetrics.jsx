@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Input, Row, Col, Progress, Card, ControlLabel } from 'reactstrap';
+import { Button, Input, Row, Col, Progress, Card } from 'reactstrap';
 import MarkdownFromFile from '../containers/MarkdownFromFile';
-import DapPreview from './DapPreview';
 import ImagePreview from './ImagePreview';
-import { stripNS } from '../utils/WPSRunner';
 
 // var { SchemaForm } = require('react-schema-form');
 
