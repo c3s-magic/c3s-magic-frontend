@@ -43,8 +43,8 @@ class DiagnosticPage extends Component {
     this.setState({ yamlPath: yamlPath });
     fetch(yamlPath).then((response) => {
       return response.text().then((text) => {
-        text = text.replace('{DATAURL}', config.dataURL);
-        text = text.replace('{STATICWMS}', config.staticWMS);
+        text = text.replace(/{DATAURL}/g, config.dataURL);
+        text = text.replace(/{STATICWMS}/g, config.staticWMS);
         this.setState({ yamlData: YAML.parse(text), readSuccess: true });
       });
     });
@@ -251,19 +251,13 @@ class DiagnosticPage extends Component {
                       <div className='text vspace1em'>
                         <h2 style={{ color: '#921A36' }}>Provenance</h2>
                         {
-                          'Provenance describes entities and processes involved in producing the resource. '
+                          'Provenance describes entities and processes involved in producing the resource. Full provenance is included in metric results for further processing.'
                         }
                         <br />
                         <br />
                         <Button className='C3SMagicTooltip' onClick={this.viewProvenance}>
                           <Icon name='tag' />
                           &nbsp;View Provenance
-                          <span className='C3SMagicTooltipText'>
-                            {
-                              'This describes entities and processes involved in producing the resource. ' +
-                              'Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility.'
-                            }
-                          </span>
                         </Button>
                       </div>
                     )
@@ -272,7 +266,9 @@ class DiagnosticPage extends Component {
                     this.renderPageElement('data') && (
                       <div className='text vspace1em'>
                         <h2 style={{ color: '#921A36' }}>Download</h2>
-                        Download precalculated results for this metric as a zipped bundle.<br /><br />
+                        Download a zipped bundle of all output files, ESMValTool logfiles and intermediate files.
+                        <br />
+                        <br />
                         { /*  data consisting of single entry */ }
                         { !Array.isArray(this.renderPageElement('data')) && (
                           <Button className='C3SMagicTooltip' onClick={() => { this.downloadData(this.renderPageElement('data')); }}>
