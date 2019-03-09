@@ -16,7 +16,7 @@ diagnostics:
           - NLeSC
           - URead
           - BSC
-          - Process
+          - Calculate
     cvdp:
         id: 201
         name: cvdp
@@ -30,7 +30,7 @@ diagnostics:
           - CVDP
           - WP4
           - DLR
-          - Process
+          - Calculate
     perfmetrics:
         id: 18
         name: perfmetrics
@@ -70,6 +70,7 @@ diagnostics:
         tags:
           - WP4
           - ISAC-CNR
+          - Calculate
     stratosphere-troposphere:
         id: 9
         name: stratosphere-troposphere
@@ -83,7 +84,7 @@ diagnostics:
           - WP4
           - zmnam
           - ISAC-CNR
-          - Process
+          - Calculate
     modes_of_variability:
         id: 555
         name: modes_of_variability
@@ -96,6 +97,7 @@ diagnostics:
         tags:
           - WP4
           - BSC
+          - Calculate
     hyint:
         id: 6
         name: hyint
@@ -133,6 +135,7 @@ diagnostics:
             - WP5
             - Anomaly Agreement
             - BSC
+            - Calculate
     ensclus:
         id: 4
         name: ensclus
@@ -146,7 +149,7 @@ diagnostics:
           - Sub-ensemble selection
           - WP5
           - ISAC-CNR
-          - Process
+          - Calculate
     combined_indices:
         id: 12
         name: combined_indices
@@ -159,6 +162,7 @@ diagnostics:
         tags:
           - WP6
           - BSC
+          - Calculate
     annularmodes:
         id: 2
         name: annularmodes
@@ -171,6 +175,7 @@ diagnostics:
         tags:
           - WP6
           - ISAC-CNR
+          - Calculate
     teleconnections:
         id: 5
         name: teleconnections
@@ -183,6 +188,7 @@ diagnostics:
         tags:
           - WP6
           - ISAC-CNR
+          - Calculate
     weather_regimes:
         id: 55
         name: weather_regimes
@@ -195,6 +201,7 @@ diagnostics:
         tags:
           - WP6
           - ISAC-CNR
+          - Calculate
     hyint_timeseries:
         id: 10
         name: hyint_timeseries
@@ -244,6 +251,7 @@ diagnostics:
         tags:
           - WP7
           - SMHI
+          - Calculate
     consecdrydays:
         id: 171
         name: consecdrydays
@@ -256,7 +264,7 @@ diagnostics:
         tags:
           - WP7
           - SMHI
-          - Process
+          - Calculate
     shapefile_selection:
         id: 16
         name: shapefile_selection
@@ -271,7 +279,7 @@ diagnostics:
           - SMHI
           - Catchment
           - Hydrology
-          - Process
+          - Calculate
     rainfarm:
         id: 3
         name: rainfarm
@@ -296,7 +304,7 @@ diagnostics:
         tags:
           - WP7
           - BSC
-#          - Heatwaves and coldwaves
+          - Calculate
     dtr:
         id: 13
         name: dtr
@@ -310,6 +318,7 @@ diagnostics:
         tags:
           - WP7
           - BSC
+          - Calculate
     capacity_factor:
         id: 133
         name: capacity_factor
@@ -322,6 +331,7 @@ diagnostics:
         tags:
           - WP7
           - BSC
+          - Calculate
     risk_index:
         id: 101
         name: risk_index
@@ -334,3 +344,4 @@ diagnostics:
           - WP7
           - BSC
           - ACI
+          - Calculate
