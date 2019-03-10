@@ -216,7 +216,7 @@ class ActuariesPage extends Component {
          exposure and vulnerability, are crucial for decision making processes.
         </span>
         <span className='text' style={{ paddingBottom:'15px' }}>
-          The data behind this tailored product can be calculated with the <a href='#/diagnostics/risk_index'>insurance risk indices</a> diagnostic.
+          The data behind this tailored product can be calculated with the <a href='#/diagnostics/extreme_index'>combined climate extreme index</a> diagnostic.
         </span>
       </Row>
       <Row>

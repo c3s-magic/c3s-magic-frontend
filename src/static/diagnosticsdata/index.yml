@@ -325,24 +325,24 @@ diagnostics:
     capacity_factor:
         id: 133
         name: capacity_factor
-        title: Capacity Factor of Wind Power
-        sub_title: Ratio of average estimated power to theoretical maximum power
-        info_text: Metric showing the wind capacity factor to estimate energy supply.
+        title: Capacity Factor of Wind Power.
+        sub_title:
+        info_text: Metric showing the wind capacity factor (the ratio of average estimated power to theoretical maximum power) to estimate energy supply.
         info_file: capacity_factor/capacity_factor.yml
-        image_file: diagnosticsdata/capacity_factor/diurnal_temperature_variation.png
+        image_file: diagnosticsdata/capacity_factor/capacity_factor_IPSL-CM5A-LR_1980-2005.png
         github_issue:
         tags:
           - WP7
           - BSC
           - Calculate
-    risk_index:
+    extreme_index:
         id: 101
-        name: risk_index
+        name: extreme_index
         title: Combined Climate Extreme Index
         sub_title:
         info_text: Metric showing extreme indices relevant to the insurance industry (heat, cold, wind, flood and drought indices).
-        info_file: risk_index/risk_index.yml
-        image_file: diagnosticsdata/risk_index/insurance_risk_indices.png
+        info_file: extreme_index/extreme_index.yml
+        image_file: diagnosticsdata/extreme_index/t90p_IPSL-CM5A-LR_rcp85_2020_2040.png
         tags:
           - WP7
           - BSC

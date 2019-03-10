@@ -14,13 +14,15 @@ contact:
   - Nicolau Manubens @nmanuben
 description_short: This metric shows the wind capacity factor to estimate energy supply.
 description_file: 'capacity_factor/description.md'
-media: https://portal.c3s-magic.eu/data/recipes/recipe_diurnal_temperature_index_wp7_20181210_113406/plots/diurnal_temperature_indicator/main/rcp85.png
+image_file: diagnosticsdata/capacity_factor/capacity_factor_IPSL-CM5A-LR_1980-2005.png
 report_file: report.pdf
 references:
   - text: "IEC. (2005). International Standard IEC 61400-1, third edition, International Electrotechnical Commission"
     url: "https://webstore.iec.ch/preview/info_iec61400-1%7Bed3.0%7Den.pdf"
   - text: "Lledó, L. (2017). Computing capacity factor. Technical note BSC-ESS-2017-001, Barcelona Supercomputing Center."
     url: "https://earth.bsc.es/wiki/lib/exe/fetch.php?media=library:external:bsc-ess-2017-001-c4e_capacity_factor.pdf"
+  - text: "ESMValTool documentation on this metric"
+    url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_capacity_factor.html
 settings:
   - Models:
       - IPSL-CM5A-MR
@@ -34,6 +36,7 @@ settings:
   - Longitude: "200 - 300"
   - Latitude: "27 - 70"
 title: Capacity factor of wind power
-youtube:
-data: https://portal.c3s-magic.eu/data/recipes/recipe_diurnal_temperature_index_wp7_20181210_113406.zip
-image_file: diagnosticsdata/capacity_factor/diurnal_temperature_variation.png
+data: {DATAURL}/recipes/recipe_capacity_factor_wp7_20190308_045354.zip
+provenance: {DATAURL}/recipes/recipe_capacity_factor_wp7_20190308_045354/work/capacity_factor/main/capacity_factor_IPSL-CM5A-MR_1980-2005_provenance.svg
+media: {DATAURL}/recipes/recipe_capacity_factor_wp7_20190308_045354/plots/capacity_factor/main/capacity_factor_IPSL-CM5A-MR_1980-2005.png
+process: /calculate/copernicus-wps/capacity_factor

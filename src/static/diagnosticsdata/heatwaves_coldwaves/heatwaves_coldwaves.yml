@@ -12,7 +12,7 @@ contact:
   - Nicolau Manubens @nmanuben
 description_short: Metric showing the duration of heatwaves and coldwaves, to help understand potential changes in energy demand.
 description_file: 'heatwaves_coldwaves/description.md'
-media: https://portal.c3s-magic.eu/data/recipes/recipe_diurnal_temperature_index_wp7_20181210_113406/plots/diurnal_temperature_indicator/main/rcp85.png
+image_file: diagnosticsdata/heatwaves_coldwaves/extreme_spells_energy.png
 report_file: report.pdf
 references:
   - text: "Vulnerability indicator: development and analysis,C. Déandreis (IPSL), B. Garnaud (IDDRI), P. Braconnot (IPSL), S., NVULNERABLe, DALKIA Indicator development"
@@ -25,10 +25,12 @@ references:
     url: "https://doi.org/10.1016/j.envint.2016.05.008"
   - text: "Zhang, X., Hegerl, G., Zwiers, F. W., & Kenyon, J. (2005). Avoiding inhomogeneity in percentile-based indices of temperature extremes. Journal of Climate, 18(11), 1641-1651."
     url: "https://doi.org/10.1175/JCLI3366.1"
+  - text: "ESMValTool documentation on this metric"
+    url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_heatwaves_coldwaves.html
 settings:
   - Models:
       - bcc-csm1-1
-  - Variables: 
+  - Variables:
       - "Daily Minimum Near-Surface Air Temperature at 2M"
   - Ensemble: "r1p1i1"
   - Reference: "1971 - 2000"
@@ -41,5 +43,6 @@ settings:
   - Season: "winter"
 title: Heatwaves and coldwaves duration
 youtube:
-data: https://portal.c3s-magic.eu/data/recipes/recipe_diurnal_temperature_index_wp7_20181210_113406.zip
-image_file: diagnosticsdata/heatwaves_coldwaves/extreme_spells_energy.png
+data: {DATAURL}/recipes/recipe_heatwaves_coldwaves_wp7_20190308_062803.zip
+media: {DATAURL}/recipes/recipe_heatwaves_coldwaves_wp7_20190308_062803/plots/heatwaves_coldwaves/main/tasmin_extreme_spell_durationwinter_bcc-csm1-1_rcp85_2060_2080.png
+provenance: {DATAURL}/recipes/recipe_heatwaves_coldwaves_wp7_20190308_062803/work/heatwaves_coldwaves/main/tasmin_extreme_spell_durationwinter_bcc-csm1-1_rcp85_2060_2080_provenance.svg

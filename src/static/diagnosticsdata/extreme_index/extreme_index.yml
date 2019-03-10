@@ -10,37 +10,32 @@ contact:
   - Alasdair Hunter @alasdairhunter
   - Nicolau Manubens @nmanuben
 description_short: Metrics showing extreme indices relevant to the insurance industry (heat, cold, wind, flood and drought indices).
-description_file: 'risk_index/description.md'
+description_file: 'extreme_index/description.md'
 report_file: report.pdf
-media: diagnosticsdata/risk_index/insurance_risk_indices.png
-enableADAGUC:
-  - data_url: https://portal.c3s-magic.eu/backend/wms?DATASET=WP7_BSC_ACI_Components
-  - projectionbutton: true
-  - layerselector: true
-  - timeselector: true
-  - styleselector: true
-  - layers: []
+image_file: diagnosticsdata/extreme_index/t90p_IPSL-CM5A-LR_rcp85_2020_2040.png
 references:
   - text: "Manubens, Nicolau, Louis-Philippe Caron, Alasdair Hunter, Omar Bellprat, Eleftheria Exarchou, Neven S. Fučkar, Javier Garcia-Serrano et al. \"An R package for climate forecast verification.\" Environmental Modelling & Software 103 (2018): 29-42."
-  - url: "https://doi.org/10.1016/j.envsoft.2018.01.018"
+    url: "https://doi.org/10.1016/j.envsoft.2018.01.018"
   - text: "Alexander L.V. and Coauthors (2006). Global observed changes in daily climate extremes of temperature and precipitation. J. Geophys. Res., 111, D05109, doi:10.1029/2005JD006290."
-  - url: "https://doi.org/10.1029/2005JD006290"
+    url: "https://doi.org/10.1029/2005JD006290"
   - text: "American Academy of Actuaries, Canadian Institute of Actuaries, Casualty Actuarial Society and Society of Actuaries. Actuaries Climate Index."
-  - url: "http://actuariesclimateindex.org"
+    url: "http://actuariesclimateindex.org"
   - text: "Donat, M., and Coauthors (2013). Updated analyses of temperature and precipitation extreme indices since the beginning of the twentieth century: The HadEX2 dataset. J. Geophys. Res., 118, 2098–2118, doi:10.1002/jgrd.50150."
-  - url: "https://doi.org/10.1002/jgrd.50150"
+    url: "https://doi.org/10.1002/jgrd.50150"
   - text: "Fouillet, A., Rey, G., Laurent, F., Pavillon, G. Bellec, S., Guihenneuc-Jouyaux, C., Clavel J., Jougla, E. and Hémon, D. (2006) Excess mortality related to the August 2003 heat wave in France. Int. Arch. Occup. Environ. Health, 80, 16–24. doi: 10.1007/s00420-006-0089-4"
-  - url: "https://doi.org/10.1007/s00420-006-0089-4"
+    url: "https://doi.org/10.1007/s00420-006-0089-4"
   - text: "Gleason, K.L., J.H. Lawrimore, D.H. Levinson, T.R. Karl, and D.J. Karoly (2008). A Revised U.S. Climate Extremes Index. J. Climate, 21, 2124-2137. doi:/10.1175/2007JCLI1883.1"
-  - url: "https://doi.org/10.1175/2007JCLI1883.1"
-  - text: "Meehl, G. A., and Coauthors (2000). An introduction to trends inextreme weather and climate events: Observations, socio-economic impacts, terrestrial ecological impacts, and model projections. Bull. Amer. Meteor. Soc., 81, 413–416. doi: 10.1175/1520-0477(2000)081<0413:AITTIE>2.3.CO;2" 
-  - url: "https://doi.org/10.1175/1520-0477(2000)081<0413:AITTIE>2.3.CO;2"
+    url: "https://doi.org/10.1175/2007JCLI1883.1"
+  - text: "Meehl, G. A., and Coauthors (2000). An introduction to trends inextreme weather and climate events: Observations, socio-economic impacts, terrestrial ecological impacts, and model projections. Bull. Amer. Meteor. Soc., 81, 413–416. doi: 10.1175/1520-0477(2000)081<0413:AITTIE>2.3.CO;2"
+    url: "https://doi.org/10.1175/1520-0477(2000)081<0413:AITTIE>2.3.CO;2"
   - text: "Whitman, S., G. Good, E. R. Donoghue, N. Benbow, W. Y. Shou and S. X. Mou (1997). Mortality in Chicago attributed to the July 1995 heat wave. Amer. J. Public Health, 87, 1515–1518. doi: 10.2105/AJPH.87.9.1515"
-  - url: "https://doi.org/10.2105/AJPH.87.9.1515"
+    url: "https://doi.org/10.2105/AJPH.87.9.1515"
   - text: "Zhang, Y., M. Nitschke, and P. Bi (2013). Risk factors for direct heat-related hospitalization during the 2009 Adelaide heat-wave: A case crossover study. Sci. Total Environ., 442, 1–5. doi: 10.1016/j.scitotenv.2012.10.042"
-  - url: "https://doi.org/10.1016/j.scitotenv.2012.10.042"
+    url: "https://doi.org/10.1016/j.scitotenv.2012.10.042"
   - text: "Zhang, X. , Alexander, L. , Hegerl, G. C., Jones, P. , Tank, A. K., Peterson, T. C., Trewin, B. and Zwiers, F. W. (2011). Indices for monitoring changes in extremes based on daily temperature and precipitation data. WIREs Clim Change, 2: 851-870. doi:10.1002/wcc.147"
-  - url: "https://doi.org/10.1002/wcc.147"
+    url: "https://doi.org/10.1002/wcc.147"
+  - text: "ESMValTool documentation on this metric"
+    url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_combined_climate_extreme_index.html
 settings:
   - Models:
     - IPSL-CM5A-MR
@@ -53,9 +48,15 @@ settings:
   - Experiment: RCP8.5
 title: Combined Climate Extreme Index
 youtube:
-info_file: risk_index/risk_index.yml
-image_file: diagnosticsdata/risk_index/insurance_risk_indices.png
-data: https://portal.c3s-magic.eu/data/recipes/recipe_insurance_risk_index_wp7_20181211_134658/plots/risk_index/main/tasmin_t10p_risk_insurance_index_IPSL-CM5A-LR_2020_2040_1971_2000.nc
-#provenance: <point to svg file>
-#process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
-
+info_file: extreme_index/extreme_index.yml
+data: {DATAURL}/recipes/recipe_extreme_index_wp7_20190308_062806.zip
+provenance: {DATAURL}/recipes/recipe_extreme_index_wp7_20190308_062806/work/extreme_index/main/sfcWind_Wx_risk_insurance_index_IPSL-CM5A-MR_2020_2040_1971_2000_provenance.svg
+process: /calculate/copernicus-wps/extreme_index
+media: {DATAURL}/recipes/recipe_extreme_index_wp7_20190308_062806/plots/extreme_index/main/Wx_IPSL-CM5A-MR_rcp85_2020_2040.png
+# enableADAGUC:
+#   - data_url: {STATICWMS}?DATASET=WP7_BSC_ACI_Components
+#   - projectionbutton: true
+#   - layerselector: true
+#   - timeselector: true
+#   - styleselector: true
+#   - layers: []
