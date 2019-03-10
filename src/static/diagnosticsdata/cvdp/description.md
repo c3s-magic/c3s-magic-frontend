@@ -2,4 +2,4 @@ The [Climate Variability Diagnostics Package (CVDP)](http://www.cesm.ucar.edu/wo
 
 CVDP is a stand alone ncl based application for the analysis of climate variability in models and observations, and is also distributed with the ESMValTool.
 
-**[The complete pre-computed output of this metric is available as a separate page (link)](/data/recipes/recipe_cvdp_20190308_045354/work/diagnostic1/cvdp/index.html).**
+**[The complete pre-computed output of this metric is available as a separate page [link]](/data/recipes/recipe_cvdp_20190308_045354/work/diagnostic1/cvdp/index.html).**
