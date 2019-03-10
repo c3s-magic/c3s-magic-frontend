@@ -169,7 +169,7 @@ diagnostics:
         name: annularmodes
         title: Indices of Annular Modes
         sub_title:
-        info_text: Metric to show the zonal mean Northern Annular Mode (NAM) to provide an evaluation of the NAM pattern at the surface and in the stratosphere. Outputs are a plot of the monthly timeseries of the zonal mean NAM index and a frequency histogram of the daily values of the NAM index.
+        info_text: Metric to show the zonal mean Northern Annular Mode (NAM) to provide an evaluation of the NAM pattern at the surface and in the stratosphere.
         info_file: annularmodes/annularmodes.yml
         image_file: diagnosticsdata/annularmodes/annularmodes_thumbnail.png
         github_issue:
