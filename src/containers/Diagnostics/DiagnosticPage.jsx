@@ -271,7 +271,7 @@ class DiagnosticPage extends Component {
                     this.renderPageElement('data') && (
                       <div className='text vspace1em'>
                         <h2 style={{ color: '#921A36' }}>Download</h2>
-                        Download a zipped bundle of all output files, ESMValTool logfiles and intermediate files.
+                        Download a zipped bundle of all output files, ESMValTool log files, provenance data, and intermediate files.
                         <br />
                         <br />
                         { /*  data consisting of single entry */ }
