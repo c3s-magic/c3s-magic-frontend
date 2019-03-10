@@ -8,7 +8,7 @@ This approach provides a robust description of the stratosphere-troposphere coup
 
 The outputs of the procedure are the monthly time series and the histogram of the daily zonal-mean NAM index, and the monthly regression maps for selected pressure levels. The users can select the specific datasets (climate model simulation and/or reanalysis) to be evaluated, and a subset of pressure levels of interest.
 
-Note this Metric is based on the same calculations as the [Annular Models](/#/diagnostics/annularmodes) metric.
+Note this Metric is based on the same calculations as the Annular Modes metric.
 
 <!---
 This metric is based on the algorithm proposed by [Baldwin and Thompson, 2009], and requires the daily geopotential height field on pressure levels as input. The method is based on an EOF/PC decomposition of the zonally averaged geopotential height, with the leading pattern of variability representative of the (zonal mean) NAM. The calculation is independently repeated at each available pressure level. The daily index can be used to characterize episodic variability of the stratosphere-troposphere connection, while regression on the monthly averaged index is used to quantify the signature of the NAM on the hemispheric climate.

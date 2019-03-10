@@ -8,6 +8,8 @@ For the diagnostic “Indices of annular modes”, two kind of outputs are produ
 
 The monthly averaging smooths fluctuations of the zonal mean index at higher frequencies, which can however be important for the coupling between the troposphere and the stratosphere. For this reason, the daily values of the index are used to build a frequency histogram. From the statistical properties of the resulting probability density function, it is possible to evaluate the realism of a simulated stratospheric variability, by comparing against reanalysis datasets.
 
+Note this Metric is based on the same calculations as the Stratosphere Troposphere Coupling metric.
+
 <!--
 
 ![example output](diagnosticsdata/annularmodes/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_250hPa_mo_ts.png "Example Output")

@@ -23,6 +23,8 @@ references:
   url: "http://doi.org/10.5281/zenodo.1237838"
 - text: "REX, D. F. (1950), Blocking Action in the Middle Troposphere and its Effect upon Regional Climate. Tellus, 2: 275-301. doi:10.1111/j.2153-3490.1950.tb00339.x"
   url: "https://onlinelibrary.wiley.com/action/showCitFormats?doi=10.1111%2Fj.2153-3490.1950.tb00331.x"
+- text: "ESMValTool documentation for this metric"
+  url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_miles.html
 settings:
   - Models:
       - EC-EARTH

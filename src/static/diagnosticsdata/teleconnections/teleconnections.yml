@@ -10,7 +10,7 @@ contact:
   - Paolo Davini p.davini@isac.cnr.it
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
   - Enrico Arnone e.arnone@isac.cnr.it
-description_short: Diagnostic that implements the MId-Latitude Evaluation System (MiLES) to provide teleconnection indices (Z500 empirical orthogonal functions). 
+description_short: Diagnostic that implements the MId-Latitude Evaluation System (MiLES) to provide teleconnection indices (Z500 empirical orthogonal functions).
 description_file: 'teleconnections/description.md'
 #media: https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360
 enableADAGUC:
@@ -21,12 +21,14 @@ enableADAGUC:
   - styleselector: true
   - layers: []
 references:
-- text: "Davini, P., C. Cagnazzo, S. Gualdi, and A. Navarra, 2012: Bidimensional Diagnostics, Variability, and Trends of Northern Hemisphere Blocking. J. Climate, 25, 6496–6509, doi: 10.1175/JCLI-D-12-00032.1" 
+- text: "Davini, P., C. Cagnazzo, S. Gualdi, and A. Navarra, 2012: Bidimensional Diagnostics, Variability, and Trends of Northern Hemisphere Blocking. J. Climate, 25, 6496–6509, doi: 10.1175/JCLI-D-12-00032.1"
   url: "https://doi.org/10.1175/JCLI-D-12-00032.1"
-- text: "Tibaldi S, Molteni F. 1990. On the operational predictability of blocking. Tellus A 42(3): 343–365, doi:10.1034/j.1600- 0870.1990.t01- 2- 00003.x" 
+- text: "Tibaldi S, Molteni F. 1990. On the operational predictability of blocking. Tellus A 42(3): 343–365, doi:10.1034/j.1600- 0870.1990.t01- 2- 00003.x"
   url: "https://doi.org/10.1034/j.1600-0870.1990.t01-2-00003.x"
 - text: "Paolo Davini. (2018, April 30). MiLES - Mid Latitude Evaluation System (Version v0.51). Zenodo. http://doi.org/10.5281/zenodo.1237838"
   url: "http://doi.org/10.5281/zenodo.1237838"
+- text: "ESMValTool documentation for this metric"
+  url: https://esmvaltool.readthedocs.io/en/version2_development/recipes/recipe_miles.html
 settings:
   - Models:
       - EC-EARTH
@@ -44,7 +46,4 @@ title: Teleconnection Indices
 image_file: diagnosticsdata/teleconnections/teleconnections_thumbnail.png
 data: https://portal.c3s-magic.eu/data/recipes/recipe_miles_block_20181211.zip
 #provenance: <point to svg file>
-#process: <link to process> 
-
-
-
+#process: <link to process>
