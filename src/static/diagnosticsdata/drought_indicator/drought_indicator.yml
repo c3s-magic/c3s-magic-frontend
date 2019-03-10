@@ -5,35 +5,36 @@ authors:
   - Peter Berg
 contact:
   - Peter Berg @PeterBergSMHI
-description_short: The drought indicator calculates the SPI and SPEI diagnostics.
+description_short: The drought indicator calculates the Standardized Precipitation Index (SPI) and Standardized Precipitation-Evapotranspiration Index (SPEI) diagnostics, indicating meteorological and hydrological droughts.
 description_file: 'drought_indicator/description.md'
+image_file: diagnosticsdata/drought_indicator/histplot.png
 report_file:
 #images in description.md
-media:
-  - https://portal.c3s-magic.eu/data/recipes/recipe_spi_20181108_132957/plots/diagnostic1/script1/histplot.png
-  - https://portal.c3s-magic.eu/data/recipes/recipe_spei_20181108_160736/plots/diagnostic1/script1/histplot.png
 references:
   - text: "McKee, T. B., Doesken, N. J., & Kleist, J. (1993). The relationship of drought frequency and duration to time scales. In Proceedings of the 8th Conference on Applied Climatology (Vol. 17, No. 22, pp. 179-183). Boston, MA: American Meteorological Society."
     url: "https://www.researchgate.net/profile/Patrick_Keys/post/Which_are_the_drought_indices_based_on_precipitation_and_temperature/attachment/59d652b379197b80779aadb6/AS:513526097166336@1499445570190/download/r_MCKEE_1993_Relationship+of+drought+Standardized+Precipitation+Index+SPI.pdf"
   - text: "Vicente-Serrano, S. M., Beguería, S., & López-Moreno, J. I. (2010). A multiscalar drought index sensitive to global warming: the standardized precipitation evapotranspiration index. Journal of climate, 23(7), 1696-1718."
     url: "https://doi.org/10.1175/2009JCLI2909.1"
+  - text: "ESMValTool documentation on this metric"
+    url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_spei.html
 settings:
   - Models:
       - ACCESS1-0
-      - ACCESS1-3
-      - BNU-ESM
-      - CNRM-CM5
-      - EC-EARTH
-      - GFDL-CM3
-      - GISS-E2-H
-      - HadGEM2-CC
-      - HadGEM2-ES
-      - inmcm4
-      - IPSL-CM5A-LR
-      - IPSL-CM5A-MR
-      - IPSL-CM5B-LR
-      - MPI-ESM-MR
-      - NorESM1-M
+      - ERA-Interim
+      # - ACCESS1-3
+      # - BNU-ESM
+      # - CNRM-CM5
+      # - EC-EARTH
+      # - GFDL-CM3
+      # - GISS-E2-H
+      # - HadGEM2-CC
+      # - HadGEM2-ES
+      # - inmcm4
+      # - IPSL-CM5A-LR
+      # - IPSL-CM5A-MR
+      # - IPSL-CM5B-LR
+      # - MPI-ESM-MR
+      # - NorESM1-M
   - Start year: 1990
   - End year: 1999
   - Experiment: Historical
@@ -42,9 +43,9 @@ settings:
       - SPEI
 title: Drought indicator
 # youtube:
-image_file: https://portal.c3s-magic.eu/data/recipes/recipe_spi_20181108_132957/plots/diagnostic1/script1/histplot.png
-data:
-  - https://portal.c3s-magic.eu/data/recipes/recipe_spei_20181108_160736.zip
-  - https://portal.c3s-magic.eu/data/recipes/recipe_spi_20181108_132957.zip
- #provenance: <point to svg file>
-#process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
+data: {DATAURL}/recipes/recipe_spei_20190309_135315.zip
+provenance: {DATAURL}/recipes/recipe_spei_20190309_135315/work/diagnostic/spei/histarr_provenance.svg
+process: /calculate/copernicus-wps/drought_indicator
+media:
+  - {DATAURL}/recipes/recipe_spei_20190309_135315/plots/diagnostic/spei/histplot.png
+  - {DATAURL}/recipes/recipe_spei_20190309_135315/plots/diagnostic/spi/histplot.png

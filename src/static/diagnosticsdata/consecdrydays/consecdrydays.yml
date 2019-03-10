@@ -7,6 +7,7 @@ contact:
   - Peter Berg @PeterBergSMHI
 description_short: Calculates the longest period of consecutive dry days (days with at least 'prlim' mm/day) in the provided time series, as well as the number of periods of at least 'frlim' consecutive dry days. 'prlim' and 'frlim' are provided by the user.
 description_file: 'consecdrydays/description.md'
+image_file: diagnosticsdata/consecdrydays/drydays.png
 report_file:
 #images in description.md
 #references:
@@ -19,16 +20,20 @@ settings:
   - plim: 1
   - frlim: 5
 title: Consecutive Dry Days
+references:
+  - text: "ESMValTool documentation on this metric"
+    url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_consecdrydays.html
+# youtube:
+process: /calculate/copernicus-wps/consecdrydays
+data: {DATAURL}/recipes/recipe_consecdrydays_20190308_045354.zip
+provenance: {DATAURL}/recipes/recipe_consecdrydays_20190308_045354/work/dry_days/consecutive_dry_days/CMIP5_bcc-csm1-1-m_day_historical_r1i1p1_T2Ms_pr_2001-2002_dryfreq_provenance.svg
+media:
+  - {DATAURL}/recipes/recipe_consecdrydays_20190308_045354/plots/dry_days/consecutive_dry_days/CMIP5_bcc-csm1-1-m_day_historical_r1i1p1_T2Ms_pr_2001-2002_dryfreq.png
+  - {DATAURL}/recipes/recipe_consecdrydays_20190308_045354/plots/dry_days/consecutive_dry_days/CMIP5_bcc-csm1-1-m_day_historical_r1i1p1_T2Ms_pr_2001-2002_drymax.png
 enableADAGUC:
-  - data_url: https://portal.c3s-magic.eu/backend/adagucserver?source=c3smagic%2Frecipes%2Frecipe_conseqdrydays_20181213_145259%2Fwork%2Fdiagnostic1%2Fscript1%2FCMIP5_bcc-csm1-1-m_day_historical_r1i1p1_T2Ms_pr_2001-2002_drymax.nc&&service=WMS&request=GetCapabilities
-  - projectionbutton: false
+  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_consecdrydays_20190308_045354%2Fwork%2Fdry_days%2Fconsecutive_dry_days%2FCMIP5_bcc-csm1-1-m_day_historical_r1i1p1_T2Ms_pr_2001-2002_drymax.nc&&service=WMS&request=GetCapabilities
+  - projectionbutton: true
   - layerselector: false
   - timeselector: false
-  - styleselector: false
+  - styleselector: true
   - layers: []
-# youtube:
-image_file: diagnosticsdata/consecdrydays/drydays.png
-process: /calculate/consecdrydays
-data: https://portal.c3s-magic.eu/data/recipes/recipe_conseqdrydays_20181213_145259.zip
- #provenance: <point to svg file>
-#process: <link to process, e.g.: process: /calculate/python_demonstrator_metric

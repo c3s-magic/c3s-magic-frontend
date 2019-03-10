@@ -189,19 +189,21 @@ diagnostics:
         tags:
           - WP6
           - ISAC-CNR
+          - MiLES
           - Calculate
     weather_regimes:
         id: 55
         name: weather_regimes
         title: Weather Regimes
         sub_title:
-        info_text: Recipe for computing and plotting weather regimes using the MiLES (Mid-Latitude Evaluation System) package.
+        info_text: Diagnostic for computing and plotting weather regimes.
         info_file: weather_regimes/weather_regimes.yml
         image_file: diagnosticsdata/weather_regimes/weather_regimes_thumbnail.png
         github_issue:
         tags:
           - WP6
           - ISAC-CNR
+          - MiLES
           - Calculate
     hyint_timeseries:
         id: 10
@@ -245,7 +247,7 @@ diagnostics:
         name: drought_indicator
         title: Drought indicator
         sub_title:
-        info_text: The drought indicator calculates diagnostics for meteorological drought.
+        info_text: The drought indicator calculates diagnostics for meteorological and hydrological drought.
         info_file: drought_indicator/drought_indicator.yml
         image_file: https://portal.c3s-magic.eu/data/recipes/recipe_spi_20181108_132957/plots/diagnostic1/script1/histplot.png
         github_issue:
@@ -256,9 +258,9 @@ diagnostics:
     consecdrydays:
         id: 171
         name: consecdrydays
-        title: Calculating number of dry days
+        title: Consecutive Dry Days
         sub_title:
-        info_text: Calculating number of dry days.
+        info_text: Calculates the longest period of consecutive dry days in the provided time series, as well as the number of periods of at least some number of consecutive dry days.
         info_file: consecdrydays/consecdrydays.yml
         image_file: diagnosticsdata/consecdrydays/drydays.png
         github_issue:

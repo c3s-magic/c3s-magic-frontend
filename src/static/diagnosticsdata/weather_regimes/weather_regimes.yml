@@ -10,7 +10,7 @@ contact:
   - Paolo Davini p.davini@isac.cnr.it
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
   - Enrico Arnone e.arnone@isac.cnr.it
-description_short: Recipe for computing and plotting weather regimes using the MiLES (Mid-Latitude Evaluation System) package.
+description_short: Diagnostic for computing and plotting weather regimes.
 description_file: 'weather_regimes/description.md'
 image_file: diagnosticsdata/weather_regimes/weather_regimes_thumbnail.png
 references:
