@@ -12,14 +12,7 @@ contact:
   - Enrico Arnone e.arnone@isac.cnr.it
 description_short: Recipe for computing and plotting weather regimes using the MiLES (Mid-Latitude Evaluation System) package.
 description_file: 'weather_regimes/description.md'
-#media: https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360
-enableADAGUC:
-  - data_url: https://portal.c3s-magic.eu/backend/wms?DATASET=WP6_ISAC_teleconnection
-  - projectionbutton: true
-  - layerselector: true
-  - timeselector: true
-  - styleselector: true
-  - layers: []
+image_file: diagnosticsdata/weather_regimes/weather_regimes_thumbnail.png
 references:
 - text: "Paolo Davini. (2018, April 30). MiLES - Mid Latitude Evaluation System (Version v0.51). Zenodo. http://doi.org/10.5281/zenodo.1237838"
   url: "http://doi.org/10.5281/zenodo.1237838"
@@ -41,7 +34,18 @@ settings:
   - Reference dataset: ERA-INTERIM
   - Number of clusters: 4
 title: Weather Regimes
-image_file: diagnosticsdata/weather_regimes/weather_regimes_thumbnail.png
-data: https://portal.c3s-magic.eu/data/recipes/recipe_miles_block_20181211.zip
-#provenance: <point to svg file>
-#process: <link to process>
+data: {DATAURL}/recipes/recipe_miles_regimes_20190308_064506.zip
+provenance: {DATAURL}/recipes/recipe_miles_regimes_20190308_064506/work/miles_diagnostics/miles_regimes/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Regimes/RegimesPattern_EC-EARTH_historical_r2i1p1_1980-1989_DJF_provenance.svg
+process: /calculate/copernicus-wps/weather_regimes
+media:
+  - {DATAURL}/recipes/recipe_miles_regimes_20190308_064506/plots/miles_diagnostics/miles_regimes/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Regimes/Regime1_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
+  - {DATAURL}/recipes/recipe_miles_regimes_20190308_064506/plots/miles_diagnostics/miles_regimes/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Regimes/Regime2_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
+  - {DATAURL}/recipes/recipe_miles_regimes_20190308_064506/plots/miles_diagnostics/miles_regimes/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Regimes/Regime3_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
+  - {DATAURL}/recipes/recipe_miles_regimes_20190308_064506/plots/miles_diagnostics/miles_regimes/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Regimes/Regime4_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
+enableADAGUC:
+  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_miles_regimes_20190308_064506%2Fwork%2Fmiles_diagnostics%2Fmiles_regimes%2FEC-EARTH%2Fhistorical%2Fr2i1p1%2F1980-1989%2FDJF%2FRegimes%2FRegimesPattern_EC-EARTH_historical_r2i1p1_1980-1989_DJF.nc&&service=WMS&request=GetCapabilities
+  - projectionbutton: true
+  - layerselector: true
+  - timeselector: false
+  - styleselector: true
+  - layers: []
