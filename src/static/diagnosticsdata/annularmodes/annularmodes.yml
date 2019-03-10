@@ -10,24 +10,16 @@ authors:
 contact:
 #  - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
   - Federico Serva federico.serva@artov.isac.cnr.it
-description_short: Metric to show the zonal mean Northern Annular Mode (NAM) to provide an evaluation of the NAM pattern at the surface and in the stratosphere. Outputs are a plot of the monthly timeseries of the zonal mean NAM index and a frequency histogram of the daily values of the NAM index. 
+description_short: Metric to show the zonal mean Northern Annular Mode (NAM) to provide an evaluation of the NAM pattern at the surface and in the stratosphere. Outputs are a plot of the monthly timeseries of the zonal mean NAM index and a frequency histogram of the daily values of the NAM index.
 description_file: 'annularmodes/description.md'
-#media: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360'
-#enableADAGUC:
-#  - data_url: 'https://portal.c3s-magic.eu/backend/wms?DATASET=WP4-6_ISAC_zmnam'
-#  - projectionbutton: true
-#  - layerselector: true
-#  - timeselector: true
-#  - styleselector: true
-#  - layers: []
+image_file: diagnosticsdata/annularmodes/annularmodes_thumbnail.png
 references:
 - text: "Baldwin, M. P. and Thompson, D. W. (2009), A critical comparison of stratosphere–troposphere coupling indices. Q.J.R. Meteorol. Soc., 135: 1661-1672. doi:10.1002/qj.479"
-  url: "https://doi.org/10.1002/qj.479"
-- text: "Baldwin, M. P. and Dunkerton, T. J. (2001), Stratospheric Harbingers of Anomalous Weather Regimes Q.J.R. Meteorol. Science Oct 2001:
-Vol. 294, Issue 5542, pp. 581-584: https://doi.org/10.1126/science.1063315"
-  url: "https://doi.org/10.1126/science.1063315"
+  url: https://doi.org/10.1002/qj.479
+- text: "Baldwin, M. P. and Dunkerton, T. J. (2001), Stratospheric Harbingers of Anomalous Weather Regimes Q.J.R. Meteorol. Science Oct 2001: Vol. 294, Issue 5542, pp. 581-584: https://doi.org/10.1126/science.1063315"
+  url: https://doi.org/10.1126/science.1063315
 - text: "Wallace, J. M. (2000), North atlantic oscillatiodannular mode: Two paradigms—one phenomenon. Q.J.R. Meteorol. Soc., 126: 791-805. doi:10.1002/qj.49712656402"
-  url: "https://doi.org/10.1002/qj.49712656402"
+  url: https://doi.org/10.1002/qj.49712656402
 settings:
   - Models:
       - MPI-ESM-MR
@@ -38,11 +30,17 @@ settings:
   - End year: 2008
   - Latitude (pre-processor): "20 - 90"
 title: Indices of Annular Modes
-image_file: diagnosticsdata/annularmodes/annularmodes_thumbnail.png
-data: https://portal.c3s-magic.eu/data/recipes/recipe_modes_of_variability_wp4_20181210_114624.zip
-#provenance: <point to svg file>
-#process: <link to process> 
-process: /calculate/zonal_mean_nam
-
-
-
+#enableADAGUC:
+#  - data_url: 'https://portal.c3s-magic.eu/backend/wms?DATASET=WP4-6_ISAC_zmnam'
+#  - projectionbutton: true
+#  - layerselector: true
+#  - timeselector: true
+#  - styleselector: true
+#  - layers: []
+data: {DATAURL}/recipes/recipe_zmnam_20190308_175626.zip
+provenance: {DATAURL}/recipes/recipe_zmnam_20190308_175626/work/zmnam/main/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_pc_mo_provenance.svg
+process: /calculate/copernicus-wps/zmnam
+media:
+  #- {DATAURL}/recipes/recipe_zmnam_20190308_175626/plots/zmnam/main/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_25000Pa_mo_reg.png
+  - {DATAURL}/recipes/recipe_zmnam_20190308_175626/plots/zmnam/main/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_25000Pa_mo_ts.png
+  - {DATAURL}/recipes/recipe_zmnam_20190308_175626/plots/zmnam/main/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_25000Pa_da_pdf.png

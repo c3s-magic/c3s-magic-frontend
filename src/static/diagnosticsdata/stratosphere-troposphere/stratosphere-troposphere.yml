@@ -12,6 +12,7 @@ contact:
   - Federico Serva federico.serva@artov.isac.cnr.it
 description_short: Metric to evaluate the representation of the Northern Annular Mode (NAM) in climate simulations, using reanalysis datasets as reference.
 description_file: 'stratosphere-troposphere/description.md'
+image_file: diagnosticsdata/stratosphere-troposphere/stratosphere-troposphere_thumbnail.png
 #media: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360'
 #enableADAGUC:
 #  - data_url: https://portal.c3s-magic.eu/backend/wms?DATASET=WP4-6_ISAC_zmnam
@@ -22,12 +23,11 @@ description_file: 'stratosphere-troposphere/description.md'
 #  - layers: []
 references:
 - text: "Baldwin, M. P. and Thompson, D. W. (2009), A critical comparison of stratosphere–troposphere coupling indices. Q.J.R. Meteorol. Soc., 135: 1661-1672. doi:10.1002/qj.479"
-  url: "https://doi.org/10.1002/qj.479"
-- text: "Baldwin, M. P. and Dunkerton, T. J. (2001), Stratospheric Harbingers of Anomalous Weather Regimes Q.J.R. Meteorol. Science Oct 2001:
-Vol. 294, Issue 5542, pp. 581-584: https://doi.org/10.1126/science.1063315"
-  url: "https://doi.org/10.1126/science.1063315"
+  url: https://doi.org/10.1002/qj.479
+- text: "Baldwin, M. P. and Dunkerton, T. J. (2001), Stratospheric Harbingers of Anomalous Weather Regimes Q.J.R. Meteorol. Science Oct 2001: Vol. 294, Issue 5542, pp. 581-584: https://doi.org/10.1126/science.1063315"
+  url: https://doi.org/10.1126/science.1063315
 - text: "Wallace, J. M. (2000), North atlantic oscillatiodannular mode: Two paradigms—one phenomenon. Q.J.R. Meteorol. Soc., 126: 791-805. doi:10.1002/qj.49712656402"
-  url: "https://doi.org/10.1002/qj.49712656402"
+  url: https://doi.org/10.1002/qj.49712656402
 settings:
   - Models:
       - MPI-ESM-MR
@@ -39,10 +39,9 @@ settings:
   - Longitude (pre-processor): "0-360"
   - Latitude (pre-processor): "20-90"
 title: Stratosphere-Troposphere coupling
-image_file: diagnosticsdata/stratosphere-troposphere/stratosphere-troposphere_thumbnail.png
-data: https://portal.c3s-magic.eu/data/recipes/recipe_miles_eof_20181211.zip
-#provenance: <point to svg file>
-#process: <link to process> 
-
-
-
+data: {DATAURL}/recipes/recipe_zmnam_20190308_175626.zip
+provenance: {DATAURL}/recipes/recipe_zmnam_20190308_175626/work/zmnam/main/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_pc_mo_provenance.svg
+process: /calculate/copernicus-wps/zmnam
+media:
+  - {DATAURL}/recipes/recipe_zmnam_20190308_175626/plots/zmnam/main/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_25000Pa_mo_reg.png
+#media: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360'
