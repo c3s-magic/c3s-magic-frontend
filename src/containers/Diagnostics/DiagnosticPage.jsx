@@ -258,6 +258,11 @@ class DiagnosticPage extends Component {
                         <Button className='C3SMagicTooltip' onClick={this.viewProvenance}>
                           <Icon name='tag' />
                           &nbsp;View Provenance
+                          <span className='C3SMagicTooltipText'>
+                            {
+                              'View ' + this.getBasename(this.renderPageElement('provenance'))
+                            }
+                          </span>
                         </Button>
                       </div>
                     )
@@ -276,7 +281,7 @@ class DiagnosticPage extends Component {
                             &nbsp;Download bundle
                             <span className='C3SMagicTooltipText'>
                               {
-                                'Download a zipped bundle of all output files, ESMValTool logfiles and intermediate files.'
+                                'Download ' + this.getBasename(this.renderPageElement('data'))
                               }
                             </span>
                           </Button>
@@ -327,7 +332,14 @@ class DiagnosticPage extends Component {
                     {this.renderPageElement('settings')}
                     { this.renderPageElement('process') ? <div>
                       <p>You can calculate this metric yourself using custom settings.</p>
-                      <Button onClick={this.calculate}><Icon name='gear' />&nbsp;Calculate metric</Button>
+                      <Button className='C3SMagicTooltip' onClick={this.calculate}><Icon name='gear' />
+                      &nbsp;Calculate metric
+                      <span className='C3SMagicTooltipText'>
+                        {
+                          'Calculate ' + this.getBasename(this.renderPageElement('process'))
+                        }
+                      </span>
+                      </Button>
                     </div>
                       : null }
                   </div>
