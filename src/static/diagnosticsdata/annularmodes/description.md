@@ -1,6 +1,6 @@
 The current generation of climate models include the representation of stratospheric processes, as the vertical coupling with the troposphere is important for the weather and climate at the surface [Baldwin and Dunkerton (2001)](https://doi.org/10.1126/science.1063315).
 
-The recipe recipe_zmnam.yml can be used to evaluate the representation of the Northern Annular Mode - NAM [(e.g. Wallace, 2000)](https://doi.org/10.1002/qj.49712656402) in climate simulations, using reanalysis datasets as reference.
+This metric can be used to evaluate the representation of the Northern Annular Mode - NAM [(e.g. Wallace, 2000)](https://doi.org/10.1002/qj.49712656402) in climate simulations, using reanalysis datasets as reference.
 
 The metric calculation is based on the algorithm proposed by [Baldwin and Thompson (2009)](https://doi.org/10.1002/qj.479), and requires the daily geopotential height field on pressure levels as input. The method is based on an EOF/PC decomposition of the zonally averaged geopotential height, with the leading pattern of variability representative of the (zonal mean) NAM. The calculation is independently repeated at each available pressure level. The daily index can be used to characterize episodic variability of the stratosphere-troposphere connection, while regression on the monthly averaged index is used to quantify the signature of the NAM on the hemispheric climate.
 
