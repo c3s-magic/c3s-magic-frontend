@@ -36,7 +36,7 @@ diagnostics:
         name: perfmetrics
         title: Performance Metrics for Essential Climate Parameters
         sub_title:
-        info_text: A standard recipe for the calculation of performance metrics to quantify the ability of the models to reproduce the climatological mean annual cycle for selected Essential Climate Variables (ECV) plus some additional corresponding diagnostics.
+        info_text: Performance metrics to quantify the ability of the models to reproduce the climatological mean annual cycle for selected Essential Climate Variables (ECV).
         info_file: perfmetrics/perfmetrics.yml
         image_file: ./diagnosticsdata/perfmetrics/Portait.png
         github_issue:

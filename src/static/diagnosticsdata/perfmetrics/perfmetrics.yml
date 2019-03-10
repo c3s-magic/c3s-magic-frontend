@@ -8,15 +8,17 @@ authors:
   - Birgit Hassler
 contact:
   - Mattia Righi @mattiarighi
-description_short: A standard recipe for the calculation of performance metrics to quantify the ability of the models to reproduce the climatological mean annual cycle for selected Essential Climate Variables (ECV) plus some additional corresponding diagnostics.
+description_short: Performance metrics to quantify the ability of the models to reproduce the climatological mean annual cycle for selected Essential Climate Variables (ECV).
 description_file: 'perfmetrics/description.md'
+image_file: ./diagnosticsdata/perfmetrics/Portait.png
 report_file:
-media: diagnosticsdata/perfmetrics/Portait.png
 references:
   - text: "Gleckler, P. J., K. E. Taylor, and C. Doutriaux, Performance metrics for climate models, J. Geophys. Res., 113, D06104, doi: 10.1029/2007JD008972 (2008)."
     url: "http://dx.doi.org/10.1029/2007JD008972"
   - text: "Righi, M., Eyring, V., Klinger, C., Frank, F., Gottschaldt, K.-D., Jöckel, P., and Cionni, I.: Quantitative evaluation of oone and selected climate parameters in a set of EMAC simulations, Geosci. Model Dev., 8, 733, doi: 10.5194/gmd-8-733-2015 (2015)."
     url: "https://doi.org/10.5194/gmd-8-733-2015"
+  - text: "ESMValTool Documentation for this Metric"
+    url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_perfmetrics.html
 settings:
   - Models:
       - ACCESS1-0
@@ -68,11 +70,11 @@ settings:
       - MRI-ESM1
       - NorESM1-M
       - NorESM1-ME
-  - Variables: 
-      -	"Air temperature at 850;200;30;5 hPa global" 
+  - Variables:
+      -	"Air temperature at 850;200;30;5 hPa global"
       - " Air temperature zonal mean"
-      - " Eastward wind at 850 and 200 hPa global" 
-      - " Northward wind at 850 and 200 hPa global" 
+      - " Eastward wind at 850 and 200 hPa global"
+      - " Northward wind at 850 and 200 hPa global"
       - " Geopotential height 500 hPa global"
       - " Specific humidity at 400 hPa global"
       - " Near-surface air temperature"
@@ -93,8 +95,8 @@ settings:
   - Experiment: historical
   - Ensemble: "r1i1p1"
   - Reference dataset: ERA-Interim
-  - Alternative reference datasets: 
-      - NCEP 
+  - Alternative reference datasets:
+      - NCEP
       - GPCP-SG
       - ESACCI-CLOUD
       - CERES-EBAF
@@ -109,12 +111,12 @@ settings:
 #  - Reference dataset for Specific humidity: AIRS
 #  - Reference dataset for Sea-surface (skin) temperature: ESACCI-SST
 #  - Reference dataset for Total column ozone: ESACCI-OZONE
-  - Note: "Some varaibles were calculated using part of the models and different start/end dates and some models are using different ensembles (r6i1p1 for EC-EARTH and r1i1p2 for GISS-E2-H/GISS-E2-R)"
+  - Note: "Some variables were calculated using part of the models and different start/end dates and some models are using different ensembles (r6i1p1 for EC-EARTH and r1i1p2 for GISS-E2-H/GISS-E2-R)"
 title: Performance Metrics for essential climate parameters
 youtube:
 #chart: 'https://portal.c3s-magic.eu/backend/adagucopendap/recipe_flato13ipcc_20180825_091035%2Fwork%2Ffig09-42a%2Ffig09-42a%2Fch09_fig09-42a.nc'
-image_file: ./diagnosticsdata/perfmetrics/Portait.png
-data: https://portal.c3s-magic.eu/data/recipes/recipe_perfmetrics_CMIP5_20181213_103458.zip
-#provenance: <point to svg file>
-#process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
 
+data: {DATAURL}/recipes/recipe_perfmetrics_CMIP5_20190308_173950.zip
+media: {DATAURL}/recipes/recipe_perfmetrics_CMIP5_20190308_173950/plots/collect/RMSD/ta_Glob_to_ua_Glob_RMSD.png
+#provenance: {DATA_URL}/
+#process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
