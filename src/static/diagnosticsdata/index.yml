@@ -63,13 +63,14 @@ diagnostics:
         name: blocking
         title: Blocking Metrics and Indices
         sub_title:
-        info_text: The Blocking metrics shows the mid-latitude 1D and 2D blocking indices. It is one of the recepies in the MId-Latitude Evaluation System (MiLES).
+        info_text: Atmospheric blocking is a recurrent mid-latitude weather pattern identified by a large-amplitude, quasi-stationary, long-lasting, high-pressure anomaly that ‘‘blocks’’ the westerly flow forcing the jet stream to split or meander. The Blocking metrics shows the mid-latitude 1D and 2D blocking indices.
         info_file: blocking/blocking.yml
         image_file: diagnosticsdata/blocking/blocking_thumbnail.png
         github_issue:
         tags:
           - WP4
           - ISAC-CNR
+          - MiLES
           - Calculate
     stratosphere-troposphere:
         id: 9
