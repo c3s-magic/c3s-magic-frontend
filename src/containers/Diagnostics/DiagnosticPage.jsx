@@ -361,9 +361,18 @@ class DiagnosticPage extends Component {
               }
               <Row>
                 <Col xs='12' className='diagnosticsCol'>
+                  <h2 style={{ color: '#921A36' }}>Metric Description</h2>
+                  <div id='additional' className='vspace2em'>
+                    { this.isEnabled('description_file')
+                      ? [
+                        <MarkdownFromFile key={'description_file'} url={this.state.staticPath + this.state.yamlData['description_file']} />
+                      ]
+                      : null
+                    }
+                  </div>
+
                   <div className='text vspace2em'>
                     <h2 style={{ color: '#921A36' }}>Metric Results</h2>
-
                     {this.isEnabled('enableEnsembleAnomalyPlots')
                       ? [
                         <WPSWranglerDemo key={'WPSWranglerDemo'} map_data={this.getElementProperty('enableEnsembleAnomalyPlots', 'data_url')}
@@ -407,14 +416,6 @@ class DiagnosticPage extends Component {
                     : null
                   }
 
-                  <div id='additional' className='vspace2em'>
-                    { this.isEnabled('description_file')
-                      ? [
-                        <MarkdownFromFile key={'description_file'} url={this.state.staticPath + this.state.yamlData['description_file']} />
-                      ]
-                      : null
-                    }
-                  </div>
 
                   <div className='text'>
                     <Button color='primary' onClick={this.toTop}><Icon name='' />&nbsp;Go to the top of the page</Button>{' '}
