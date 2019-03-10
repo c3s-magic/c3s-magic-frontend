@@ -27,7 +27,7 @@ references:
   url: "https://doi.org/10.1034/j.1600-0870.1990.t01-2-00003.x"
 - text: "Paolo Davini. (2018, April 30). MiLES - Mid Latitude Evaluation System (Version v0.51). Zenodo. http://doi.org/10.5281/zenodo.1237838"
   url: "http://doi.org/10.5281/zenodo.1237838"
-- text: "ESMValTool documentation for this metric"
+- text: "ESMValTool documentation on this metric"
   url: https://esmvaltool.readthedocs.io/en/version2_development/recipes/recipe_miles.html
 settings:
   - Models:

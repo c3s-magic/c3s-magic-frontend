@@ -20,7 +20,7 @@ references:
   url: https://doi.org/10.1126/science.1063315
 - text: "Wallace, J. M. (2000), North atlantic oscillatiodannular mode: Two paradigms—one phenomenon. Q.J.R. Meteorol. Soc., 126: 791-805. doi:10.1002/qj.49712656402"
   url: https://doi.org/10.1002/qj.49712656402
-- text: "ESMValTool documentation for this metric"
+- text: "ESMValTool documentation on this metric"
   url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_zmnam.html
 settings:
   - Models:

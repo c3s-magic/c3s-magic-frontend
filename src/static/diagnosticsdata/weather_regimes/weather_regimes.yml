@@ -25,7 +25,7 @@ references:
   url: "http://doi.org/10.5281/zenodo.1237838"
 - text: "S. Corti, F. Molteni and T. N. Palmer, 1999. Signature of recent climate change in frequencies of natural atmospheric circulation regimes. Nature 398, 799-802, doi: 10.1038/19745"
   url: "https://doi.org/10.1038/19745"
-- text: "ESMValTool documentation for this metric"
+- text: "ESMValTool documentation on this metric"
   url: https://esmvaltool.readthedocs.io/en/version2_development/recipes/recipe_miles.html
 settings:
   - Models:
