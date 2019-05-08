@@ -779,12 +779,16 @@ div.hpace2em {
   border: 1px solid #AAA;
 }
 
-.RenderProcesses_CardBody_NoSuccess, .RenderWPSProcessOutput_CardBody_NoSuccess{
+.RenderProcesses_CardBody_NoSuccess, {
+  background-color: #ff8080;
+}
+.RenderWPSProcessOutput_CardBody_NoSuccess{
   background-color: red;
 }
 .RenderProcesses_CardBody_Success, .RenderWPSProcessOutput_CardBody_Success{
   background-color: #CCFFCC;
 }
+
 .RenderProcessesTickMark_Success{
   color:#A5DC86;
   font-size: 40px;

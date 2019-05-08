@@ -5,7 +5,7 @@ import MarkdownFromFile from './MarkdownFromFile';
 import ADAGUCViewerComponent from '../components/ADAGUCViewerComponent';
 import { Row, Col } from 'reactstrap';
 
-const wmsurl = 'https://portal-dev.c3s-magic.eu/backend/adagucserver?source=c3smagic%2Frecipes%2Frecipe_cvdp_20190306_155022%2Fpreproc%2Fdiagnostic1%2Fpr%2FCMIP5_MPI-ESM-LR_Amon_historical_r1i1p1_T2Ms_pr_2000-2002.nc&&service=WMS&request=GetCapabilities';
+const wmsurl = 'https://portal-dev.c3s-magic.eu/backend/adagucserver?source=c3smagic%2Frecipes%2Frecipe_cvdp_20190308_045354%2Fpreproc%2Fdiagnostic1%2Fpr%2FCMIP5_MPI-ESM-LR_Amon_historical_r1i1p1_T2Ms_pr_2000-2002.nc&&service=WMS&request=GetCapabilities';
 
 export default class WP1Home extends Component {
   render () {
