@@ -14,7 +14,7 @@ contact:
   - Nicolau Manubens @nmanuben
 description_short: This metric shows the diurnal temperature indicator to estimate energy demand.
 description_file: 'dtr/description.md'
-media: https://portal.c3s-magic.eu/data/recipes/recipe_diurnal_temperature_index_wp7_20181210_113406/plots/diurnal_temperature_indicator/main/rcp85.png
+image_file: diagnosticsdata/dtr/diurnal_temperature_variation.png
 report_file: report.pdf
 references:
   - text: "Vulnerability indicator: development and analysis,C. Déandreis (IPSL), B. Garnaud (IDDRI), P. Braconnot (IPSL), S., NVULNERABLe, DALKIA Indicator development"
@@ -31,10 +31,12 @@ references:
     url: "https://doi.org/10.1038/nature01675"
   - text: "Thyholt, M., & Hestnes, A. G. (2008). Heat supply to low-energy buildings in district heating areas: Analyses of CO2 emissions and electricity supply security. Energy and Buildings, 40(2), 131–139."
     url: "https://doi.org/10.1016/J.ENBUILD.2007.01.016"
+  - text: "ESMValTool documentation on this metric"
+    url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_diurnal_temperature_index.html
 settings:
   - Models:
       - MPI-ESM-MR
-  - Variables: 
+  - Variables:
       - "daily maximum and minimum temperature at 2M"
   - Ensemble: "r1p1i1"
   - Historical Simulation: "1961 - 1990"
@@ -42,6 +44,7 @@ settings:
   - Experiment: "RCP2.6"
   - Area: "-10 to 40East - 27 to 70North"
 title: Diurnal Temperature Variation (DTR) Indicator
-youtube:
-data: https://portal.c3s-magic.eu/data/recipes/recipe_diurnal_temperature_index_wp7_20181210_113406.zip
-image_file: diagnosticsdata/dtr/diurnal_temperature_variation.png
+data: {DATAURL}/recipes/recipe_diurnal_temperature_index_wp7_20190308_045354.zip
+provenance: {DATAURL}/recipes/recipe_diurnal_temperature_index_wp7_20190308_045354/work/diurnal_temperature_indicator/main/Seasonal_DTRindicator_MPI-ESM-MR_2030_2080_1961_1990_provenance.svg
+media: {DATAURL}/recipes/recipe_diurnal_temperature_index_wp7_20190308_045354/plots/diurnal_temperature_indicator/main/rcp85.png
+process: /calculate/copernicus-wps/diurnal_temperature_index

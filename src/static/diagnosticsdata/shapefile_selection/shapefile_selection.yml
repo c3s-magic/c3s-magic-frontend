@@ -9,9 +9,10 @@ contact:
 description_short: Metric showing selected gridded data within a user defined polygon shapefile and outputting as NetCDF or Excel file.
 description_file: 'shapefile_selection/description.md'
 report_file:
-#media: diagnosticsdata/shapefile_selection/Basin_grid2.png
-enableEnsembleAnomalyPlots:
-reference:
+image_file: diagnosticsdata/shapefile_selection/OBS_CRU_reanaly_1_T2Ms_tas_1990-1994.png
+references:
+    - text: "ESMValTool documentation on this metric"
+      url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_shapeselect.html
 settings:
   - Models:
       - EC-EARTH
@@ -24,11 +25,14 @@ settings:
   - write_netcdf: true
   - evalplot: false
 title: Shapefile selection
-youtube:
-image_file: diagnosticsdata/shapefile_selection/OBS_CRU_reanaly_1_T2Ms_tas_1990-1994.png
-###
-# An example output is presented in the form of the figure 'Basin_grid2.png' with the caption: 'Example of grid point selection for a river basin of the hydrosheds data base. Red points are all grid points of the model, blue points are within the two largest polygons, and the orange polygon defaults to the grid point nearest to a representative point inside the polygon, which is most often the centroid point.'
-#data: 
-#provenance: <point to svg file>
-#process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
-process: /calculate/shape_select
+data: {DATAURL}/recipes/recipe_shapeselect_20190309_133432.zip
+provenance: {DATAURL}/recipes/recipe_shapeselect_20190309_133432/work/diagnostic1/script1/CMIP5_EC-EARTH_Amon_historical_r12i1p1_T2Ms_pr_1990-1999_polygon_provenance.svg
+process: /calculate/copernicus-wps/shapefile_selection
+media: diagnosticsdata/shapefile_selection/OBS_CRU_reanaly_1_T2Ms_tas_1990-1994.png
+# enableADAGUC:
+#   - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_miles_eof_20190308_064303%2Fwork%2Fmiles_diagnostics%2Fmiles_eof%2FEC-EARTH%2Fhistorical%2Fr2i1p1%2F1980-1989%2FDJF%2FEOFs%2FNAO%2FEOFs_EC-EARTH_historical_r2i1p1_1980-1989_DJF.nc&&service=WMS&request=GetCapabilities
+#   - projectionbutton: true
+#   - layerselector: true
+#   - timeselector: false
+#   - styleselector: true
+#   - layers: []

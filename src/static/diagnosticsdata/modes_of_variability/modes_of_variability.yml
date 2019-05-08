@@ -14,11 +14,11 @@ contact:
   - Nicolau Manubens @nmanuben
 description_short: Diagnostic to compute the Root Mean Square Error (RMSE) between the observed and modelled patterns of variability.
 description_file: 'modes_of_variability/description.md'
-media: https://portal.c3s-magic.eu/data/recipes/recipe_modes_of_variability_wp4_20181210_114624/plots/weather_regime/main/JJA-psl_predicted_regimes.png
+image_file: ./diagnosticsdata/modes_of_variability/era_interim_1990-01-2010-01_clusters.png
 report_file: report.pdf
 references:
   - text: "Fučkar, Neven S., Virginie Guemas, Nathaniel C. Johnson, François Massonnet, and Francisco J. Doblas-Reyes. \"Clusters of interannual sea ice variability in the northern hemisphere.\" Climate Dynamics 47, no. 5-6 (2016): 1527-1543."
-    url: "https://doi.org/10.1007/s00382-015-2917-2" 
+    url: "https://doi.org/10.1007/s00382-015-2917-2"
   - text: "Dawson, A., T. N. Palmer, and S. Corti, 2012: Simulating regime structures in weather and climate prediction models. Geophysical Research Letters, 39 (21), doi: 10.1029/2012GL053284"
     url: "https://doi.org/10.1029/2012GL053284"
   - text: "Ferranti, L., S. Corti, and M. Janousek, 2015: Flow-dependent verification of the ECMWF ensemble over the Euro-Atlantic sector. Quarterly Journal of the Royal Meteorological Society, 141 (688), 916-924, doi: 10.1002/qj.2411"
@@ -32,16 +32,18 @@ references:
   - text: "Vautard, R., 1990: Multiple weather regimes over the North Atlantic: Analysis of precursors and successors. Monthly weather review, 118 (10), 2056-2081, doi: 10.1175/1520-0493(1990)118<2056:MWROTN>2.0.CO;2"
     url: "https://doi.org/10.1175/1520-0493(1990)118<2056:MWROTN>2.0.CO;2"
   - text: "Yiou, P., K. Goubanova, Z. X. Li, and M. Nogaj, 2008: Weather regime dependence of extreme value statistics for summer temperature and precipitation. Nonlinear Processes in Geophysics, 15 (3), 365-378, doi: 10.5194/npg-15-365-2008"
-    url: "https://doi.org/10.5194/npg-15-365-2008" 
+    url: "https://doi.org/10.5194/npg-15-365-2008"
+  - text: "ESMValTool documentation on this metric"
+    url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_modes_of_variability.html
 settings:
   - Model: bcc-csm1-1
-  - Variable: 
+  - Variable:
       - "Daily pressure at sea level (psl) at 2M"
   - Longitude (pre-processor): "0 - 360"
   - Latitude (pre-processor): "30 - 90"
   - Region: "North Atlantic"
   - Ensemble: "r1i1p1"
-  - Experiment: "rcp8.5" 
+  - Experiment: "rcp8.5"
 #  - Area: "0 to 360 lon 30 to 90 lat"
   - Historical simulation: "1971 - 2000"
   - Projection : "2020 - 2050"
@@ -51,9 +53,10 @@ settings:
   - EOFS: "TRUE"
   - Detrend order: 2
 title: Modes of Variability
-youtube:
-data: https://portal.c3s-magic.eu/data/recipes/recipe_modes_of_variability_wp4_20181210_114624.zip
-image_file: /diagnosticsdata/modes_of_variability/era_interim_1990-01-2010-01_clusters.png
-#provenance: <point to svg file>
-#process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
-process: /calculate/rmse
+process: /calculate/copernicus-wps/modes_of_variability
+data: {DATAURL}/recipes/recipe_modes_of_variability_wp4_20190308_080505.zip
+provenance: {DATAURL}/recipes/recipe_modes_of_variability_wp4_20190308_080505/work/weather_regime/main/psl_JAN_rmse_bcc-csm1-1_2020-01-01_2050-12-31_1971-01-01_2000-12-31_provenance.svg
+media:
+  - {DATAURL}/recipes/recipe_modes_of_variability_wp4_20190308_080505/plots/weather_regime/main/JAN-psl_observed_regimes.png
+  - {DATAURL}/recipes/recipe_modes_of_variability_wp4_20190308_080505/plots/weather_regime/main/JAN-psl_predicted_regimes.png
+  - {DATAURL}/recipes/recipe_modes_of_variability_wp4_20190308_080505/plots/weather_regime/main/Table_psl_JAN_rmse_bcc-csm1-1_2020-01-01_2050-12-31_1971-01-01_2000-12-31.png

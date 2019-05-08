@@ -258,6 +258,11 @@ class DiagnosticPage extends Component {
                         <Button className='C3SMagicTooltip' onClick={this.viewProvenance}>
                           <Icon name='tag' />
                           &nbsp;View Provenance
+                          <span className='C3SMagicTooltipText'>
+                            {
+                              'View ' + this.getBasename(this.renderPageElement('provenance'))
+                            }
+                          </span>
                         </Button>
                       </div>
                     )
@@ -266,7 +271,7 @@ class DiagnosticPage extends Component {
                     this.renderPageElement('data') && (
                       <div className='text vspace1em'>
                         <h2 style={{ color: '#921A36' }}>Download</h2>
-                        Download a zipped bundle of all output files, ESMValTool logfiles and intermediate files.
+                        Download a zipped bundle of all output files, log files, provenance data, and intermediate files.
                         <br />
                         <br />
                         { /*  data consisting of single entry */ }
@@ -276,7 +281,7 @@ class DiagnosticPage extends Component {
                             &nbsp;Download bundle
                             <span className='C3SMagicTooltipText'>
                               {
-                                'Download a zipped bundle of all output files, ESMValTool logfiles and intermediate files.'
+                                'Download ' + this.getBasename(this.renderPageElement('data'))
                               }
                             </span>
                           </Button>
@@ -327,7 +332,14 @@ class DiagnosticPage extends Component {
                     {this.renderPageElement('settings')}
                     { this.renderPageElement('process') ? <div>
                       <p>You can calculate this metric yourself using custom settings.</p>
-                      <Button onClick={this.calculate}><Icon name='gear' />&nbsp;Calculate metric</Button>
+                      <Button className='C3SMagicTooltip' onClick={this.calculate}><Icon name='gear' />
+                      &nbsp;Calculate metric
+                      <span className='C3SMagicTooltipText'>
+                        {
+                          'Calculate ' + this.getBasename(this.renderPageElement('process'))
+                        }
+                      </span>
+                      </Button>
                     </div>
                       : null }
                   </div>
@@ -349,9 +361,18 @@ class DiagnosticPage extends Component {
               }
               <Row>
                 <Col xs='12' className='diagnosticsCol'>
+                  <h2 style={{ color: '#921A36' }}>Metric Description</h2>
+                  <div id='additional' className='vspace2em'>
+                    { this.isEnabled('description_file')
+                      ? [
+                        <MarkdownFromFile key={'description_file'} url={this.state.staticPath + this.state.yamlData['description_file']} />
+                      ]
+                      : null
+                    }
+                  </div>
+
                   <div className='text vspace2em'>
                     <h2 style={{ color: '#921A36' }}>Metric Results</h2>
-
                     {this.isEnabled('enableEnsembleAnomalyPlots')
                       ? [
                         <WPSWranglerDemo key={'WPSWranglerDemo'} map_data={this.getElementProperty('enableEnsembleAnomalyPlots', 'data_url')}
@@ -395,14 +416,6 @@ class DiagnosticPage extends Component {
                     : null
                   }
 
-                  <div id='additional' className='vspace2em'>
-                    { this.isEnabled('description_file')
-                      ? [
-                        <MarkdownFromFile key={'description_file'} url={this.state.staticPath + this.state.yamlData['description_file']} />
-                      ]
-                      : null
-                    }
-                  </div>
 
                   <div className='text'>
                     <Button color='primary' onClick={this.toTop}><Icon name='' />&nbsp;Go to the top of the page</Button>{' '}

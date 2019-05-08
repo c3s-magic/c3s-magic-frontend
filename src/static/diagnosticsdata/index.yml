@@ -16,27 +16,27 @@ diagnostics:
           - NLeSC
           - URead
           - BSC
-          - Process
+          - Calculate
     cvdp:
         id: 201
         name: cvdp
         title: Climate Variability Diagnostics
         sub_title:
-        info_text: The NCAR Climate Variability Package (CVDP) is a stand alone ncl based application for the analysis of climate variability in models and observations.
+        info_text: Diagnostic showing major modes of climate variability in models and observations, including ENSO, Pacific Decadal Oscillation, Atlantic Multi-decadal Oscillation, Northern and Southern Annular Modes, North Atlantic Oscillation, Pacific North and South American teleconnection patterns.
         info_file: cvdp/cvdp.yml
-        image_file: https://portal.c3s-magic.eu/data/recipes/recipe_cvdp_20181207_142708/work/diagnostic1/cvdp/tas.mean.ann.png
+        image_file: ./diagnosticsdata/cvdp/tas.mean.ann.png
         github_issue:
         tags:
           - CVDP
           - WP4
           - DLR
-          - Process
+          - Calculate
     perfmetrics:
         id: 18
         name: perfmetrics
         title: Performance Metrics for Essential Climate Parameters
         sub_title:
-        info_text: A standard recipe for the calculation of performance metrics to quantify the ability of the models to reproduce the climatological mean annual cycle for selected Essential Climate Variables (ECV) plus some additional corresponding diagnostics.
+        info_text: Performance metrics to quantify the ability of the models to reproduce the climatological mean annual cycle for selected Essential Climate Variables (ECV).
         info_file: perfmetrics/perfmetrics.yml
         image_file: ./diagnosticsdata/perfmetrics/Portait.png
         github_issue:
@@ -63,13 +63,15 @@ diagnostics:
         name: blocking
         title: Blocking Metrics and Indices
         sub_title:
-        info_text: The Blocking metrics shows the mid-latitude 1D and 2D blocking indices. It is one of the recepies in the MId-Latitude Evaluation System (MiLES).
+        info_text: Atmospheric blocking is a recurrent mid-latitude weather pattern identified by a large-amplitude, quasi-stationary, long-lasting, high-pressure anomaly that ‘‘blocks’’ the westerly flow forcing the jet stream to split or meander. The Blocking metrics shows the mid-latitude 1D and 2D blocking indices.
         info_file: blocking/blocking.yml
         image_file: diagnosticsdata/blocking/blocking_thumbnail.png
         github_issue:
         tags:
           - WP4
           - ISAC-CNR
+          - MiLES
+          - Calculate
     stratosphere-troposphere:
         id: 9
         name: stratosphere-troposphere
@@ -83,7 +85,7 @@ diagnostics:
           - WP4
           - zmnam
           - ISAC-CNR
-          - Process
+          - Calculate
     modes_of_variability:
         id: 555
         name: modes_of_variability
@@ -96,6 +98,7 @@ diagnostics:
         tags:
           - WP4
           - BSC
+          - Calculate
     hyint:
         id: 6
         name: hyint
@@ -133,6 +136,7 @@ diagnostics:
             - WP5
             - Anomaly Agreement
             - BSC
+            - Calculate
     ensclus:
         id: 4
         name: ensclus
@@ -146,7 +150,7 @@ diagnostics:
           - Sub-ensemble selection
           - WP5
           - ISAC-CNR
-          - Process
+          - Calculate
     combined_indices:
         id: 12
         name: combined_indices
@@ -159,18 +163,20 @@ diagnostics:
         tags:
           - WP6
           - BSC
+          - Calculate
     annularmodes:
         id: 2
         name: annularmodes
         title: Indices of Annular Modes
         sub_title:
-        info_text: Metric to show the zonal mean Northern Annular Mode (NAM) to provide an evaluation of the NAM pattern at the surface and in the stratosphere. Outputs are a plot of the monthly timeseries of the zonal mean NAM index and a frequency histogram of the daily values of the NAM index.
+        info_text: Metric to show the zonal mean Northern Annular Mode (NAM) to provide an evaluation of the NAM pattern at the surface and in the stratosphere.
         info_file: annularmodes/annularmodes.yml
         image_file: diagnosticsdata/annularmodes/annularmodes_thumbnail.png
         github_issue:
         tags:
           - WP6
           - ISAC-CNR
+          - Calculate
     teleconnections:
         id: 5
         name: teleconnections
@@ -183,18 +189,22 @@ diagnostics:
         tags:
           - WP6
           - ISAC-CNR
+          - MiLES
+          - Calculate
     weather_regimes:
         id: 55
         name: weather_regimes
         title: Weather Regimes
         sub_title:
-        info_text: Recipe for computing and plotting weather regimes using the MiLES (Mid-Latitude Evaluation System) package.
+        info_text: Diagnostic for computing and plotting weather regimes.
         info_file: weather_regimes/weather_regimes.yml
         image_file: diagnosticsdata/weather_regimes/weather_regimes_thumbnail.png
         github_issue:
         tags:
           - WP6
           - ISAC-CNR
+          - MiLES
+          - Calculate
     hyint_timeseries:
         id: 10
         name: hyint_timeseries
@@ -237,26 +247,27 @@ diagnostics:
         name: drought_indicator
         title: Drought indicator
         sub_title:
-        info_text: The drought indicator calculates diagnostics for meteorological drought.
+        info_text: The drought indicator calculates diagnostics for meteorological and hydrological drought.
         info_file: drought_indicator/drought_indicator.yml
         image_file: https://portal.c3s-magic.eu/data/recipes/recipe_spi_20181108_132957/plots/diagnostic1/script1/histplot.png
         github_issue:
         tags:
           - WP7
           - SMHI
+          - Calculate
     consecdrydays:
         id: 171
         name: consecdrydays
-        title: Calculating number of dry days
+        title: Consecutive Dry Days
         sub_title:
-        info_text: Calculating number of dry days.
+        info_text: Calculates the longest period of consecutive dry days in the provided time series, as well as the number of periods of at least some number of consecutive dry days.
         info_file: consecdrydays/consecdrydays.yml
         image_file: diagnosticsdata/consecdrydays/drydays.png
         github_issue:
         tags:
           - WP7
           - SMHI
-          - Process
+          - Calculate
     shapefile_selection:
         id: 16
         name: shapefile_selection
@@ -271,7 +282,7 @@ diagnostics:
           - SMHI
           - Catchment
           - Hydrology
-          - Process
+          - Calculate
     rainfarm:
         id: 3
         name: rainfarm
@@ -296,7 +307,7 @@ diagnostics:
         tags:
           - WP7
           - BSC
-#          - Heatwaves and coldwaves
+          - Calculate
     dtr:
         id: 13
         name: dtr
@@ -310,27 +321,30 @@ diagnostics:
         tags:
           - WP7
           - BSC
+          - Calculate
     capacity_factor:
         id: 133
         name: capacity_factor
-        title: Capacity Factor of Wind Power
-        sub_title: Ratio of average estimated power to theoretical maximum power
-        info_text: Metric showing the wind capacity factor to estimate energy supply.
+        title: Capacity Factor of Wind Power.
+        sub_title:
+        info_text: Metric showing the wind capacity factor (the ratio of average estimated power to theoretical maximum power) to estimate energy supply.
         info_file: capacity_factor/capacity_factor.yml
-        image_file: diagnosticsdata/capacity_factor/diurnal_temperature_variation.png
+        image_file: diagnosticsdata/capacity_factor/capacity_factor_IPSL-CM5A-LR_1980-2005.png
         github_issue:
         tags:
           - WP7
           - BSC
-    risk_index:
+          - Calculate
+    extreme_index:
         id: 101
-        name: risk_index
+        name: extreme_index
         title: Combined Climate Extreme Index
         sub_title:
         info_text: Metric showing extreme indices relevant to the insurance industry (heat, cold, wind, flood and drought indices).
-        info_file: risk_index/risk_index.yml
-        image_file: diagnosticsdata/risk_index/insurance_risk_indices.png
+        info_file: extreme_index/extreme_index.yml
+        image_file: diagnosticsdata/extreme_index/t90p_IPSL-CM5A-LR_rcp85_2020_2040.png
         tags:
           - WP7
           - BSC
           - ACI
+          - Calculate

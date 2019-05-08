@@ -10,23 +10,18 @@ contact:
   - Paolo Davini p.davini@isac.cnr.it
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
   - Enrico Arnone e.arnone@isac.cnr.it
-description_short: Diagnostic that implements the MId-Latitude Evaluation System (MiLES) to provide teleconnection indices (Z500 empirical orthogonal functions). 
+description_short: Diagnostic that implements the MId-Latitude Evaluation System (MiLES) to provide teleconnection indices (Z500 empirical orthogonal functions).
 description_file: 'teleconnections/description.md'
-#media: https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360
-enableADAGUC:
-  - data_url: https://portal.c3s-magic.eu/backend/wms?DATASET=WP6_ISAC_teleconnection
-  - projectionbutton: true
-  - layerselector: true
-  - timeselector: true
-  - styleselector: true
-  - layers: []
+image_file: diagnosticsdata/teleconnections/teleconnections_thumbnail.png
 references:
-- text: "Davini, P., C. Cagnazzo, S. Gualdi, and A. Navarra, 2012: Bidimensional Diagnostics, Variability, and Trends of Northern Hemisphere Blocking. J. Climate, 25, 6496–6509, doi: 10.1175/JCLI-D-12-00032.1" 
+- text: "Davini, P., C. Cagnazzo, S. Gualdi, and A. Navarra, 2012: Bidimensional Diagnostics, Variability, and Trends of Northern Hemisphere Blocking. J. Climate, 25, 6496–6509, doi: 10.1175/JCLI-D-12-00032.1"
   url: "https://doi.org/10.1175/JCLI-D-12-00032.1"
-- text: "Tibaldi S, Molteni F. 1990. On the operational predictability of blocking. Tellus A 42(3): 343–365, doi:10.1034/j.1600- 0870.1990.t01- 2- 00003.x" 
+- text: "Tibaldi S, Molteni F. 1990. On the operational predictability of blocking. Tellus A 42(3): 343–365, doi:10.1034/j.1600- 0870.1990.t01- 2- 00003.x"
   url: "https://doi.org/10.1034/j.1600-0870.1990.t01-2-00003.x"
 - text: "Paolo Davini. (2018, April 30). MiLES - Mid Latitude Evaluation System (Version v0.51). Zenodo. http://doi.org/10.5281/zenodo.1237838"
   url: "http://doi.org/10.5281/zenodo.1237838"
+- text: "ESMValTool documentation on this metric"
+  url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_miles.html
 settings:
   - Models:
       - EC-EARTH
@@ -41,10 +36,18 @@ settings:
   - Reference dataset: ERA-INTERIM
   - Teleconnection index: NAO
 title: Teleconnection Indices
-image_file: diagnosticsdata/teleconnections/teleconnections_thumbnail.png
-data: https://portal.c3s-magic.eu/data/recipes/recipe_miles_block_20181211.zip
-#provenance: <point to svg file>
-#process: <link to process> 
-
-
-
+data: {DATAURL}/recipes/recipe_miles_eof_20190308_064303.zip
+provenance: {DATAURL}/recipes/recipe_miles_eof_20190308_064303/work/miles_diagnostics/miles_eof/EC-EARTH/historical/r2i1p1/1980-1989/DJF/EOFs/NAO/EOFs_EC-EARTH_historical_r2i1p1_1980-1989_DJF_provenance.svg
+process: /calculate/copernicus-wps/teleconnections
+media:
+  - {DATAURL}/recipes/recipe_miles_eof_20190308_064303/plots/miles_diagnostics/miles_eof/EC-EARTH/historical/r2i1p1/1980-1989/DJF/EOFs/NAO/EOF1_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
+  - {DATAURL}/recipes/recipe_miles_eof_20190308_064303/plots/miles_diagnostics/miles_eof/EC-EARTH/historical/r2i1p1/1980-1989/DJF/EOFs/NAO/EOF2_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
+  - {DATAURL}/recipes/recipe_miles_eof_20190308_064303/plots/miles_diagnostics/miles_eof/EC-EARTH/historical/r2i1p1/1980-1989/DJF/EOFs/NAO/EOF3_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
+  - {DATAURL}/recipes/recipe_miles_eof_20190308_064303/plots/miles_diagnostics/miles_eof/EC-EARTH/historical/r2i1p1/1980-1989/DJF/EOFs/NAO/EOF4_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
+enableADAGUC:
+  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_miles_eof_20190308_064303%2Fwork%2Fmiles_diagnostics%2Fmiles_eof%2FEC-EARTH%2Fhistorical%2Fr2i1p1%2F1980-1989%2FDJF%2FEOFs%2FNAO%2FEOFs_EC-EARTH_historical_r2i1p1_1980-1989_DJF.nc&&service=WMS&request=GetCapabilities
+  - projectionbutton: true
+  - layerselector: true
+  - timeselector: false
+  - styleselector: true
+  - layers: []

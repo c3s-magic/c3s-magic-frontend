@@ -11,11 +11,13 @@ contact:
   - Nicolau Manubens @nmanuben
 description_short: Metric showning single and multi model indices based on area averages.
 description_file: 'combine_indices/description.md'
-media: diagnosticsdata/combined_indices/single_and_multi_model_indices.png
+image_file: diagnosticsdata/combined_indices/single_and_multi_model_indices_thumbnail.png
 report_file: report.pdf
 references:
-  - text "Manubens, Nicolau, Louis-Philippe Caron, Alasdair Hunter, Omar Bellprat, Eleftheria Exarchou, Neven S. Fučkar, Javier Garcia-Serrano et al. "An R package for climate forecast verification." Environmental Modelling & Software 103 (2018): 29-42."
-    url: "https://doi.org/10.1016/j.envsoft.2018.01.018"
+  - text: "Manubens, Nicolau, Louis-Philippe Caron, Alasdair Hunter, Omar Bellprat, Eleftheria Exarchou, Neven S. Fučkar, Javier Garcia-Serrano et al. An R package for climate forecast verification. Environmental Modelling & Software 103 (2018): 29-42."
+    url: https://doi.org/10.1016/j.envsoft.2018.01.018
+  - text: "ESMValTool documentation on this metric"
+    url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_combined_climate_extreme_index.html
 settings:
   - Models:
       - MPI-ESM-MR
@@ -30,12 +32,12 @@ settings:
   - Weights: "equal"
   - Running mean: 5
   - First month: 1
-  - Last month: 3 
+  - Last month: 3
   - Multi year average: "false"
   - Experiment: RCP8.5
 title: Single and multi-model indices based on area averages
-# youtube: 
-image_file: diagnosticsdata/combined_indices/single_and_multi_model_indices_thumbnail.png
-data: https://portal.c3s-magic.eu/data/recipes/recipe_multimodel_products_wp5_20181211_133442.zip
-#provenance: <point to svg file>
-#process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
+# youtube:
+data: {DATAURL}/recipes/recipe_combined_indices_wp6_20190308_045354.zip
+media: diagnosticsdata/combined_indices/single_and_multi_model_indices.png
+provenance: {DATAURL}/recipes/recipe_combined_indices_wp6_20190308_045354/work/combine_indices/main/pr_MPI-ESM-MR_Mar-May_MPI-ESM-MR_1950-01-01_2005-12-31__provenance.svg
+process: /calculate/copernicus-wps/combined_indices

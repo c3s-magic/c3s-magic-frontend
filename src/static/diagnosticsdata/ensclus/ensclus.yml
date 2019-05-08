@@ -13,17 +13,11 @@ contact:
   - Enrico Arnone e.arnone@isac.cnr.it
 description_short: Cluster analysis tool based on the k-means algorithm for ensembles of climate model simulations. EnsClus groups ensemble members according to similar characteristics and select the most representative member for each cluster.
 description_file: 'ensclus/description.md'
-#media: https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360
-enableADAGUC:
-  - data_url: https://portal.c3s-magic.eu/backend/wms?DATASET=WP5_ISAC_ensclus
-  - projectionbutton: true
-  - layerselector: true
-  - timeselector: true
-  - styleselector: true
-  - layers: []
 references:
   - text: "Straus, D. M., S. Corti, and F. Molteni, 2007: Circulation regimes: Chaotic variability vs. SST forced predictability. J. Climate, 20, 2251–2272"
     url: "https://doi.org/10.1175/JCLI4070.1"
+  - text: "ESMValTool documentation on this metric"
+    url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_ensclus.html
 settings:
   - Models:
       - ACCESS1-0
@@ -64,18 +58,22 @@ settings:
   - Extreme: 75th_percentile
   - Number of clusters: 3
   - Percentage of variance explained by PCs (perc): 80
-  - Number of PCs (numpcs): 'no' 
+  - Number of PCs (numpcs): 'no'
   - Experiment: Historical
   - Ensemble: r1i1p1
   - Start year: 1900
   - End year: 2005
 #youtube: MktvzcvflL8
 image_file: diagnosticsdata/ensclus/ensclus_thumbnail.png
-data: https://portal.c3s-magic.eu/data/recipes/recipe_ensclus_20181211.zip
-#provenance: <point to svg file>
-process: /calculate/ensclus
-
-
-
-
-
+data: {DATAURL}/recipes/recipe_extreme_index_wp7_20190308_062806.zip
+provenance: {DATAURL}/recipes/recipe_ensclus_20190308_045354/work/EnsClus/main/ens_anomalies_pr_32ens_JJA_EU_CMIP5_historical_provenance.svg
+process: /calculate/copernicus-wps/ensclus
+media:
+  - {DATAURL}/recipes/recipe_ensclus_20190308_045354/plots/EnsClus/main/anomalies_pr_32ens_JJA_EU_CMIP5_historical.png
+enableADAGUC:
+  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_ensclus_20190308_045354%2Fwork%2FEnsClus%2Fmain%2Fens_anomalies_pr_32ens_JJA_EU_CMIP5_historical.nc&&service=WMS&request=GetCapabilities
+  - projectionbutton: true
+  - layerselector: false
+  - timeselector: false
+  - styleselector: true
+  - layers: []

@@ -8,15 +8,15 @@ authors:
   - Bjoern Broetz
 contact:
   - Bjoern Broetz
-description_short: The NCAR Climate Variability Package (CVDP) is a stand alone ncl based application for the analysis of climate variability in models and observations.
+description_short: Metric showing major modes of climate variability in models and observations, including ENSO, Pacific Decadal Oscillation, Atlantic Multi-decadal Oscillation, Northern and Southern Annular Modes, North Atlantic Oscillation, Pacific North and South American teleconnection patterns.
 description_file: 'cvdp/description.md'
 media:
-  - https://portal.c3s-magic.eu/data/recipes/recipe_cvdp_20181207_142708/work/diagnostic1/cvdp/tas.mean.ann.png
-  - https://portal.c3s-magic.eu/data/recipes/recipe_cvdp_20181207_142708/work/diagnostic1/cvdp/psl.mean.ann.png
-  - https://portal.c3s-magic.eu/data/recipes/recipe_cvdp_20181207_142708/work/diagnostic1/cvdp/pr.mean.ann.png
-  - https://portal.c3s-magic.eu/data/recipes/recipe_cvdp_20181207_142708/work/diagnostic1/cvdp/pr.za.ann.png
-  - https://portal.c3s-magic.eu/data/recipes/recipe_cvdp_20181207_142708/work/diagnostic1/cvdp/nam.ann.png
-  - https://portal.c3s-magic.eu/data/recipes/recipe_cvdp_20181207_142708/work/diagnostic1/cvdp/nao.ann.png
+  - {DATAURL}/recipes/recipe_cvdp_20190308_045354/work/diagnostic1/cvdp/tas.mean.ann.png
+  - {DATAURL}/recipes/recipe_cvdp_20190308_045354/work/diagnostic1/cvdp/psl.mean.ann.png
+  - {DATAURL}/recipes/recipe_cvdp_20190308_045354/work/diagnostic1/cvdp/pr.mean.ann.png
+  - {DATAURL}/recipes/recipe_cvdp_20190308_045354/work/diagnostic1/cvdp/pr.za.ann.png
+  - {DATAURL}/recipes/recipe_cvdp_20190308_045354/work/diagnostic1/cvdp/nam.ann.png
+  - {DATAURL}/recipes/recipe_cvdp_20190308_045354/work/diagnostic1/cvdp/nao.ann.png
 references:
   - text: "CVDP webpage."
     url: http://www.cesm.ucar.edu/working_groups/CVC/cvdp/
@@ -24,6 +24,8 @@ references:
     url: https://github.com/NCAR/CVDP-ncl
   - text: "Phillips, A. S., C. Deser, and J. Fasullo, 2014: A New Tool for Evaluating Modes of Variability in Climate Models. EOS, 95, 453-455, doi: 10.1002/2014EO490002."
     url: https://doi.org/10.1002/2014EO490002
+  - text: "ESMValTool documentation for cvdp"
+    url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_cvdp.html
 settings:
   - Models:
       - MPI-ESM-LR
@@ -33,7 +35,7 @@ settings:
   - Start year: 2000
   - End year: 2002
 title: Climate Variability Diagnostics
-process: /calculate/cvdp
-data: https://portal.c3s-magic.eu/data/recipes/recipe_cvdp_20181207_142708.zip
+process: /calculate/copernicus-wps/cvdp
+data: {DATAURL}/recipes/recipe_cvdp_20190308_045354.zip
 #provenance: https://portal.c3s-magic.eu/data/recipes/recipe_python_20181207_141601/work/diagnostic1/script1/MultiModelMean_T3M_ta_2000-2002_mean_provenance.svg
-image_file: https://portal.c3s-magic.eu/data/recipes/recipe_cvdp_20181207_142708/work/diagnostic1/cvdp/tas.mean.ann.png
+image_file: ./diagnosticsdata/cvdp/tas.mean.ann.png
