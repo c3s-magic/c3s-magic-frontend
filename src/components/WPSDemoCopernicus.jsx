@@ -145,7 +145,10 @@ class WPSDemoCopernicus extends Component {
           let processNames = [];
 
           try {
-            let wpsProcessList = result['Capabilities']['ProcessOfferings']['Process'];
+            /* With a single input the keys are not mapped on {'0': ..., '1': ...} but directly to the object */
+            const wpsProcessListTMP = result['Capabilities']['ProcessOfferings']['Process'];
+            const wpsProcessListKeys = Object.keys(wpsProcessListTMP);
+            const wpsProcessList = (wpsProcessListKeys.length > 0 && wpsProcessListKeys[0] !== '0') ? { '0': wpsProcessListTMP } : wpsProcessListTMP;
             for (let key in wpsProcessList) {
               try {
                 let identifier = wpsProcessList[key]['Identifier'].value;
