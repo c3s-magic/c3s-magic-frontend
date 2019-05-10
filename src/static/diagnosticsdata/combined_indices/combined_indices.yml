@@ -1,17 +1,19 @@
 ---
-name: Single and multi-model indices based on area averages.
+name: Indices based on area averages.
 partner: BSC
 authors:
   - Alasdair Hunter
+  - Nuria Perez-Zanon
   - Nicolau Manubens
   - Louis-Philippe Caron
   - Javier Vegas.
 contact:
   - Alasdair Hunter @alasdairhunter
+  - Nuria Perez-Zanon @nperezzanon
   - Nicolau Manubens @nmanuben
-description_short: Metric showning single and multi model indices based on area averages.
+description_short: Metric showning Indices based on area averages.
 description_file: 'combine_indices/description.md'
-image_file: diagnosticsdata/combined_indices/single_and_multi_model_indices_thumbnail.png
+image_file: diagnosticsdata/combined_indices/Index_NAO.png
 report_file: report.pdf
 references:
   - text: "Manubens, Nicolau, Louis-Philippe Caron, Alasdair Hunter, Omar Bellprat, Eleftheria Exarchou, Neven S. Fučkar, Javier Garcia-Serrano et al. An R package for climate forecast verification. Environmental Modelling & Software 103 (2018): 29-42."
@@ -21,21 +23,18 @@ references:
 settings:
   - Models:
       - MPI-ESM-MR
-  - Variable: Percipitation
+  - Variable: Pressure
   - Start year: 1950
   - End year: 2005
-  - Longitude (pre-processor): "200-300"
-  - Latitude (pre-processor): "20-70"
   - Experiment: Historical
   - Ensemble: "r1i1p1"
-#  - Indices: tx90p, tx10p, cdd, rx5day, wx
-  - Weights: "equal"
+  - Region: "NAO"
   - Running mean: 5
   - First month: 1
   - Last month: 3
-  - Multi year average: "false"
   - Experiment: RCP8.5
-title: Single and multi-model indices based on area averages
+  - Standardized: "true" 
+title: Indices based on area averages
 # youtube:
 data: {DATAURL}/recipes/recipe_combined_indices_wp6_20190308_045354.zip
 media: diagnosticsdata/combined_indices/single_and_multi_model_indices.png
