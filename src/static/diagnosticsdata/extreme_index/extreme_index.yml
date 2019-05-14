@@ -6,9 +6,11 @@ authors:
   - Alasdair Hunter
   - Dragana Bojović
   - Nicolau Manubens
+  - Nuria Perez-Zanon
 contact:
   - Alasdair Hunter @alasdairhunter
   - Nicolau Manubens @nmanuben
+  - Nuria Perez-Zanon
 description_short: Metrics showing extreme indices relevant to the insurance industry (heat, cold, wind, flood and drought indices).
 description_file: 'extreme_index/description.md'
 report_file: report.pdf
@@ -46,6 +48,12 @@ settings:
   - Historical simulations: "1971-2000"
   - Projection: "2020 - 2040"
   - Experiment: RCP8.5
+  - Weight t90p: 0.2
+  - Weight t10p: 0.2
+  - Weight Wx: 0.2
+  - Weight cdd: 0.2
+  - Weight rx5day: 0.2
+  - Running mean: 5
 title: Combined Climate Extreme Index
 youtube:
 info_file: extreme_index/extreme_index.yml
