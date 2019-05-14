@@ -12,7 +12,7 @@ contact:
   - Nuria Perez-Zanon @nperezzanon
   - Nicolau Manubens @nmanuben
 description_short: Metric showning Indices based on area averages.
-description_file: 'combine_indices/description.md'
+description_file: 'combined_indices/description.md'
 image_file: diagnosticsdata/combined_indices/single_and_multi_model_indices_thumbnail.png
 report_file: report.pdf
 references:
