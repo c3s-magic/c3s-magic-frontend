@@ -153,9 +153,9 @@ diagnostics:
     combined_indices:
         id: 12
         name: combined_indices
-        title: Single and multi-model indices based on area averages.
+        title: Indices based on area averages
         sub_title:
-        info_text: Metric showning single and multi model indices based on area averages.
+        info_text: Metric showning Indices based on area averages.
         info_file: combined_indices/combined_indices.yml
         image_file: diagnosticsdata/combined_indices/single_and_multi_model_indices_thumbnail.png
         github_issue:
