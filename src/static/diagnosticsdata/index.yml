@@ -72,18 +72,17 @@ diagnostics:
           - ISAC-CNR
           - MiLES
           - Calculate
-    stratosphere-troposphere:
+    zmnam:
         id: 9
-        name: stratosphere-troposphere
-        title: Stratosphere-Troposphere coupling
+        name: zmnam
+        title: ZMNAM - Stratosphere-Troposphere coupling and annular modes indices
         sub_title:
-        info_text: Metric to evaluate the representation of the Northern Annular Mode (NAM) in climate simulations, using reanalysis datasets as reference.
-        info_file: stratosphere-troposphere/stratosphere-troposphere.yml
-        image_file: diagnosticsdata/stratosphere-troposphere/stratosphere-troposphere_thumbnail.png
+        info_text: Metric to compute the Zonal Mean Northern Annular Mode (ZMNAM). The diagnostics compute the index and the spatial pattern to assess the simulation of the strat-trop coupling in the boreal hemisphere.
+        info_file: zmnam/zmnam.yml
+        image_file: diagnosticsdata/zmnam/stratosphere-troposphere_thumbnail.png
         github_issue:
         tags:
           - WP4
-          - zmnam
           - ISAC-CNR
           - Calculate
     modes_of_variability:
@@ -163,19 +162,6 @@ diagnostics:
         tags:
           - WP6
           - BSC
-          - Calculate
-    annularmodes:
-        id: 2
-        name: annularmodes
-        title: Indices of Annular Modes
-        sub_title:
-        info_text: Metric to show the zonal mean Northern Annular Mode (NAM) to provide an evaluation of the NAM pattern at the surface and in the stratosphere.
-        info_file: annularmodes/annularmodes.yml
-        image_file: diagnosticsdata/annularmodes/annularmodes_thumbnail.png
-        github_issue:
-        tags:
-          - WP6
-          - ISAC-CNR
           - Calculate
     teleconnections:
         id: 5
