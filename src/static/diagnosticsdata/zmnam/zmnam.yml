@@ -44,7 +44,9 @@ title: ZMNAM - Stratosphere-Troposphere coupling and annular modes indices
 data: {DATAURL}/recipes/recipe_zmnam_20190308_175626.zip
 provenance: {DATAURL}/recipes/recipe_zmnam_20190308_175626/work/zmnam/main/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_pc_mo_provenance.svg
 process: /calculate/copernicus-wps/zmnam
-media:
+media: 
+- diagnosticsdata/zmnam/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_250hPa_mo_ts.png
+- diagnosticsdata/zmnam/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_250hPa_da_pdf.png
 #  - {DATAURL}/recipes/recipe_zmnam_20190308_175626/plots/zmnam/main/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_25000Pa_mo_reg.png
 #  - {DATAURL}/recipes/recipe_zmnam_20190308_175626/plots/zmnam/main/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_25000Pa_mo_ts.png
 #  - {DATAURL}/recipes/recipe_zmnam_20190308_175626/plots/zmnam/main/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_25000Pa_da_pdf.png
