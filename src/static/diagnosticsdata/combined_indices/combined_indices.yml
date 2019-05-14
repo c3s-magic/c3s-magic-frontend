@@ -1,19 +1,19 @@
 ---
-name: Indices based on area averages.
+name: Indices based on area averages
 partner: BSC
 authors:
   - Alasdair Hunter
   - Nuria Perez-Zanon
   - Nicolau Manubens
   - Louis-Philippe Caron
-  - Javier Vegas.
+  - Javier Vegas
 contact:
   - Alasdair Hunter @alasdairhunter
   - Nuria Perez-Zanon @nperezzanon
   - Nicolau Manubens @nmanuben
 description_short: Metric showning Indices based on area averages.
 description_file: 'combine_indices/description.md'
-image_file: diagnosticsdata/combined_indices/Index_NAO.png
+image_file: diagnosticsdata/combined_indices/single_and_multi_model_indices_thumbnail.png
 report_file: report.pdf
 references:
   - text: "Manubens, Nicolau, Louis-Philippe Caron, Alasdair Hunter, Omar Bellprat, Eleftheria Exarchou, Neven S. Fučkar, Javier Garcia-Serrano et al. An R package for climate forecast verification. Environmental Modelling & Software 103 (2018): 29-42."
@@ -37,6 +37,6 @@ settings:
 title: Indices based on area averages
 # youtube:
 data: {DATAURL}/recipes/recipe_combined_indices_wp6_20190308_045354.zip
-media: diagnosticsdata/combined_indices/single_and_multi_model_indices.png
+media: diagnosticsdata/combined_indices/Index_NAO.png
 provenance: {DATAURL}/recipes/recipe_combined_indices_wp6_20190308_045354/work/combine_indices/main/pr_MPI-ESM-MR_Mar-May_MPI-ESM-MR_1950-01-01_2005-12-31__provenance.svg
 process: /calculate/copernicus-wps/combined_indices
