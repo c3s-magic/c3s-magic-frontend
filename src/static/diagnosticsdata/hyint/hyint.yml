@@ -8,7 +8,7 @@ authors:
 contact:
   - Enrico Arnone e.arnone@isac.cnr.it
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
-description_short: The HyInt metrics calculates and maps the hydroclimatic intensity index HY-INT and additional hydroclimatic indices and climate extreme indices.
+description_short: Metric to calculate and map the hydroclimatic intensity index HY-INT and additional hydroclimatic indices and climate extreme indices.
 description_file: 'hyint/description.md'
 #media: https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360
 enableADAGUC:
