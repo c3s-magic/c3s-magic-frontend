@@ -36,20 +36,9 @@ settings:
   - Ensemble: "r1i1p1"
   - Start year: 1980
   - End year: 2020
-  - Normalization period: [1980,1999]
-  - Indices: 
-      - pa_norm
-      - hyint
-      - int_norm
-      - r95_norm 
-      - wsl_norm
-      - dsl_norm
-  - Regions:
-      - GL
-      - SA
-      - AF
-      - EU
-      - EA
+  - Normalization period: [1980-1999]
+  - Indices: pa_norm, hyint, int_norm, r95_norm, wsl_norm, dsl_norm
+  - Regions: GL, SA, AF, EU, EA
   - Figure type: 1, 2, 3, 12, 13, 14, 15
 title: Hydroclimatic intensity (HyInt) and extremes
 #process: /calculate/copernicus-wps/hyint
