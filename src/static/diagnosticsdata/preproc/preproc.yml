@@ -1,5 +1,5 @@
 ---
-name: ESMValTool Backend
+name: ESMValTool climate data pre-processor
 partner: DLR
 authors:
   - Veronika Eyring
@@ -31,16 +31,18 @@ references:
     url: "https://doi.org/10.5194/gmd-8-733-2015"
 settings:
   - Models:
+      - CanESM2
       - GFDL-ESM2G
       - MPI-ESM-LR
-      - bcc-csm1-1
-  - Variable: Temperature (3 dimensional)
+  - Variable: 
+      - Precipitation
+      - " Air Temperature"
   - Experiment: Historical
   - Ensemble: "r1i1p1"
   - Start year: 2000
   - End year: 2002
-  - Reference dataset: ERA-INTERIM
-  - Additional dataset: NCEP
+  - Reference dataset: CanESM2
+  - Additional dataset: MPI-ESM-LR
 title: ESMValTool climate data pre-processor
 process: /calculate/copernicus-wps/preproc
 data: {DATAURL}/recipes/recipe_python_20190307_180633.zip
