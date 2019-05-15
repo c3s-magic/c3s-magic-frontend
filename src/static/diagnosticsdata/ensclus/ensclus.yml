@@ -25,15 +25,15 @@ settings:
       - bcc-csm1-1
       - bcc-csm1-1-m
       - CanESM2
+      - CCSM4
       - CESM1-BGC
       - CESM1-CAM5
-      - CESM1-CAM5-1-FV2
       - CESM1-FASTCHEM
       - CESM1-WACCM
       - CMCC-CESM
       - CMCC-CMS
       - CNRM-CM5
-      - CNRM-CM5-2
+      - CSIRO-Mk3-6-0
       - FGOALS-g2
       - FIO-ESM
       - GFDL-CM2p1
