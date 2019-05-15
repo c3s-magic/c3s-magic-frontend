@@ -8,7 +8,7 @@ authors:
 contact:
   - Enrico Arnone e.arnone@isac.cnr.it
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
-description_short: Metric to calculate and map the hydroclimatic intensity index HY-INT and additional hydroclimatic indices and climate extreme indices.
+description_short: Metric to calculate the hydroclimatic intensity index (HY-INT) and additional hydroclimatic indices, which allow to evaluate the overall behaviour of the hydroclimatic cycle
 description_file: 'hyint/description.md'
 #media: https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360
 enableADAGUC:
@@ -26,18 +26,36 @@ references:
 settings:
   - Models:
       - ACCESS1-0
-  - Experiment: Historical
-  - Start year: 1990
-  - End year: 2005
-  - Normalization period: [1990,2000]
-  - Indices: 4
-  - Figure type: 1
+      - MPI-ESM-MR
+      - IPSL-CM5A-MR
+      - CCSM4
+  - Variable: "Precipitation"
+  - Experiment: 
+      - Historical
+      - rcp85
+  - Ensemble: "r1i1p1"
+  - Start year: 1980
+  - End year: 2020
+  - Normalization period: [1980,1999]
+  - Indices: 
+      - pa_norm
+      - hyint
+      - int_norm
+      - r95_norm 
+      - wsl_norm
+      - dsl_norm
+  - Regions:
+      - GL
+      - SA
+      - AF
+      - EU
+      - EA
+  - Figure type: 1, 2, 3, 12, 13, 14, 15
 title: Hydroclimatic intensity (HyInt) and extremes
-#youtube: jCk9or69VF0
-image_file: diagnosticsdata/hyint/hyint_thumbnail.png
+#process: /calculate/copernicus-wps/hyint
 #data: 
 #provenance: <point to svg file>
-#process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
+image_file: ./diagnosticsdata/hyint/hyint_thumbnail.png
 
 
 
