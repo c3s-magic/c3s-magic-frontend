@@ -57,8 +57,8 @@ settings:
   - Area: EU
   - Extreme: 75th_percentile
   - Number of clusters: 3
-  - Percentage of variance explained by PCs (perc): 80
-  - Number of PCs (numpcs): 'no'
+  - Percentage: 80
+  - Number of PCs (numpcs): 0
   - Experiment: Historical
   - Ensemble: r1i1p1
   - Start year: 1900
