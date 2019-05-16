@@ -11,10 +11,12 @@ The indices were selected following [Giorgi et al. (2014)](https://doi.org/10.10
 Secondly, also a selection of the 27 temperature and precipitation -based indices of extremes from the Expert Team on Climate Change Detection and Indices (ETCCDI) produced by the climdex (https://www.climdex.org) library can be ingested to produce a multi-index analysis. The tool allows then to perform a subsequent analysis of the selected indices calculating timeseries and trends over predefined continental areas, normalized to a reference period. Trends are calculated using the R lm function and significance testing performed with a Student T test on non-null coefficients hypothesis. Trend coefficients are stored together with their statistics which include standard error, t value and Pr(>|t|). 
 The tool can then produce a variety of types of plots including global and regional maps, maps of comparison between models and a reference dataset, timeseries with their spread, trend lines and summary plots of trend coefficients.
 
+<!---change the following paragraph if hyint timeseries will not be merged-->
 In the following example figures we present the output figure type-1 for the hyint index calculated for EC-Earth rcp85 multi year mean over 1976-2100 with boxes for user-selected regions, and output figure type-12 and type-14 for selected indices and regions calculated for EC-Earth rcp85 over 1976-2100.
 
 ![example output](diagnosticsdata/hyint/hyint_EC-Earth_rcp85_r8i1p1_r320x160_1976_2100_ALL_myear-mean_Globe_map.png "Example Output")
 
+<!---plots to b eremoved if hyint timeseries will not be merged-->
 ![example output](diagnosticsdata/hyint_timeseries/hyint_timeseries.png "Example Output")
 
 ![example output](diagnosticsdata/hyint_timeseries/hyint_trends1.png "Example Output")
