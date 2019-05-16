@@ -9,7 +9,7 @@ authors:
 contact:
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
   - Enrico Arnone e.arnone@isac.cnr.it
-description_short: Diagnostic showing the quantile bias between models and a reference dataset
+description_short: Diagnostic showing the precipitation quantile bias between models and a reference dataset
 description_file: 'quantilebias/description.md'
 #media: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360'
 enableADAGUC:
@@ -24,14 +24,17 @@ references:
     url: "https://doi.org/10.1029/2011JD015934"
 settings:
   - Models:
-      - MPI-ESM-P
+      - EC-EARTH
+      - ACCESS1-0
+  - Variable: Precipitation
   - Experiment: Historical
+  - Ensamble: r1i1p1
   - Start year: 1979
-  - End year: 2005
+  - End year: 1997
   - Quantile: 75
+  - Reference dataset: GPCP-SG
 title: Precipitation quantile bias
 image_file: diagnosticsdata/quantilebias/quantilebias_thumbnail.png
-
 data: https://portal.c3s-magic.eu/data/recipes/recipe_quantile_bias_20181211.zip
 #provenance: <point to svg file>
 #process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
