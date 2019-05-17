@@ -7,7 +7,9 @@ import ImagePreview from './ImagePreview';
 import { withRouter } from 'react-router';
 import Icon from 'react-fa';
 import _ from 'lodash';
+import axios from 'axios';
 import MarkdownFromFile from '../containers/MarkdownFromFile';
+import { produce } from 'immer';
 
 class WPSDemoCopernicus extends Component {
   constructor (props) {
@@ -29,7 +31,7 @@ class WPSDemoCopernicus extends Component {
     this.setComputeNode = this.setComputeNode.bind(this);
     this.setStatePromise = this.setStatePromise.bind(this);
     this.renderCompute = this.renderCompute.bind(this);
-    console.log('Constructing WPSDemoCopernicus', this.props.location);
+    this.getDRSTree = this.getDRSTree.bind(this);
     this.state = {
       describeProcessDocument: null,
       currentWPSNodeName: this.getInfoFromLocation(this.props.location).computeNode,
@@ -47,7 +49,23 @@ class WPSDemoCopernicus extends Component {
       errorExists: false,
       errorContent: ''
     };
+    this.drsTree = null;
+    console.log('constructed');
+    this.getDRSTree();
     // console.log(props);
+  }
+
+  getDRSTree () {
+    console.log('Getting DRS tree');
+    axios({
+      method: 'get',
+      url: './cp4cds-wps-tree.json',
+      responseType: 'json'
+    }).then(src => {
+      console.log(src.data[0].contents);
+    }).catch((e) => {
+      console.error(e);
+    });
   }
 
   getWPSUrlByName (wpsName) {
@@ -306,7 +324,7 @@ class WPSDemoCopernicus extends Component {
                 newInput.identifier = itemIdentifier;
                 newInput.type = itemDataType;
                 newInput.default = itemDefaultValue;
-                newInput.selected = itemDefaultValue;
+                newInput.selected = [ itemDefaultValue ];
                 newInput.abstract = itemAbstract;
                 newInput.allowedValues = [];
                 for (let keyAV in itemAllowedValues) {
@@ -404,40 +422,139 @@ class WPSDemoCopernicus extends Component {
     if (!inputList || inputList.length === 0) {
       return (<div>This process has no inputs</div>);
     }
+
+    let compositeInputType = 'standard';
+    if (inputList.filter(el => el.identifier === 'model' || el.identifier === 'experiment' || el.identifier === 'ensemble').length === 3) {
+      compositeInputType = 'model_experiment_ensemble';
+    }
+
+
+    
+
     let formElements = inputList.map((el, index) => {
       if (el.type === 'string' && el.allowedValues.length > 0) {
-        // console.log('selectbox: ', el);
-        // console.log(el.allowedValues);
-        return (
-          <div key={'container' + el.title + index} className={'WPSDemoCopernicus_InputLabels'} >
-            <label key={el.title + index}>
-              <span className={'WPSDemoCopernicus_InputLabelsLabel'}>
-                {el.title}:
+        /* Standard drop down box */
+        if (compositeInputType === 'model_experiment_ensemble' && el.identifier === 'model') {
+          const numModels = this.state.processInputs.filter(el => el.identifier === 'model')[0].selected.length;
+          const modelInput = el;
+          const experimentInput = inputList.filter(el => el.identifier === 'experiment')[0];
+          const ensembleInput = inputList.filter(el => el.identifier === 'ensemble')[0];
+          return (
+            <div key={'container' + el.title + index} className={'WPSDemoCopernicus_InputLabels'} >
+              { this.state.processInputs.filter(el => el.identifier === 'model')[0].selected.map((selectedItem, selectedItemIndex) => {
+                console.log(selectedItemIndex);
+                return (
+                  <label key={modelInput.title + '_' + index + '_' + selectedItemIndex}>
+                    <span key='WPSDemoCopernicus_InputLabelsLabel' className={'WPSDemoCopernicus_InputLabelsLabel'}>
+                      {modelInput.title + ' [' + selectedItemIndex + ']'}:
+                    </span>
+                    <select
+                      key={'select_' + modelInput.identifier}
+                      value={this.state.processInputs.filter(el => el.identifier === 'model')[0].selected[selectedItemIndex]}
+                      onChange={this.onChange}
+                      name={modelInput.identifier + ',' + selectedItemIndex}
+                    >
+                      {modelInput.allowedValues.map(av =>
+                        <option
+                          key={av}
+                          value={av}
+                        >
+                          {av}
+                        </option>
+                      )}
+                    </select>
+                    <select
+                      key={'select_' + experimentInput.identifier}
+                      value={this.state.processInputs.filter(el => el.identifier === 'experiment')[0].selected[selectedItemIndex]}
+                      onChange={this.onChange}
+                      name={experimentInput.identifier + ',' + selectedItemIndex}
+                    >
+                      {experimentInput.allowedValues.map(av =>
+                        <option
+                          key={av}
+                          value={av}
+                        >
+                          {av}
+                        </option>
+                      )}
+                    </select>
+                    <select
+                      key={'select_' + ensembleInput.identifier}
+                      value={this.state.processInputs.filter(el => el.identifier === 'ensemble')[0].selected[selectedItemIndex]}
+                      onChange={this.onChange}
+                      name={ensembleInput.identifier + ',' + selectedItemIndex}
+                    >
+                      {ensembleInput.allowedValues.map(av =>
+                        <option
+                          key={av}
+                          value={av}
+                        >
+                          {av}
+                        </option>
+                      )}
+                    </select>
+                    { ((numModels - 1) === selectedItemIndex) && <button
+                      onClick={() => {
+                        this.setState(
+                          produce(this.state, draft => {
+                            draft.processInputs.filter(el => el.identifier === 'model')[0].selected.push(
+                              draft.processInputs.filter(el => el.identifier === 'model')[0].allowedValues[0]);
+                            draft.processInputs.filter(el => el.identifier === 'experiment')[0].selected.push(
+                              draft.processInputs.filter(el => el.identifier === 'experiment')[0].allowedValues[0]);
+                            draft.processInputs.filter(el => el.identifier === 'ensemble')[0].selected.push(
+                              draft.processInputs.filter(el => el.identifier === 'ensemble')[0].allowedValues[0]);
+                          }), () => {
+                            this.setState({
+                              showForm: true,
+                              wpsFormElements: this.createForm()
+                            });
+                          }
+                        );
+                      }}>+
+                    </button>
+                    }
+                  </label>
+                );
+              })
+              }
+
+            </div>
+          );
+        } if (compositeInputType === 'model_experiment_ensemble' && el.identifier === 'experiment') {
+          return (<div key='no_experiment' />);
+        } if (compositeInputType === 'model_experiment_ensemble' && el.identifier === 'ensemble') {
+          return (<div key='no_ensemble' />);
+        } else {
+          return (
+            <div key={'container' + el.title + index} className={'WPSDemoCopernicus_InputLabels'} >
+              <label key={el.title + index}>
+                <span className={'WPSDemoCopernicus_InputLabelsLabel'}>
+                  {el.title}:
+                </span>
+                <select
+                  value={this.state.processInputs[index].selected[0]}
+                  onChange={this.onChange}
+                  name={el.identifier}
+                >
+                  {el.allowedValues.map(av =>
+                    <option
+                      key={av}
+                      value={av}
+                    >
+                      {av}
+                    </option>
+                  )}
+                </select>
+              </label>
+              <span className={'WPSDemoCopernicus_InputAbstract'}>
+                {el.abstract}
               </span>
-              <select
-                value={this.state.processInputs[index].selected}
-                onChange={this.onChange}
-                name={el.title}
-              >
-                {el.allowedValues.map(av =>
-                  <option
-                    key={av}
-                    value={av}
-                  >
-                    {av}
-                  </option>
-                )}
-              </select>
-            </label>
-            <span className={'WPSDemoCopernicus_InputAbstract'}>
-              {el.abstract}
-            </span>
-          </div>
-        );
+            </div>
+          );
+        }
       }
 
       if (el.type === 'string') {
-        // console.log('string: ', el);
         return (
           <div key={'container' + el.title + index} className={'WPSDemoCopernicus_InputLabels'} >
             <label key={el.default}>
@@ -447,8 +564,8 @@ class WPSDemoCopernicus extends Component {
               <input
                 key={el.title + index}
                 type='text'
-                name={el.title}
-                value={this.state.processInputs[index].selected}
+                name={el.identifier}
+                value={this.state.processInputs[index].selected[0]}
                 onChange={this.onChange} />
             </label>
             <span className={'WPSDemoCopernicus_InputAbstract'}>
@@ -459,7 +576,6 @@ class WPSDemoCopernicus extends Component {
       }
 
       if (el.type === 'integer' || el.type === 'float') {
-        // console.log('integer: ', el);
         return (
           <div key={'container' + el.title + index} className={'WPSDemoCopernicus_InputLabels'} >
             <label key={el.title + index}>
@@ -472,7 +588,7 @@ class WPSDemoCopernicus extends Component {
                 type='number'
                 size='6'
                 width='6'
-                value={this.state.processInputs[index].selected}
+                value={this.state.processInputs[index].selected[0]}
                 onChange={this.onChange} />
             </label>
             <span className={'WPSDemoCopernicus_InputAbstract'}>
@@ -505,12 +621,7 @@ class WPSDemoCopernicus extends Component {
         dataInputs += ';';
       }
       dataInputs += value.identifier + '=' + value.selected;
-      // console.log(key, value.title, value.selected);
-      // console.log(dataInputs);
     });
-    // dataInputs += ']';
-
-    // console.log(dataInputs);
 
     const { dispatch, actions, nrOfStartedProcesses } = this.props;
     let wpsUrl = this.getWPSUrlByName(this.state.currentWPSNodeName);
@@ -525,34 +636,26 @@ class WPSDemoCopernicus extends Component {
   }
 
   onChange (event) {
-    this.setState({ isBusy: true });
-    this.setState({ isBusyMessage: 'onChange' });
-
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    let stateItemIndex = this.state.processInputs.map((e) => { return e.title; }).indexOf(name);
-    // console.log('stateItemIndex:', stateItemIndex);
-
-    const items = this.state.processInputs;
-    items[stateItemIndex].selected = value;
+    const name = target.name.split(',')[0];
+    let itemIndex = 0;
+    if (target.name.split(',').length === 2) itemIndex = parseInt(target.name.split(',')[1]);
 
     // update state
-    this.setState({
-      items
-    });
-
-    // update the form
-    let formElements = this.createForm();
-    this.setState({ showForm: true });
-
-    this.setState({
-      wpsFormElements: formElements
-    });
-
-    this.setState({ isBusy: false });
-    this.setState({ isBusyMessage: '' });
+    this.setState(
+      produce(this.state, draft => {
+        let stateItemIndex = this.state.processInputs.findIndex(e => e.identifier === name);
+        draft.processInputs[stateItemIndex].selected[itemIndex] = value;
+      }), () => {
+        this.setState({
+          showForm: true,
+          wpsFormElements: this.createForm()
+        }, () => {
+          console.log(this.state);
+        });
+      }
+    );
   }
 
   getInfoFromLocation (newLocation) {
