@@ -10,6 +10,7 @@ import _ from 'lodash';
 import axios from 'axios';
 import MarkdownFromFile from '../containers/MarkdownFromFile';
 import { produce } from 'immer';
+import { findDrsItems } from '../utils/drsTools';
 
 class WPSDemoCopernicus extends Component {
   constructor (props) {
@@ -63,6 +64,7 @@ class WPSDemoCopernicus extends Component {
       responseType: 'json'
     }).then(src => {
       console.log(src.data[0].contents);
+      this.drsTree = src.data;
     }).catch((e) => {
       console.error(e);
     });
@@ -427,10 +429,6 @@ class WPSDemoCopernicus extends Component {
     if (inputList.filter(el => el.identifier === 'model' || el.identifier === 'experiment' || el.identifier === 'ensemble').length === 3) {
       compositeInputType = 'model_experiment_ensemble';
     }
-
-
-    
-
     let formElements = inputList.map((el, index) => {
       if (el.type === 'string' && el.allowedValues.length > 0) {
         /* Standard drop down box */
@@ -442,7 +440,10 @@ class WPSDemoCopernicus extends Component {
           return (
             <div key={'container' + el.title + index} className={'WPSDemoCopernicus_InputLabels'} >
               { this.state.processInputs.filter(el => el.identifier === 'model')[0].selected.map((selectedItem, selectedItemIndex) => {
+                const modelValue = this.state.processInputs.filter(el => el.identifier === 'model')[0].selected[selectedItemIndex];
                 console.log(selectedItemIndex);
+                const drsItems = findDrsItems(this.drsTree[0], { model: modelValue }, ['model', 'experiment', 'ensemble']);
+                console.log(drsItems);
                 return (
                   <label key={modelInput.title + '_' + index + '_' + selectedItemIndex}>
                     <span key='WPSDemoCopernicus_InputLabelsLabel' className={'WPSDemoCopernicus_InputLabelsLabel'}>
@@ -450,7 +451,7 @@ class WPSDemoCopernicus extends Component {
                     </span>
                     <select
                       key={'select_' + modelInput.identifier}
-                      value={this.state.processInputs.filter(el => el.identifier === 'model')[0].selected[selectedItemIndex]}
+                      value={modelValue}
                       onChange={this.onChange}
                       name={modelInput.identifier + ',' + selectedItemIndex}
                     >
@@ -474,7 +475,7 @@ class WPSDemoCopernicus extends Component {
                           key={av}
                           value={av}
                         >
-                          {av}
+                          {(drsItems['experiment'].findIndex(e => e === av) === -1 ? av + ' (not available)' : av)}
                         </option>
                       )}
                     </select>
@@ -489,7 +490,7 @@ class WPSDemoCopernicus extends Component {
                           key={av}
                           value={av}
                         >
-                          {av}
+                          {(drsItems['ensemble'].findIndex(e => e === av) === -1 ? av + ' (not available)' : av)}
                         </option>
                       )}
                     </select>
@@ -617,14 +618,17 @@ class WPSDemoCopernicus extends Component {
     this.setState({ isBusyMessage: 'formSubmit' });
     let dataInputs = '';
     _.forIn(this.state.processInputs, (value, key) => {
-      if (dataInputs.length > 1) {
-        dataInputs += ';';
+      for (let j = 0; j < value.selected.length; j++) {
+        if (dataInputs.length > 1) {
+          dataInputs += ';';
+        }
+        dataInputs += value.identifier + '=' + value.selected[j];
       }
-      dataInputs += value.identifier + '=' + value.selected;
     });
 
     const { dispatch, actions, nrOfStartedProcesses } = this.props;
     let wpsUrl = this.getWPSUrlByName(this.state.currentWPSNodeName);
+    console.log(dataInputs);
     dispatch(actions.startWPSExecute(wpsUrl,
       this.state.selectedProcess,
       dataInputs,
