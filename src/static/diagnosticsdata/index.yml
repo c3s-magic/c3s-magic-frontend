@@ -141,7 +141,7 @@ diagnostics:
         name: ensclus
         title: EnsClus - Ensemble Clustering
         sub_title:
-        info_text: Cluster analysis tool based on the k-means algorithm for ensembles of climate model simulations. EnsClus groups ensemble members according to similar characteristics and select the most representative member for each cluster.
+        info_text: Cluster analysis tool for ensembles of climate model simulations. EnsClus groups ensemble members according to similar characteristics (based on the k-means algorithm) and selects the most representative member for each cluster.
         info_file: ensclus/ensclus.yml
         image_file: diagnosticsdata/ensclus/ensclus_thumbnail.png
         github_issue:
