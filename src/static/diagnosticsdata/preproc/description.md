@@ -9,4 +9,4 @@ Features of the ESMValTool Climate data pre-processor are:
 * multi-model mean,
 * and many more
 
-[See ESMValtool User’s guide](https://esmvaltool.readthedocs.io) for more information on the ESMValTool pre-processor installation and usage.
+See [ESMValtool User’s guide](https://esmvaltool.readthedocs.io) for more information on the ESMValTool pre-processor installation and usage.

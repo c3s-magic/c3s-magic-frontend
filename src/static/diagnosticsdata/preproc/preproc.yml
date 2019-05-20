@@ -1,5 +1,5 @@
 ---
-name: ESMValTool Backend
+name: ESMValTool climate data pre-processor
 partner: DLR
 authors:
   - Veronika Eyring
@@ -19,28 +19,30 @@ description_file: preproc/description.md
 image_file: ./diagnosticsdata/preproc/CMIP5_bcc-csm1-1_Amon_historical_r1i1p1_T3M_ta_2001-2002_mean_r_2i936e.png
 #report_file: report.pdf
 media: "{DATAURL}/recipes/recipe_python_20190307_180633/plots/diagnostic1/script1/MultiModelMean_T3M_ta_2000-2002_mean.png"
-enableADAGUC:
-  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_python_20190307_180633%2Fpreproc%2Fdiagnostic1%2Fta%2FMultiModelMean_T3M_ta_2000-2002.nc&&service=WMS&request=GetCapabilities
-  - projectionbutton: true
-  - layerselector: true
-  - timeselector: true
-  - styleselector: true
-  - layers: []
+#enableADAGUC:
+#  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_python_20190307_180633%2Fpreproc%2Fdiagnostic1%2Fta%2FMultiModelMean_T3M_ta_2000-2002.nc&&service=WMS&request=GetCapabilities
+#  - projectionbutton: true
+#  - layerselector: true
+#  - timeselector: true
+#  - styleselector: true
+#  - layers: []
 references:
   - text: "Righi, M., Eyring, V., Klinger, C., Frank, F., Gottschaldt, K.-D., Jöckel, P., and Cionni, I.: Quantitative evaluation of oone and selected climate parameters in a set of EMAC simulations, Geosci. Model Dev., 8, 733, doi: 10.5194/gmd-8-733-2015 (2015)."
     url: "https://doi.org/10.5194/gmd-8-733-2015"
 settings:
   - Models:
+      - CanESM2
       - GFDL-ESM2G
       - MPI-ESM-LR
-      - bcc-csm1-1
-  - Variable: Temperature (3 dimensional)
+  - Variable: 
+      - Precipitation
+      - " Air Temperature"
   - Experiment: Historical
   - Ensemble: "r1i1p1"
   - Start year: 2000
   - End year: 2002
-  - Reference dataset: ERA-INTERIM
-  - Additional dataset: NCEP
+  - Reference dataset: CanESM2
+  - Additional dataset: MPI-ESM-LR
 title: ESMValTool climate data pre-processor
 process: /calculate/copernicus-wps/preproc
 data: {DATAURL}/recipes/recipe_python_20190307_180633.zip
