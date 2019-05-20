@@ -21,7 +21,7 @@ enableADAGUC:
   - layers: []
 references:
   - text: "Mehran, A. et al., 2014, Journal of Geophysical Research (Atmospheres), Volume 119, Issue 4, pp. 1695-1707"
-    url: "https://doi.org/10.1029/2011JD015934"
+    url: "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2013JD021152"
 settings:
   - Models:
       - EC-EARTH
