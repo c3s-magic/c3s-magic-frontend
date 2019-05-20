@@ -1,7 +1,7 @@
 The Earth’s hydrological cycle is of key importance both for the climate system and society. 
 For example, the intensity and distribution of precipitation determines the availability or scarcity of fresh water in a certain region, and it is also related to the severity of hazardous events such as flooding or droughts. 
 
-The simple investigation of average precipitation quantities can clearly hide some of the most relevant aspects of the hydrological cycle and its extremes [(e.g., Giorgi et al., 2014)](https://doi.org/10.1002/2014JD022238). More in general, temperature and precipitation extremes have been the focus of recent climate studies attempting to capture the most relevant component of climate variability and impact on society in a changing climate [(e.g., Alexander, 2016)](https://doi.org/10.1016/j.wace.2015.10.007). 
+The simple investigation of average precipitation quantities can clearly hide some of the most relevant aspects of the hydrological cycle and its extremes [(e.g., Giorgi et al., 2014)](https://doi.org/10.1002/2014JD022238). More in general, temperature and precipitation extremes have been the focus of recent climate studies attempting to capture the most relevant component of climate variability and impact on society in a changing climate.
 
 A particular effort has been dedicated to developing and standardising indices that can be adopted for investigation studies with observations and climate models. 
 
