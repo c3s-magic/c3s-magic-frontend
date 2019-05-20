@@ -11,7 +11,7 @@ authors:
 contact:
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
   - Enrico Arnone e.arnone@isac.cnr.it
-description_short: Cluster analysis tool based on the k-means algorithm for ensembles of climate model simulations. EnsClus groups ensemble members according to similar characteristics and select the most representative member for each cluster.
+description_short: Cluster analysis tool for ensembles of climate model simulations. EnsClus groups ensemble members according to similar characteristics (based on the k-means algorithm) and selects the most representative member for each cluster.
 description_file: 'ensclus/description.md'
 references:
   - text: "Straus, D. M., S. Corti, and F. Molteni, 2007: Circulation regimes: Chaotic variability vs. SST forced predictability. J. Climate, 20, 2251–2272"
@@ -52,7 +52,7 @@ settings:
       - MPI-ESM-P
       - NorESM1-M
       - NorESM1-ME
-  - Varibale: Precipitation
+  - Variable: Precipitation
   - Season: JJA
   - Area: EU
   - Extreme: 75th_percentile
@@ -70,10 +70,10 @@ provenance: {DATAURL}/recipes/recipe_ensclus_20190308_045354/work/EnsClus/main/e
 process: /calculate/copernicus-wps/ensclus
 media:
   - {DATAURL}/recipes/recipe_ensclus_20190308_045354/plots/EnsClus/main/anomalies_pr_32ens_JJA_EU_CMIP5_historical.png
-enableADAGUC:
-  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_ensclus_20190308_045354%2Fwork%2FEnsClus%2Fmain%2Fens_anomalies_pr_32ens_JJA_EU_CMIP5_historical.nc&&service=WMS&request=GetCapabilities
-  - projectionbutton: true
-  - layerselector: false
-  - timeselector: false
-  - styleselector: true
-  - layers: []
+#enableADAGUC:
+#  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_ensclus_20190308_045354%2Fwork%2FEnsClus%2Fmain%2Fens_anomalies_pr_32ens_JJA_EU_CMIP5_historical.nc&&service=WMS&request=GetCapabilities
+#  - projectionbutton: true
+#  - layerselector: false
+#  - timeselector: false
+#  - styleselector: true
+#  - layers: []
