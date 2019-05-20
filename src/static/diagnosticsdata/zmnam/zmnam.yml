@@ -10,17 +10,17 @@ authors:
 contact:
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
   - Federico Serva federico.serva@artov.isac.cnr.it
-description_short: Metric to compute the Zonal Mean Northern Annular Mode (ZMNAM). The diagnostics compute the index and the spatial pattern to assess the simulation of the strat-trop coupling in the boreal hemisphere.
+description_short: Metric to compute the Zonal Mean Northern Annular Mode (ZMNAM) in climate simulations using reanalysis datasets as reference.
 description_file: 'zmnam/description.md'
 image_file: diagnosticsdata/zmnam/stratosphere-troposphere_thumbnail.png
 #media: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360'
-#enableADAGUC:
-#  - data_url: https://portal.c3s-magic.eu/backend/wms?DATASET=WP4-6_ISAC_zmnam
-#  - projectionbutton: true
-#  - layerselector: true
-#  - timeselector: true
-#  - styleselector: true
-#  - layers: []
+enableADAGUC:
+  - data_url: https://portal.c3s-magic.eu/backend/wms?DATASET=WP4-6_ISAC_zmnam
+  - projectionbutton: true
+  - layerselector: true
+  - timeselector: true
+  - styleselector: true
+  - layers: []
 references:
 - text: "Baldwin, M. P. and Thompson, D. W. (2009), A critical comparison of stratosphere–troposphere coupling indices. Q.J.R. Meteorol. Soc., 135: 1661-1672. doi:10.1002/qj.479"
   url: https://doi.org/10.1002/qj.479
@@ -33,7 +33,7 @@ references:
 settings:
   - Models:
       - MPI-ESM-MR
-  - Variable: Geopotential height (zg)
+  - Variable: "Geopotential height (zg)"
   - Experiment: Historical
   - Ensamble: "r1i1p1"
   - Start year: 1979
@@ -44,7 +44,9 @@ title: ZMNAM - Stratosphere-Troposphere coupling and annular modes indices
 data: {DATAURL}/recipes/recipe_zmnam_20190308_175626.zip
 provenance: {DATAURL}/recipes/recipe_zmnam_20190308_175626/work/zmnam/main/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_pc_mo_provenance.svg
 process: /calculate/copernicus-wps/zmnam
-media:
+media: 
+- diagnosticsdata/zmnam/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_250hPa_mo_ts.png
+- diagnosticsdata/zmnam/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_250hPa_da_pdf.png
 #  - {DATAURL}/recipes/recipe_zmnam_20190308_175626/plots/zmnam/main/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_25000Pa_mo_reg.png
 #  - {DATAURL}/recipes/recipe_zmnam_20190308_175626/plots/zmnam/main/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_25000Pa_mo_ts.png
 #  - {DATAURL}/recipes/recipe_zmnam_20190308_175626/plots/zmnam/main/CMIP5_MPI-ESM-MR_amip_r1i1p1_1979-2008_25000Pa_da_pdf.png

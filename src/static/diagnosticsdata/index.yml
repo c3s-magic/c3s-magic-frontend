@@ -77,7 +77,7 @@ diagnostics:
         name: zmnam
         title: ZMNAM - Stratosphere-Troposphere coupling and annular modes indices
         sub_title:
-        info_text: Metric to compute the Zonal Mean Northern Annular Mode (ZMNAM). The diagnostics compute the index and the spatial pattern to assess the simulation of the strat-trop coupling in the boreal hemisphere.
+        info_text: Metric to compute the Zonal Mean Northern Annular Mode (ZMNAM) in climate simulations using reanalysis datasets as reference.
         info_file: zmnam/zmnam.yml
         image_file: diagnosticsdata/zmnam/stratosphere-troposphere_thumbnail.png
         github_issue:
