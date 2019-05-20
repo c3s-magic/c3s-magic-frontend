@@ -103,7 +103,7 @@ diagnostics:
         name: hyint
         title: Hydroclimatic intensity (HyInt) and extremes
         sub_title:
-        info_text: The HyInt metrics show the hydroclimatic intensity index HY-INT and additional hydroclimatic indices, which allow to evaluate the overall behaviour of the hydroclimatic cycle
+        info_text: The HyInt metrics shows the hydroclimatic intensity index HY-INT and additional hydroclimatic indices, which allow to evaluate the overall behaviour of the hydroclimatic cycle
         info_file: hyint/hyint.yml
         image_file: diagnosticsdata/hyint/hyint_thumbnail.png
         github_issue:
@@ -191,18 +191,6 @@ diagnostics:
           - ISAC-CNR
           - MiLES
           - Calculate
-    hyint_timeseries:
-        id: 10
-        name: hyint_timeseries
-        title: HyInt and ETCCDI trends and significance testing
-        sub_title:
-        info_text: Metric showing timeseries and trends for the HyInt hydroclimatic indices and ETCCDI extremes indices.
-        info_file: hyint_timeseries/hyint_timeseries.yml
-        image_file: diagnosticsdata/hyint_timeseries/hyint_timeseries_thumbnail.png
-        github_issue:
-        tags:
-          - WP6
-          - ISAC-CNR
     correlations:
         id: 11
         name: correlations
