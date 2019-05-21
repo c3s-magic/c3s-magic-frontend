@@ -29,7 +29,7 @@ settings:
   - Variable: Precipitation
   - Experiment: Historical
   - Ensamble: r1i1p1
-  - Start year: 1979
+  - Start year: 1997
   - End year: 1997
   - Quantile: 75
   - Reference dataset: GPCP-SG
