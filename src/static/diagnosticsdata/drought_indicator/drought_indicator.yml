@@ -20,7 +20,6 @@ references:
 settings:
   - Models:
       - ACCESS1-0
-      - ERA-Interim
       # - ACCESS1-3
       # - BNU-ESM
       # - CNRM-CM5
@@ -35,9 +34,14 @@ settings:
       # - IPSL-CM5B-LR
       # - MPI-ESM-MR
       # - NorESM1-M
-  - Start year: 1990
-  - End year: 1999
+  - Variables: 
+      - Percipitation 
+      - Temperature
   - Experiment: Historical
+  - Ensemble: r1i1p1
+  - Start year: 2000
+  - End year: 2005
+  - Reference dataset: ERA-Interim
   - dryindex:
       - SPI
       - SPEI
