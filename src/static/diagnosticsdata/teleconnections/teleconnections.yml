@@ -1,6 +1,6 @@
 ---
 id: 1
-name: Teleconnection Indices
+name: Teleconnection Indices (MiLES) 
 partner: ISAC-CNR
 authors:
   - Paolo Davini (ISAC-CNR, Italy)
@@ -35,7 +35,7 @@ settings:
   - Season: DJF
   - Reference dataset: ERA-INTERIM
   - Teleconnection index: NAO
-title: Teleconnection Indices
+title: Teleconnection Indices (MiLES)
 data: {DATAURL}/recipes/recipe_miles_eof_20190308_064303.zip
 provenance: {DATAURL}/recipes/recipe_miles_eof_20190308_064303/work/miles_diagnostics/miles_eof/EC-EARTH/historical/r2i1p1/1980-1989/DJF/EOFs/NAO/EOFs_EC-EARTH_historical_r2i1p1_1980-1989_DJF_provenance.svg
 process: /calculate/copernicus-wps/teleconnections
@@ -44,10 +44,10 @@ media:
   - {DATAURL}/recipes/recipe_miles_eof_20190308_064303/plots/miles_diagnostics/miles_eof/EC-EARTH/historical/r2i1p1/1980-1989/DJF/EOFs/NAO/EOF2_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
   - {DATAURL}/recipes/recipe_miles_eof_20190308_064303/plots/miles_diagnostics/miles_eof/EC-EARTH/historical/r2i1p1/1980-1989/DJF/EOFs/NAO/EOF3_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
   - {DATAURL}/recipes/recipe_miles_eof_20190308_064303/plots/miles_diagnostics/miles_eof/EC-EARTH/historical/r2i1p1/1980-1989/DJF/EOFs/NAO/EOF4_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
-enableADAGUC:
-  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_miles_eof_20190308_064303%2Fwork%2Fmiles_diagnostics%2Fmiles_eof%2FEC-EARTH%2Fhistorical%2Fr2i1p1%2F1980-1989%2FDJF%2FEOFs%2FNAO%2FEOFs_EC-EARTH_historical_r2i1p1_1980-1989_DJF.nc&&service=WMS&request=GetCapabilities
-  - projectionbutton: true
-  - layerselector: true
-  - timeselector: false
-  - styleselector: true
-  - layers: []
+#enableADAGUC:
+#  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_miles_eof_20190308_064303%2Fwork%2Fmiles_diagnostics%2Fmiles_eof%2FEC-EARTH%2Fhistorical%2Fr2i1p1%2F1980-1989%2FDJF%2FEOFs%2FNAO%2FEOFs_EC-EARTH_historical_r2i1p1_1980-1989_DJF.nc&&service=WMS&request=GetCapabilities
+#  - projectionbutton: true
+#  - layerselector: true
+#  - timeselector: false
+#  - styleselector: true
+#  - layers: []
