@@ -1,0 +1,37 @@
+---
+id: 111
+name: Toy Model
+partner: BSC
+authors:
+  - Nuria Perez-Zanon (BSC, Spain)
+contact:
+  - Nuria Perez-Zanon nuria.perez@bsc.es
+description_short: Diagnostic to simulate single-model ensembles from an observational dataset to investigate the effect of observational uncertainty.
+description_file: 'toy_model/description.md'
+image_file: diagnosticsdata/toy_model/synthetic_CMIP5_IPSL-CM5A-LR_day_historical_r1i1p1_T2M_tasmax_1999-2000.jpg
+references:
+  - text: "Bellprat, O., Massonnet, F., Siegert, S., Prodhomme, C., Macias-Gómez, D., Guemas, V., & Doblas-Reyes, F. (2017). Uncertainty propagation in observational references to climate model scales. Remote Sensing of Environment, 203, 101-108., doi:10.1016/j.rse.2017.06.034"
+    url: "https://doi.org/10.1016/j.rse.2017.06.034"
+  - text: "Massonet, F., Bellprat, O. Guemas, V., & Doblas-Reyes, F. J. (2016). Using climate models to estimate the quality of global observational data sets. Science, aaf6369. doi:10.1126/science.aaf6369"
+    url: "https://doi.org/10.1126/science.aaf6369"
+  - text: "Weigel, A. P., Liniger, M. A., & Appenzeller, C. (2008). Can multi-model combinations really enhance the prediction skill of probabilistic ensemble forecasts? Quarterly Journal of the Royal Meteorological Society, 134(630), 241-260. doi:10.1002/qj.210"
+    url: "https://doi.org/10.1002/qj.210"
+settings:
+  - Models:
+      - bcc-csm1-1
+  - Variable: "SL pressure"
+  - Experiment: Historical
+  - Ensemble: "r1i1p1"
+  - Start year: 2051
+  - End year: 2060
+  - Longitude (pre-processor): "-40 - 40"
+  - Latitude (pre-processor): "30 - 50"
+title: Toy Model
+#process: /calculate/copernicus-wps/hyint
+#data: 
+#provenance: <point to svg file>
+media: diagnosticsdata/toy_model/synthetic_CMIP5_IPSL-CM5A-LR_day_historical_r1i1p1_T2M_tasmax_1999-2000.jpg
+#data: https://portal.c3s-magic.eu/data/recipes/recipe_quantile_bias_20181211.zip
+
+
+
