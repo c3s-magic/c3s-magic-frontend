@@ -322,3 +322,13 @@ diagnostics:
           - BSC
           - ACI
           - Calculate
+    toy_model:
+        id: 111
+        name: toy_model
+        title: Toy Model
+        sub_title:
+        info_text: Diagnostic to simulate single-model ensembles from an observational dataset to investigate the effect of observational uncertainty.
+        info_file: toy_model/toy_model.yml
+        image_file: diagnosticsdata/toy_model/synthetic_CMIP5_IPSL-CM5A-LR_day_historical_r1i1p1_T2M_tasmax_1999-2000.jpg
+        tags:
+          - BSC
