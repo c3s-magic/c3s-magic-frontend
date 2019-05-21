@@ -221,7 +221,7 @@ diagnostics:
         name: drought_indicator
         title: Drought indicator
         sub_title:
-        info_text: The drought indicator calculates diagnostics for meteorological and hydrological drought.
+        info_text: The drought indicator calculates the Standardized Precipitation Index (SPI) and Standardized Precipitation-Evapotranspiration Index (SPEI) diagnostics, indicating meteorological and hydrological droughts.
         info_file: drought_indicator/drought_indicator.yml
         image_file: https://portal.c3s-magic.eu/data/recipes/recipe_spi_20181108_132957/plots/diagnostic1/script1/histplot.png
         github_issue:
