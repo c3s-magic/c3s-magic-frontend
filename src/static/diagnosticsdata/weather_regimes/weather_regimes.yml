@@ -1,6 +1,6 @@
 ---
 id: 55
-name: Weather Regimes
+name: Weather Regimes (MiLES)
 partner: ISAC-CNR
 authors:
   - Paolo Davini (ISAC-CNR, Italy)
@@ -33,7 +33,7 @@ settings:
   - Season: DJF
   - Reference dataset: ERA-INTERIM
   - Number of clusters: 4
-title: Weather Regimes
+title: Weather Regimes (MiLES)
 data: {DATAURL}/recipes/recipe_miles_regimes_20190308_064506.zip
 provenance: {DATAURL}/recipes/recipe_miles_regimes_20190308_064506/work/miles_diagnostics/miles_regimes/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Regimes/RegimesPattern_EC-EARTH_historical_r2i1p1_1980-1989_DJF_provenance.svg
 process: /calculate/copernicus-wps/weather_regimes
@@ -42,10 +42,10 @@ media:
   - {DATAURL}/recipes/recipe_miles_regimes_20190308_064506/plots/miles_diagnostics/miles_regimes/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Regimes/Regime2_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
   - {DATAURL}/recipes/recipe_miles_regimes_20190308_064506/plots/miles_diagnostics/miles_regimes/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Regimes/Regime3_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
   - {DATAURL}/recipes/recipe_miles_regimes_20190308_064506/plots/miles_diagnostics/miles_regimes/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Regimes/Regime4_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
-enableADAGUC:
-  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_miles_regimes_20190308_064506%2Fwork%2Fmiles_diagnostics%2Fmiles_regimes%2FEC-EARTH%2Fhistorical%2Fr2i1p1%2F1980-1989%2FDJF%2FRegimes%2FRegimesPattern_EC-EARTH_historical_r2i1p1_1980-1989_DJF.nc&&service=WMS&request=GetCapabilities
-  - projectionbutton: true
-  - layerselector: true
-  - timeselector: false
-  - styleselector: true
-  - layers: []
+#enableADAGUC:
+#  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_miles_regimes_20190308_064506%2Fwork%2Fmiles_diagnostics%2Fmiles_regimes%2FEC-EARTH%2Fhistorical%2Fr2i1p1%2F1980-1989%2FDJF%2FRegimes%2FRegimesPattern_EC-EARTH_historical_r2i1p1_1980-1989_DJF.nc&&service=WMS&request=GetCapabilities
+#  - projectionbutton: true
+#  - layerselector: true
+#  - timeselector: false
+#  - styleselector: true
+#  - layers: []
