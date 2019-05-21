@@ -166,7 +166,7 @@ diagnostics:
     teleconnections:
         id: 5
         name: teleconnections
-        title: Teleconnection indices
+        title: Teleconnection indices (MiLES)
         sub_title:
         info_text: Diagnostic that implements the MId-Latitude Evaluation System (MiLES) to provide teleconnection indices (Z500 empirical orthogonal functions).
         info_file: teleconnections/teleconnections.yml
@@ -182,7 +182,7 @@ diagnostics:
         name: weather_regimes
         title: Weather Regimes
         sub_title:
-        info_text: Diagnostic for computing and plotting weather regimes.
+        info_text: Diagnostic for computing and plotting weather regimes (MiLES) 
         info_file: weather_regimes/weather_regimes.yml
         image_file: diagnosticsdata/weather_regimes/weather_regimes_thumbnail.png
         github_issue:
