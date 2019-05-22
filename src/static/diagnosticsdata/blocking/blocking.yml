@@ -31,7 +31,7 @@ settings:
   - Start year: 1980
   - End year: 1989
   - Experiment: Historical
-  - Ensamble: r2i1p1
+  - Ensemble: r2i1p1
   - Season: DJF
   - Reference dataset: ERA-INTERIM
   - Latitude (pre-processor): "1.25 - 90"
