@@ -2,7 +2,7 @@ This diagnostic uses the standard climdex.pcic.ncdf R library to compute the 27 
 
 In the following figures we show examples for the two figures produced by the diagnostic. 
 
-![example output](diagnosticsdata/extreme_events/glecker.png "Example of Glecker plot")
+![example output](diagnosticsdata/extreme_events/gleckler.png "Example of Glecker plot")
 
 A portrait plot of relative error metrics for the CMIP5 temperature and precipitation extreme indices. Reproduces Fig. 9.37 of the IPCC AR5 report, Chapter 9.
 
