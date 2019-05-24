@@ -110,6 +110,19 @@ diagnostics:
         tags:
           - WP4
           - ISAC-CNR
+    extreme_events:
+        id: 77
+        name: extreme_events
+        title: Extreme Events Indices
+        info_text: Calculate indices for monitoring changes in extremes based on daily temperature and precipitation data. Producing Glecker and timeline plots of this as shown in the IPCC_AR4 report.
+        info_file: extreme_events/extreme_events.yml
+        image_file: diagnosticsdata/extreme_events/extreme_events_thumbnail.png
+        github_issue:
+        tags:
+          - WP4
+          - Cicero (Oslo, Norway)
+          - DLR
+          - ISAC-CNR
     quantilebias:
         id: 8
         name: quantilebias
