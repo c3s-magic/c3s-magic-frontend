@@ -5,7 +5,7 @@ authors:
   - Peter Berg
 contact:
   - Peter Berg @PeterBergSMHI
-description_short: Calculates the longest period of consecutive dry days (days with at least 'prlim' mm/day) in the provided time series, as well as the number of periods of at least 'frlim' consecutive dry days. 'prlim' and 'frlim' are provided by the user.
+description_short: Calculates the longest period of consecutive dry days in the provided time series, as well as the number of periods of at least some number of consecutive dry days.
 description_file: 'consecdrydays/description.md'
 image_file: diagnosticsdata/consecdrydays/drydays.png
 report_file:
@@ -14,9 +14,11 @@ report_file:
 settings:
   - Models:
     - bcc-csm1-1-m
+  - Variable: Percipitation
   - Start year: 2001
   - End year: 2002
   - Experiment: Historical
+  - Ensemble: r1i1p1
   - plim: 1
   - frlim: 5
 title: Consecutive Dry Days
@@ -30,10 +32,10 @@ provenance: {DATAURL}/recipes/recipe_consecdrydays_20190308_045354/work/dry_days
 media:
   - {DATAURL}/recipes/recipe_consecdrydays_20190308_045354/plots/dry_days/consecutive_dry_days/CMIP5_bcc-csm1-1-m_day_historical_r1i1p1_T2Ms_pr_2001-2002_dryfreq.png
   - {DATAURL}/recipes/recipe_consecdrydays_20190308_045354/plots/dry_days/consecutive_dry_days/CMIP5_bcc-csm1-1-m_day_historical_r1i1p1_T2Ms_pr_2001-2002_drymax.png
-enableADAGUC:
-  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_consecdrydays_20190308_045354%2Fwork%2Fdry_days%2Fconsecutive_dry_days%2FCMIP5_bcc-csm1-1-m_day_historical_r1i1p1_T2Ms_pr_2001-2002_drymax.nc&&service=WMS&request=GetCapabilities
-  - projectionbutton: true
-  - layerselector: false
-  - timeselector: false
-  - styleselector: true
-  - layers: []
+#enableADAGUC:
+#  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_consecdrydays_20190308_045354%2Fwork%2Fdry_days%2Fconsecutive_dry_days%2FCMIP5_bcc-csm1-1-m_day_historical_r1i1p1_T2Ms_pr_2001-2002_drymax.nc&&service=WMS&request=GetCapabilities
+#  - projectionbutton: true
+#  - layerselector: false
+#  - timeselector: false
+#  - styleselector: true
+#  - layers: []
