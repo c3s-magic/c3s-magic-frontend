@@ -39,11 +39,11 @@ title: Blocking Metrics and Indices (MiLES)
 #provenance: <point to svg file>
 #process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
 process: /calculate/copernicus-wps/blocking
-data: https://portal-dev.c3s-magic.eu/data/recipes/recipe_miles_block_20190521_141416.zip
-provenance: https://portal-dev.c3s-magic.eu/data/recipes/recipe_miles_block_20190521_141416/work/miles_diagnostics/miles_block/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Block/BlockClim_EC-EARTH_historical_r2i1p1_1980-1989_DJF_provenance.svg
+data: {DATAURL}/recipes/recipe_miles_block_20190521_141416.zip
+provenance: {DATAURL}/recipes/recipe_miles_block_20190521_141416/work/miles_diagnostics/miles_block/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Block/BlockClim_EC-EARTH_historical_r2i1p1_1980-1989_DJF_provenance.svg
 media:
-  - https://portal-dev.c3s-magic.eu/data/recipes/recipe_miles_block_20190521_141416/plots/miles_diagnostics/miles_block/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Block/TM90_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
-  - https://portal-dev.c3s-magic.eu/data/recipes/recipe_miles_block_20190521_141416/plots/miles_diagnostics/miles_block/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Block/BlockEvents_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
+  - {DATAURL}/recipes/recipe_miles_block_20190521_141416/plots/miles_diagnostics/miles_block/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Block/TM90_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
+  - {DATAURL}/recipes/recipe_miles_block_20190521_141416/plots/miles_diagnostics/miles_block/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Block/BlockEvents_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
 #enableADAGUC:
 #  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_miles_block_20190308_063447%2Fwork%2Fmiles_diagnostics%2Fmiles_block%2FEC-EARTH%2Fhistorical%2Fr2i1p1%2F1980-1989%2FDJF%2FBlock%2FBlockClim_EC-EARTH_historical_r2i1p1_1980-1989_DJF.nc&&service=WMS&request=GetCapabilities
 #  - projectionbutton: true
