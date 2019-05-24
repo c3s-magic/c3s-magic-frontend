@@ -6,11 +6,11 @@ partner:
   - DLR
   - ISAC-CNR
 authors:
-  - broe_bj
-  - sand_ma
-  - mohr_cw
-  - arno_en
-  - hard_jo
+  - Bjoern Broetz (DLR, Germany)
+  - Marit Sandstad (Cicero, Norway)
+  - Christian Wilhelm Mohr (Cicero, Norway)
+  - Enrico Arnone (ISAC-CNR, Italy)
+  - Jost von Hardenberg (ISAC-CNR, Italy)
 contact:
   - Marit Sandstad marit.sandstad@cicero.oslo.no
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
