@@ -1,6 +1,6 @@
 ---
 id: 1
-name: Blocking Metrics and Indices
+name: Blocking Metrics and Indices (MiLES)
 partner: ISAC-CNR
 authors:
   - Paolo Davini (ISAC-CNR, Italy)
@@ -10,8 +10,7 @@ contact:
   - Paolo Davini p.davini@isac.cnr.it
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
   - Enrico Arnone e.arnone@isac.cnr.it
-description_short: Atmospheric blocking is a recurrent mid-latitude weather pattern identified by a large-amplitude, quasi-stationary, long-lasting, high-pressure anomaly that ‘‘blocks’’ the westerly flow forcing the jet stream to split or meander. The Blocking metrics shows the mid-latitude 1D and 2D blocking indices.
-#that was developed to support analysis of mid-latitude weather patterns in terms of atmospheric blocking, teleconnections and weather regimes.
+description_short: The Blocking diagnostic shows the mid-latitude 1D and 2D blocking indices developed as part of MiLES to support analysis of mid-latitude weather patterns in terms of atmospheric blocking, teleconnections and weather regimes.
 description_file: 'blocking/description.md'
 image_file: diagnosticsdata/blocking/blocking_thumbnail.png
 references:
@@ -32,23 +31,23 @@ settings:
   - Start year: 1980
   - End year: 1989
   - Experiment: Historical
-  - Ensamble: r2i1p1
+  - Ensemble: r2i1p1
   - Season: DJF
   - Reference dataset: ERA-INTERIM
   - Latitude (pre-processor): "1.25 - 90"
-title: Blocking Metrics and Indices
+title: Blocking Metrics and Indices (MiLES)
 #provenance: <point to svg file>
 #process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
 process: /calculate/copernicus-wps/blocking
-data: {DATAURL}/recipes/recipe_miles_block_20190308_063447.zip
-provenance: {DATAURL}/recipes/recipe_miles_block_20190308_063447/work/miles_diagnostics/miles_block/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Block/BlockClim_EC-EARTH_historical_r2i1p1_1980-1989_DJF_provenance.svg
+data: {DATAURL}/recipes/recipe_miles_block_20190521_141416.zip
+provenance: {DATAURL}/recipes/recipe_miles_block_20190521_141416/work/miles_diagnostics/miles_block/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Block/BlockClim_EC-EARTH_historical_r2i1p1_1980-1989_DJF_provenance.svg
 media:
-  - {DATAURL}/recipes/recipe_miles_block_20190308_063447/plots/miles_diagnostics/miles_block/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Block/TM90_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
-  - {DATAURL}/recipes/recipe_miles_block_20190308_063447/plots/miles_diagnostics/miles_block/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Block/BlockEvents_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
-enableADAGUC:
-  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_miles_block_20190308_063447%2Fwork%2Fmiles_diagnostics%2Fmiles_block%2FEC-EARTH%2Fhistorical%2Fr2i1p1%2F1980-1989%2FDJF%2FBlock%2FBlockClim_EC-EARTH_historical_r2i1p1_1980-1989_DJF.nc&&service=WMS&request=GetCapabilities
-  - projectionbutton: true
-  - layerselector: true
-  - timeselector: true
-  - styleselector: true
-  - layers: []
+  - {DATAURL}/recipes/recipe_miles_block_20190521_141416/plots/miles_diagnostics/miles_block/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Block/TM90_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
+  - {DATAURL}/recipes/recipe_miles_block_20190521_141416/plots/miles_diagnostics/miles_block/EC-EARTH/historical/r2i1p1/1980-1989/DJF/Block/BlockEvents_EC-EARTH_historical_r2i1p1_1980-1989_DJF.png
+#enableADAGUC:
+#  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_miles_block_20190308_063447%2Fwork%2Fmiles_diagnostics%2Fmiles_block%2FEC-EARTH%2Fhistorical%2Fr2i1p1%2F1980-1989%2FDJF%2FBlock%2FBlockClim_EC-EARTH_historical_r2i1p1_1980-1989_DJF.nc&&service=WMS&request=GetCapabilities
+#  - projectionbutton: true
+#  - layerselector: true
+#  - timeselector: true
+#  - styleselector: true
+#  - layers: []
