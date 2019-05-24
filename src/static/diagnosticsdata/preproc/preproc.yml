@@ -45,6 +45,6 @@ settings:
   - Additional dataset: MPI-ESM-LR
 title: ESMValTool climate data pre-processor
 process: /calculate/copernicus-wps/preproc
-data: https://portal-dev.c3s-magic.eu/data/recipes/recipe_python_20190521_141415.zip
-provenance: https://portal-dev.c3s-magic.eu/data/recipes/recipe_python_20190521_141415/work/diagnostic1/script1/MultiModelMean_T3M_ta_2000-2002_mean_provenance.svg
-media: https://portal-dev.c3s-magic.eu/data/recipes/recipe_python_20190521_141415/plots/diagnostic1/script1/MultiModelMean_Amon_ta_2000-2002_mean.png
+data: {DATAURL}/recipes/recipe_python_20190521_141415.zip
+provenance: {DATAURL}/recipes/recipe_python_20190521_141415/work/diagnostic1/script1/MultiModelMean_Amon_ta_2000-2002_mean_provenance.svg
+media: {DATAURL}/recipes/recipe_python_20190521_141415/plots/diagnostic1/script1/MultiModelMean_Amon_ta_2000-2002_mean.png
