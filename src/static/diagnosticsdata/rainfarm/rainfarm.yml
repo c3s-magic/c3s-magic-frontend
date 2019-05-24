@@ -8,7 +8,7 @@ authors:
 contact:
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
   - Enrico Arnone e.arnone@isac.cnr.it
-description_short: Metric showing stochastic precipitation downscaling, generating an ensemble of fine-scale precipitation fields from information simulated by climate models at regional scale.
+description_short: Metric showing stochastic downscaling of precipitation fields predicting climate variables at local scale from information simulated by climate models at regional scale.
 description_file: 'rainfarm/description.md'
 #media used as an alternative to a live adaguc viewer
 #media: diagnosticsdata/rainfarm/RainFARM_example_64x64.png
@@ -20,23 +20,30 @@ enableADAGUC:
   - styleselector: true
   - layers: []
 references:
-  - text: "D'Onofrio et al. 2014, J of Hydrometeorology 15, 830-843; Rebora et. al 2006, JHM 7, 724; von Hardenberg J  (2018)"
-    url: "http://doi.org/10.5281/zenodo.1240477"
+  - text: "D’Onofrio, D., Palazzi, E., von Hardenberg, J., Provenzale, a., & Calmanti, S. (2014). Stochastic Rainfall Downscaling of Climate Models. Journal of Hydrometeorology, 15(2), 830–843. doi:10.1175/JHM-D-13-096.1"
+    url: "https://doi.org/10.1175/JHM-D-13-096.1"
+  - text: "Rebora, N., Ferraris, L., von Hardenberg, J., & Provenzale, A. (2006). RainFARM: Rainfall Downscaling by a Filtered Autoregressive Model. Journal of Hydrometeorology, 7(4), 724–738. doi:10.1175/JHM517.1"
+    url: "https://doi.org/10.1175/JHM517.1"
 settings:
   - Models:
-      - ACCESS1-0
+      - EC-EARTH
+  - Variables: Precipitation
   - Experiment: Historical
+  - Ensemble: r1i1p1
   - Start year: 1997
   - End year: 1997
-  - Geographical subset: [4,13,44,53]
-  - Regridding: false
-  - Slope: false
+  - Longitude (pre-processor): "5 - 15"
+  - Latitude (pre-processor): "40 - 50"
+  - Slope: 1.7
   - Number of ensemble members: 2
   - Number of subdivisions: 8
+  - Conserve glob: false
+  - Conserve smooth: true
+  - Weights climo: false
 title: RainFARM stochastic downscaling
 #youtube: P3BCRFipKO0
 image_file: diagnosticsdata/rainfarm/rainfarm_thumbnail.png
-data: https://portal.c3s-magic.eu/data/recipes/recipe_rainfarm_20181211.zip
+data: {DATAURL}/recipes/recipe_rainfarm_20190521_141430.zip
 #provenance: <point to svg file>
 #process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
 #process: /calculate/rainfarm

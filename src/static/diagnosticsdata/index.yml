@@ -262,7 +262,7 @@ diagnostics:
         name: rainfarm
         title: RainFARM stochastic downscaling
         sub_title:
-        info_text: Metric showing stochastic downscaling of precipitation fields predicting climate variables at local scale from information simulated by climate models at regional scale
+        info_text: Metric showing stochastic downscaling of precipitation fields predicting climate variables at local scale from information simulated by climate models at regional scale.
         info_file: rainfarm/rainfarm.yml
         image_file: diagnosticsdata/rainfarm/rainfarm_thumbnail.png
         github_issue:
