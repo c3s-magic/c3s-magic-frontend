@@ -47,7 +47,7 @@ settings:
   - Longitude (pre-processor): "-10 - 40"
   - Latitude (pre-processor): "27 - 70"
 title: Diurnal Temperature Variation (DTR) Indicator
-data: https://portal-dev.c3s-magic.eu/data/recipes/recipe_diurnal_temperature_index_20190521_141426.zip
-provenance: https://portal-dev.c3s-magic.eu/data/recipes/recipe_diurnal_temperature_index_20190521_141426/work/diurnal_temperature_indicator/main/Seasonal_DTRindicator_MPI-ESM-MR_2030_2080_1961_1990_provenance.svg
-media: https://portal-dev.c3s-magic.eu/data/recipes/recipe_diurnal_temperature_index_20190521_141426/plots/diurnal_temperature_indicator/main/rcp85.png
+data: {DATAURL}/recipes/recipe_diurnal_temperature_index_20190521_141426.zip
+provenance: {DATAURL}/recipes/recipe_diurnal_temperature_index_20190521_141426/work/diurnal_temperature_indicator/main/Seasonal_DTRindicator_MPI-ESM-MR_2030_2080_1961_1990_provenance.svg
+media: {DATAURL}/recipes/recipe_diurnal_temperature_index_20190521_141426/plots/diurnal_temperature_indicator/main/rcp85.png
 process: /calculate/copernicus-wps/diurnal_temperature_index
