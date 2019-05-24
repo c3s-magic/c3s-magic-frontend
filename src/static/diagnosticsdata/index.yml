@@ -247,7 +247,7 @@ diagnostics:
         name: shapefile_selection
         title: Shapefile selection
         sub_title:
-        info_text: Metric showing selected gridded data within a user defined polygon shapefile and outputting as NetCDF or csv file.
+        info_text: Metric showing selected gridded data within a user defined polygon shapefile and outputs a NetCDF or csv file.
         info_file: shapefile_selection/shapefile_selection.yml
         image_file: diagnosticsdata/shapefile_selection/OBS_CRU_reanaly_1_T2Ms_tas_1990-1994.png
         github_issue:
