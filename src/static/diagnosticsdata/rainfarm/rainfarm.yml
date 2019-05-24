@@ -43,7 +43,7 @@ settings:
 title: RainFARM stochastic downscaling
 #youtube: P3BCRFipKO0
 image_file: diagnosticsdata/rainfarm/rainfarm_thumbnail.png
-data: https://portal.c3s-magic.eu/data/recipes/recipe_rainfarm_20190521_141430.zip
+data: {DATAURL}/recipes/recipe_rainfarm_20190521_141430.zip
 #provenance: <point to svg file>
 #process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
 #process: /calculate/rainfarm
