@@ -46,6 +46,6 @@ settings:
   - Season: "winter"
 title: Heatwaves and coldwaves duration
 #youtube:
-data: https://portal-dev.c3s-magic.eu/data/recipes/recipe_heatwaves_coldwaves_20190521_141426.zip
-media: https://portal-dev.c3s-magic.eu/data/recipes/recipe_heatwaves_coldwaves_20190521_141426/plots/heatwaves_coldwaves/main/tasmin_extreme_spell_durationwinter_bcc-csm1-1_rcp85_2060_2080.png
-provenance: https://portal-dev.c3s-magic.eu/data/recipes/recipe_heatwaves_coldwaves_20190521_141426/work/heatwaves_coldwaves/main/tasmin_extreme_spell_durationwinter_bcc-csm1-1_rcp85_2060_2080_provenance.svg
+data: {DATAURL}/recipes/recipe_heatwaves_coldwaves_20190521_141426.zip
+media: {DATAURL}/recipes/recipe_heatwaves_coldwaves_20190521_141426/plots/heatwaves_coldwaves/main/tasmin_extreme_spell_durationwinter_bcc-csm1-1_rcp85_2060_2080.png
+provenance: {DATAURL}/recipes/recipe_heatwaves_coldwaves_20190521_141426/work/heatwaves_coldwaves/main/tasmin_extreme_spell_durationwinter_bcc-csm1-1_rcp85_2060_2080_provenance.svg
