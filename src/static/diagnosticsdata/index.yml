@@ -27,9 +27,9 @@ diagnostics:
         image_file: ./diagnosticsdata/cvdp/tas.mean.ann.png
         github_issue:
         tags:
-          - CVDP
           - WP4
           - DLR
+          - CVDP
           - Calculate
     perfmetrics:
         id: 18
@@ -41,11 +41,11 @@ diagnostics:
         image_file: ./diagnosticsdata/perfmetrics/Portait.png
         github_issue:
         tags:
-          - performance
-          - mean annual cycle
-          - Essential Climate Variables
           - WP4
           - DLR
+          - PERFORMANCE
+          - MEAN ANNUAL CYCLE
+          - ESSENTIAL CLIMATE VARIABLES
     smpi:
         id: 19
         name: smpi
@@ -58,6 +58,8 @@ diagnostics:
         tags:
           - WP4
           - DLR
+          - SMPI
+          - Calculate
     blocking:
         id: 7
         name: blocking
@@ -83,7 +85,9 @@ diagnostics:
         github_issue:
         tags:
           - WP4
+          - WP6
           - ISAC-CNR
+          - ZMNAM
           - Calculate
     modes_of_variability:
         id: 555
@@ -109,7 +113,10 @@ diagnostics:
         github_issue:
         tags:
           - WP4
+          - WP6
           - ISAC-CNR
+          - HyInt
+          - Calculate
     quantilebias:
         id: 8
         name: quantilebias
@@ -122,6 +129,8 @@ diagnostics:
         tags:
           - WP4
           - ISAC-CNR
+          - QuantileBias
+          - Calculate
     multimodel_products:
         id: 86
         name: multimodel_products
@@ -133,8 +142,8 @@ diagnostics:
         github_issue: https://github.com/c3s-magic/c3s-magic-frontend/issues/51
         tags:
             - WP5
-            - Anomaly Agreement
             - BSC
+            - Anomaly Agreement
             - Calculate
     ensclus:
         id: 4
@@ -146,9 +155,9 @@ diagnostics:
         image_file: diagnosticsdata/ensclus/ensclus_thumbnail.png
         github_issue:
         tags:
-          - Sub-ensemble selection
           - WP5
           - ISAC-CNR
+          - Sub-ensemble selection
           - Calculate
     combined_indices:
         id: 12
@@ -162,6 +171,7 @@ diagnostics:
         tags:
           - WP6
           - BSC
+          - Combined Indices
           - Calculate
     teleconnections:
         id: 5
@@ -228,6 +238,7 @@ diagnostics:
         tags:
           - WP7
           - SMHI
+          - WATER
           - Calculate
     consecdrydays:
         id: 171
@@ -241,6 +252,7 @@ diagnostics:
         tags:
           - WP7
           - SMHI
+          - WATER
           - Calculate
     shapefile_selection:
         id: 16
@@ -254,8 +266,8 @@ diagnostics:
         tags:
           - WP7
           - SMHI
-          - Catchment
-          - Hydrology
+          - CATCHMENT
+          - HYDROLOGY
           - Calculate
     rainfarm:
         id: 3
@@ -269,6 +281,8 @@ diagnostics:
         tags:
           - WP7
           - ISAC-CNR
+          - RainFarm
+          - Calculate
     heatwaves_coldwaves:
         id: 14
         name: heatwaves_coldwaves
@@ -281,6 +295,8 @@ diagnostics:
         tags:
           - WP7
           - BSC
+          - HEAT WAVES
+          - COLD WAVES
           - Calculate
     dtr:
         id: 13
@@ -308,6 +324,7 @@ diagnostics:
         tags:
           - WP7
           - BSC
+          - DTR
           - Calculate
     extreme_index:
         id: 101
@@ -331,4 +348,7 @@ diagnostics:
         info_file: toy_model/toy_model.yml
         image_file: diagnosticsdata/toy_model/synthetic_CMIP5_IPSL-CM5A-LR_day_historical_r1i1p1_T2M_tasmax_1999-2000.jpg
         tags:
+          - WP4
           - BSC
+          - TOY MODEL
+          - Calculate
