@@ -34,7 +34,7 @@ title: KNMI Climate explorer Correlate a field with a timeseries
 image_file: ./diagnosticsdata/correlations/climexp_correlations.png
 #data: 
 #provenance: <point to svg file>
-#process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
+process: /calculate/climexp_numerical_wps/correlate_field
 
 
 
