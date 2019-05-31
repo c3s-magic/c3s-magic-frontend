@@ -305,7 +305,7 @@ class WPSDemoCopernicus extends Component {
               try {
                 let item = wpsInputList[key];
 
-                // console.log('intput item\n', item);
+                console.log('intput item\n', item);
 
                 let newInput = {};
                 let itemTitle = item['Title'].value;
@@ -338,6 +338,17 @@ class WPSDemoCopernicus extends Component {
                     newInput.allowedValues.push(av.value);
                   }
                 }
+                /* Get min occurances */
+                newInput.minOccurances = 1;
+                if (item.attr && item.attr.minOccurs && parseInt(item.attr.minOccurs) > 1) {
+                  newInput.minOccurances = parseInt(item.attr.minOccurs);
+                }
+                /* Get max occurances */
+                newInput.maxOccurances = 1;
+                if (item.attr && item.attr.maxOccurs && parseInt(item.attr.maxOccurs) > 1) {
+                  newInput.maxOccurances = parseInt(item.attr.maxOccurs);
+                }
+
                 formItemInputs.push(newInput);
               } catch (e) {
                 console.warn('Omitting ' + key + ' because ', e);
@@ -433,17 +444,17 @@ class WPSDemoCopernicus extends Component {
       if (el.type === 'string' && el.allowedValues.length > 0) {
         /* Standard drop down box */
         if (compositeInputType === 'model_experiment_ensemble' && el.identifier === 'model') {
-          const numModels = this.state.processInputs.filter(el => el.identifier === 'model')[0].selected.length;
-          const modelInput = el;
+          const modelInput = this.state.processInputs.filter(el => el.identifier === 'model')[0];
           const experimentInput = inputList.filter(el => el.identifier === 'experiment')[0];
           const ensembleInput = inputList.filter(el => el.identifier === 'ensemble')[0];
+          const numModels = modelInput.selected.length;
+          const maxOccurances = modelInput.maxOccurances;
+          const minOccurances = modelInput.minOccurances;          
           return (
             <div key={'container' + el.title + index} className={'WPSDemoCopernicus_InputLabels'} >
-              { this.state.processInputs.filter(el => el.identifier === 'model')[0].selected.map((selectedItem, selectedItemIndex) => {
-                const modelValue = this.state.processInputs.filter(el => el.identifier === 'model')[0].selected[selectedItemIndex];
-                console.log(selectedItemIndex);
+              { modelInput.selected.map((selectedItem, selectedItemIndex) => {
+                const modelValue = modelInput.selected[selectedItemIndex];
                 const drsItems = findDrsItems(this.drsTree[0], { model: modelValue }, ['model', 'experiment', 'ensemble']);
-                console.log(drsItems);
                 return (
                   <label key={modelInput.title + '_' + index + '_' + selectedItemIndex}>
                     <span key='WPSDemoCopernicus_InputLabelsLabel' className={'WPSDemoCopernicus_InputLabelsLabel'}>
@@ -494,25 +505,49 @@ class WPSDemoCopernicus extends Component {
                         </option>
                       )}
                     </select>
-                    { ((numModels - 1) === selectedItemIndex) && <button
-                      onClick={() => {
-                        this.setState(
-                          produce(this.state, draft => {
-                            draft.processInputs.filter(el => el.identifier === 'model')[0].selected.push(
-                              draft.processInputs.filter(el => el.identifier === 'model')[0].allowedValues[0]);
-                            draft.processInputs.filter(el => el.identifier === 'experiment')[0].selected.push(
-                              draft.processInputs.filter(el => el.identifier === 'experiment')[0].allowedValues[0]);
-                            draft.processInputs.filter(el => el.identifier === 'ensemble')[0].selected.push(
-                              draft.processInputs.filter(el => el.identifier === 'ensemble')[0].allowedValues[0]);
-                          }), () => {
-                            this.setState({
-                              showForm: true,
-                              wpsFormElements: this.createForm()
-                            });
-                          }
-                        );
-                      }}>+
-                    </button>
+                    { /* Remove model button */ }
+                    { ((numModels - 1) === selectedItemIndex && minOccurances < numModels) && (<span>
+                      <button
+                        onClick={() => {
+                          this.setState(
+                            produce(this.state, draft => {
+                              draft.processInputs.filter(el => el.identifier === 'model')[0].selected.splice(-1, 1);
+                              draft.processInputs.filter(el => el.identifier === 'experiment')[0].selected.splice(-1, 1);
+                              draft.processInputs.filter(el => el.identifier === 'ensemble')[0].selected.splice(-1, 1);
+                            }), () => {
+                              this.setState({
+                                showForm: true,
+                                wpsFormElements: this.createForm()
+                              });
+                            }
+                          );
+                        }}>-
+                      </button>
+                    </span>)
+                    }                    
+                    { /* Add model button */ }
+                    { ((numModels - 1) === selectedItemIndex && maxOccurances > numModels) && (<span>
+                      <button
+                        onClick={() => {
+                          this.setState(
+                            produce(this.state, draft => {
+                              draft.processInputs.filter(el => el.identifier === 'model')[0].selected.push(
+                                draft.processInputs.filter(el => el.identifier === 'model')[0].allowedValues[0]);
+                              draft.processInputs.filter(el => el.identifier === 'experiment')[0].selected.push(
+                                draft.processInputs.filter(el => el.identifier === 'experiment')[0].allowedValues[0]);
+                              draft.processInputs.filter(el => el.identifier === 'ensemble')[0].selected.push(
+                                draft.processInputs.filter(el => el.identifier === 'ensemble')[0].allowedValues[0]);
+                            }), () => {
+                              this.setState({
+                                showForm: true,
+                                wpsFormElements: this.createForm()
+                              });
+                            }
+                          );
+                        }}>+
+                      </button>
+                      { /* <span> ({maxOccurances - (numModels)})</span> */ }
+                    </span>)
                     }
                   </label>
                 );
@@ -887,7 +922,7 @@ class WPSDemoCopernicus extends Component {
 
                         {formNoInputFound
                           ? <Alert color='info'>
-                          No settings were found for the selected process.
+                          No input settings are required for the selected process.
                           </Alert>
                           : '' }
                         <CardBody className='ProcessSettings_CardBody'>
