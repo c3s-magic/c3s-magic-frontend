@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardBody, CardTitle, Button, Row, Col, Alert, UncontrolledAlert, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Label } from 'reactstrap';
 import RenderProcesses from './RenderProcesses';
-import { doWPSCall, clearWPSCache } from '../utils/WPSRunner';
+import { doWPSCall, clearWPSCache, doXML2JSONCallWithToken } from '../utils/WPSRunner';
 import ImagePreview from './ImagePreview';
 import { withRouter } from 'react-router';
 import Icon from 'react-fa';
@@ -52,22 +52,42 @@ class WPSDemoCopernicus extends Component {
     };
     this.drsTree = null;
     console.log('constructed');
-    this.getDRSTree();
-    // console.log(props);
   }
 
-  getDRSTree () {
-    console.log('Getting DRS tree');
-    axios({
-      method: 'get',
-      url: './cp4cds-wps-tree.json',
-      responseType: 'json'
-    }).then(src => {
-      console.log(src.data[0].contents);
-      this.drsTree = src.data;
-    }).catch((e) => {
-      console.error(e);
+  async getDRSTree (processId = '') {
+    return new Promise((resolve, reject) => {
+      console.log('Getting DRS tree');
+      const currentWPSNodeName = this.state.currentWPSNodeName;
+      let wpsUrl = this.getWPSUrlByName(currentWPSNodeName);
+      console.log(wpsUrl);
+      let metaWPSRequestURL = wpsUrl + 'service=WPS&request=Execute&version=1.0.0&Identifier=meta&DataInputs=process=' + processId;
+      console.log('Meta request: ' + metaWPSRequestURL);
+      doXML2JSONCallWithToken(metaWPSRequestURL, (d) => {
+        try {
+          const drsTree = [JSON.parse(d.ExecuteResponse.ProcessOutputs.Output.Data.ComplexData.value)];
+          console.log(drsTree);
+          resolve(drsTree);
+        } catch (e) {
+          console.error('Unable to fetch DRS tree from server:', e);
+          reject(e);
+        }       
+      }, (e) => {
+        console.error('Unable to fetch DRS tree from server:', e);
+        reject(e);
+      });
     });
+    // if ( 1 === 1 ) return;
+    // axios({
+    //   method: 'get',
+    //   url: './cp4cds-wps-tree.json',
+    //   // url: 'https://portal-dev.c3s-magic.eu/wps/?service=WPS&request=Execute&version=1.0.0&Identifier=meta&DataInputs=process=',
+    //   responseType: 'xml'
+    // }).then(src => {
+    //   console.log(src.data[0].contents);
+    //   this.drsTree = src.data;
+    // }).catch((e) => {
+    //   console.error(e);
+    // });
   }
 
   getWPSUrlByName (wpsName) {
@@ -174,7 +194,9 @@ class WPSDemoCopernicus extends Component {
                 let identifier = wpsProcessList[key]['Identifier'].value;
                 let abstract = '<no abstract provided>'; try { abstract = wpsProcessList[key]['Abstract'].value; } catch (e) {}
                 let title = '<no title provided>'; try { title = wpsProcessList[key]['Title'].value; } catch (e) {}
-                processNames.push({ name: identifier, abstract: abstract, title: title });
+                if (identifier !== 'meta') {
+                  processNames.push({ name: identifier, abstract: abstract, title: title });
+                }
               } catch (e) {
                 console.log(e);
               }
@@ -237,26 +259,36 @@ class WPSDemoCopernicus extends Component {
         console.log('Process [' + _wpsName + '] already selected');
         resolve('Process already selected');
       }
-      return this.getWPSProcessInfo(wpsName)
-        .then(response => {
-          return this.setStatePromise(
-            {
-              isBusy: false,
-              isBusyMessage: '',
-              selectedProcess: wpsName
-            }).then(() => { resolve(response); });
-        }).catch((e) => {
-          return this.setStatePromise(
-            {
-              isBusy: false,
-              isBusyMessage: 'Error' + JSON.stringify(e, null, 2),
-              selectedProcess: null
-            }).then(() => { reject(new Error('Could not get the process list!' + e)); });
-        });
+      console.log('Start fetching drsTree');
+      this.drsTree = null;
+      return this.getDRSTree(wpsName).then((drsTree) => {
+        console.log('New drsTree:', drsTree);
+        this.drsTree = drsTree;
+      }).finally(async () => {
+        console.log('Start fetching getWPSProcessInfo');
+        try {
+          const response = await this.getWPSProcessInfo(wpsName);
+          await this.setStatePromise({
+            isBusy: false,
+            isBusyMessage: '',
+            selectedProcess: wpsName
+          });
+          resolve(response);
+        }
+        catch (e) {
+          await this.setStatePromise({
+            isBusy: false,
+            isBusyMessage: 'Error' + JSON.stringify(e, null, 2),
+            selectedProcess: null
+          });
+          console.error(e);
+          reject(new Error('Could not get the process list!' + e));
+        }
+      });
     });
   }
 
-  getWPSProcessInfo (processName) {
+  async getWPSProcessInfo (processName) {
     this.setState({ isBusy: true, isBusyMessage: 'getting settings for ' + processName });
     console.log('getting getWPSProcessInfo for ' + processName);
     return new Promise((resolve, reject) => {
@@ -305,7 +337,7 @@ class WPSDemoCopernicus extends Component {
               try {
                 let item = wpsInputList[key];
 
-                console.log('intput item\n', item);
+                // console.log('intput item\n', item);
 
                 let newInput = {};
                 let itemTitle = item['Title'].value;
@@ -420,6 +452,7 @@ class WPSDemoCopernicus extends Component {
           // console.log('Promise.resolve from WPSCalculate::getWPSProcessInfo()');
           resolve('success');
         }, (error) => {
+          console.error(error);
           // console.log('Promise.reject from WPSCalculate::getWPSProcessInfo()');
           reject(new Error('failed' + error));
         }
@@ -454,7 +487,12 @@ class WPSDemoCopernicus extends Component {
             <div key={'container' + el.title + index} className={'WPSDemoCopernicus_InputLabels'} >
               { modelInput.selected.map((selectedItem, selectedItemIndex) => {
                 const modelValue = modelInput.selected[selectedItemIndex];
-                const drsItems = findDrsItems(this.drsTree[0], { model: modelValue }, ['model', 'experiment', 'ensemble']);
+                let drsItems = null;
+                try {
+                  drsItems = findDrsItems(this.drsTree[0], { model: modelValue }, ['model', 'experiment', 'ensemble']);
+                } catch (e) {
+                  console.error('Unable to findDrsItems', e);
+                }
                 return (
                   <label key={modelInput.title + '_' + index + '_' + selectedItemIndex}>
                     <span key='WPSDemoCopernicus_InputLabelsLabel' className={'WPSDemoCopernicus_InputLabelsLabel'}>
@@ -486,7 +524,7 @@ class WPSDemoCopernicus extends Component {
                           key={av}
                           value={av}
                         >
-                          {(drsItems['experiment'].findIndex(e => e === av) === -1 ? av + ' (not available)' : av)}
+                          {(drsItems && drsItems['experiment'] && drsItems['experiment'].findIndex(e => e === av) === -1 ? av + ' (not available)' : av)}
                         </option>
                       )}
                     </select>
@@ -501,7 +539,7 @@ class WPSDemoCopernicus extends Component {
                           key={av}
                           value={av}
                         >
-                          {(drsItems['ensemble'].findIndex(e => e === av) === -1 ? av + ' (not available)' : av)}
+                          {(drsItems && drsItems['ensemble'] && drsItems['ensemble'].findIndex(e => e === av) === -1 ? av + ' (not available)' : av)}
                         </option>
                       )}
                     </select>

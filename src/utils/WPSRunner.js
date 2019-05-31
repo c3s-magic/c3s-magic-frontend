@@ -157,7 +157,7 @@ export const doWPSExecuteCall = function (wps, statusCallBack, executeCompleteCa
   doXML2JSONCallWithToken(wps, wpsExecuteCallback, failure);
 };
 
-const doXML2JSONCallWithToken = function (urlToXMLService, callback, failure) {
+export const doXML2JSONCallWithToken = function (urlToXMLService, callback, failure) {
   // let encodedWPSURL = encodeURIComponent(urlToXMLService
   let encodedWPSURL = encodeURIComponent(urlToXMLService);
   let requestURL = config.backendHost + '/xml2json?request=' + encodedWPSURL + '&rand=' + Math.random();
