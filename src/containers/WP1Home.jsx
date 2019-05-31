@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 import MarkdownFromFile from './MarkdownFromFile';
 // import EnsembleAnomalyPlots from '../containers/Diagnostics/EnsembleAnomalyPlots';
 import ADAGUCViewerComponent from '../components/ADAGUCViewerComponent';
+import { getConfig } from '../getConfig';
 import { Row, Col } from 'reactstrap';
+let config = getConfig();
 
-const wmsurl = 'https://portal-dev.c3s-magic.eu/backend/adagucserver?source=c3smagic%2Frecipes%2Frecipe_cvdp_20190308_045354%2Fpreproc%2Fdiagnostic1%2Fpr%2FCMIP5_MPI-ESM-LR_Amon_historical_r1i1p1_T2Ms_pr_2000-2002.nc&&service=WMS&request=GetCapabilities';
+const wmsurl = config.staticWMS + '?source=c3smagic%2Fportalfrontend%2FCMIP5_MPI-ESM-LR_Amon_historical_r1i1p1_T2Ms_pr_2000-2002.nc&&service=WMS&request=GetCapabilities';
 
 export default class WP1Home extends Component {
   render () {
@@ -21,7 +23,6 @@ export default class WP1Home extends Component {
         <Row style={{ flex:2 }}>
           <Col xs='2' />
           <Col xs='8' style={{ display:'flex', flexDirection:'column' }}>
-            {/* <EnsembleAnomalyPlots showSlider map_data={'https://portal.c3s-magic.eu/backend/wms?DATASET=anomaly_agreement_stippling&'} /> */}
             <ADAGUCViewerComponent
               height={'40vh'}
               layers={['pr']}
