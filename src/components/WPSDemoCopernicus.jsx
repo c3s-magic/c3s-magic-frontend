@@ -374,7 +374,10 @@ class WPSDemoCopernicus extends Component {
                 if (item.attr && item.attr.maxOccurs && parseInt(item.attr.maxOccurs) > 1) {
                   newInput.maxOccurances = parseInt(item.attr.maxOccurs);
                 }
-
+                /* If minOccurs is more than 1, add more inputs */
+                for (let j = 1; j < newInput.minOccurances; j++) {
+                  newInput.selected.push(itemDefaultValue);
+                }
                 formItemInputs.push(newInput);
               } catch (e) {
                 console.warn('Omitting ' + key + ' because ', e);
