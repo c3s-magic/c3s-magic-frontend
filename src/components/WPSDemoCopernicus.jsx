@@ -11,7 +11,7 @@ import axios from 'axios';
 import MarkdownFromFile from '../containers/MarkdownFromFile';
 import { produce } from 'immer';
 import { findDrsItems } from '../utils/drsTools';
-
+var drsTreeCache = {};
 class WPSDemoCopernicus extends Component {
   constructor (props) {
     super(props);
@@ -56,16 +56,22 @@ class WPSDemoCopernicus extends Component {
 
   async getDRSTree (processId = '') {
     return new Promise((resolve, reject) => {
-      console.log('Getting DRS tree');
+      console.log('Getting DRS tree for ' + processId);
+      if (drsTreeCache[processId]) {
+        console.log('Getting DRS from cache');
+        resolve(drsTreeCache[processId]);
+        return;
+      }
       const currentWPSNodeName = this.state.currentWPSNodeName;
       let wpsUrl = this.getWPSUrlByName(currentWPSNodeName);
-      console.log(wpsUrl);
       let metaWPSRequestURL = wpsUrl + 'service=WPS&request=Execute&version=1.0.0&Identifier=meta&DataInputs=process=' + processId;
       console.log('Meta request: ' + metaWPSRequestURL);
       doXML2JSONCallWithToken(metaWPSRequestURL, (d) => {
         try {
+          console.log('drsTree: ' + processId, d);
           const drsTree = [JSON.parse(d.ExecuteResponse.ProcessOutputs.Output.Data.ComplexData.value)];
-          console.log(drsTree);
+          console.log('getDRSTree finished', drsTree);
+          drsTreeCache[processId] = drsTree;
           resolve(drsTree);
         } catch (e) {
           console.error('Unable to fetch DRS tree from server:', e);
@@ -76,18 +82,6 @@ class WPSDemoCopernicus extends Component {
         reject(e);
       });
     });
-    // if ( 1 === 1 ) return;
-    // axios({
-    //   method: 'get',
-    //   url: './cp4cds-wps-tree.json',
-    //   // url: 'https://portal-dev.c3s-magic.eu/wps/?service=WPS&request=Execute&version=1.0.0&Identifier=meta&DataInputs=process=',
-    //   responseType: 'xml'
-    // }).then(src => {
-    //   console.log(src.data[0].contents);
-    //   this.drsTree = src.data;
-    // }).catch((e) => {
-    //   console.error(e);
-    // });
   }
 
   getWPSUrlByName (wpsName) {
@@ -259,7 +253,7 @@ class WPSDemoCopernicus extends Component {
         console.log('Process [' + _wpsName + '] already selected');
         resolve('Process already selected');
       }
-      console.log('Start fetching drsTree');
+      console.log('Start fetching drsTree for ' + wpsName);
       this.drsTree = null;
       return this.getDRSTree(wpsName).then((drsTree) => {
         console.log('New drsTree:', drsTree);
@@ -273,9 +267,9 @@ class WPSDemoCopernicus extends Component {
             isBusyMessage: '',
             selectedProcess: wpsName
           });
+          console.log('Finished getWPSProcessInfo', response);
           resolve(response);
-        }
-        catch (e) {
+        } catch (e) {
           await this.setStatePromise({
             isBusy: false,
             isBusyMessage: 'Error' + JSON.stringify(e, null, 2),
@@ -299,7 +293,7 @@ class WPSDemoCopernicus extends Component {
         (result) => {
           this.setState({ formNoInputFound: false, documentationLink: null });
 
-          console.log('Looking for link');
+          console.log('Looking for link', result);
 
           try {
             let metadataItems = {};
