@@ -23,7 +23,7 @@ references:
 settings:
   - Models:
       - EC-EARTH
-  - Variable: Geopotential height
+  - Variable: Geopotential height at 500 hPa
   - Start year: 1980
   - End year: 1989
   - Longitude: "0-360"
