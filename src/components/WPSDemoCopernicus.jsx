@@ -655,7 +655,7 @@ class WPSDemoCopernicus extends Component {
               </span>
               <input
                 key={index}
-                name={el.title}
+                name={el.identifier}
                 type='number'
                 size='6'
                 width='6'
@@ -720,6 +720,7 @@ class WPSDemoCopernicus extends Component {
     this.setState(
       produce(this.state, draft => {
         let stateItemIndex = this.state.processInputs.findIndex(e => e.identifier === name);
+        console.log(stateItemIndex, this.state.processInputs, name);
         draft.processInputs[stateItemIndex].selected[itemIndex] = value;
       }), () => {
         this.setState({
