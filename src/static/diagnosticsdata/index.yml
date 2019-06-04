@@ -13,10 +13,34 @@ diagnostics:
           - WP3
           - DLR
           - KNMI
-          - NLeSC
-          - URead
+          - NLESC
+          - URREAD
           - BSC
-          - Calculate
+    capacity_factor:
+        id: 133
+        name: capacity_factor
+        title: Capacity Factor of Wind Power.
+        sub_title:
+        info_text: Metric showing the wind capacity factor (the ratio of average estimated power to theoretical maximum power) to estimate energy supply.
+        info_file: capacity_factor/capacity_factor.yml
+        image_file: diagnosticsdata/capacity_factor/capacity_factor_IPSL-CM5A-LR_1980-2005.png
+        github_issue:
+        tags:
+          - WP7
+          - BSC
+          - DTR
+    dtr:
+        id: 13
+        name: dtr
+        title: Diurnal Temperature Variation (DTR) Indicator
+        sub_title:
+        info_text: Metric showing the diurnal temperature indicator to estimate energy demand
+        info_file: dtr/dtr.yml
+        image_file: diagnosticsdata/dtr/diurnal_temperature_variation.png
+        github_issue:
+        tags:
+          - WP7
+          - BSC
     cvdp:
         id: 201
         name: cvdp
@@ -71,7 +95,6 @@ diagnostics:
           - WP4
           - ISAC-CNR
           - MiLES
-          - Calculate
     zmnam:
         id: 9
         name: zmnam
@@ -83,8 +106,8 @@ diagnostics:
         github_issue:
         tags:
           - WP4
+          - WP6
           - ISAC-CNR
-          - Calculate
     modes_of_variability:
         id: 555
         name: modes_of_variability
@@ -97,7 +120,6 @@ diagnostics:
         tags:
           - WP4
           - BSC
-          - Calculate
     hyint:
         id: 6
         name: hyint
@@ -109,19 +131,6 @@ diagnostics:
         github_issue:
         tags:
           - WP4
-          - ISAC-CNR
-    extreme_events:
-        id: 77
-        name: extreme_events
-        title: Extreme Events Indices
-        info_text: Calculate indices for monitoring changes in extremes based on daily temperature and precipitation data. Producing Glecker and timeline plots of this as shown in the IPCC_AR4 report.
-        info_file: extreme_events/extreme_events.yml
-        image_file: diagnosticsdata/extreme_events/extreme_events_thumbnail.png
-        github_issue:
-        tags:
-          - WP4
-          - Cicero (Oslo, Norway)
-          - DLR
           - ISAC-CNR
     quantilebias:
         id: 8
@@ -148,7 +157,6 @@ diagnostics:
             - WP5
             - Anomaly Agreement
             - BSC
-            - Calculate
     ensclus:
         id: 4
         name: ensclus
@@ -162,7 +170,6 @@ diagnostics:
           - Sub-ensemble selection
           - WP5
           - ISAC-CNR
-          - Calculate
     combined_indices:
         id: 12
         name: combined_indices
@@ -175,7 +182,6 @@ diagnostics:
         tags:
           - WP6
           - BSC
-          - Calculate
     teleconnections:
         id: 5
         name: teleconnections
@@ -189,7 +195,6 @@ diagnostics:
           - WP6
           - ISAC-CNR
           - MiLES
-          - Calculate
     weather_regimes:
         id: 55
         name: weather_regimes
@@ -203,7 +208,6 @@ diagnostics:
           - WP6
           - ISAC-CNR
           - MiLES
-          - Calculate
     correlations:
         id: 11
         name: correlations
@@ -241,7 +245,6 @@ diagnostics:
         tags:
           - WP7
           - SMHI
-          - Calculate
     consecdrydays:
         id: 171
         name: consecdrydays
@@ -254,7 +257,7 @@ diagnostics:
         tags:
           - WP7
           - SMHI
-          - Calculate
+          - WATER
     shapefile_selection:
         id: 16
         name: shapefile_selection
@@ -267,9 +270,8 @@ diagnostics:
         tags:
           - WP7
           - SMHI
-          - Catchment
-          - Hydrology
-          - Calculate
+          - CATCHMENT
+          - HYDROLOGY
     rainfarm:
         id: 3
         name: rainfarm
@@ -294,34 +296,6 @@ diagnostics:
         tags:
           - WP7
           - BSC
-          - Calculate
-    dtr:
-        id: 13
-        name: dtr
-        title: Diurnal Temperature Variation (DTR) Indicator
-        sub_title:
-        info_text: Metric showing the diurnal temperature indicator to estimate energy demand
-#        , and the wind capacity factor to estimate energy supply.
-        info_file: dtr/dtr.yml
-        image_file: diagnosticsdata/dtr/diurnal_temperature_variation.png
-        github_issue:
-        tags:
-          - WP7
-          - BSC
-          - Calculate
-    capacity_factor:
-        id: 133
-        name: capacity_factor
-        title: Capacity Factor of Wind Power.
-        sub_title:
-        info_text: Metric showing the wind capacity factor (the ratio of average estimated power to theoretical maximum power) to estimate energy supply.
-        info_file: capacity_factor/capacity_factor.yml
-        image_file: diagnosticsdata/capacity_factor/capacity_factor_IPSL-CM5A-LR_1980-2005.png
-        github_issue:
-        tags:
-          - WP7
-          - BSC
-          - Calculate
     extreme_index:
         id: 101
         name: extreme_index
@@ -334,7 +308,6 @@ diagnostics:
           - WP7
           - BSC
           - ACI
-          - Calculate
     toy_model:
         id: 111
         name: toy_model
