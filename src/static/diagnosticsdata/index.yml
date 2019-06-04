@@ -300,7 +300,7 @@ diagnostics:
     heatwaves_coldwaves:
         id: 14
         name: heatwaves_coldwaves
-        title: Heatwaves and Coldwaves duration
+        title: Heatwave and coldwave duration
         sub_title:
         info_text: Metric showing the duration of heatwaves and coldwaves, to help understand potential changes in energy demand.
         info_file: heatwaves_coldwaves/heatwaves_coldwaves.yml
