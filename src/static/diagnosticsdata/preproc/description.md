@@ -10,3 +10,5 @@ Features of the ESMValTool Climate data pre-processor are:
 * and many more
 
 See [ESMValtool User’s guide](https://esmvaltool.readthedocs.io) for more information on the ESMValTool pre-processor installation and usage.
+
+In the plots below we show the percipitation and air temperature outputs for MPI-ESM-LR model prepared for CMIP5 historical dataset.
