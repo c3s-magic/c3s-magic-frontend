@@ -13,8 +13,8 @@ diagnostics:
           - WP3
           - DLR
           - KNMI
-          - NLESC
-          - URREAD
+          - NLeSC
+          - URead
           - BSC
     capacity_factor:
         id: 133
@@ -65,7 +65,7 @@ diagnostics:
         image_file: ./diagnosticsdata/perfmetrics/Portait.png
         github_issue:
         tags:
-          - performance
+          - Performance
           - mean annual cycle
           - Essential Climate Variables
           - WP4
@@ -131,6 +131,19 @@ diagnostics:
         github_issue:
         tags:
           - WP4
+          - ISAC-CNR
+    extreme_events:
+        id: 77
+        name: extreme_events
+        title: Extreme Events Indices
+        info_text: Calculate indices for monitoring changes in extremes based on daily temperature and precipitation data. Producing Glecker and timeline plots of this as shown in the IPCC_AR4 report.
+        info_file: extreme_events/extreme_events.yml
+        image_file: diagnosticsdata/extreme_events/extreme_events_thumbnail.png
+        github_issue:
+        tags:
+          - WP4
+          - Cicero (Oslo, Norway)
+          - DLR
           - ISAC-CNR
     quantilebias:
         id: 8
