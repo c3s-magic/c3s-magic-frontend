@@ -136,7 +136,7 @@ diagnostics:
         id: 77
         name: extreme_events
         title: Extreme Events Indices
-        info_text: Calculate indices for monitoring changes in extremes based on daily temperature and precipitation data. Producing Glecker and timeline plots of this as shown in the IPCC_AR4 report.
+        info_text: Compute ETCCDI indices for monitoring climate changes in extremes, based on daily temperature and precipitation data. Produces Glecker and timeseries plots as shown in the IPCC AR5 report.
         info_file: extreme_events/extreme_events.yml
         image_file: diagnosticsdata/extreme_events/extreme_events_thumbnail.png
         github_issue:
