@@ -85,7 +85,7 @@ diagnostics:
     blocking:
         id: 7
         name: blocking
-        title: Blocking Metrics and Indices (MiLES)
+        title: Atmospheric Blocking Indices
         sub_title:
         info_text: Diagnostic to provide daily 1-D and 2-D atmospheric blocking indices (computed as the reversal of the zg500 meridional gradient). Based on the MId-Latitude Evaluation System (MiLES).
         info_file: blocking/blocking.yml
@@ -98,7 +98,7 @@ diagnostics:
     zmnam:
         id: 9
         name: zmnam
-        title: ZMNAM - Stratosphere-Troposphere coupling and annular modes indices
+        title: Stratosphere-Troposphere coupling and annular modes indices
         sub_title:
         info_text: Metric to compute the Zonal Mean Northern Annular Mode (ZMNAM) in climate simulations using reanalysis datasets as reference.
         info_file: zmnam/zmnam.yml
@@ -198,7 +198,7 @@ diagnostics:
     teleconnections:
         id: 5
         name: teleconnections
-        title: Teleconnection indices (MiLES)
+        title: Teleconnection patterns
         sub_title:
         info_text: Diagnostic to provide teleconnection patterns (zg500 Empirical Orthogonal Functions) such as the North Atlantic Oscillation or the Arctic Oscillation. Based on the MId-Latitude Evaluation System (MiLES).
         info_file: teleconnections/teleconnections.yml
