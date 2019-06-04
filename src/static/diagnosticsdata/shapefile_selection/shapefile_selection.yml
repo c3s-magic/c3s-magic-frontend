@@ -27,16 +27,14 @@ settings:
   - Weighting method: 'mean_inside'
   - Write xlsx: true
   - Write netcdf: true
-#  - evalplot: false
 title: Shapefile selection
-data: {DATAURL}/recipes/recipe_shapeselect_20190309_133432.zip
-provenance: {DATAURL}/recipes/recipe_shapeselect_20190309_133432/work/diagnostic1/script1/CMIP5_EC-EARTH_Amon_historical_r12i1p1_T2Ms_pr_1990-1999_polygon_provenance.svg
+data: {DATAURL}/recipes/recipe_shapeselect_20190602_200903.zip
+provenance: {DATAURL}/recipes/recipe_shapeselect_20190602_200903/work/diagnostic1/script1/CMIP5_EC-EARTH_Amon_historical_r12i1p1_pr_1990-1999_polygon_provenance.svg
 process: /calculate/copernicus-wps/shapefile_selection
 media: 
-  - diagnosticsdata/shapefile_selection/OBS_CRU_reanaly_1_T2Ms_tas_1990-1994.png
   - diagnosticsdata/shapefile_selection/Basin_grid2.png
-# enableADAGUC:
-#   - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_miles_eof_20190308_064303%2Fwork%2Fmiles_diagnostics%2Fmiles_eof%2FEC-EARTH%2Fhistorical%2Fr2i1p1%2F1980-1989%2FDJF%2FEOFs%2FNAO%2FEOFs_EC-EARTH_historical_r2i1p1_1980-1989_DJF.nc&&service=WMS&request=GetCapabilities
+#enableADAGUC:
+#   - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_shapeselect_20190602_200903%2Fwork%2Fdiagnostic1%2Fscript1%2FCMIP5_EC-EARTH_Amon_historical_r12i1p1_tas_1990-1999_polygon.nc
 #   - projectionbutton: true
 #   - layerselector: true
 #   - timeselector: false

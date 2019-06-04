@@ -12,10 +12,9 @@ authors:
 contact:
   - Alasdair Hunter @alasdairhunter
   - Nicolau Manubens @nmanuben
-description_short: This metric shows the wind capacity factor to estimate energy supply.
+description_short: Metric showing the wind capacity factor (the ratio of average estimated power to theoretical maximum power) to estimate energy supply.
 description_file: 'capacity_factor/description.md'
 image_file: diagnosticsdata/capacity_factor/capacity_factor_IPSL-CM5A-LR_1980-2005.png
-report_file: report.pdf
 references:
   - text: "IEC. (2005). International Standard IEC 61400-1, third edition, International Electrotechnical Commission"
     url: "https://webstore.iec.ch/preview/info_iec61400-1%7Bed3.0%7Den.pdf"
@@ -36,7 +35,14 @@ settings:
   - Longitude: "200 - 300"
   - Latitude: "27 - 70"
 title: Capacity factor of wind power
-data: {DATAURL}/recipes/recipe_capacity_factor_wp7_20190308_045354.zip
-provenance: {DATAURL}/recipes/recipe_capacity_factor_wp7_20190308_045354/work/capacity_factor/main/capacity_factor_IPSL-CM5A-MR_1980-2005_provenance.svg
-media: {DATAURL}/recipes/recipe_capacity_factor_wp7_20190308_045354/plots/capacity_factor/main/capacity_factor_IPSL-CM5A-MR_1980-2005.png
+data: {DATAURL}/recipes/recipe_capacity_factor_20190602_200903.zip
+provenance: {DATAURL}/recipes/recipe_capacity_factor_20190602_200903/work/capacity_factor/main/capacity_factor_IPSL-CM5A-MR_1980-2005_provenance.svg
+media: {DATAURL}/recipes/recipe_capacity_factor_20190602_200903/plots/capacity_factor/main/capacity_factor_IPSL-CM5A-MR_1980-2005.png
 process: /calculate/copernicus-wps/capacity_factor
+#enableADAGUC:
+#  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_capacity_factor_20190602_200903%2Fwork%2Fcapacity_factor%2Fmain%2Fcapacity_factor_IPSL-CM5A-MR_1980-2005.nc
+#  - projectionbutton: true
+#  - layerselector: true
+#  - timeselector: false
+#  - styleselector: true
+#  - layers: []
