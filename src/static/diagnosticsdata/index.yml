@@ -63,7 +63,7 @@ diagnostics:
         name: blocking
         title: Blocking Metrics and Indices (MiLES)
         sub_title:
-        info_text: The Blocking diagnostic shows the mid-latitude 1D and 2D blocking indices, that was developed to support analysis of mid-latitude weather patterns in terms of atmospheric blocking, teleconnections and weather regimes (MiLES).
+        info_text: Diagnostic to provide daily 1-D and 2-D atmospheric blocking indices (computed as the reversal of the zg500 meridional gradient). Based on the MId-Latitude Evaluation System (MiLES).
         info_file: blocking/blocking.yml
         image_file: diagnosticsdata/blocking/blocking_thumbnail.png
         github_issue:
@@ -181,7 +181,7 @@ diagnostics:
         name: teleconnections
         title: Teleconnection indices (MiLES)
         sub_title:
-        info_text: Diagnostic that implements the MId-Latitude Evaluation System (MiLES) to provide teleconnection indices (Z500 empirical orthogonal functions).
+        info_text: Diagnostic to provide teleconnection patterns (zg500 Empirical Orthogonal Functions) such as the North Atlantic Oscillation or the Arctic Oscillation. Based on the MId-Latitude Evaluation System (MiLES).
         info_file: teleconnections/teleconnections.yml
         image_file: diagnosticsdata/teleconnections/teleconnections_thumbnail.png
         github_issue:
@@ -195,7 +195,7 @@ diagnostics:
         name: weather_regimes
         title: Weather Regimes
         sub_title:
-        info_text: Diagnostic for computing and plotting weather regimes (MiLES) 
+        info_text: Diagnostic to provide Euro-Atlantic weather regimes (computed with k-means clustering on daily zg500 data). Based on the MId-Latitude Evaluation System (MiLES).
         info_file: weather_regimes/weather_regimes.yml
         image_file: diagnosticsdata/weather_regimes/weather_regimes_thumbnail.png
         github_issue:
