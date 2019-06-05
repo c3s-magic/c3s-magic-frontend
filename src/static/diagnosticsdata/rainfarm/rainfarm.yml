@@ -13,7 +13,7 @@ description_file: 'rainfarm/description.md'
 #media used as an alternative to a live adaguc viewer
 #media: diagnosticsdata/rainfarm/RainFARM_example_64x64.png
 enableADAGUC:
-  - data_url: https://portal.c3s-magic.eu/backend/wms?DATASET=WP7_ISAC_rainfarm
+  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_rainfarm_20190602_200904%2Fwork%2Frainfarm%2Frainfarm%2FCMIP5_EC-EARTH_day_historical_r1i1p1_pr_1997-1997_downscaled_0002.nc
   - projectionbutton: true
   - layerselector: true
   - timeselector: true
@@ -41,12 +41,13 @@ settings:
   - Conserve smooth: true
   - Weights climo: false
 title: RainFARM stochastic downscaling
-#youtube: P3BCRFipKO0
 image_file: diagnosticsdata/rainfarm/rainfarm_thumbnail.png
-data: {DATAURL}/recipes/recipe_rainfarm_20190521_141430.zip
-#provenance: <point to svg file>
-#process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
-#process: /calculate/rainfarm
+data: {DATAURL}/recipes/recipe_rainfarm_20190602_200904.zip
+provenance: {DATAURL}/recipes/recipe_rainfarm_20190602_200904/work/rainfarm/rainfarm/CMIP5_EC-EARTH_day_historical_r1i1p1_pr_1997-1997_downscaled_0001_provenance.svg
+media: 
+  - ./diagnosticsdata/rainfarm/RainFARM_example_8x8.png
+  - ./diagnosticsdata/rainfarm/RainFARM_example_64x64.png
+process: /calculate/copernicus-wps/rainfarm
 
 
 

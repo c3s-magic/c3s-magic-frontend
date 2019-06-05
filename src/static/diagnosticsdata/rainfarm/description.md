@@ -7,7 +7,4 @@ The stochastic method is a weather generator which allows to generate fine-scale
 Description of user-changeable settings on webpage 1) Selection of model; 2) Selection of period; 3) Selection of longitude and latitude.
 
 Figures: original precipitation (mm/day) field and the downscaled field for the EC-Earth model over central Europe.
-![example output](diagnosticsdata/rainfarm/RainFARM_example_8x8.png "Example Output") 
-![example output](diagnosticsdata/rainfarm/RainFARM_example_64x64.png "Example Output")
-
 

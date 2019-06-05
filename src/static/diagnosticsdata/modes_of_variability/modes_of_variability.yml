@@ -54,9 +54,9 @@ settings:
   - Detrend order: 2
 title: Modes of Variability
 process: /calculate/copernicus-wps/modes_of_variability
-data: {DATAURL}/recipes/recipe_modes_of_variability_wp4_20190308_080505.zip
-provenance: {DATAURL}/recipes/recipe_modes_of_variability_wp4_20190308_080505/work/weather_regime/main/psl_JAN_rmse_bcc-csm1-1_2020-01-01_2050-12-31_1971-01-01_2000-12-31_provenance.svg
+data: {DATAURL}/recipes/recipe_modes_of_variability_20190602_200903.zip
+provenance: {DATAURL}/recipes/recipe_modes_of_variability_20190602_200903/work/weather_regime/main/psl_SON_WR_exp_bcc-csm1-1_2020-01-01_2075-12-31_1971-01-01 01%3A00%3A00_2000-12-31_provenance.svg
 media:
-  - {DATAURL}/recipes/recipe_modes_of_variability_wp4_20190308_080505/plots/weather_regime/main/JAN-psl_observed_regimes.png
-  - {DATAURL}/recipes/recipe_modes_of_variability_wp4_20190308_080505/plots/weather_regime/main/JAN-psl_predicted_regimes.png
-  - {DATAURL}/recipes/recipe_modes_of_variability_wp4_20190308_080505/plots/weather_regime/main/Table_psl_JAN_rmse_bcc-csm1-1_2020-01-01_2050-12-31_1971-01-01_2000-12-31.png
+  - {DATAURL}/recipes/recipe_modes_of_variability_20190602_200903/plots/weather_regime/main/SON-psl_observed_regimes.png
+  - {DATAURL}/recipes/recipe_modes_of_variability_20190602_200903/plots/weather_regime/main/SON-psl_predicted_regimes.png
+  - {DATAURL}/recipes/recipe_modes_of_variability_20190602_200903/plots/weather_regime/main/Table_psl_SON_rmse_bcc-csm1-1_2020-01-01_2075-12-31_1971-01-01 01%3A00%3A00_2000-12-31.png

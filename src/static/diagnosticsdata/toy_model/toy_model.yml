@@ -27,13 +27,11 @@ settings:
   - Longitude (pre-processor): "-40 - 40"
   - Latitude (pre-processor): "30 - 50"
 title: Toy Model
-#process: /calculate/copernicus-wps/hyint
-data: {DATAURL}/recipes/recipe_toymodel_20190521_141452.zip   
-provenance: {DATAURL}/recipes/recipe_toymodel_20190521_141452/work/toymodel/main/synthetic_CMIP5_bcc-csm1-1_Amon_rcp45_r1i1p1_psl_2051-2060_provenance.svg
+process: /calculate/copernicus-wps/toy_model
+data: {DATAURL}/recipes/recipe_toymodel_20190602_200904.zip   
+provenance: {DATAURL}/recipes/recipe_toymodel_20190602_200904/work/toymodel/main/synthetic_CMIP5_bcc-csm1-1_Amon_rcp45_r1i1p1_psl_2051-2060_provenance.svg
 media:
-  - {DATAURL}/recipes/recipe_toymodel_20190521_141452/plots/toymodel/main/synthetic_CMIP5_bcc-csm1-1_Amon_rcp45_r1i1p1_psl_2051-2060.jpg
-#media: diagnosticsdata/toy_model/synthetic_CMIP5_IPSL-CM5A-LR_day_historical_r1i1p1_T2M_tasmax_1999-2000.jpg
-#data: https://portal.c3s-magic.eu/data/recipes/recipe_quantile_bias_20181211.zip
+  - {DATAURL}/recipes/recipe_toymodel_20190602_200904/plots/toymodel/main/synthetic_CMIP5_bcc-csm1-1_Amon_rcp45_r1i1p1_psl_2051-2060.jpg
 
 
 
