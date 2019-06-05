@@ -12,7 +12,6 @@ diagnostics:
           - CVDP
           - WP4
           - DLR
-          - Calculate
     heatwaves_coldwaves:
         id: 2
         name: heatwaves_coldwaves
@@ -49,7 +48,7 @@ diagnostics:
         tags:
           - WP7
           - SMHI
-          - Water
+          - WATER
     drought_indicator:
         id: 5
         name: drought_indicator
@@ -62,6 +61,7 @@ diagnostics:
         tags:
           - WP7
           - SMHI
+          - WATER
     quantilebias:
         id: 6
         name: quantilebias
@@ -84,7 +84,7 @@ diagnostics:
         github_issue:
         tags:
           - WP4
-          - Cicero
+          - CICERO
           - DLR
           - ISAC-CNR
     combined_indices:
@@ -92,7 +92,7 @@ diagnostics:
         name: combined_indices
         title: Indices based on area averages
         sub_title:
-        info_text: Metric showning Indices based on area averages.
+        info_text: Metric showing Indices based on area averages.
         info_file: combined_indices/combined_indices.yml
         image_file: diagnosticsdata/combined_indices/single_and_multi_model_indices_thumbnail.png
         github_issue:
@@ -111,6 +111,7 @@ diagnostics:
         tags:
           - WP7
           - BSC
+          - DTR
     multimodel_products:
         id: 10
         name: multimodel_products
@@ -122,21 +123,21 @@ diagnostics:
         github_issue: https://github.com/c3s-magic/c3s-magic-frontend/issues/51
         tags:
             - WP5
-            - Anomaly Agreement
+            - ANOMALY AGREEMENT
             - BSC
     blocking:
         id: 11
         name: blocking
         title: Atmospheric Blocking Indices
         sub_title:
-        info_text: Diagnostic to provide daily 1-D and 2-D atmospheric blocking indices (computed as the reversal of the zg500 meridional gradient). Based on the MId-Latitude Evaluation System (MiLES).
+        info_text: The Blocking diagnostic shows the mid-latitude 1D and 2D blocking indices developed as part of MiLES to support analysis of mid-latitude weather patterns in terms of atmospheric blocking, teleconnections and weather regimes.
         info_file: blocking/blocking.yml
         image_file: diagnosticsdata/blocking/blocking_thumbnail.png
         github_issue:
         tags:
           - WP4
           - ISAC-CNR
-          - MiLES
+          - MILES
     teleconnections:
         id: 12
         name: teleconnections
@@ -149,7 +150,7 @@ diagnostics:
         tags:
           - WP6
           - ISAC-CNR
-          - MiLES
+          - MILES
     weather_regimes:
         id: 13
         name: weather_regimes
@@ -162,7 +163,7 @@ diagnostics:
         tags:
           - WP6
           - ISAC-CNR
-          - MiLES
+          - MILES
     modes_of_variability:
         id: 14
         name: modes_of_variability
@@ -239,8 +240,8 @@ diagnostics:
           - WP3
           - DLR
           - KNMI
-          - NLeSC
-          - URead
+          - NLESC
+          - UREAD
           - BSC
     shapefile_selection:
         id: 20

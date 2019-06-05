@@ -11,14 +11,6 @@ contact:
   - Enrico Arnone e.arnone@isac.cnr.it
 description_short: Diagnostic showing the precipitation quantile bias between models and a reference dataset
 description_file: 'quantilebias/description.md'
-#media: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360'
-enableADAGUC:
-  - data_url: https://portal.c3s-magic.eu/backend/wms?DATASET=WP4_ISAC_quantilebias
-  - projectionbutton: true
-  - layerselector: true
-  - timeselector: true
-  - styleselector: true
-  - layers: []
 references:
   - text: "Mehran, A. et al., 2014, Journal of Geophysical Research (Atmospheres), Volume 119, Issue 4, pp. 1695-1707"
     url: "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2013JD021152"
@@ -28,15 +20,19 @@ settings:
       - ACCESS1-0
   - Variable: Precipitation
   - Experiment: Historical
-  - Ensamble: r1i1p1
+  - Ensemble: r1i1p1
   - Start year: 1997
   - End year: 1997
   - Quantile: 75
   - Reference dataset: GPCP-SG
 title: Precipitation quantile bias
 image_file: diagnosticsdata/quantilebias/quantilebias_thumbnail.png
-data: https://portal.c3s-magic.eu/data/recipes/recipe_quantile_bias_20181211.zip
-#provenance: <point to svg file>
-#process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
-
-
+data: {DATAURL}/recipes/recipe_quantilebias_20190602_200904.zip
+provenance: {DATAURL}/recipes/recipe_quantilebias_20190602_200904/work/quantilebias/main/ACCESS1-0_historical_r1i1p1_1997-1997_pr_75qb_provenance.svg
+enableADAGUC:
+  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_quantilebias_20190602_200904%2Fwork%2Fquantilebias%2Fmain%2FEC-EARTH_historical_r2i1p1_1997-1997_pr_75qb.nc
+  - projectionbutton: true
+  - layerselector: true
+  - timeselector: false
+  - styleselector: true
+  - layers: []
