@@ -57,12 +57,12 @@ settings:
 title: Combined Climate Extreme Index
 youtube:
 info_file: extreme_index/extreme_index.yml
-data: {DATAURL}/recipes/recipe_extreme_index_wp7_20190308_062806.zip
-provenance: {DATAURL}/recipes/recipe_extreme_index_wp7_20190308_062806/work/extreme_index/main/sfcWind_Wx_risk_insurance_index_IPSL-CM5A-MR_2020_2040_1971_2000_provenance.svg
+data: {DATAURL}/recipes/recipe_extreme_index_20190602_200903.zip
+provenance: {DATAURL}/recipes/recipe_extreme_index_20190602_200903/work/extreme_index/metric/_MPI-ESM-MR_provenance.svg
 process: /calculate/copernicus-wps/extreme_index
-media: {DATAURL}/recipes/recipe_extreme_index_wp7_20190308_062806/plots/extreme_index/main/Wx_IPSL-CM5A-MR_rcp85_2020_2040.png
+media: {DATAURL}/recipes/recipe_extreme_index_20190602_200903/plots/extreme_index/metric/Wx_MPI-ESM-MR_rcp85_2020_2040.png
 # enableADAGUC:
-#   - data_url: {STATICWMS}?DATASET=WP7_BSC_ACI_Components
+#   - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_extreme_index_20190602_200903%2Fwork%2Fextreme_index%2Fmetric%2FsfcWind_Wx_risk_insurance_index_MPI-ESM-MR_2020_2040_1971_2000.nc
 #   - projectionbutton: true
 #   - layerselector: true
 #   - timeselector: true
