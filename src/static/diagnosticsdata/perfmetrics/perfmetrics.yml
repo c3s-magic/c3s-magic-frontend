@@ -95,7 +95,7 @@ settings:
   - Experiment: historical
   - Ensemble: "r1i1p1"
   - Reference dataset: ERA-Interim
-  - Alternative reference datasets:
+  - Additional reference datasets:
       - NCEP
       - GPCP-SG
       - ESACCI-CLOUD
@@ -116,7 +116,7 @@ title: Performance Metrics for essential climate parameters
 youtube:
 #chart: 'https://portal.c3s-magic.eu/backend/adagucopendap/recipe_flato13ipcc_20180825_091035%2Fwork%2Ffig09-42a%2Ffig09-42a%2Fch09_fig09-42a.nc'
 
-data: {DATAURL}/recipes/recipe_perfmetrics_CMIP5_20190308_173950.zip
-media: {DATAURL}/recipes/recipe_perfmetrics_CMIP5_20190308_173950/plots/collect/RMSD/ta_Glob_to_ua_Glob_RMSD.png
+data: {DATAURL}/recipes/recipe_perfmetrics_CMIP5_4cds_20190602_200903.zip
+media: {DATAURL}/recipes/recipe_perfmetrics_CMIP5_4cds_20190602_200903/plots/collect/RMSD/ta850-global_to_rsut-global_RMSD.png
 #provenance: {DATA_URL}/
-#process: <link to process, e.g.: process: /calculate/python_demonstrator_metric
+process: /calculate/perfmetrics
