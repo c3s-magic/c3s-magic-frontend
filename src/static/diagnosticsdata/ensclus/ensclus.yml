@@ -65,15 +65,15 @@ settings:
   - End year: 2005
 #youtube: MktvzcvflL8
 image_file: diagnosticsdata/ensclus/ensclus_thumbnail.png
-data: {DATAURL}/recipes/recipe_extreme_index_wp7_20190308_062806.zip
-provenance: {DATAURL}/recipes/recipe_ensclus_20190308_045354/work/EnsClus/main/ens_anomalies_pr_32ens_JJA_EU_CMIP5_historical_provenance.svg
+data: {DATAURL}/recipes/recipe_ensclus_20190602_200903.zip
+#provenance: {DATAURL}/recipes/recipe_ensclus_20190602_200903/work/EnsClus/main/ens_anomalies_pr_32ens_JJA_EU_CMIP5_historical_provenance.svg
 process: /calculate/copernicus-wps/ensclus
 media:
-  - {DATAURL}/recipes/recipe_ensclus_20190308_045354/plots/EnsClus/main/anomalies_pr_32ens_JJA_EU_CMIP5_historical.png
-#enableADAGUC:
-#  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_ensclus_20190308_045354%2Fwork%2FEnsClus%2Fmain%2Fens_anomalies_pr_32ens_JJA_EU_CMIP5_historical.nc&&service=WMS&request=GetCapabilities
-#  - projectionbutton: true
-#  - layerselector: false
-#  - timeselector: false
-#  - styleselector: true
-#  - layers: []
+  - {DATAURL}/recipes/recipe_ensclus_20190602_200903/plots/EnsClus/main/anomalies_pr_32ens_JJA_EU_CMIP5_historical.fig1.png
+enableADAGUC:
+  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_ensclus_20190602_200903%2Fwork%2FEnsClus%2Fmain%2Fens_extreme_pr_32ens_JJA_EU_CMIP5_historical.nc
+  - projectionbutton: true
+  - layerselector: true
+  - timeselector: true
+  - styleselector: true
+  - layers: []
