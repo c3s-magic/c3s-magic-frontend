@@ -18,8 +18,8 @@ image_file: diagnosticsdata/capacity_factor/capacity_factor_IPSL-CM5A-LR_1980-20
 references:
   - text: "IEC. (2005). International Standard IEC 61400-1, third edition, International Electrotechnical Commission"
     url: "https://webstore.iec.ch/preview/info_iec61400-1%7Bed3.0%7Den.pdf"
-  - text: "Lledó, L. (2017). Computing capacity factor. Technical note BSC-ESS-2017-001, Barcelona Supercomputing Center."
-    url: "https://earth.bsc.es/wiki/lib/exe/fetch.php?media=library:external:bsc-ess-2017-001-c4e_capacity_factor.pdf"
+  - text: "Lledó, Ll., V. Torralba, A. Soret, J. Ramon, F.J. Doblas-Reyes (2019). Seasonal forecasts of wind power generation, Renewable Energy, 143, 91-100"
+    url: "https://doi.org/10.1016/j.renene.2019.04.135"
   - text: "ESMValTool documentation on this metric"
     url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_capacity_factor.html
 settings:
@@ -29,7 +29,7 @@ settings:
   - Start year: 1980
   - End year: 2005
   - Experiment: Historical
-  - Ensamble: r1i1p1
+  - Ensemble: r1i1p1
   - Season: DJF
   - Reference dataset: ERA-INTERIM
   - Longitude: "200 - 300"
