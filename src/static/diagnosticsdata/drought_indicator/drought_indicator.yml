@@ -8,8 +8,7 @@ contact:
 description_short: The drought indicator calculates the Standardized Precipitation Index (SPI) and Standardized Precipitation-Evapotranspiration Index (SPEI) diagnostics, indicating meteorological and hydrological droughts.
 description_file: 'drought_indicator/description.md'
 image_file: diagnosticsdata/drought_indicator/histplot.png
-report_file:
-#images in description.md
+#report_file:
 references:
   - text: "McKee, T. B., Doesken, N. J., & Kleist, J. (1993). The relationship of drought frequency and duration to time scales. In Proceedings of the 8th Conference on Applied Climatology (Vol. 17, No. 22, pp. 179-183). Boston, MA: American Meteorological Society."
     url: "https://www.researchgate.net/profile/Patrick_Keys/post/Which_are_the_drought_indices_based_on_precipitation_and_temperature/attachment/59d652b379197b80779aadb6/AS:513526097166336@1499445570190/download/r_MCKEE_1993_Relationship+of+drought+Standardized+Precipitation+Index+SPI.pdf"
@@ -42,14 +41,23 @@ settings:
   - Start year: 2000
   - End year: 2005
   - Reference dataset: ERA-Interim
-  - dryindex:
-      - SPI
+  - Dry index:
+      - SPI 
       - SPEI
 title: Drought indicator
 # youtube:
-data: {DATAURL}/recipes/recipe_spei_20190309_135315.zip
-provenance: {DATAURL}/recipes/recipe_spei_20190309_135315/work/diagnostic/spei/histarr_provenance.svg
+data: {DATAURL}/recipes/recipe_spei_20190602_200905.zip
+provenance: {DATAURL}/recipes/recipe_spei_20190602_200905/work/diagnostic/spei/CMIP5_ACCESS1-0_Amon_historical_r1i1p1_spei_2000-2005_hist_provenance.svg
 process: /calculate/copernicus-wps/drought_indicator
 media:
-  - {DATAURL}/recipes/recipe_spei_20190309_135315/plots/diagnostic/spei/histplot.png
-  - {DATAURL}/recipes/recipe_spei_20190309_135315/plots/diagnostic/spi/histplot.png
+  - {DATAURL}/recipes/recipe_spei_20190602_200905/plots/diagnostic/spei/histplot.png
+  - {DATAURL}/recipes/recipe_spei_20190602_200905/plots/diagnostic/spi/histplot.png
+  - ./diagnosticsdata/drought_indicator/dryfreq.png
+  - ./diagnosticsdata/drought_indicator/drymax.png
+enableADAGUC:
+  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_spei_20190602_200905%2Fwork%2Fdiagnostic%2Fspei%2FCMIP5_ACCESS1-0_Amon_historical_r1i1p1_spei_2000-2005_hist.nc
+  - projectionbutton: true
+  - layerselector: true
+  - timeselector: false
+  - styleselector: true
+  - layers: []
