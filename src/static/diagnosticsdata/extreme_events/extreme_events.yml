@@ -14,16 +14,15 @@ authors:
 contact:
   - Marit Sandstad marit.sandstad@cicero.oslo.no
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
-description_short: Calculate indices for monitoring changes in extremes based on daily temperature and precipitation data. Producing Glecker and timeline plots of this as shown in the IPCC_AR4 report
+description_short: Calculate indices for monitoring changes in extremes based on daily temperature and precipitation data. Produces Glecker and timeseries plots as shown in the IPCC_AR5 report.
 description_file: 'extreme_events/description.md'
-#media: https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360
-#enableADAGUC:
-# - data_url: https://portal.c3s-magic.eu/backend/wms?DATASET=extreme_events
-# - projectionbutton: true
-#  - layerselector: true
-#  - timeselector: true
-#  - styleselector: true
-#  - layers: []
+enableADAGUC:
+  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_extreme_events_20190602_200903%2Fwork%2Fextreme_events%2Fmain%2FtrETCCDI_yr_CESM1-BGC_historical_r1i1p1_1981-2000.nc
+  - projectionbutton: true
+  - layerselector: true
+  - timeselector: true
+  - styleselector: true
+  - layers: []
 references:
   - text: "Zhang, X., Alexander, L., Hegerl, G. C., Jones, P., Klein Tank, A., Peterson, T. C., Trewin, B., Zwiers, F. W., 2011, Indices for monitoring changes in extremes based on daily temperature and precipitation data, WIREs Clim. Change" 
     url: "https://doi.org/10.1002/wcc.147"
@@ -50,8 +49,7 @@ settings:
   - Ensemble: "r1i1p1"
   - Start year: 1980
   - End year: 2020
-  - Base period: [1980, 1999]
-  - Base period: [1980, 2020]
+  - Base period: [1981, 2000]
   - Timeseries_idx: 
       - "tn10pETCCDI_yr"
       - "tn90pETCCDI_yr"
@@ -64,11 +62,13 @@ settings:
       - "tx90pETCCDI_yr"
   - ts_plt: true
   - glc_plt: true
-
 title: Extreme Events Indices
-#process: /calculate/copernicus-wps/extreme_events
-#data: 
-#provenance: <point to svg file>
+process: /calculate/copernicus-wps/extreme_events
+data: {DATAURL}/recipes/recipe_extreme_events_20190602_200903.zip 
+provenance: {DATAURL}/recipes/recipe_extreme_events_20190602_200903/work/extreme_events/main/cddETCCDI_yr_ACCESS1-0_historical_r1i1p1_1981-2000_provenance.svg
+media: 
+  - {DATAURL}/recipes/recipe_extreme_events_20190602_200903/plots/extreme_events/main/Gleckler_CMIP_24-models_11-idx_4-obs_1981-2000.png
+  - {DATAURL}/recipes/recipe_extreme_events_20190602_200903/plots/extreme_events/main/cddETCCDI_yr_4-obs_ensmean_timeseriesplot.png
 image_file: ./diagnosticsdata/extreme_events/extreme_events_thumbnail.png
 
 
