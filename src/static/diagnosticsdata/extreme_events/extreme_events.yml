@@ -41,8 +41,8 @@ settings:
   - Regrid dataset: ACCESS1-0
   - Variable: 
       - "Precipitation"
-      - "Maximum temperature"
-      - "Minimum temperature"
+      - " Maximum temperature"
+      - " Minimum temperature"
   - Experiment: 
       - Historical
       - rcp85

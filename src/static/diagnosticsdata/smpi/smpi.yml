@@ -12,7 +12,6 @@ contact:
 description_short: "Diagnostic allowing the user to calculate the Single Model Performance Index (SMPI) following Reichler and Kim (2008)."
 description_file: 'smpi/description.md'
 report_file:
-media: diagnosticsdata/smpi/Single.png
 references:
   - text: "Reichler, T. and J. Kim, How well do coupled models simulate today`s climate? Bull. Amer. Meteor. Soc., 89, 303-311, doi: 10.1175/BAMS-89-3-303, 2008."
     url: "https://doi.org/10.1175/BAMS-89-3-303"
@@ -41,3 +40,10 @@ youtube:
 image_file: ./diagnosticsdata/smpi/Single.png
 #provenance: <point to svg file>
 #process: <link to process> 
+
+
+process: /calculate/copernicus-wps/smpi
+data: {DATAURL}/recipes/https://portal.c3s-magic.eu/data/recipes/recipe_smpi_4cds_20190603_070756.zip
+#provenance: {DATAURL}/recipes/
+media:
+  - {DATAURL}/recipes/recipe_smpi_4cds_20190603_070756/plots/collect/SMPI/SMPI.png
