@@ -40,12 +40,12 @@ settings:
   - Ensemble: "r1p1i1"
   - Longitude: "220 - 320"
   - Latitude: "30 - 80"
-  - Quantile_threshold: 0.8
+  - Quantile threshold: 0.8
   - Min duration of an event (days): 5
   - Operator: '<'
   - Season: "winter"
 title: Heatwaves and coldwaves duration
 #youtube:
-data: {DATAURL}/recipes/recipe_heatwaves_coldwaves_20190521_141426.zip
-media: {DATAURL}/recipes/recipe_heatwaves_coldwaves_20190521_141426/plots/heatwaves_coldwaves/main/tasmin_extreme_spell_durationwinter_bcc-csm1-1_rcp85_2060_2080.png
-provenance: {DATAURL}/recipes/recipe_heatwaves_coldwaves_20190521_141426/work/heatwaves_coldwaves/main/tasmin_extreme_spell_durationwinter_bcc-csm1-1_rcp85_2060_2080_provenance.svg
+data: {DATAURL}/recipes/recipe_heatwaves_coldwaves_20190602_200903.zip
+media: {DATAURL}/recipes/recipe_heatwaves_coldwaves_20190602_200903/plots/heatwaves_coldwaves/main/tasmin_extreme_spell_durationwinter_bcc-csm1-1_rcp85_2060_2080.png
+provenance: {DATAURL}/recipes/recipe_heatwaves_coldwaves_20190602_200903/work/heatwaves_coldwaves/main/tasmin_extreme_spell_durationwinter_bcc-csm1-1_rcp85_2060_2080_provenance.svg
