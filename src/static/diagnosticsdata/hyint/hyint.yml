@@ -8,7 +8,7 @@ authors:
 contact:
   - Enrico Arnone e.arnone@isac.cnr.it
   - Jost von Hardenberg j.vonhardeberg@isac.cnr.it
-description_short: The HyInt metrics shows the hydroclimatic intensity index HY-INT and additional hydroclimatic indices, which allow to evaluate the overall behaviour of the hydroclimatic cycle
+description_short: The HyInt metrics calculates the HY-INT hydroclimatic intensity and additional hydroclimatic indices, which allow to evaluate the overall behaviour of the hydroclimatic cycle. It produces maps, timeseries, trends and significant testing for the selected hydroclimatic indices, and can also include data from the ETCCDI indices of extremes for a joint analysis.
 description_file: 'hyint/description.md'
 #media: https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360
 enableADAGUC:

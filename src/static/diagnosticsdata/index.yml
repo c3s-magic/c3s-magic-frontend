@@ -1,6 +1,232 @@
 diagnostics:
+    cvdp:
+        id: 1
+        name: cvdp
+        title: Climate Variability Diagnostics
+        sub_title:
+        info_text: Diagnostic showing major modes of climate variability in models and observations, including ENSO, Pacific Decadal Oscillation, Atlantic Multi-decadal Oscillation, Northern and Southern Annular Modes, North Atlantic Oscillation, Pacific North and South American teleconnection patterns.
+        info_file: cvdp/cvdp.yml
+        image_file: ./diagnosticsdata/cvdp/tas.mean.ann.png
+        github_issue:
+        tags:
+          - CVDP
+          - WP4
+          - DLR
+          - Calculate
+    heatwaves_coldwaves:
+        id: 2
+        name: heatwaves_coldwaves
+        title: Heatwave and coldwave duration
+        sub_title:
+        info_text: Metric showing the duration of heatwaves and coldwaves, to help understand potential changes in energy demand.
+        info_file: heatwaves_coldwaves/heatwaves_coldwaves.yml
+        image_file: diagnosticsdata/heatwaves_coldwaves/extreme_spells_energy.png
+        github_issue:
+        tags:
+          - WP7
+          - BSC
+    dtr:
+        id: 3
+        name: dtr
+        title: Diurnal Temperature Variation (DTR) Indicator
+        sub_title:
+        info_text: Metric showing the diurnal temperature indicator to estimate energy demand
+        info_file: dtr/dtr.yml
+        image_file: diagnosticsdata/dtr/diurnal_temperature_variation.png
+        github_issue:
+        tags:
+          - WP7
+          - BSC
+    consecdrydays:
+        id: 4
+        name: consecdrydays
+        title: Consecutive Dry Days
+        sub_title:
+        info_text: Calculates the longest period of consecutive dry days in the provided time series, as well as the number of periods of at least some number of consecutive dry days.
+        info_file: consecdrydays/consecdrydays.yml
+        image_file: diagnosticsdata/consecdrydays/drydays.png
+        github_issue:
+        tags:
+          - WP7
+          - SMHI
+          - Water
+    drought_indicator:
+        id: 5
+        name: drought_indicator
+        title: Drought indicator
+        sub_title:
+        info_text: The drought indicator calculates the Standardized Precipitation Index (SPI) and Standardized Precipitation-Evapotranspiration Index (SPEI) diagnostics, indicating meteorological and hydrological droughts.
+        info_file: drought_indicator/drought_indicator.yml
+        image_file: https://portal.c3s-magic.eu/data/recipes/recipe_spi_20181108_132957/plots/diagnostic1/script1/histplot.png
+        github_issue:
+        tags:
+          - WP7
+          - SMHI
+    quantilebias:
+        id: 6
+        name: quantilebias
+        title: Precipitation quantile bias
+        sub_title:
+        info_text: Diagnostic showing the quantile bias between models and a reference dataset.
+        info_file: quantilebias/quantilebias.yml
+        image_file: diagnosticsdata/quantilebias/quantilebias_thumbnail.png
+        github_issue:
+        tags:
+          - WP4
+          - ISAC-CNR
+    extreme_events:
+        id: 7
+        name: extreme_events
+        title: Extreme Events Indices
+        info_text: Compute ETCCDI indices for monitoring climate changes in extremes, based on daily temperature and precipitation data. Produces Glecker and timeseries plots as shown in the IPCC AR5 report.
+        info_file: extreme_events/extreme_events.yml
+        image_file: diagnosticsdata/extreme_events/extreme_events_thumbnail.png
+        github_issue:
+        tags:
+          - WP4
+          - Cicero
+          - DLR
+          - ISAC-CNR
+    combined_indices:
+        id: 8
+        name: combined_indices
+        title: Indices based on area averages
+        sub_title:
+        info_text: Metric showning Indices based on area averages.
+        info_file: combined_indices/combined_indices.yml
+        image_file: diagnosticsdata/combined_indices/single_and_multi_model_indices_thumbnail.png
+        github_issue:
+        tags:
+          - WP6
+          - BSC
+    capacity_factor:
+        id: 9
+        name: capacity_factor
+        title: Capacity Factor of Wind Power.
+        sub_title:
+        info_text: Metric showing the wind capacity factor (the ratio of average estimated power to theoretical maximum power) to estimate energy supply.
+        info_file: capacity_factor/capacity_factor.yml
+        image_file: diagnosticsdata/capacity_factor/capacity_factor_IPSL-CM5A-LR_1980-2005.png
+        github_issue:
+        tags:
+          - WP7
+          - BSC
+    multimodel_products:
+        id: 10
+        name: multimodel_products
+        title: Generic Multi-Model Products
+        sub_title:
+        info_text: Diagnostic to calculate the ensemble mean anomaly, variance and agreement. The results are shown as maps and time series.
+        info_file: multimodel_products/multimodel_products.yml
+        image_file: diagnosticsdata/multimodel_products/bsc_anomaly_timeseries.png
+        github_issue: https://github.com/c3s-magic/c3s-magic-frontend/issues/51
+        tags:
+            - WP5
+            - Anomaly Agreement
+            - BSC
+    blocking:
+        id: 11
+        name: blocking
+        title: Atmospheric Blocking Indices
+        sub_title:
+        info_text: Diagnostic to provide daily 1-D and 2-D atmospheric blocking indices (computed as the reversal of the zg500 meridional gradient). Based on the MId-Latitude Evaluation System (MiLES).
+        info_file: blocking/blocking.yml
+        image_file: diagnosticsdata/blocking/blocking_thumbnail.png
+        github_issue:
+        tags:
+          - WP4
+          - ISAC-CNR
+          - MiLES
+    teleconnections:
+        id: 12
+        name: teleconnections
+        title: Teleconnection patterns
+        sub_title:
+        info_text: Diagnostic to provide teleconnection patterns (zg500 Empirical Orthogonal Functions) such as the North Atlantic Oscillation or the Arctic Oscillation. Based on the MId-Latitude Evaluation System (MiLES).
+        info_file: teleconnections/teleconnections.yml
+        image_file: diagnosticsdata/teleconnections/teleconnections_thumbnail.png
+        github_issue:
+        tags:
+          - WP6
+          - ISAC-CNR
+          - MiLES
+    weather_regimes:
+        id: 13
+        name: weather_regimes
+        title: Weather Regimes
+        sub_title:
+        info_text: Diagnostic to provide Euro-Atlantic weather regimes (computed with k-means clustering on daily zg500 data). Based on the MId-Latitude Evaluation System (MiLES).
+        info_file: weather_regimes/weather_regimes.yml
+        image_file: diagnosticsdata/weather_regimes/weather_regimes_thumbnail.png
+        github_issue:
+        tags:
+          - WP6
+          - ISAC-CNR
+          - MiLES
+    modes_of_variability:
+        id: 14
+        name: modes_of_variability
+        title: Modes of Variability
+        sub_title:
+        info_text: Diagnostic to compute the Root Mean Square Error (RMSE) between the observed and modelled patterns of variability.
+        info_file: modes_of_variability/modes_of_variability.yml
+        image_file: diagnosticsdata/modes_of_variability/era_interim_1990-01-2010-01_clusters.png
+        github_issue:
+        tags:
+          - WP4
+          - BSC
+    extreme_index:
+        id: 15
+        name: extreme_index
+        title: Combined Climate Extreme Index
+        sub_title:
+        info_text: Metric showing extreme indices relevant to the insurance industry (heat, cold, wind, flood and drought indices).
+        info_file: extreme_index/extreme_index.yml
+        image_file: diagnosticsdata/extreme_index/t90p_IPSL-CM5A-LR_rcp85_2020_2040.png
+        tags:
+          - WP7
+          - BSC
+          - ACI
+    rainfarm:
+        id: 16
+        name: rainfarm
+        title: RainFARM stochastic downscaling
+        sub_title:
+        info_text: Metric showing stochastic downscaling of precipitation fields predicting climate variables at local scale from information simulated by climate models at regional scale.
+        info_file: rainfarm/rainfarm.yml
+        image_file: diagnosticsdata/rainfarm/rainfarm_thumbnail.png
+        github_issue:
+        tags:
+          - WP7
+          - ISAC-CNR
+    zmnam:
+        id: 17
+        name: zmnam
+        title: Stratosphere-Troposphere coupling and annular modes indices
+        sub_title:
+        info_text: Metric to compute the Zonal Mean Northern Annular Mode (ZMNAM) in climate simulations using reanalysis datasets as reference.
+        info_file: zmnam/zmnam.yml
+        image_file: diagnosticsdata/zmnam/stratosphere-troposphere_thumbnail.png
+        github_issue:
+        tags:
+          - WP4
+          - WP6
+          - ISAC-CNR
+    ensclus:
+        id: 18
+        name: ensclus
+        title: EnsClus - Ensemble Clustering
+        sub_title:
+        info_text: Cluster analysis tool for ensembles of climate model simulations. EnsClus groups ensemble members according to similar characteristics (based on the k-means algorithm) and selects the most representative member for each cluster.
+        info_file: ensclus/ensclus.yml
+        image_file: diagnosticsdata/ensclus/ensclus_thumbnail.png
+        github_issue:
+        tags:
+          - Sub-ensemble selection
+          - WP5
+          - ISAC-CNR
     python_example:
-        id: 20
+        id: 19
         name: preproc
         title: ESMValTool climate data pre-processor
         sub_title:
@@ -16,90 +242,31 @@ diagnostics:
           - NLeSC
           - URead
           - BSC
-          - Calculate
-    cvdp:
-        id: 201
-        name: cvdp
-        title: Climate Variability Diagnostics
+    shapefile_selection:
+        id: 20
+        name: shapefile_selection
+        title: Shapefile selection
         sub_title:
-        info_text: Diagnostic showing major modes of climate variability in models and observations, including ENSO, Pacific Decadal Oscillation, Atlantic Multi-decadal Oscillation, Northern and Southern Annular Modes, North Atlantic Oscillation, Pacific North and South American teleconnection patterns.
-        info_file: cvdp/cvdp.yml
-        image_file: ./diagnosticsdata/cvdp/tas.mean.ann.png
+        info_text: Metric showing selected gridded data within a user defined polygon shapefile and outputs a NetCDF or csv file.
+        info_file: shapefile_selection/shapefile_selection.yml
+        image_file: diagnosticsdata/shapefile_selection/OBS_CRU_reanaly_1_T2Ms_tas_1990-1994.png
         github_issue:
         tags:
-          - CVDP
-          - WP4
-          - DLR
-          - Calculate
-    perfmetrics:
-        id: 18
-        name: perfmetrics
-        title: Performance Metrics for Essential Climate Parameters
+          - WP7
+          - SMHI
+          - Catchment Hydrology
+    toy_model:
+        id: 21
+        name: toy_model
+        title: Toy Model
         sub_title:
-        info_text: Performance metrics to quantify the ability of the models to reproduce the climatological mean annual cycle for selected Essential Climate Variables (ECV).
-        info_file: perfmetrics/perfmetrics.yml
-        image_file: ./diagnosticsdata/perfmetrics/Portait.png
-        github_issue:
+        info_text: Diagnostic to simulate single-model ensembles from an observational dataset to investigate the effect of observational uncertainty.
+        info_file: toy_model/toy_model.yml
+        image_file: diagnosticsdata/toy_model/synthetic_CMIP5_IPSL-CM5A-LR_day_historical_r1i1p1_T2M_tasmax_1999-2000.jpg
         tags:
-          - performance
-          - mean annual cycle
-          - Essential Climate Variables
-          - WP4
-          - DLR
-    smpi:
-        id: 19
-        name: smpi
-        title: Single Model Performance index
-        sub_title:
-        info_text: This diagnostic calculates the Single Model Performance Index (SMPI) following Reichler and Kim (2008).
-        info_file: smpi/smpi.yml
-        image_file: ./diagnosticsdata/smpi/Single.png
-        github_issue:
-        tags:
-          - WP4
-          - DLR
-    blocking:
-        id: 7
-        name: blocking
-        title: Blocking Metrics and Indices (MiLES)
-        sub_title:
-        info_text: The Blocking diagnostic shows the mid-latitude 1D and 2D blocking indices, that was developed to support analysis of mid-latitude weather patterns in terms of atmospheric blocking, teleconnections and weather regimes (MiLES).
-        info_file: blocking/blocking.yml
-        image_file: diagnosticsdata/blocking/blocking_thumbnail.png
-        github_issue:
-        tags:
-          - WP4
-          - ISAC-CNR
-          - MiLES
-          - Calculate
-    zmnam:
-        id: 9
-        name: zmnam
-        title: ZMNAM - Stratosphere-Troposphere coupling and annular modes indices
-        sub_title:
-        info_text: Metric to compute the Zonal Mean Northern Annular Mode (ZMNAM) in climate simulations using reanalysis datasets as reference.
-        info_file: zmnam/zmnam.yml
-        image_file: diagnosticsdata/zmnam/stratosphere-troposphere_thumbnail.png
-        github_issue:
-        tags:
-          - WP4
-          - ISAC-CNR
-          - Calculate
-    modes_of_variability:
-        id: 555
-        name: modes_of_variability
-        title: Modes of Variability
-        sub_title:
-        info_text: Diagnostic to compute the Root Mean Square Error (RMSE) between the observed and modelled patterns of variability.
-        info_file: modes_of_variability/modes_of_variability.yml
-        image_file: diagnosticsdata/modes_of_variability/era_interim_1990-01-2010-01_clusters.png
-        github_issue:
-        tags:
-          - WP4
           - BSC
-          - Calculate
     hyint:
-        id: 6
+        id: 22
         name: hyint
         title: Hydroclimatic intensity (HyInt) and extremes
         sub_title:
@@ -110,101 +277,35 @@ diagnostics:
         tags:
           - WP4
           - ISAC-CNR
-    quantilebias:
-        id: 8
-        name: quantilebias
-        title: Precipitation quantile bias
+    smpi:
+        id: 23
+        name: smpi
+        title: Single Model Performance index
         sub_title:
-        info_text: Diagnostic showing the quantile bias between models and a reference dataset.
-        info_file: quantilebias/quantilebias.yml
-        image_file: diagnosticsdata/quantilebias/quantilebias_thumbnail.png
+        info_text: This diagnostic calculates the Single Model Performance Index (SMPI) following Reichler and Kim (2008).
+        info_file: smpi/smpi.yml
+        image_file: ./diagnosticsdata/smpi/Single.png
         github_issue:
         tags:
           - WP4
-          - ISAC-CNR
-    multimodel_products:
-        id: 86
-        name: multimodel_products
-        title: Generic Multi-Model Products
+          - DLR
+    perfmetrics:
+        id: 24
+        name: perfmetrics
+        title: Performance Metrics for Essential Climate Parameters
         sub_title:
-        info_text: Diagnostic to calculate the ensemble mean anomaly, variance and agreement. The results are shown as maps and time series.
-        info_file: multimodel_products/multimodel_products.yml
-        image_file: diagnosticsdata/multimodel_products/bsc_anomaly_timeseries.png
-        github_issue: https://github.com/c3s-magic/c3s-magic-frontend/issues/51
-        tags:
-            - WP5
-            - Anomaly Agreement
-            - BSC
-            - Calculate
-    ensclus:
-        id: 4
-        name: ensclus
-        title: EnsClus - Ensemble Clustering
-        sub_title:
-        info_text: Cluster analysis tool for ensembles of climate model simulations. EnsClus groups ensemble members according to similar characteristics (based on the k-means algorithm) and selects the most representative member for each cluster.
-        info_file: ensclus/ensclus.yml
-        image_file: diagnosticsdata/ensclus/ensclus_thumbnail.png
+        info_text: Performance metrics to quantify the ability of the models to reproduce the climatological mean annual cycle for selected Essential Climate Variables (ECV).
+        info_file: perfmetrics/perfmetrics.yml
+        image_file: ./diagnosticsdata/perfmetrics/Portait.png
         github_issue:
         tags:
-          - Sub-ensemble selection
-          - WP5
-          - ISAC-CNR
-          - Calculate
-    combined_indices:
-        id: 12
-        name: combined_indices
-        title: Indices based on area averages
-        sub_title:
-        info_text: Metric showning Indices based on area averages.
-        info_file: combined_indices/combined_indices.yml
-        image_file: diagnosticsdata/combined_indices/single_and_multi_model_indices_thumbnail.png
-        github_issue:
-        tags:
-          - WP6
-          - BSC
-          - Calculate
-    teleconnections:
-        id: 5
-        name: teleconnections
-        title: Teleconnection indices (MiLES)
-        sub_title:
-        info_text: Diagnostic that implements the MId-Latitude Evaluation System (MiLES) to provide teleconnection indices (Z500 empirical orthogonal functions).
-        info_file: teleconnections/teleconnections.yml
-        image_file: diagnosticsdata/teleconnections/teleconnections_thumbnail.png
-        github_issue:
-        tags:
-          - WP6
-          - ISAC-CNR
-          - MiLES
-          - Calculate
-    weather_regimes:
-        id: 55
-        name: weather_regimes
-        title: Weather Regimes
-        sub_title:
-        info_text: Diagnostic for computing and plotting weather regimes (MiLES) 
-        info_file: weather_regimes/weather_regimes.yml
-        image_file: diagnosticsdata/weather_regimes/weather_regimes_thumbnail.png
-        github_issue:
-        tags:
-          - WP6
-          - ISAC-CNR
-          - MiLES
-          - Calculate
-    correlations:
-        id: 11
-        name: correlations
-        title: Correlate a field with a timeseries
-        sub_title:
-        info_text: Metric for correlating fields with timeseries as input
-        info_file: correlations/correlations.yml
-        image_file: ./diagnosticsdata/correlations/climexp_correlations.png
-        github_issue:
-        tags:
-          - WP6
-          - KNMI
+          - Performance
+          - mean annual cycle
+          - Essential Climate Variables
+          - WP4
+          - DLR
     surge_height_estimator:
-        id: 122
+        id: 25
         name: surge_height
         title: Surge Height Estimator
         sub_title:
@@ -216,119 +317,15 @@ diagnostics:
           - WP7
           - Storm
           - KNMI
-    drought_indicator:
-        id: 17
-        name: drought_indicator
-        title: Drought indicator
+    correlations:
+        id: 26
+        name: correlations
+        title: Correlate a field with a timeseries
         sub_title:
-        info_text: The drought indicator calculates the Standardized Precipitation Index (SPI) and Standardized Precipitation-Evapotranspiration Index (SPEI) diagnostics, indicating meteorological and hydrological droughts.
-        info_file: drought_indicator/drought_indicator.yml
-        image_file: https://portal.c3s-magic.eu/data/recipes/recipe_spi_20181108_132957/plots/diagnostic1/script1/histplot.png
+        info_text: Metric for correlating fields with timeseries as input
+        info_file: correlations/correlations.yml
+        image_file: ./diagnosticsdata/correlations/climexp_correlations.png
         github_issue:
         tags:
-          - WP7
-          - SMHI
-          - Calculate
-    consecdrydays:
-        id: 171
-        name: consecdrydays
-        title: Consecutive Dry Days
-        sub_title:
-        info_text: Calculates the longest period of consecutive dry days in the provided time series, as well as the number of periods of at least some number of consecutive dry days.
-        info_file: consecdrydays/consecdrydays.yml
-        image_file: diagnosticsdata/consecdrydays/drydays.png
-        github_issue:
-        tags:
-          - WP7
-          - SMHI
-          - Calculate
-    shapefile_selection:
-        id: 16
-        name: shapefile_selection
-        title: Shapefile selection
-        sub_title:
-        info_text: Metric showing selected gridded data within a user defined polygon shapefile and outputs a NetCDF or csv file.
-        info_file: shapefile_selection/shapefile_selection.yml
-        image_file: diagnosticsdata/shapefile_selection/OBS_CRU_reanaly_1_T2Ms_tas_1990-1994.png
-        github_issue:
-        tags:
-          - WP7
-          - SMHI
-          - Catchment
-          - Hydrology
-          - Calculate
-    rainfarm:
-        id: 3
-        name: rainfarm
-        title: RainFARM stochastic downscaling
-        sub_title:
-        info_text: Metric showing stochastic downscaling of precipitation fields predicting climate variables at local scale from information simulated by climate models at regional scale.
-        info_file: rainfarm/rainfarm.yml
-        image_file: diagnosticsdata/rainfarm/rainfarm_thumbnail.png
-        github_issue:
-        tags:
-          - WP7
-          - ISAC-CNR
-    heatwaves_coldwaves:
-        id: 14
-        name: heatwaves_coldwaves
-        title: Heatwaves and Coldwaves duration
-        sub_title:
-        info_text: Metric showing the duration of heatwaves and coldwaves, to help understand potential changes in energy demand.
-        info_file: heatwaves_coldwaves/heatwaves_coldwaves.yml
-        image_file: diagnosticsdata/heatwaves_coldwaves/extreme_spells_energy.png
-        github_issue:
-        tags:
-          - WP7
-          - BSC
-          - Calculate
-    dtr:
-        id: 13
-        name: dtr
-        title: Diurnal Temperature Variation (DTR) Indicator
-        sub_title:
-        info_text: Metric showing the diurnal temperature indicator to estimate energy demand
-#        , and the wind capacity factor to estimate energy supply.
-        info_file: dtr/dtr.yml
-        image_file: diagnosticsdata/dtr/diurnal_temperature_variation.png
-        github_issue:
-        tags:
-          - WP7
-          - BSC
-          - Calculate
-    capacity_factor:
-        id: 133
-        name: capacity_factor
-        title: Capacity Factor of Wind Power.
-        sub_title:
-        info_text: Metric showing the wind capacity factor (the ratio of average estimated power to theoretical maximum power) to estimate energy supply.
-        info_file: capacity_factor/capacity_factor.yml
-        image_file: diagnosticsdata/capacity_factor/capacity_factor_IPSL-CM5A-LR_1980-2005.png
-        github_issue:
-        tags:
-          - WP7
-          - BSC
-          - Calculate
-    extreme_index:
-        id: 101
-        name: extreme_index
-        title: Combined Climate Extreme Index
-        sub_title:
-        info_text: Metric showing extreme indices relevant to the insurance industry (heat, cold, wind, flood and drought indices).
-        info_file: extreme_index/extreme_index.yml
-        image_file: diagnosticsdata/extreme_index/t90p_IPSL-CM5A-LR_rcp85_2020_2040.png
-        tags:
-          - WP7
-          - BSC
-          - ACI
-          - Calculate
-    toy_model:
-        id: 111
-        name: toy_model
-        title: Toy Model
-        sub_title:
-        info_text: Diagnostic to simulate single-model ensembles from an observational dataset to investigate the effect of observational uncertainty.
-        info_file: toy_model/toy_model.yml
-        image_file: diagnosticsdata/toy_model/synthetic_CMIP5_IPSL-CM5A-LR_day_historical_r1i1p1_T2M_tasmax_1999-2000.jpg
-        tags:
-          - BSC
+          - WP6
+          - KNMI
