@@ -11,7 +11,7 @@ contact:
   - Alasdair Hunter @alasdairhunter
   - Nuria Perez-Zanon @nperezzanon
   - Nicolau Manubens @nmanuben
-description_short: Metric showning Indices based on area averages.
+description_short: Metric showing Indices based on area averages.
 description_file: 'combined_indices/description.md'
 image_file: diagnosticsdata/combined_indices/single_and_multi_model_indices_thumbnail.png
 report_file: report.pdf
@@ -29,14 +29,14 @@ settings:
   - Experiment: Historical
   - Ensemble: "r1i1p1"
   - Region: "NAO"
-  - Running mean: 5
-  - First month: 1
-  - Last month: 3
-  - Experiment: RCP8.5
+  - Running mean: 11
+  - First month: 12
+  - Last month: 2
+#  - Experiment: RCP8.5
   - Standardized: "true" 
 title: Indices based on area averages
 # youtube:
-data: {DATAURL}/recipes/recipe_combined_indices_wp6_20190308_045354.zip
-media: diagnosticsdata/combined_indices/Index_NAO.png
-provenance: {DATAURL}/recipes/recipe_combined_indices_wp6_20190308_045354/work/combine_indices/main/pr_MPI-ESM-MR_Mar-May_MPI-ESM-MR_1950-01-01_2005-12-31__provenance.svg
+data: {DATAURL}/recipes/recipe_combined_indices_20190602_200903.zip
+media: {DATAURL}/recipes/recipe_combined_indices_20190602_200903/plots/combine_indices/main/Index_NAO.png
+provenance: {DATAURL}/recipes/recipe_combined_indices_20190602_200903/work/combine_indices/main/psl_11-month-running-mean-_Dec-Feb_19502005__provenance.svg
 process: /calculate/copernicus-wps/combined_indices
