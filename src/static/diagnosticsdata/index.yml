@@ -9,8 +9,8 @@ diagnostics:
         image_file: ./diagnosticsdata/cvdp/tas.mean.ann.png
         github_issue:
         tags:
-          - CVDP
           - WP4
+          - CVDP
           - DLR
     heatwaves_coldwaves:
         id: 2
@@ -74,6 +74,7 @@ diagnostics:
         tags:
           - WP4
           - ISAC-CNR
+          - QUANTILEBIAS
     extreme_events:
         id: 7
         name: extreme_events
@@ -200,6 +201,7 @@ diagnostics:
         tags:
           - WP7
           - ISAC-CNR
+          - RAINFARM
     zmnam:
         id: 17
         name: zmnam
@@ -223,8 +225,8 @@ diagnostics:
         image_file: diagnosticsdata/ensclus/ensclus_thumbnail.png
         github_issue:
         tags:
-          - Sub-ensemble selection
           - WP5
+          - Sub-ensemble selection
           - ISAC-CNR
     python_example:
         id: 19
@@ -236,8 +238,8 @@ diagnostics:
         image_file: ./diagnosticsdata/preproc/CMIP5_bcc-csm1-1_Amon_historical_r1i1p1_T3M_ta_2001-2002_mean_r_2i936e.png
         github_issue:
         tags:
-          - ESMValtool
           - WP3
+          - ESMValtool
           - DLR
           - KNMI
           - NLESC
@@ -265,6 +267,7 @@ diagnostics:
         info_file: toy_model/toy_model.yml
         image_file: diagnosticsdata/toy_model/synthetic_CMIP5_IPSL-CM5A-LR_day_historical_r1i1p1_T2M_tasmax_1999-2000.jpg
         tags:
+          - WP4
           - BSC
     hyint:
         id: 22
@@ -277,7 +280,9 @@ diagnostics:
         github_issue:
         tags:
           - WP4
+          - WP6
           - ISAC-CNR
+          - HYINT
     smpi:
         id: 23
         name: smpi
@@ -300,10 +305,10 @@ diagnostics:
         image_file: ./diagnosticsdata/perfmetrics/Portait.png
         github_issue:
         tags:
+          - WP4
           - Performance
           - mean annual cycle
           - Essential Climate Variables
-          - WP4
           - DLR
     surge_height_estimator:
         id: 25

@@ -22,7 +22,7 @@ settings:
   - End year: 2014
 references:
 image_file: diagnosticsdata/surge_height/surge_height_thumbnail.png
-data: "{DATAURL}/data/recipes/recipe_modes_of_variability_wp4_20181210_114624.zip"
+#data: "{DATAURL}/data/recipes/recipe_modes_of_variability_wp4_20181210_114624.zip"
 #provenance: <point to svg file>
 #process: <link to process> 
 #data:
