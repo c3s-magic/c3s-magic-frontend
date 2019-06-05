@@ -11,23 +11,23 @@ import ADAGUCViewerComponent from '../ADAGUCViewerComponent';
 import Icon from 'react-fa';
 
 export default class RenderWPSProcessOutput extends Component {
-  render () {
+  render() {
     const { processOutput, url, identifier, title, abstract } = this.props;
     let myProcessOutput = processOutput;
     if (!processOutput) {
       myProcessOutput = {
-        Identifier:{
-          value:identifier || '<value>'
+        Identifier: {
+          value: identifier || '<value>'
         },
-        Title:{
-          value:title || '<title>'
+        Title: {
+          value: title || '<title>'
         },
-        Abstract:{
-          value:abstract || '<abstract>'
+        Abstract: {
+          value: abstract || '<abstract>'
         },
-        Reference:{
-          attr:{
-            href:url
+        Reference: {
+          attr: {
+            href: url
           }
         }
       };
@@ -40,7 +40,7 @@ export default class RenderWPSProcessOutput extends Component {
       imageLink: null,
       reference: null,
       esmRecipe: null,
-      txtViewer:null,
+      txtViewer: null,
       netcdfOpenDAP: null,
       svgViewer: null
     };
@@ -65,9 +65,13 @@ export default class RenderWPSProcessOutput extends Component {
         if (output.reference.endsWith('.png')) {
           output.imageLink = output.reference;
         }
+        /* Check if is image */
+        if (output.reference.endsWith('.jpg')) {
+          output.imageLink = output.reference;
+        }
         /* Check if is esmvaltool recipe */
         if (output.reference.endsWith('.yml')) {
-          output.esmRecipe = output.reference;
+          output.txtViewer = output.reference;
         }
         /* Check if is JSON */
         if (output.reference.endsWith('.json') || output.reference.endsWith('.wpssettings')) {
@@ -94,21 +98,21 @@ export default class RenderWPSProcessOutput extends Component {
     return (<div key={output.identifier}>
       <Card className={className}>
         <CardBody>
-          <CardTitle>{output.title}&nbsp;<span style={{ color:'darkgrey', fontStyle:'italic' }}>-&nbsp;({output.identifier})</span></CardTitle>
+          <CardTitle>{output.title}&nbsp;<span style={{ color: 'darkgrey', fontStyle: 'italic' }}>-&nbsp;({output.identifier})</span></CardTitle>
           <CardText>{output.abstract}</CardText>
         </CardBody>
         <CardBody>
-          { output.data && (<CardText>{output.data}</CardText>) }
-          { output.imageLink && (<Row>
+          {output.data && (<CardText>{output.data}</CardText>)}
+          {output.imageLink && (<Row>
             <Col xs='10'><div style={{ width: '50%' }}><ClickableImage src={output.imageLink} /></div></Col>
             {/* <Col><Button color='secondary' onClick={() =>{ this.props.resultClickCallback(output.imageLink);}}>Open image</Button></Col> */}
           </Row>)
           }
-          { output.esmRecipe && (<Row><Col xs='10'><YMLViewer url={output.esmRecipe} /></Col></Row>) }
-          { output.jsonViewer && (<Row><Col xs='10'><JSONViewer url={output.jsonViewer} /></Col></Row>) }
-          { output.txtViewer && (<Row><Col xs='10'><TXTViewer url={output.txtViewer} /></Col></Row>) }
-          { output.svgViewer && (<Row><Col xs='12'><SVGViewer url={output.svgViewer} /></Col></Row>) }
-          { output.netcdfOpenDAP && (<Row><Col xs='10'>
+          {output.esmRecipe && (<Row><Col xs='10'><YMLViewer url={output.esmRecipe} /></Col></Row>)}
+          {output.jsonViewer && (<Row><Col xs='10'><JSONViewer url={output.jsonViewer} /></Col></Row>)}
+          {output.txtViewer && (<Row><Col xs='10'><TXTViewer url={output.txtViewer} /></Col></Row>)}
+          {output.svgViewer && (<Row><Col xs='12'><SVGViewer url={output.svgViewer} /></Col></Row>)}
+          {output.netcdfOpenDAP && (<Row><Col xs='10'>
             <ADAGUCViewerComponent
               height={'300px'}
               layers={[]}
@@ -126,17 +130,17 @@ export default class RenderWPSProcessOutput extends Component {
               dapurl={output.netcdfOpenDAP}
             />
 
-          </Col></Row>) }
-          { output.reference && <CardLink href={output.reference} target='_blank'><Icon name='download' /> Download</CardLink> }
+          </Col></Row>)}
+          {output.reference && <CardLink href={output.reference} target='_blank'><Icon name='download' /> Download</CardLink>}
         </CardBody>
       </Card>
     </div>);
   }
 };
 RenderWPSProcessOutput.propTypes = {
-  processOutput:PropTypes.object,
-  url:PropTypes.string,
-  identifier:PropTypes.string,
-  title:PropTypes.string,
-  abstract:PropTypes.string
+  processOutput: PropTypes.object,
+  url: PropTypes.string,
+  identifier: PropTypes.string,
+  title: PropTypes.string,
+  abstract: PropTypes.string
 };
