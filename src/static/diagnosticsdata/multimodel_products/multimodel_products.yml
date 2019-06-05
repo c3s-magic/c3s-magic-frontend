@@ -24,6 +24,7 @@ settings:
   - Models:
       - MPI-ESM-MR
       - bcc-csm1-1
+      - IPSL-CM5A-LR
   - Variable: "June mean air temperature at 2M"
   - Ensemble: "r1i1p1"
   - Climatology start year: "1961"
@@ -36,13 +37,16 @@ settings:
   - Running mean period: "5 years"
   - Time series plot: "single"
 title: Generic Multi-Model Products
-#youtube: CNWA4j2okcc
-data: {DATAURL}/recipes/recipe_multimodel_products_wp5_20190308_080611.zip
-provenance: {DATAURL}/recipes/recipe_multimodel_products_wp5_20190308_080611/work/anomaly_agreement/main/tas_JUN_multimodel-anomaly_bcc-csm1-1_MPI-ESM-MR_2006_2099_1961_1990_provenance.svg
+data: {DATAURL}/recipes/recipe_multimodel_products_20190602_200903.zip
+provenance: {DATAURL}/recipes/recipe_multimodel_products_20190602_200903/work/anomaly_agreement/main/tas_JUN_multimodel-anomaly_MPI-ESM-MR_bcc-csm1-1_IPSL-CM5A-LR_2006_2099_1961_1990_provenance.svg
 process: /calculate/copernicus-wps/multimodel_products
-enableEnsembleAnomalyPlots:
-  - data_url: '{STATICWMS}?DATASET=anomaly_agreement_stippling&'
-  - map_slider: true
 media:
-  - {DATAURL}/recipes/recipe_multimodel_products_wp5_20190308_080611/plots/anomaly_agreement/main/Area-averaged_tas_JUN_multimodel-anomaly_2006_2099_1961_1990.png
-  - {DATAURL}/recipes/recipe_multimodel_products_wp5_20190308_080611/plots/anomaly_agreement/main/tas_JUN_multimodel-anomaly_2006_2099_1961_1990.png
+  - {DATAURL}/recipes/recipe_multimodel_products_20190602_200903/plots/anomaly_agreement/main/Area-averaged_tas_JUN_multimodel-anomaly_2006_2099_1961_1990.png
+  - {DATAURL}/recipes/recipe_multimodel_products_20190602_200903/plots/anomaly_agreement/main/tas_JUN_multimodel-anomaly_2006_2099_1961_1990.png
+enableADAGUC:
+  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_multimodel_products_20190602_200903%2Fwork%2Fanomaly_agreement%2Fmain%2Ftas_JUN_multimodel-anomaly_MPI-ESM-MR_bcc-csm1-1_IPSL-CM5A-LR_2006_2099_1961_1990.nc
+  - projectionbutton: true
+  - layerselector: true
+  - timeselector: false
+  - styleselector: true
+  - layers: []
