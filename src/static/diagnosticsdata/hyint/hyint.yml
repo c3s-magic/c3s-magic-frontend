@@ -12,7 +12,7 @@ description_short: The HyInt metrics calculates the HY-INT hydroclimatic intensi
 description_file: 'hyint/description.md'
 #media: https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=512&h=360
 enableADAGUC:
-  - data_url: https://portal.c3s-magic.eu/backend/wms?DATASET=WP4-6_ISAC_hyint
+  - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_hyint_20190602_200903%2Fwork%2Fhyint%2Fmain%2Fhyint_MPI-ESM-MR_historical-rcp85_r1i1p1_1980_2020_ALL.nc
   - projectionbutton: true
   - layerselector: true
   - timeselector: true
@@ -41,9 +41,10 @@ settings:
   - Regions: GL, SA, AF, EU, EA
   - Figure type: 1, 2, 3, 12, 13, 14, 15
 title: Hydroclimatic intensity (HyInt) and extremes
-#process: /calculate/copernicus-wps/hyint
-#data: 
-#provenance: <point to svg file>
+process: /calculate/copernicus-wps/hyint
+data: {DATAURL}/recipes/recipe_hyint_20190602_200903.zip
+media:  {DATAURL}/recipes/
+provenance: {DATAURL}/recipes/recipe_hyint_20190602_200903/work/hyint/main/hyint_ACCESS1-0_historical-rcp85_r1i1p1_1980_2020_ALL_provenance.svg
 image_file: ./diagnosticsdata/hyint/hyint_thumbnail.png
 
 
