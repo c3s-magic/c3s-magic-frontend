@@ -10,13 +10,6 @@ contact:
   - Bjoern Broetz
 description_short: Metric showing major modes of climate variability in models and observations, including ENSO, Pacific Decadal Oscillation, Atlantic Multi-decadal Oscillation, Northern and Southern Annular Modes, North Atlantic Oscillation, Pacific North and South American teleconnection patterns.
 description_file: 'cvdp/description.md'
-media:
-  - {DATAURL}/recipes/recipe_cvdp_20190308_045354/work/diagnostic1/cvdp/tas.mean.ann.png
-  - {DATAURL}/recipes/recipe_cvdp_20190308_045354/work/diagnostic1/cvdp/psl.mean.ann.png
-  - {DATAURL}/recipes/recipe_cvdp_20190308_045354/work/diagnostic1/cvdp/pr.mean.ann.png
-  - {DATAURL}/recipes/recipe_cvdp_20190308_045354/work/diagnostic1/cvdp/pr.za.ann.png
-  - {DATAURL}/recipes/recipe_cvdp_20190308_045354/work/diagnostic1/cvdp/nam.ann.png
-  - {DATAURL}/recipes/recipe_cvdp_20190308_045354/work/diagnostic1/cvdp/nao.ann.png
 references:
   - text: "CVDP webpage."
     url: http://www.cesm.ucar.edu/working_groups/CVC/cvdp/
@@ -36,6 +29,13 @@ settings:
   - End year: 2002
 title: Climate Variability Diagnostics
 process: /calculate/copernicus-wps/cvdp
-data: {DATAURL}/recipes/recipe_cvdp_20190308_045354.zip
-#provenance: https://portal.c3s-magic.eu/data/recipes/recipe_python_20181207_141601/work/diagnostic1/script1/MultiModelMean_T3M_ta_2000-2002_mean_provenance.svg
+data: {DATAURL}/recipes/recipe_cvdp_20190602_200903.zip
+provenance: {DATAURL}/recipes/recipe_cvdp_20190602_200903/work/diagnostic1/cvdp/amm.timeseries_provenance.svg
+media:
+  - {DATAURL}/recipes/recipe_cvdp_20190602_200903/work/diagnostic1/cvdp/tas.mean.ann.png
+  - {DATAURL}/recipes/recipe_cvdp_20190602_200903/work/diagnostic1/cvdp/psl.mean.ann.png
+  - {DATAURL}/recipes/recipe_cvdp_20190602_200903/work/diagnostic1/cvdp/pr.mean.ann.png
+  - {DATAURL}/recipes/recipe_cvdp_20190602_200903/work/diagnostic1/cvdp/pr.za.ann.png
+  - {DATAURL}/recipes/recipe_cvdp_20190602_200903/work/diagnostic1/cvdp/nam.ann.png
+  - {DATAURL}/recipes/recipe_cvdp_20190602_200903/work/diagnostic1/cvdp/nao.ann.png
 image_file: ./diagnosticsdata/cvdp/tas.mean.ann.png
