@@ -11,11 +11,17 @@ The indices were selected following [Giorgi et al. (2014)](https://doi.org/10.10
 Secondly, also a selection of the 27 temperature and precipitation -based indices of extremes from the Expert Team on Climate Change Detection and Indices (ETCCDI) produced by the climdex (https://www.climdex.org) library can be ingested to produce a multi-index analysis. The tool allows then to perform a subsequent analysis of the selected indices calculating timeseries and trends over predefined continental areas, normalized to a reference period. Trends are calculated using the R lm function and significance testing performed with a Student T test on non-null coefficients hypothesis. Trend coefficients are stored together with their statistics which include standard error, t value and Pr(>|t|). 
 The tool can then produce a variety of types of plots including global and regional maps, maps of comparison between models and a reference dataset, timeseries with their spread, trend lines and summary plots of trend coefficients.
 
-In the following example figures we present the output figure type-1 for the hyint index calculated for EC-Earth rcp85 multi year mean over 1976-2100 with boxes for user-selected regions, and output figure type-12 and type-14 for selected indices and regions calculated for EC-Earth rcp85 over 1976-2100.
+The following are examples of output figures type-1, type-12, type-14 and type-15 for selected hyint and ETCCDI indices, individual models or ensemble of CMIP5 models.
 
-![example output](diagnosticsdata/hyint/hyint_EC-Earth_rcp85_r8i1p1_r320x160_1976_2100_ALL_myear-mean_Globe_map.png "Example Output")
+![example output](diagnosticsdata/hyint/hyint_maps.png "Example Output")
+Mean hydroclimatic intensity (figure type 1) for the EC-EARTH model historical + rcp8.5 projection over 1976-2099.
 
 ![example output](diagnosticsdata/hyint/hyint_timeseries.png "Example Output")
+Timeseries for multiple indices and regions (figure type 12) for the ACCESS1-0 model historical + RCP8.5 projection over 1976-2099.
 
 ![example output](diagnosticsdata/hyint/hyint_trends1.png "Example Output")
+Multi-region trend coefficients over selected ETCDDI indices (figure type 14) for rcp85 2006-2099 future projection normalized to the 1976-2005 historical period.
+
 ![example output](diagnosticsdata/hyint/hyint_trends2.png "Example Output")
+Multi-model trend coefficients over selected indices (figure type 15) for rcp85 2006-2099 future projection normalized to the 1976-2005 historical period.
+
