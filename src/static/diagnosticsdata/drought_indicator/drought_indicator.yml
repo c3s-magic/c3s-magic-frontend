@@ -52,8 +52,8 @@ process: /calculate/copernicus-wps/drought_indicator
 media:
   - {DATAURL}/recipes/recipe_spei_20190602_200905/plots/diagnostic/spei/histplot.png
   - {DATAURL}/recipes/recipe_spei_20190602_200905/plots/diagnostic/spi/histplot.png
-  - ./diagnosticsdata/drought_indicator/dryfreq.png
-  - ./diagnosticsdata/drought_indicator/drymax.png
+#  - ./diagnosticsdata/drought_indicator/dryfreq.png
+#  - ./diagnosticsdata/drought_indicator/drymax.png
 enableADAGUC:
   - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_spei_20190602_200905%2Fwork%2Fdiagnostic%2Fspei%2FCMIP5_ACCESS1-0_Amon_historical_r1i1p1_spei_2000-2005_hist.nc
   - projectionbutton: true
