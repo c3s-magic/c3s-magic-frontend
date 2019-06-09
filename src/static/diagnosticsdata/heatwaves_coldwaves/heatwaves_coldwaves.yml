@@ -46,6 +46,7 @@ settings:
   - Season: "winter"
 title: Heatwaves and coldwaves duration
 #youtube:
+process: /calculate/copernicus-wps/heatwaves_coldwaves
 data: {DATAURL}/recipes/recipe_heatwaves_coldwaves_20190602_200903.zip
 media: {DATAURL}/recipes/recipe_heatwaves_coldwaves_20190602_200903/plots/heatwaves_coldwaves/main/tasmin_extreme_spell_durationwinter_bcc-csm1-1_rcp85_2060_2080.png
 provenance: {DATAURL}/recipes/recipe_heatwaves_coldwaves_20190602_200903/work/heatwaves_coldwaves/main/tasmin_extreme_spell_durationwinter_bcc-csm1-1_rcp85_2060_2080_provenance.svg
