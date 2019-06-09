@@ -19,7 +19,7 @@ references:
   - text: "Manubens, Nicolau, Louis-Philippe Caron, Alasdair Hunter, Omar Bellprat, Eleftheria Exarchou, Neven S. Fučkar, Javier Garcia-Serrano et al. An R package for climate forecast verification. Environmental Modelling & Software 103 (2018): 29-42."
     url: https://doi.org/10.1016/j.envsoft.2018.01.018
   - text: "ESMValTool documentation on this metric"
-    url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_combined_climate_extreme_index.html
+    url: https://esmvaltool.readthedocs.io/en/latest/recipes/recipe_combined_indices.html
 settings:
   - Models:
       - MPI-ESM-MR
