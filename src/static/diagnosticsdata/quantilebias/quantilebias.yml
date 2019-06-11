@@ -29,6 +29,7 @@ title: Precipitation quantile bias
 image_file: diagnosticsdata/quantilebias/quantilebias_thumbnail.png
 data: {DATAURL}/recipes/recipe_quantilebias_20190602_200904.zip
 provenance: {DATAURL}/recipes/recipe_quantilebias_20190602_200904/work/quantilebias/main/ACCESS1-0_historical_r1i1p1_1997-1997_pr_75qb_provenance.svg
+process: /calculate/copernicus-wps/quantile_bias
 enableADAGUC:
   - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_quantilebias_20190602_200904%2Fwork%2Fquantilebias%2Fmain%2FEC-EARTH_historical_r2i1p1_1997-1997_pr_75qb.nc
   - projectionbutton: true

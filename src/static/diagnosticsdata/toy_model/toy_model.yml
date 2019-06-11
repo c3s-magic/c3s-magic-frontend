@@ -27,7 +27,7 @@ settings:
   - Longitude (pre-processor): "-40 - 40"
   - Latitude (pre-processor): "30 - 50"
 title: Toy Model
-process: /calculate/copernicus-wps/toy_model
+process: /calculate/copernicus-wps/toymodel
 data: {DATAURL}/recipes/recipe_toymodel_20190602_200904.zip   
 provenance: {DATAURL}/recipes/recipe_toymodel_20190602_200904/work/toymodel/main/synthetic_CMIP5_bcc-csm1-1_Amon_rcp45_r1i1p1_psl_2051-2060_provenance.svg
 media:
