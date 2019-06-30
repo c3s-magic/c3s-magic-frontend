@@ -9,7 +9,7 @@ navigate to your metric of choice.
 * For cross-domain derived diagnostics, go to the [Tailored Products](#/tailoredproducts) page en select a diagnostic.
 * To re-evaluate a metric with customized parameters on a CMIP5 dataset, sign in with your BADC/CEDA OpenID and navigate to the metric of
 choice. Then click the *Calculate metric* button to enter the metric configuration page. Choose the configuration parameters
-and select the input dataset of the assessment tool, and the resulting processing job will be scheduled onto the JASMIN cluster and listed in
+and select the input dataset of the assessment tool, and the resulting processing job will be scheduled for execution and listed in
 your job list. Your job list and basket can be found on the [Calculate](#/calculate/) page.
 * For a simple exploration and visualization or download of CMIP-compliant GCM output, go to [Explore Data](#/esgfsearch) and start browsing.
 
@@ -19,7 +19,7 @@ The documentation for the metrics and diagnostics found in this portal has been 
 
 #### Software documentation
 
-The documentation for the software used to run his portal has been collected in the [C3S Magic Documentation page](https://c3smagic.readthedocs.io).
+The documentation for the software used to run his portal has been collected in the [C3S Magic Documentation page](https://c3s-magic.readthedocs.io). The Web Processing Server (WPS) used to run the metric calculations has a separate [C3S Magic WPS documentation page](https://c3s-magic-wps.readthedocs.io).
 
 #### Advanced Viewers
 
