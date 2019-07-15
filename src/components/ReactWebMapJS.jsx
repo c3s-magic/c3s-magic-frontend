@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { WMJSLayer, WMJSMap } from 'adaguc-webmapjs';
+import { Button } from 'reactstrap';
+import { Icon } from 'react-fa';
+
 const WMJSTileRendererTileSettings = require('./ADAGUC/basemaps.json');
 export default class ReactWebMapJS extends Component {
   constructor (props) {
@@ -127,16 +130,27 @@ export default class ReactWebMapJS extends Component {
     return (<div className='ReactWebMapJS' ref={(container) => { this.container = container; }}
       style={{ height:'100%', width:'100%', border:'none', display:'block', overflow:'hidden' }} >
       <div ref='adaguccontainer' style={{
-        minWidth:'inherit',
-        minHeight:'inherit',
+        minWidth: 'inherit',
+        minHeight: 'inherit',
         width: 'inherit',
         height: 'inherit',
         overflow: 'hidden',
         display:'block',
         border: 'none'
       }}>
-        <div style={{ overflow: 'visible' }} >
+        <div className={'ReactWMJSMapComponent'}>
           <div ref='adagucwebmapjs' />
+        </div>
+        <div className={'ReactWMJSZoomPanel'} style={{ color: 'black' }}>
+          <Button onClick={() => {
+            this.webMapJS && this.webMapJS.zoomOut();
+          }}><Icon name='minus' /></Button>
+          <Button onClick={() => {
+            this.webMapJS && this.webMapJS.zoomToLayer(this.webMapJS.getActiveLayer());
+          }}><Icon name='home' /></Button>
+          <Button onClick={() => {
+            this.webMapJS && this.webMapJS.zoomIn();
+          }}><Icon name='plus' /></Button>
         </div>
       </div>
     </div>);
