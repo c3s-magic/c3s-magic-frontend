@@ -26,18 +26,18 @@ diagnostics:
           - Insurance
           - Tailored product
 
-    stormsurge:
-        id: 3
-        name: stormsurge
-        title: Storm surge
-        sub_title:
-        info_text: "Estimates of surge levels along the coast of the North Sea from anomalies in mean sea level pressure and wind components."
-        page_link: /tailoredproduct_stormsurge
-        image_file: ./diagnosticsdata/surge_height/surge_height_thumbnail.png
-        github_issue:
-        tags:
-          - Storm surge
-          - Tailored product
+    # stormsurge:
+    #     id: 3
+    #     name: stormsurge
+    #     title: Storm surge
+    #     sub_title:
+    #     info_text: "Estimates of surge levels along the coast of the North Sea from anomalies in mean sea level pressure and wind components."
+    #     page_link: /tailoredproduct_stormsurge
+    #     image_file: ./diagnosticsdata/surge_height/surge_height_thumbnail.png
+    #     github_issue:
+    #     tags:
+    #       - Storm surge
+    #       - Tailored product
           
     droughtindicator:
         id: 4
