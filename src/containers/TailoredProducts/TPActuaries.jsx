@@ -269,6 +269,7 @@ class ActuariesPage extends Component {
             controls={{ showprojectionbutton: false }}
             webMapJSInitializedCallback={
               (webMapJSInstance) => {
+                webMapJSInstance.hideMapPin();
                 webMapJSInstance.enableInlineGetFeatureInfo(false);
                 if (!this.state.initialized) {
                   this.setState({ webMapJSInstance:webMapJSInstance, initialized: true });

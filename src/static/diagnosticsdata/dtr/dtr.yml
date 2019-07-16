@@ -49,7 +49,7 @@ data: {DATAURL}/recipes/recipe_diurnal_temperature_index_20190602_200903.zip
 provenance: {DATAURL}/recipes/recipe_diurnal_temperature_index_20190602_200903/work/diurnal_temperature_indicator/main/Seasonal_DTRindicator_MPI-ESM-MR_2030_2080_1961_1990_provenance.svg
 media: {DATAURL}/recipes/recipe_diurnal_temperature_index_20190602_200903/plots/diurnal_temperature_indicator/main/rcp85.png
 process: /calculate/copernicus-wps/diurnal_temperature_index
-enableADAGUC:
+noenableADAGUC:
   - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_diurnal_temperature_index_20190602_200903%2Fwork%2Fdiurnal_temperature_indicator%2Fmain%2FSeasonal_DTRindicator_MPI-ESM-MR_2030_2080_1961_1990.nc
   - projectionbutton: true
   - layerselector: true

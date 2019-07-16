@@ -26,40 +26,40 @@ diagnostics:
           - Insurance
           - Tailored product
 
-    stormsurge:
-        id: 3
-        name: stormsurge
-        title: Storm surge
-        sub_title:
-        info_text: "Estimates of surge levels along the coast of the North Sea from anomalies in mean sea level pressure and wind components."
-        page_link: /tailoredproduct_stormsurge
-        image_file: ./diagnosticsdata/surge_height/surge_height_thumbnail.png
-        github_issue:
-        tags:
-          - Storm surge
-          - Tailored product
+    # stormsurge:
+    #     id: 3
+    #     name: stormsurge
+    #     title: Storm surge
+    #     sub_title:
+    #     info_text: "Estimates of surge levels along the coast of the North Sea from anomalies in mean sea level pressure and wind components."
+    #     page_link: /tailoredproduct_stormsurge
+    #     image_file: ./diagnosticsdata/surge_height/surge_height_thumbnail.png
+    #     github_issue:
+    #     tags:
+    #       - Storm surge
+    #       - Tailored product
           
-    droughtindicator:
-        id: 4
-        name: droughtindicator
-        title: Drought indicator
-        sub_title:
-        info_text: "Meteorological droughts are often described using the standardized precipitation index (SPI; McKee et al, 1993), which in a standardized way describes local precipitation anomalies. It is calculated on monthly mean precipitation, and is therefore not accounting for the intensity of precipitation and the runoff process. Because SPI does not account for evaporation from the ground, it lacks one component of the water fluxes at the surface and is therefore not compatible with the concept of hydrological drought."
-        page_link: /diagnostics/drought_indicator
-        image_file: /diagnosticsdata/drought_indicator/histplot.png
-        github_issue:
-        tags:
-          - Drought
+    # droughtindicator:
+    #     id: 4
+    #     name: droughtindicator
+    #     title: Drought indicator
+    #     sub_title:
+    #     info_text: "Meteorological droughts are often described using the standardized precipitation index (SPI; McKee et al, 1993), which in a standardized way describes local precipitation anomalies. It is calculated on monthly mean precipitation, and is therefore not accounting for the intensity of precipitation and the runoff process. Because SPI does not account for evaporation from the ground, it lacks one component of the water fluxes at the surface and is therefore not compatible with the concept of hydrological drought."
+    #     page_link: /diagnostics/drought_indicator
+    #     image_file: /diagnosticsdata/drought_indicator/histplot.png
+    #     github_issue:
+    #     tags:
+    #       - Drought
 
-    rainfarm:
-        id: 5
-        name: rainfarm
-        title: Rain farm
-        sub_title:
-        info_text: "Performs stochastic downscaling of precipitation fields predicting climate variables at local scale from information simulated by climate models at regional scale"
-        page_link: /diagnostics/rainfarm
-        image_file: /tailoredproducts/rainfarm/rainfarm.png
-        github_issue:
-        tags:
-          - Precipitation
+    # rainfarm:
+    #     id: 5
+    #     name: rainfarm
+    #     title: Rain farm
+    #     sub_title:
+    #     info_text: "Performs stochastic downscaling of precipitation fields predicting climate variables at local scale from information simulated by climate models at regional scale"
+    #     page_link: /diagnostics/rainfarm
+    #     image_file: /tailoredproducts/rainfarm/rainfarm.png
+    #     github_issue:
+    #     tags:
+    #       - Precipitation
 

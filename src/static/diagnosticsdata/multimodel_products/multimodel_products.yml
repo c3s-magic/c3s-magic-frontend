@@ -43,7 +43,7 @@ process: /calculate/copernicus-wps/multimodel_products
 media:
   - {DATAURL}/recipes/recipe_multimodel_products_20190602_200903/plots/anomaly_agreement/main/Area-averaged_tas_JUN_multimodel-anomaly_2006_2099_1961_1990.png
   - {DATAURL}/recipes/recipe_multimodel_products_20190602_200903/plots/anomaly_agreement/main/tas_JUN_multimodel-anomaly_2006_2099_1961_1990.png
-enableADAGUC:
+noenableADAGUC:
   - data_url: {STATICWMS}?source=c3smagic%2Frecipes%2Frecipe_multimodel_products_20190602_200903%2Fwork%2Fanomaly_agreement%2Fmain%2Ftas_JUN_multimodel-anomaly_MPI-ESM-MR_bcc-csm1-1_IPSL-CM5A-LR_2006_2099_1961_1990.nc
   - projectionbutton: true
   - layerselector: true
