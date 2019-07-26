@@ -824,7 +824,16 @@ div.hpace2em {
 .WPSDemoCopernicus_InputAbstract{
   width:auto;
 }
-
+.WPSDemoCopernicus_Input_Invalid{
+  color: black;
+  border: 2px solid red;
+  background-color: #FFA0A0;
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+}
+.WPSDemoCopernicus_Input_Valid{
+  color: black;
+}
 .WPSDemoCopernicus_ProcessAbstract {
   color: #000;
   /* background-color: #DDE;*/

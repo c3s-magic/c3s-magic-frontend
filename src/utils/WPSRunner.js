@@ -63,8 +63,7 @@ export const doWPSExecuteCall = function (wps, statusCallBack, executeCompleteCa
   let handleExceptions = (json) => {
     let percentageComplete = 0;
     let message = null;
-
-    if (json.error) {
+    if (json.error || (Object.keys(json).length === 0)) {
       message = 'Failed, unable to get message';
       if (json.error) {
         message = json.error;
@@ -104,6 +103,7 @@ export const doWPSExecuteCall = function (wps, statusCallBack, executeCompleteCa
   let wpsExecuteCallback = (executeResponse) => {
     if (handleExceptions(executeResponse) === true) {
       console.log('Exception in WPS Process');
+      failure('Exception in WPS Process');
       return;
     }
     console.log(executeResponse);
