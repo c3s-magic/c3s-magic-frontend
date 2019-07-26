@@ -7,11 +7,11 @@ import ImagePreview from './ImagePreview';
 import { withRouter } from 'react-router';
 import Icon from 'react-fa';
 import _ from 'lodash';
-import axios from 'axios';
 import MarkdownFromFile from '../containers/MarkdownFromFile';
 import { produce } from 'immer';
 import { findDrsItems } from '../utils/drsTools';
 var drsTreeCache = {};
+const mode = 'development'; /* Set to 'development' or 'production' to show or hide debug buttons and info */
 class WPSDemoCopernicus extends Component {
   constructor (props) {
     super(props);
@@ -76,7 +76,7 @@ class WPSDemoCopernicus extends Component {
         } catch (e) {
           console.error('Unable to fetch DRS tree from server:', e);
           reject(e);
-        }       
+        }
       }, (e) => {
         console.error('Unable to fetch DRS tree from server:', e);
         reject(e);
@@ -479,7 +479,7 @@ class WPSDemoCopernicus extends Component {
           const ensembleInput = inputList.filter(el => el.identifier === 'ensemble')[0];
           const numModels = modelInput.selected.length;
           const maxOccurances = modelInput.maxOccurances;
-          const minOccurances = modelInput.minOccurances;          
+          const minOccurances = modelInput.minOccurances;
           return (
             <div key={'container' + el.title + index} className={'WPSDemoCopernicus_InputLabels'} >
               { modelInput.selected.map((selectedItem, selectedItemIndex) => {
@@ -559,7 +559,7 @@ class WPSDemoCopernicus extends Component {
                         }}>-
                       </button>
                     </span>)
-                    }                    
+                    }
                     { /* Add model button */ }
                     { ((numModels - 1) === selectedItemIndex && maxOccurances > numModels) && (<span>
                       <button
@@ -869,82 +869,87 @@ class WPSDemoCopernicus extends Component {
                 ? <div>
                   <Row>
                     <Col xs='auto' ><Label style={{ lineHeight: '40px' }}>Diagnostic: </Label></Col>
-                    <Col xs='auto' >
-                      <Dropdown isOpen={this.state.wpsSelectorDropDownOpen} toggle={this.toggleWPSSelectorDropDown}>
-                        <DropdownToggle caret>
-                          {(processInfo && (processInfo.title)) || this.state.selectedProcess}
-                        </DropdownToggle>
-                        <DropdownMenu
-                          modifiers={{
-                            setMaxHeight: {
-                              enabled: true,
-                              order: 890,
-                              fn: (data) => {
-                                return {
-                                  ...data,
-                                  styles: {
-                                    ...data.styles,
-                                    overflow: 'auto',
-                                    maxHeight: '50vh'
+                    { mode === 'development' &&
+                      <div>
+                        <Col xs='auto' >
+                          <Dropdown isOpen={this.state.wpsSelectorDropDownOpen} toggle={this.toggleWPSSelectorDropDown}>
+                            <DropdownToggle caret>
+                              {(processInfo && (processInfo.title)) || this.state.selectedProcess}
+                            </DropdownToggle>
+                            <DropdownMenu
+                              modifiers={{
+                                setMaxHeight: {
+                                  enabled: true,
+                                  order: 890,
+                                  fn: (data) => {
+                                    return {
+                                      ...data,
+                                      styles: {
+                                        ...data.styles,
+                                        overflow: 'auto',
+                                        maxHeight: '50vh'
+                                      }
+                                    };
                                   }
-                                };
+                                }
+                              }}
+                            >
+                              <DropdownItem header>Please select one of the processes</DropdownItem>
+                              {
+                                this.state.wpsProcessName.map((wp, index) => {
+                                  return <DropdownItem
+                                    active={(processInfo && processInfo.name) === (wp && wp.name)}
+                                    key={index}
+                                    color='primary'
+                                    onClick={() => {
+                                      clearWPSCache();
+                                      this.onWpsButtonClick(wp.name).then().catch();
+                                    }}>{wp.title}
+                                  </DropdownItem>;
+                                })
                               }
-                            }
-                          }}
-                        >
-                          <DropdownItem header>Please select one of the processes</DropdownItem>
-                          {
-                            this.state.wpsProcessName.map((wp, index) => {
-                              return <DropdownItem
-                                active={(processInfo && processInfo.name) === (wp && wp.name)}
-                                key={index}
-                                color='primary'
-                                onClick={() => {
-                                  clearWPSCache();
-                                  this.onWpsButtonClick(wp.name).then().catch();
-                                }}>{wp.title}
-                              </DropdownItem>;
-                            })
-                          }
-                        </DropdownMenu>
-                      </Dropdown>
-                    </Col>
-                    <Col xs='auto' ><Label style={{ lineHeight: '40px' }}> on WPS server</Label></Col>
-                    <Col xs='auto' >
-                      <Dropdown isOpen={this.state.computeNodeSelectorDropDownOpen} toggle={this.toggleComputeNodeSelectorDropDown}>
-                        <DropdownToggle caret>
-                          {this.state.currentWPSNodeName}
-                        </DropdownToggle>
-                        <DropdownMenu
-                          modifiers={{
-                            setMaxHeight: {
-                              enabled: true,
-                              order: 890,
-                              fn: (data) => {
-                                return {
-                                  ...data,
-                                  styles: {
-                                    ...data.styles,
-                                    overflow: 'auto',
-                                    maxHeight: '50vh'
+                            </DropdownMenu>
+                          </Dropdown>
+                        </Col>
+                        <Col xs='auto' ><Label style={{ lineHeight: '40px' }}> on WPS server</Label></Col>
+                        <Col xs='auto' >
+                          <Dropdown isOpen={this.state.computeNodeSelectorDropDownOpen} toggle={this.toggleComputeNodeSelectorDropDown}>
+                            <DropdownToggle caret>
+                              {this.state.currentWPSNodeName}
+                            </DropdownToggle>
+                            <DropdownMenu
+                              modifiers={{
+                                setMaxHeight: {
+                                  enabled: true,
+                                  order: 890,
+                                  fn: (data) => {
+                                    return {
+                                      ...data,
+                                      styles: {
+                                        ...data.styles,
+                                        overflow: 'auto',
+                                        maxHeight: '50vh'
+                                      }
+                                    };
                                   }
-                                };
+                                }
+                              }}
+                            >
+                              <DropdownItem header>Please select one of the compute nodes</DropdownItem>
+                              {
+                                compute.map((wp, index) => {
+                                  return <DropdownItem active={this.state.currentWPSNodeName === wp.name} key={index} color='primary' onClick={() => {
+                                    clearWPSCache();
+                                    this.setComputeNode(wp.name);
+                                  }}>{wp.name}</DropdownItem>;
+                                })
                               }
-                            }
-                          }}
-                        >
-                          <DropdownItem header>Please select one of the compute nodes</DropdownItem>
-                          {
-                            compute.map((wp, index) => {
-                              return <DropdownItem active={this.state.currentWPSNodeName === wp.name} key={index} color='primary' onClick={() => {
-                                clearWPSCache();
-                                this.setComputeNode(wp.name);
-                              }}>{wp.name}</DropdownItem>;
-                            })
-                          }
-                        </DropdownMenu>
-                      </Dropdown>
-                    </Col>
+                            </DropdownMenu>
+                          </Dropdown>
+                        </Col>
+                      </div>
+                      /* End of wps selection buttons */
+                    }
                     <Col xs='auto'>
                       <Label className='WPSDemoCopernicus_Small' style={{ lineHeight: '40px' }}>WPS server URL { this.getWPSUrlByName(this.state.currentWPSNodeName) }</Label>
                     </Col>
