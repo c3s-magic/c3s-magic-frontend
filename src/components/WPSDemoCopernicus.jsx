@@ -7,11 +7,11 @@ import ImagePreview from './ImagePreview';
 import { withRouter } from 'react-router';
 import Icon from 'react-fa';
 import _ from 'lodash';
-import axios from 'axios';
 import MarkdownFromFile from '../containers/MarkdownFromFile';
 import { produce } from 'immer';
 import { findDrsItems } from '../utils/drsTools';
 var drsTreeCache = {};
+const mode = 'production'; /* Set to 'development' or 'production' to show or hide debug buttons and info */
 class WPSDemoCopernicus extends Component {
   constructor (props) {
     super(props);
@@ -76,7 +76,7 @@ class WPSDemoCopernicus extends Component {
         } catch (e) {
           console.error('Unable to fetch DRS tree from server:', e);
           reject(e);
-        }       
+        }
       }, (e) => {
         console.error('Unable to fetch DRS tree from server:', e);
         reject(e);
@@ -340,11 +340,21 @@ class WPSDemoCopernicus extends Component {
                 let itemDataType = ''; try { itemDataType = item.LiteralData['DataType'].value; } catch (e) {}
                 let itemDefaultValue; try { itemDefaultValue = item.LiteralData.DefaultValue.value; } catch (e) {}
                 let itemAllowedValues; try { itemAllowedValues = item.LiteralData['AllowedValues']; } catch (e) {}
-
+                let itemMinimumValue = null;
+                let itemMaximumValue = null;
+                let itemAllowedValuesValue = null;
                 // fix for non-existing allowedvalues field
                 if (typeof itemAllowedValues !== 'undefined') {
-                // console.log('Found allowed values!');
-                  itemAllowedValues = itemAllowedValues['Value'];
+                  try {
+                    let itemRange = itemAllowedValues['Range'];
+                    itemMinimumValue = itemRange['MinimumValue'].value;
+                    itemMaximumValue = itemRange['MaximumValue'].value;
+                  } catch (e) {
+                  }
+                  try {
+                    itemAllowedValuesValue = itemAllowedValues['Value'];
+                  } catch (e) {
+                  }
                 // console.log(itemAllowedValues);
                 }
 
@@ -352,11 +362,13 @@ class WPSDemoCopernicus extends Component {
                 newInput.identifier = itemIdentifier;
                 newInput.type = itemDataType;
                 newInput.default = itemDefaultValue;
-                newInput.selected = [ itemDefaultValue ];
+                newInput.selected = [{
+                  value: itemDefaultValue
+                }];
                 newInput.abstract = itemAbstract;
                 newInput.allowedValues = [];
-                for (let keyAV in itemAllowedValues) {
-                  let av = itemAllowedValues[keyAV];
+                for (let keyAV in itemAllowedValuesValue) {
+                  let av = itemAllowedValuesValue[keyAV];
 
                   if (av.value === undefined) {
                     newInput.allowedValues.push(av);
@@ -376,7 +388,15 @@ class WPSDemoCopernicus extends Component {
                 }
                 /* If minOccurs is more than 1, add more inputs */
                 for (let j = 1; j < newInput.minOccurances; j++) {
-                  newInput.selected.push(itemDefaultValue);
+                  newInput.selected.push({ value: itemDefaultValue });
+                }
+
+                /* Get allowed values, MinimumValue and MaximumValue */
+                try {
+                  newInput.minimumValue = itemMinimumValue;
+                  newInput.maximumValue = itemMaximumValue;
+                } catch (e) {
+                  console.log('Unable to get allowedvalues', e);
                 }
                 formItemInputs.push(newInput);
               } catch (e) {
@@ -479,11 +499,11 @@ class WPSDemoCopernicus extends Component {
           const ensembleInput = inputList.filter(el => el.identifier === 'ensemble')[0];
           const numModels = modelInput.selected.length;
           const maxOccurances = modelInput.maxOccurances;
-          const minOccurances = modelInput.minOccurances;          
+          const minOccurances = modelInput.minOccurances;
           return (
             <div key={'container' + el.title + index} className={'WPSDemoCopernicus_InputLabels'} >
-              { modelInput.selected.map((selectedItem, selectedItemIndex) => {
-                const modelValue = modelInput.selected[selectedItemIndex];
+              { modelInput.selected.map((__unused, selectedItemIndex) => {
+                const modelValue = modelInput.selected[selectedItemIndex].value;
                 let drsItems = null;
                 try {
                   drsItems = findDrsItems(this.drsTree[0], { model: modelValue }, ['model', 'experiment', 'ensemble']);
@@ -512,7 +532,7 @@ class WPSDemoCopernicus extends Component {
                     </select>
                     <select
                       key={'select_' + experimentInput.identifier}
-                      value={this.state.processInputs.filter(el => el.identifier === 'experiment')[0].selected[selectedItemIndex]}
+                      value={this.state.processInputs.filter(el => el.identifier === 'experiment')[0].selected[selectedItemIndex].value}
                       onChange={this.onChange}
                       name={experimentInput.identifier + ',' + selectedItemIndex}
                     >
@@ -527,7 +547,7 @@ class WPSDemoCopernicus extends Component {
                     </select>
                     <select
                       key={'select_' + ensembleInput.identifier}
-                      value={this.state.processInputs.filter(el => el.identifier === 'ensemble')[0].selected[selectedItemIndex]}
+                      value={this.state.processInputs.filter(el => el.identifier === 'ensemble')[0].selected[selectedItemIndex].value}
                       onChange={this.onChange}
                       name={ensembleInput.identifier + ',' + selectedItemIndex}
                     >
@@ -559,7 +579,7 @@ class WPSDemoCopernicus extends Component {
                         }}>-
                       </button>
                     </span>)
-                    }                    
+                    }
                     { /* Add model button */ }
                     { ((numModels - 1) === selectedItemIndex && maxOccurances > numModels) && (<span>
                       <button
@@ -567,11 +587,11 @@ class WPSDemoCopernicus extends Component {
                           this.setState(
                             produce(this.state, draft => {
                               draft.processInputs.filter(el => el.identifier === 'model')[0].selected.push(
-                                draft.processInputs.filter(el => el.identifier === 'model')[0].allowedValues[0]);
+                                { value: draft.processInputs.filter(el => el.identifier === 'model')[0].allowedValues[0] });
                               draft.processInputs.filter(el => el.identifier === 'experiment')[0].selected.push(
-                                draft.processInputs.filter(el => el.identifier === 'experiment')[0].allowedValues[0]);
+                                { value: draft.processInputs.filter(el => el.identifier === 'experiment')[0].allowedValues[0] });
                               draft.processInputs.filter(el => el.identifier === 'ensemble')[0].selected.push(
-                                draft.processInputs.filter(el => el.identifier === 'ensemble')[0].allowedValues[0]);
+                                { value: draft.processInputs.filter(el => el.identifier === 'ensemble')[0].allowedValues[0] });
                             }), () => {
                               this.setState({
                                 showForm: true,
@@ -603,7 +623,7 @@ class WPSDemoCopernicus extends Component {
                   {el.title}:
                 </span>
                 <select
-                  value={this.state.processInputs[index].selected[0]}
+                  value={this.state.processInputs[index].selected[0].value}
                   onChange={this.onChange}
                   name={el.identifier}
                 >
@@ -636,7 +656,7 @@ class WPSDemoCopernicus extends Component {
                 key={el.title + index}
                 type='text'
                 name={el.identifier}
-                value={this.state.processInputs[index].selected[0]}
+                value={this.state.processInputs[index].selected[0].value}
                 onChange={this.onChange} />
             </label>
             <span className={'WPSDemoCopernicus_InputAbstract'}>
@@ -654,12 +674,14 @@ class WPSDemoCopernicus extends Component {
                 {el.title}:
               </span>
               <input
+                alt={this.state.processInputs[index].selected[0].tooltipMessage}
+                title={this.state.processInputs[index].selected[0].tooltipMessage}
+                className={this.state.processInputs[index].selected[0].isOutsideRange === true ? 'WPSDemoCopernicus_Input_Invalid' : 'WPSDemoCopernicus_Input_valid'}
                 key={index}
                 name={el.identifier}
-                type='number'
                 size='6'
                 width='6'
-                value={this.state.processInputs[index].selected[0]}
+                value={this.state.processInputs[index].selected[0].value}
                 onChange={this.onChange} />
             </label>
             <span className={'WPSDemoCopernicus_InputAbstract'}>
@@ -692,7 +714,7 @@ class WPSDemoCopernicus extends Component {
         if (dataInputs.length > 1) {
           dataInputs += ';';
         }
-        dataInputs += value.identifier + '=' + value.selected[j];
+        dataInputs += value.identifier + '=' + value.selected[j].value;
       }
     });
 
@@ -720,8 +742,25 @@ class WPSDemoCopernicus extends Component {
     this.setState(
       produce(this.state, draft => {
         let stateItemIndex = this.state.processInputs.findIndex(e => e.identifier === name);
-        console.log(stateItemIndex, this.state.processInputs, name);
-        draft.processInputs[stateItemIndex].selected[itemIndex] = value;
+        // console.log(stateItemIndex, this.state.processInputs, name);
+        /* Check if minimum or maximum value is specified and if entered value is in range */
+        // console.log(this.state.processInputs[stateItemIndex]);
+        let isOutsideRange = false;
+        let tooltipMessage = null;
+        try {
+          const { minimumValue, maximumValue, type } = this.state.processInputs[stateItemIndex];
+          if ((minimumValue !== null && parseInt(value) < parseInt(minimumValue)) ||
+              (maximumValue !== null && parseInt(value) > parseInt(maximumValue))) {
+            isOutsideRange = true;
+            tooltipMessage = 'Value should be between ' + minimumValue + ' and ' + maximumValue;
+          }
+          if (type === 'integer' && (parseInt(value) + '' !== value)) {
+            isOutsideRange = true;
+            tooltipMessage = 'Value should be a number';
+            console.log('outside range');
+          }
+        } catch (e) { console.error(e); }
+        draft.processInputs[stateItemIndex].selected[itemIndex] = { value: value, isOutsideRange : isOutsideRange, tooltipMessage: tooltipMessage };
       }), () => {
         this.setState({
           showForm: true,
@@ -869,85 +908,90 @@ class WPSDemoCopernicus extends Component {
                 ? <div>
                   <Row>
                     <Col xs='auto' ><Label style={{ lineHeight: '40px' }}>Diagnostic: </Label></Col>
-                    <Col xs='auto' >
-                      <Dropdown isOpen={this.state.wpsSelectorDropDownOpen} toggle={this.toggleWPSSelectorDropDown}>
-                        <DropdownToggle caret>
-                          {(processInfo && (processInfo.title)) || this.state.selectedProcess}
-                        </DropdownToggle>
-                        <DropdownMenu
-                          modifiers={{
-                            setMaxHeight: {
-                              enabled: true,
-                              order: 890,
-                              fn: (data) => {
-                                return {
-                                  ...data,
-                                  styles: {
-                                    ...data.styles,
-                                    overflow: 'auto',
-                                    maxHeight: '50vh'
+                    { mode === 'development' &&
+                      <div>                    
+                        <Col xs='auto' >
+                          <Dropdown isOpen={this.state.wpsSelectorDropDownOpen} toggle={this.toggleWPSSelectorDropDown}>
+                            <DropdownToggle caret>
+                              {(processInfo && (processInfo.title)) || this.state.selectedProcess}
+                            </DropdownToggle>
+                            <DropdownMenu
+                              modifiers={{
+                                setMaxHeight: {
+                                  enabled: true,
+                                  order: 890,
+                                  fn: (data) => {
+                                    return {
+                                      ...data,
+                                      styles: {
+                                        ...data.styles,
+                                        overflow: 'auto',
+                                        maxHeight: '50vh'
+                                      }
+                                    };
                                   }
-                                };
+                                }
+                              }}
+                            >
+                              <DropdownItem header>Please select one of the processes</DropdownItem>
+                              {
+                                this.state.wpsProcessName.map((wp, index) => {
+                                  return <DropdownItem
+                                    active={(processInfo && processInfo.name) === (wp && wp.name)}
+                                    key={index}
+                                    color='primary'
+                                    onClick={() => {
+                                      clearWPSCache();
+                                      this.onWpsButtonClick(wp.name).then().catch();
+                                    }}>{wp.title}
+                                  </DropdownItem>;
+                                })
                               }
-                            }
-                          }}
-                        >
-                          <DropdownItem header>Please select one of the processes</DropdownItem>
-                          {
-                            this.state.wpsProcessName.map((wp, index) => {
-                              return <DropdownItem
-                                active={(processInfo && processInfo.name) === (wp && wp.name)}
-                                key={index}
-                                color='primary'
-                                onClick={() => {
-                                  clearWPSCache();
-                                  this.onWpsButtonClick(wp.name).then().catch();
-                                }}>{wp.title}
-                              </DropdownItem>;
-                            })
-                          }
-                        </DropdownMenu>
-                      </Dropdown>
-                    </Col>
-                    <Col xs='auto' ><Label style={{ lineHeight: '40px' }}> on WPS server</Label></Col>
-                    <Col xs='auto' >
-                      <Dropdown isOpen={this.state.computeNodeSelectorDropDownOpen} toggle={this.toggleComputeNodeSelectorDropDown}>
-                        <DropdownToggle caret>
-                          {this.state.currentWPSNodeName}
-                        </DropdownToggle>
-                        <DropdownMenu
-                          modifiers={{
-                            setMaxHeight: {
-                              enabled: true,
-                              order: 890,
-                              fn: (data) => {
-                                return {
-                                  ...data,
-                                  styles: {
-                                    ...data.styles,
-                                    overflow: 'auto',
-                                    maxHeight: '50vh'
+                            </DropdownMenu>
+                          </Dropdown>
+                        </Col>
+                        <Col xs='auto' ><Label style={{ lineHeight: '40px' }}> on WPS server</Label></Col>
+                        <Col xs='auto' >
+                          <Dropdown isOpen={this.state.computeNodeSelectorDropDownOpen} toggle={this.toggleComputeNodeSelectorDropDown}>
+                            <DropdownToggle caret>
+                              {this.state.currentWPSNodeName}
+                            </DropdownToggle>
+                            <DropdownMenu
+                              modifiers={{
+                                setMaxHeight: {
+                                  enabled: true,
+                                  order: 890,
+                                  fn: (data) => {
+                                    return {
+                                      ...data,
+                                      styles: {
+                                        ...data.styles,
+                                        overflow: 'auto',
+                                        maxHeight: '50vh'
+                                      }
+                                    };
                                   }
-                                };
+                                }
+                              }}
+                            >
+                              <DropdownItem header>Please select one of the compute nodes</DropdownItem>
+                              {
+                                compute.map((wp, index) => {
+                                  return <DropdownItem active={this.state.currentWPSNodeName === wp.name} key={index} color='primary' onClick={() => {
+                                    clearWPSCache();
+                                    this.setComputeNode(wp.name);
+                                  }}>{wp.name}</DropdownItem>;
+                                })
                               }
-                            }
-                          }}
-                        >
-                          <DropdownItem header>Please select one of the compute nodes</DropdownItem>
-                          {
-                            compute.map((wp, index) => {
-                              return <DropdownItem active={this.state.currentWPSNodeName === wp.name} key={index} color='primary' onClick={() => {
-                                clearWPSCache();
-                                this.setComputeNode(wp.name);
-                              }}>{wp.name}</DropdownItem>;
-                            })
-                          }
-                        </DropdownMenu>
-                      </Dropdown>
-                    </Col>
-                    <Col xs='auto'>
-                      <Label className='WPSDemoCopernicus_Small' style={{ lineHeight: '40px' }}>WPS server URL { this.getWPSUrlByName(this.state.currentWPSNodeName) }</Label>
-                    </Col>
+                            </DropdownMenu>
+                          </Dropdown>
+                        </Col>
+                        <Col xs='auto'>
+                          <Label className='WPSDemoCopernicus_Small' style={{ lineHeight: '40px' }}>WPS server URL { this.getWPSUrlByName(this.state.currentWPSNodeName) }</Label>
+                        </Col>
+                      </div>
+                      /* End of wps selection buttons */
+                    }
                   </Row>
                   {errorExists
                     ? <UncontrolledAlert color='danger' style={{ textAlign: 'initial' }}>

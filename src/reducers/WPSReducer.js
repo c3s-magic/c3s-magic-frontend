@@ -12,7 +12,20 @@ const handleWPSExecute = (state, payload) => {
 };
 
 const handleWPSFailed = (state, payload) => {
-  // console.log('reducer handleWPSFailed', payload);
+  console.log('reducer handleWPSFailed', payload);
+  if (payload.id !== null) {
+    console.log('Handling failed for id', payload.id);
+    let newRunningProcesses = Object.assign({}, state.runningProcesses);
+    newRunningProcesses[payload.id].isComplete = true;
+    newRunningProcesses[payload.id].hasFailed = true;
+    newRunningProcesses[payload.id].result = {};
+    newRunningProcesses[payload.id].message = 'Process has failed';
+    return Object.assign({}, state, {
+      runningProcesses: newRunningProcesses,
+      nrOfCompletedProcesses: state.nrOfCompletedProcesses + 1,
+      nrOfFailedProcesses: state.nrOfFailedProcesses + 1
+    });
+  }
   return Object.assign({}, state);
 };
 

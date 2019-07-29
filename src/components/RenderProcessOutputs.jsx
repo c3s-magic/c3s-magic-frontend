@@ -28,6 +28,9 @@ export default class RenderProcessOutputs extends Component {
         isSuccess = identifier === 'success' ? data === 'True' ? true : (data === 'False' ? false : undefined) : undefined;
       }
     });
+    if (process.hasFailed === true) {
+      isSuccess = false;
+    }
     let className = 'RenderProcesses_CardBody';
     if (isSuccess === false) className = 'RenderProcesses_CardBody_NoSuccess';
     if (isSuccess === true) className = 'RenderProcesses_CardBody_Success';

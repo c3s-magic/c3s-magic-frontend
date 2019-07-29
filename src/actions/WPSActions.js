@@ -21,7 +21,9 @@ const startWPSExecute = (wpsdomain, identifier, dataInputs, nrOfStartedProcesses
       let executeCompletCallback = (json, processSucceeded, statusLocation) => {
         dispatch({ type: WPS_COMPLETED, payload: { json: json, processSucceeded: processSucceeded, id: nrOfStartedProcesses, statuslocation: statusLocation } });
       };
-      doWPSExecuteCall(wps, statusUpdateCallback, executeCompletCallback);
+      doWPSExecuteCall(wps, statusUpdateCallback, executeCompletCallback, (e) => {
+        return dispatch({ type: START_WPS_EXECUTE_FAILED, payload: { error: e, id: nrOfStartedProcesses } });
+      });
     } catch (e) {
       return dispatch({ type: START_WPS_EXECUTE_FAILED, payload: { error: e, id: nrOfStartedProcesses } });
     }
