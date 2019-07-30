@@ -991,6 +991,51 @@ class WPSDemoCopernicus extends Component {
                         </Col>
                       </div>
                       /* End of wps selection buttons */
+                    } 
+                     { mode === 'production' &&
+                      <div>                    
+                        <Col xs='auto' >
+                          <Dropdown isOpen={this.state.wpsSelectorDropDownOpen} toggle={this.toggleWPSSelectorDropDown}>
+                            <DropdownToggle caret>
+                              {(processInfo && (processInfo.title)) || this.state.selectedProcess}
+                            </DropdownToggle>
+                            <DropdownMenu
+                              modifiers={{
+                                setMaxHeight: {
+                                  enabled: true,
+                                  order: 890,
+                                  fn: (data) => {
+                                    return {
+                                      ...data,
+                                      styles: {
+                                        ...data.styles,
+                                        overflow: 'auto',
+                                        maxHeight: '50vh'
+                                      }
+                                    };
+                                  }
+                                }
+                              }}
+                            >
+                              <DropdownItem header>Please select one of the processes</DropdownItem>
+                              {
+                                this.state.wpsProcessName.map((wp, index) => {
+                                  return <DropdownItem
+                                    active={(processInfo && processInfo.name) === (wp && wp.name)}
+                                    key={index}
+                                    color='primary'
+                                    onClick={() => {
+                                      clearWPSCache();
+                                      this.onWpsButtonClick(wp.name).then().catch();
+                                    }}>{wp.title}
+                                  </DropdownItem>;
+                                })
+                              }
+                            </DropdownMenu>
+                          </Dropdown>
+                        </Col>
+                      </div>
+                      /* End of production wps selection buttons */
                     }
                   </Row>
                   {errorExists
@@ -1022,7 +1067,9 @@ class WPSDemoCopernicus extends Component {
                                     );
                                   })
                                 )}
+                     { mode === 'development' &&
                                 <li>Describe process - <a href={this.state.describeProcessLink} target='_blank'>{this.state.describeProcessLink}</a></li>
+		     }
                               </ul>
                             </span>
                             <hr />
