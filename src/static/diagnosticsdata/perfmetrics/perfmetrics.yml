@@ -114,8 +114,6 @@ settings:
   - Note: "Some variables were calculated using part of the models and different start/end dates and some models are using different ensembles (r6i1p1 for EC-EARTH and r1i1p2 for GISS-E2-H/GISS-E2-R)"
 title: Performance Metrics for essential climate parameters
 youtube:
-#chart: 'https://portal.c3s-magic.eu/backend/adagucopendap/recipe_flato13ipcc_20180825_091035%2Fwork%2Ffig09-42a%2Ffig09-42a%2Fch09_fig09-42a.nc'
-
 data: {DATAURL}/recipes/recipe_perfmetrics_CMIP5_4cds_20190602_200903.zip
 media: {DATAURL}/recipes/recipe_perfmetrics_CMIP5_4cds_20190602_200903/plots/collect/RMSD/ta850-global_to_rsut-global_RMSD.png
 provenance: {DATA_URL}/recipes/recipe_perfmetrics_CMIP5_4cds_20190602_200903/work/collect/RMSD/ta850-global_to_rsut-global_RMSD_provenance.svg
