@@ -10,74 +10,74 @@ import AdagucMapDraw from '../../components/ADAGUC/AdagucMapDraw.js';
 
 const colorBar = [{
   min: -2.0,
-  max:10000,
-  text:'-2 or more',
-  fillColor:'#A30000',
-  textColor:'white'
+  max: 10000,
+  text: '-2 or more',
+  fillColor: '#A30000',
+  textColor: 'white'
 }, {
-  min:-2.5,
-  max:-2.0,
+  min: -2.5,
+  max: -2.0,
   text: '-2.5 till -2.0',
-  fillColor:'#E30000',
-  textColor:'white'
+  fillColor: '#E30000',
+  textColor: 'white'
 }, {
-  min:-3.0,
-  max:-2.5,
-  text:'-3.0 till -2.5',
-  fillColor:'#FF1F1F',
-  textColor:'white'
+  min: -3.0,
+  max: -2.5,
+  text: '-3.0 till -2.5',
+  fillColor: '#FF1F1F',
+  textColor: 'white'
 }, {
-  min:-3.5,
-  max:-3.0,
-  text:'-3.5 till -3.0',
-  fillColor:'#FF5C5C',
-  textColor:'white'
+  min: -3.5,
+  max: -3.0,
+  text: '-3.5 till -3.0',
+  fillColor: '#FF5C5C',
+  textColor: 'white'
 }, {
-  min:-3.75,
-  max:-3.5,
-  text:'-3.75 till -3.5',
-  fillColor:'#F99',
-  textColor:'white'
+  min: -3.75,
+  max: -3.5,
+  text: '-3.75 till -3.5',
+  fillColor: '#F99',
+  textColor: 'white'
 }, {
-  min:-4.25,
-  max:-3.75,
-  text:'-4.25 till -3.75',
-  fillColor:'#FFF',
-  textColor:'black'
+  min: -4.25,
+  max: -3.75,
+  text: '-4.25 till -3.75',
+  fillColor: '#FFF',
+  textColor: 'black'
 }, {
-  min:-4.5,
-  max:-4.25,
-  text:'-4.5 till -4.25',
-  fillColor:'#99D3FF',
-  textColor:'white'
+  min: -4.5,
+  max: -4.25,
+  text: '-4.5 till -4.25',
+  fillColor: '#99D3FF',
+  textColor: 'white'
 }, {
-  min:-4.0,
-  max:-4.5,
-  text:'-4.0 till -4.5',
-  fillColor:'#5CB8FF',
-  textColor:'white'
+  min: -4.0,
+  max: -4.5,
+  text: '-4.0 till -4.5',
+  fillColor: '#5CB8FF',
+  textColor: 'white'
 }, {
   min: -5.5,
   max: -5.0,
   text: '-5.5 till -5.0',
   fillColor: '#1F9EFF',
-  textColor:'white'
+  textColor: 'white'
 }, {
-  min:-6.0,
-  max:-5.5,
-  text:'-6.0 till -5.5',
+  min: -6.0,
+  max: -5.5,
+  text: '-6.0 till -5.5',
   fillColor: '#007FE0',
-  textColor:'white'
+  textColor: 'white'
 }, {
-  min:-100000,
-  max:-6,
-  text:'-6 or less',
+  min: -100000,
+  max: -6,
+  text: '-6 or less',
   fillColor: '#005CA3',
-  textColor:'white'
+  textColor: 'white'
 }];
 
 class ActuariesPage extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.handleSliderChange = this.handleSliderChange.bind(this);
     this.debouncedHandleSliderChange = debounce(25, this.debouncedHandleSliderChange);
@@ -116,7 +116,7 @@ class ActuariesPage extends Component {
             };
             this.setState({ geojson: src.data });
             if (this.state.webMapJSInstance && this.state.webMapJSInstance) {
-              this.state.webMapJSInstance.setProjection({ srs:'EPSG:32661', bbox:[422133.0051161968, -4614524.365473892, 4714402.927897792, -1179461.5805027087] });
+              this.state.webMapJSInstance.setProjection({ srs: 'EPSG:32661', bbox: [422133.0051161968, -4614524.365473892, 4714402.927897792, -1179461.5805027087] });
               this.state.webMapJSInstance.draw();
             }
             axios({
@@ -155,13 +155,13 @@ class ActuariesPage extends Component {
       changeValue: 1960,
       step: 1,
       min: 1960,
-      max:1991
+      max: 1991
     };
 
     fetchGeoJSON();
   }
 
-  extractValuesFromCSV () {
+  extractValuesFromCSV() {
     this.csvData.map((csvItem) => {
       if (csvItem.time === this.state.currentValue + '-01-01T00:00:00') {
         this.geojson.features.map((feature) => {
@@ -190,32 +190,32 @@ class ActuariesPage extends Component {
     this.state.webMapJSInstance.draw();
   }
 
-  debouncedHandleSliderChange (v) {
+  debouncedHandleSliderChange(v) {
     this.handleSliderChange(v);
   }
 
-  handleSliderChange (v) {
-    this.setState({ currentValue:v });
+  handleSliderChange(v) {
+    this.setState({ currentValue: v });
     this.extractValuesFromCSV();
   }
 
-  hoverFeatureCallback (featureIndex) {
+  hoverFeatureCallback(featureIndex) {
     if (this.geojson && featureIndex >= 0 && this.geojson.features[featureIndex] && this.geojson.features[featureIndex]) {
-      this.setState({ hoveredValue:this.geojson.features[featureIndex].properties.value });
+      this.setState({ hoveredValue: this.geojson.features[featureIndex].properties.value });
     }
   }
 
-  render () {
+  render() {
     return (<div className='MainViewport'>
       <h1>Actuaries index</h1>
       <Row>
-        <span className='text' style={{ paddingBottom:'15px' }}>
-        The changing risks between the recent past and the future are of great interest to the insurance industry
-        because even slight changes in climate characteristics can translate into large impacts on risk distribution/management and expected losses.
-        Comprehensive risk indices such as the ACRI, which integrates changes in frequency and magnitude of key climate indicators and elements of hazard,
-         exposure and vulnerability, are crucial for decision making processes.
+        <span className='text' style={{ paddingBottom: '15px' }}>
+          The changing risks between the recent past and the future are of great interest to the insurance industry
+          because even slight changes in climate characteristics can translate into large impacts on risk distribution/management and expected losses.
+          Comprehensive risk indices such as the ACRI, which integrates changes in frequency and magnitude of key climate indicators and elements of hazard,
+           exposure and vulnerability, are crucial for decision making processes.
         </span>
-        <span className='text' style={{ paddingBottom:'15px' }}>
+        <span className='text' style={{ paddingBottom: '15px' }}>
           The data behind this tailored product can be calculated with the <a href='#/diagnostics/extreme_index'>combined climate extreme index</a> diagnostic.
         </span>
       </Row>
@@ -247,11 +247,11 @@ class ActuariesPage extends Component {
                 {
                   colorBar.map((item, i) => {
                     return (<span key={i} style={{
-                      background:item.fillColor,
+                      background: item.fillColor,
                       color: item.textColor,
-                      padding:'6px 8px 6px 8px',
-                      textAlign:'center',
-                      display:'block',
+                      padding: '6px 8px 6px 8px',
+                      textAlign: 'center',
+                      display: 'block',
                       margin: '0px 12px 0px 12px',
                       border: this.state.hoveredValue >= item.min && this.state.hoveredValue < item.max ? '2px solid black' : '2px solid' + item.fillColor
                     }} >{item.text}</span>);
@@ -272,23 +272,20 @@ class ActuariesPage extends Component {
                 webMapJSInstance.hideMapPin();
                 webMapJSInstance.enableInlineGetFeatureInfo(false);
                 if (!this.state.initialized) {
-                  this.setState({ webMapJSInstance:webMapJSInstance, initialized: true });
+                  this.setState({ webMapJSInstance: webMapJSInstance, initialized: true });
                   // this.state.webMapJSInstance.getLayers()[0].zoomToLayer();
                 }
               }
             }
           />
-          { this.state.initialized ? <AdagucMapDraw
+          {this.state.initialized ? <AdagucMapDraw
             geojson={this.state.geojson}
             webmapjs={this.state.webMapJSInstance}
             dispatch={this.props.dispatch}
             actions={this.props.actions}
             hoverFeatureCallback={this.hoverFeatureCallback}
-          /> : null }
+          /> : null}
         </Col>
-      </Row>
-      <Row>
-        <a href='#/tailoredproducts/insurance'>Checkout our video about actuaries.</a>
       </Row>
     </div>);
   }
