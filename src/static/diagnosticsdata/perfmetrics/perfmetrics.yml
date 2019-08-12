@@ -118,5 +118,5 @@ youtube:
 
 data: {DATAURL}/recipes/recipe_perfmetrics_CMIP5_4cds_20190602_200903.zip
 media: {DATAURL}/recipes/recipe_perfmetrics_CMIP5_4cds_20190602_200903/plots/collect/RMSD/ta850-global_to_rsut-global_RMSD.png
-#provenance: {DATA_URL}/
+provenance: {DATA_URL}/recipes/recipe_perfmetrics_CMIP5_4cds_20190602_200903/work/collect/RMSD/ta850-global_to_rsut-global_RMSD_provenance.svg
 process: /calculate/perfmetrics
