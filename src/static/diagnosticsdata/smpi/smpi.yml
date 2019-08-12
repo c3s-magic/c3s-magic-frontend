@@ -43,7 +43,7 @@ image_file: ./diagnosticsdata/smpi/Single.png
 
 
 process: /calculate/copernicus-wps/smpi
-data: {DATAURL}/recipes/https://portal.c3s-magic.eu/data/recipes/recipe_smpi_4cds_20190603_070756.zip
+data: {DATAURL}/recipes/recipe_smpi_4cds_20190603_070756.zip
 #provenance: {DATAURL}/recipes/
 media:
   - {DATAURL}/recipes/recipe_smpi_4cds_20190603_070756/plots/collect/SMPI/SMPI.png
