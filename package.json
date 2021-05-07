@@ -44,7 +44,7 @@
     "immer": "^1.7.4",
     "js-file-download": "^0.4.4",
     "json-schema-ref-parser": "^6.0.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "moment": "^2.22.2",
     "react-burger-menu": "^2.6.5",
     "react-dom-factories": "^1.0.2",
